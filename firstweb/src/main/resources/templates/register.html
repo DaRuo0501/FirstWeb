@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:c="http://www.w3.org/1999/XSL/Transform">
+<head>
+    <meta charset="UTF-8">
+    <title>註冊</title>
+    <link rel="stylesheet" type="text/css" href="/css/register.css">
+</head>
+<body>
+<!--<div class="error">-->
+<!--    <c:if test="${not empty registrationError}">-->
+<!--        <div>-->
+<!--            <h1>${registrationError}</h1>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <br>-->
+<!--        </div>-->
+<!--    </c:if>-->
+<!--</div>-->
+<div class="box">
+    <form action="/set-user" method="post" autocomplete="off">
+        <h2>註 冊</h2>
+        <div class="inputBox">
+            <input type="text" name="userName" required> <span>使用者名稱</span>
+            <i></i>
+        </div>
+        <div class="inputBox">
+            <input type="password" name="password1" required> <span>密碼</span>
+            <i></i>
+        </div>
+        <div class="inputBox">
+            <input type="password" name="password2" required> <span>再次確認密碼</span>
+            <i></i>
+        </div>
+        <div class="inputBox">
+            <input type="text" name="email" required> <span>電子信箱</span>
+            <i></i>
+        </div>
+        <div class="inputBox">
+            <input type="text" name="phone" required> <span>手機號碼</span>
+            <i></i>
+        </div>
+        <input type="submit" value="確認">
+        <div class="links">
+            <a href="#" onclick="goToLogin()">返回登入</a>
+        </div>
+    </form>
+
+    <script type="text/javascript">
+        function goToLogin(){
+            // alert("是否返回登入頁面?");
+            window.location.href="/users/login";
+        }
+    </script>
+</div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package com.example.firstweb;
+package com.daruo.firstweb;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

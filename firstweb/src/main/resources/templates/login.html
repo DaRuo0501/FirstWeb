@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登入</title>
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+</head>
+<body>
+<!--<div class="error">-->
+<!--    <c:if test="${not empty error}">-->
+<!--        <div>-->
+<!--            <h1>${error}</h1>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <br>-->
+<!--        </div>-->
+<!--    </c:if>-->
+<!--    <c:if test="${not empty registerSuccess}">-->
+<!--        <div>-->
+<!--            <h1>${registerSuccess}</h1>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <br>-->
+<!--        </div>-->
+<!--    </c:if>-->
+<!--</div>-->
+<div class="box">
+    <form action="/login" method="post" autocomplete="off">
+        <h2>登 入</h2>
+        <div class="inputBox">
+            <input type="text" name="userName" required> <span>使用者名稱</span>
+            <i></i>
+        </div>
+        <div class="inputBox">
+            <input type="password" name="password" required> <span>密碼</span>
+            <i></i>
+        </div>
+        <div class="links">
+            <a href="#" onclick="goToHome()">忘記密碼?</a>
+            <a href="#" onclick="goToRegister()">註冊</a>
+        </div>
+        <div class="boxinput">
+            <input type="submit" value="登入">
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    function goToRegister(){
+        // alert("是否前往註冊頁面?");
+        window.location.href="/users/register";
+    }
+
+    function goToHome() {
+        window.location.href="/users/home";
+    }
+
+</script>
+</body>
+</html>
