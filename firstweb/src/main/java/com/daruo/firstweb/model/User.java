@@ -8,7 +8,6 @@ public class User {
     private String userName;
     private String password;
     private String email;
-    private String phone;
     private Date createdDate;
     private Date lastModifiedDate;
 
@@ -42,14 +41,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public Date getCreatedDate() {

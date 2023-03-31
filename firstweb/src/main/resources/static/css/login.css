@@ -6,25 +6,19 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
-
 body{
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     flex-direction: column;
-    background: #23242a;
+    background: #18181b;
 }
-
-.error{
-	color: #45f3ff;
-}
-
 .box{
     position: relative;
     width: 380px;
     height: 420px;
-    background: #1c1c1c;
+    background: #010101;
     border-radius: 8px;
     overflow: hidden;
 }
@@ -64,7 +58,7 @@ body{
 form{
     position: absolute;
     inset: 2px;
-    background: #28292d;
+    background: #1f1f23;
     z-index: 2;
     padding: 50px 40px;
     border-radius: 8px;
@@ -90,7 +84,7 @@ h2{
     outline: none;
     box-shadow: none;
     border: none;
-    color: #23242a;
+    color: #010101;
     font-size: 1em;
     letter-spacing: 0.05em;
     transition: 0.5s;

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- CSS 連結 -->
+  <link rel="stylesheet" href="/css/home.css">
+
+  <!-- JQuery 連結 -->
+  <script
+          src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+  <!-- Boxicon CDN link -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
+        rel='stylesheet'>
+
+  <!-- FontAwesome 連結 -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+
+  <title>商城</title>
+</head>
+
+<body>
+
+<header>
+  <span>夏天的風</span>
+</header>
+
+<!-- 左側欄 -->
+<div class="sidebar">
+
+  <!-- 左側欄 標頭 -->
+  <div class="logo-details">
+    <div class="logo-img">
+      <img src="/images/0025-皮卡丘.png" alt="logo">
+    </div>
+    <span class="logo_name"></span> <i class="fa-solid fa-bars"></i>
+  </div>
+
+  <!-- 主選單 -->
+  <ul class="nav-links">
+
+    <!-- 首頁 -->
+    <li>
+      <div class="icon-link">
+        <a href="#"> <i class='bx bx-home'></i> <span class="link_name" onclick="goToHomePage()">首頁</span>
+        </a>
+      </div>
+    </li>
+
+    <li>
+      <div class="icon-link active">
+        <a href="#"> <i class="fa-solid fa-shop"></i> <span class="link_name" onclick="goToShopPage()">商城</span>
+        </a>
+      </div>
+    </li>
+
+    <!-- 個人資料 -->
+    <!--        <li>-->
+    <!--            <div class="icon-link open">-->
+    <!--                <a href="#"> <i class='bx bx-user'></i> <span class="link_name">個人資料</span>-->
+    <!--                    <i class="fa-solid fa-caret-down"></i>-->
+    <!--                </a>-->
+    <!--            </div> &lt;!&ndash; 子選單 &ndash;&gt;-->
+    <!--            <div class="openMenu">-->
+    <!--                <ul class="sub-menu">-->
+    <!--                    <li class="box-menu active"><a href="#"> <i-->
+    <!--                            class="fa-regular fa-address-card"></i> <span class="link_name">名片</span>-->
+    <!--                    </a></li>-->
+
+    <!--                    <li class="box-menu"><a href="#"> <i-->
+    <!--                            class="fa-solid fa-book"></i> <span class="link_name">部落格</span>-->
+    <!--                    </a></li>-->
+
+    <!--                    <li class="box-menu"><a href="#"> <i-->
+    <!--                            class="fa-solid fa-bag-shopping"></i> <span class="link_name">背包</span>-->
+    <!--                    </a></li>-->
+    <!--                </ul>-->
+    <!--            </div>-->
+    <!--        </li>-->
+
+    <!-- 信箱 -->
+    <!--        <li>-->
+    <!--            <div class="icon-link">-->
+    <!--                <a href="#"> <i class="fa-regular fa-envelope"></i> <span-->
+    <!--                        class="link_name">信箱</span>-->
+    <!--                </a>-->
+    <!--            </div>-->
+    <!--        </li>-->
+
+    <!-- 商城 -->
+    <!--        <li>-->
+    <!--            <div class="icon-link open">-->
+    <!--                <a href="#"> <i class="fa-solid fa-shop"></i> <span-->
+    <!--                        class="link_name">商城</span> <i class="fa-solid fa-caret-down"></i>-->
+    <!--                </a>-->
+    <!--            </div> &lt;!&ndash; 子選單 &ndash;&gt;-->
+    <!--            <div class="openMenu">-->
+    <!--                <ul class="sub-menu">-->
+    <!--                    <li class="box-menu active"><a href="#"> <i-->
+    <!--                            class="fa-solid fa-gun"></i> <span class="link_name">武器店</span>-->
+    <!--                    </a></li>-->
+
+    <!--                    <li class="box-menu"><a href="#"> <i-->
+    <!--                            class="fa-solid fa-shield-halved"></i> <span class="link_name">防具店</span>-->
+    <!--                    </a></li>-->
+
+    <!--                    <li class="box-menu"><a href="#"> <i-->
+    <!--                            class="fa-solid fa-flask-vial"></i> <span class="link_name">藥水店</span>-->
+    <!--                    </a></li>-->
+
+    <!--                    <li class="box-menu"><a href="#"> <i-->
+    <!--                            class="fa-solid fa-horse-head"></i> <span class="link_name">雜貨店</span>-->
+    <!--                    </a></li>-->
+    <!--                </ul>-->
+    <!--            </div>-->
+    <!--        </li>-->
+
+    <!-- 遊戲 -->
+    <!--        <li>-->
+    <!--            <div class="icon-link open">-->
+    <!--                <a href="#"> <i class="fa-solid fa-gamepad"></i> <span-->
+    <!--                        class="link_name">遊戲</span> <i class="fa-solid fa-caret-down"></i>-->
+    <!--                </a>-->
+    <!--            </div> &lt;!&ndash; 子選單 &ndash;&gt;-->
+    <!--            <div class="openMenu">-->
+    <!--                <ul class="sub-menu">-->
+    <!--                    <li class="box-menu"><a href="#"> <i-->
+    <!--                            class="fa-solid fa-ghost"></i> <span class="link_name">史萊姆平原</span>-->
+    <!--                    </a></li>-->
+
+    <!--                    <li class="box-menu"><a href="#"> <i-->
+    <!--                            class="fa-solid fa-poo"></i> <span class="link_name">哥布林地洞</span>-->
+    <!--                    </a></li>-->
+
+    <!--                    <li class="box-menu"><a href="#"> <i-->
+    <!--                            class="fa-solid fa-skull-crossbones"></i> <span-->
+    <!--                            class="link_name">獸人之森</span>-->
+    <!--                    </a></li>-->
+    <!--                </ul>-->
+    <!--            </div>-->
+    <!--        </li>-->
+
+    <!--        &lt;!&ndash; 社交圈 &ndash;&gt;-->
+    <!--        <li>-->
+    <!--            <div class="icon-link open">-->
+    <!--                <a href="#"> <i class="fa-solid fa-users"></i> <span-->
+    <!--                        class="link_name">社交圈</span> <i class="fa-solid fa-caret-down"></i>-->
+    <!--                </a>-->
+    <!--            </div> &lt;!&ndash; 子選單 &ndash;&gt;-->
+    <!--            <div class="openMenu">-->
+    <!--                <ul class="sub-menu">-->
+    <!--                    <li class="box-menu"><a href="#"> <i-->
+    <!--                            class="fa-solid fa-user-group"></i> <span class="link_name">好友</span>-->
+    <!--                    </a></li>-->
+
+    <!--                    <li class="box-menu"><a href="#"> <i-->
+    <!--                            class="fa-solid fa-people-group"></i> <span class="link_name">隊伍</span>-->
+    <!--                    </a></li>-->
+
+    <!--                    <li class="box-menu"><a href="#"> <i-->
+    <!--                            class="fa-solid fa-building-columns"></i> <span-->
+    <!--                            class="link_name">公會</span>-->
+    <!--                    </a></li>-->
+
+    <!--                    <li class="box-menu"><a href="#"> <i-->
+    <!--                            class="fa-solid fa-user-xmark"></i> <span class="link_name">黑名單</span>-->
+    <!--                    </a></li>-->
+    <!--                </ul>-->
+    <!--            </div>-->
+    <!--        </li>-->
+
+    <!--        &lt;!&ndash; 設定 &ndash;&gt;-->
+    <!--        <li>-->
+    <!--            <div class="icon-link">-->
+    <!--                <a href="#"> <i class="fa-solid fa-gear"></i> <span-->
+    <!--                        class="link_name">設定</span>-->
+    <!--                </a>-->
+    <!--            </div>-->
+    <!--        </li>-->
+    <!--    </ul>-->
+
+    <!-- 頁尾 ( 登出 ) -->
+    <div class="footer">
+      <div class="footer-content">
+        <span class="logout" onclick="logout()">登出</span>
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      </div>
+    </div>
+  </ul>
+</div>
+
+<div class="content">
+  <div class="content-title">
+    <span class="content-text">首頁</span>
+  </div>
+
+  <!--    <div class="content-title">-->
+  <!--        <span class="content-text">個人資料</span>-->
+  <!--    </div>-->
+
+  <!--    <div class="content-title">-->
+  <!--        <span class="content-text">信箱</span>-->
+  <!--    </div>-->
+
+  <div class="content-title active">
+    <span class="content-text">商城</span>
+  </div>
+
+  <!--    <div class="content-title">-->
+  <!--        <span class="content-text">遊戲</span>-->
+  <!--    </div>-->
+
+  <!--    <div class="content-title">-->
+  <!--        <span class="content-text">社交圈</span>-->
+  <!--    </div>-->
+
+  <!--    <div class="content-title">-->
+  <!--        <span class="content-text">設定</span>-->
+  <!--    </div>-->
+
+  <!-- 個人資料 子選單內文 -->
+  <!--    <div class="content-title1">-->
+  <!--        <span class="content-text">( 名片 )</span>-->
+  <!--    </div>-->
+
+  <!--    <div class="content-title1">-->
+  <!--        <span class="content-text">( 部落格 )</span>-->
+  <!--    </div>-->
+
+  <!--    <div class="content-title1">-->
+  <!--        <span class="content-text">( 背包 )</span>-->
+  <!--    </div>-->
+
+  <!-- 商城 子選單內文 -->
+  <!--    <div class="content-title1">-->
+  <!--        <span class="content-text">( 武器店 )</span>-->
+  <!--    </div>-->
+
+  <!--    <div class="content-title1">-->
+  <!--        <span class="content-text">( 防具店 )</span>-->
+  <!--    </div>-->
+
+  <!--    <div class="content-title1">-->
+  <!--        <span class="content-text">( 藥水店 )</span>-->
+  <!--    </div>-->
+
+  <!--    <div class="content-title1">-->
+  <!--        <span class="content-text">( 雜貨店 )</span>-->
+  <!--    </div>-->
+
+  <!-- 遊戲 子選單內文 -->
+  <!--    <div class="content-title1">-->
+  <!--        <span class="content-text">( 史萊姆平原 )</span>-->
+  <!--    </div>-->
+
+  <!--    <div class="content-title1">-->
+  <!--        <span class="content-text">( 哥布靈地洞 )</span>-->
+  <!--    </div>-->
+
+  <!--    <div class="content-title1">-->
+  <!--        <span class="content-text">( 獸人之森 )</span>-->
+  <!--    </div>-->
+
+  <!-- 社交圈 子選單內文 -->
+  <!--    <div class="content-title1">-->
+  <!--        <span class="content-text">( 好友 )</span>-->
+  <!--    </div>-->
+
+  <!--    <div class="content-title1">-->
+  <!--        <span class="content-text">( 隊伍 )</span>-->
+  <!--    </div>-->
+
+  <!--    <div class="content-title1">-->
+  <!--        <span class="content-text">( 公會 )</span>-->
+  <!--    </div>-->
+
+  <!--    <div class="content-title1">-->
+  <!--        <span class="content-text">( 黑名單 )</span>-->
+  <!--    </div>-->
+
+</div>
+
+<div class="right-body">
+  <div class="t-title">
+    <h2>商品總表單</h2>
+  </div>
+
+  <div class="right">
+    <table class="right-table">
+      <thead>
+      <tr>
+        <th class="t-id">Id</th>
+        <th class="t-name">Name</th>
+        <th class="t-email">Email</th>
+        <th class="t-edit">Edit</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr th:each="user : ${users}">
+        <td class="td-id" th:text="*{user.userId}"></td>
+        <td class="td-name" th:text="*{user.userName}"></td>
+        <td class="td-email" th:text="*{user.email}"></td>
+        <td class="td-edit">
+          <div class="update-box">
+            <a class="btn-update" th:href="@{'/users/updateUser/' + ${user.userId}}">update</a>
+          </div>
+          <div class="delete-box">
+            <a class="btn-delete" th:href="@{'/users/deleteUser/' + ${user.userId}}">delete</a>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script src="/js/page.js"></script>
+
+<script>
+
+  // 開啟、關閉 子欄位
+  const opens = document.querySelectorAll(".open");
+  const menus = document.querySelectorAll(".openMenu");
+
+  opens.forEach((open, index) => {
+
+    open.addEventListener("click", () => {
+
+      menus[index].classList.toggle("ok");
+
+    });
+
+  });
+
+  // 選擇子欄位，並切換為正確的內文
+  // const menuOk = document.querySelectorAll(".box-menu");
+  // const menuOp = document.querySelectorAll(".content-title1");
+  //
+  // menuOk.forEach((menu1, index1) => {
+  //
+  //     menu1.addEventListener("click", (e) => {
+  //
+  //         menuOk.forEach(menu1 => {
+  //
+  //             menu1.classList.remove("active");
+  //         });
+  //         menu1.classList.add("active");
+  //
+  //         menuOp.forEach(mp => {
+  //
+  //             mp.classList.remove("active");
+  //         })
+  //
+  //         menuOp[index1].classList.add("active");
+  //
+  //     })
+  //
+  // })
+
+
+  // 選擇主欄位，並切換為正確的內文
+  // const btns = document.querySelectorAll(".icon-link");
+  // const all_content = document.querySelectorAll(".content-title");
+  //
+  // btns.forEach((btn, index) => {
+  //
+  //     btn.addEventListener("click", (e) => {
+  //
+  //         btns.forEach(btn => {
+  //
+  //             btn.classList.remove("active");
+  //         });
+  //
+  //         btn.classList.add("active");
+  //
+  //         all_content.forEach(content => {
+  //
+  //             content.classList.remove("active");
+  //         });
+  //
+  //         all_content[index].classList.add("active");
+  //
+  //         menuOp.forEach(mp => {
+  //
+  //             mp.classList.remove("active");
+  //         })
+  //
+  //         menuOp[index].classList.remove("active");
+  //
+  //     });
+  //
+  // });
+
+
+</script>
+
+</body>
+
