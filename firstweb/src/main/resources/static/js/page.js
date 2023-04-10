@@ -1,6 +1,5 @@
 function logout() {
-    alert("是否返回帳號登入頁面?");
-    window.location.href = "/users/logout";
+    window.location.href = "/users/login";
 }
 
 function goToHomePage() {
@@ -10,3 +9,4 @@ function goToHomePage() {
 function goToShopPage() {
     window.location.href = "/users/shop";
 }
+

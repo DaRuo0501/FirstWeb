@@ -182,6 +182,7 @@ header span {
 }
 
 .sidebar .footer .footer-content {
+    width: 80px;
     color: #efeff1;
     font-size: 18px;
     font-weight: 600;
@@ -256,29 +257,39 @@ header span {
 
 .right-body {
     position: fixed;
-    margin-left: 260px;
     margin-top: 60px;
-    width: 100%;
+    width: calc(100% - 260px);
     height: 100%;
-    padding: 20px 0 6px 30px;
+    padding: 20px 0 6px 0;
     color: #efeff1;
+    left: 260px;
 }
 
 .t-title {
-    padding-left: 500px;
-    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    margin-bottom: 30px;
+    letter-spacing: 5px;
 }
 
 .right {
     display: flex;
     justify-content: center;
-    align-items: center;
-    width: 80%;
+    height: 400px;
 }
 
+
 .right-table th {
-    background: #23242a;
     height: 50px;
+    background: #23242a;
+}
+
+.right-table td {
+    height: 60px;
+    padding-left: 50px;
+    border-bottom: 1px solid #45f3ff;
 }
 
 .right-table .t-id {
@@ -294,18 +305,14 @@ header span {
 }
 
 .right-table .t-edit {
+    position: relative;
+    justify-content: center;
+    align-items: center;
     width: 250px;
 }
 
-.right-table td {
-    height: 50px;
-    padding-left: 50px;
-    border-bottom: 1px solid #45f3ff;
-}
-
-.td-edit {
+.edit-box {
     display: flex;
-    align-items: center;
 }
 
 .update-box {
@@ -360,4 +367,28 @@ header span {
 
 .btn-delete:hover {
     color: #45f3ff;
+}
+
+.right-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+}
+
+.right-input input {
+    width: 80px;
+    font-size: 20px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    outline: medium;
+    background: #45f3ff;
+}
+
+.right-input input:hover {
+    font-size: 22px;
+    color: #45f3ff;
+    background: #010101;
+    border: 3px solid #45f3ff;
 }

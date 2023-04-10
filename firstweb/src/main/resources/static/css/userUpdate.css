@@ -182,6 +182,7 @@ header span {
 }
 
 .sidebar .footer .footer-content {
+    width: 80px;
     color: #efeff1;
     font-size: 18px;
     font-weight: 600;
