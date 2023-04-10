@@ -1,6 +1,7 @@
 package com.daruo.firstweb.dao.impl;
 
 import com.daruo.firstweb.dao.UserDao;
+import com.daruo.firstweb.dto.UserQueryParams;
 import com.daruo.firstweb.dto.UserRegisterRequest;
 import com.daruo.firstweb.dto.UserUpdateRequest;
 import com.daruo.firstweb.model.User;
@@ -83,12 +84,17 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers(UserQueryParams userQueryParams) {
 
         String sql = "SELECT user_id, user_name, password, email, created_date, last_modified_date " +
-                "FROM user;";
+                "FROM user WHERE 1 = 1";
 
         Map<String, Object> map = new HashMap<>();
+
+        // 分頁
+        sql = sql + " LIMIT :limit OFFSET :offset";
+        map.put("limit", userQueryParams.getLimit());
+        map.put("offset", userQueryParams.getOffset());
 
         List<User> userList = namedParameterJdbcTemplate.query(sql, map, new UserRowMapper());
 

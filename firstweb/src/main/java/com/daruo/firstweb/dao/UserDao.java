@@ -1,5 +1,6 @@
 package com.daruo.firstweb.dao;
 
+import com.daruo.firstweb.dto.UserQueryParams;
 import com.daruo.firstweb.dto.UserRegisterRequest;
 import com.daruo.firstweb.dto.UserUpdateRequest;
 import com.daruo.firstweb.model.User;
@@ -14,7 +15,7 @@ public interface UserDao {
 
     User getUserByEmail(String userEmail);
 
-    List<User> getAllUsers();
+    List<User> getAllUsers(UserQueryParams userQueryParams);
 
     void deleteUserById(Integer userId);
 

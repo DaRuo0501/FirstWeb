@@ -2,6 +2,7 @@ package com.daruo.firstweb.service.impl;
 
 import com.daruo.firstweb.dao.UserDao;
 import com.daruo.firstweb.dto.UserLoginRequest;
+import com.daruo.firstweb.dto.UserQueryParams;
 import com.daruo.firstweb.dto.UserRegisterRequest;
 import com.daruo.firstweb.dto.UserUpdateRequest;
 import com.daruo.firstweb.model.User;
@@ -65,7 +66,7 @@ public class UserServiceImpl implements UserService {
         }
 
         // 使用 MD5 生成密碼得雜湊值
-        String hashedPassword =DigestUtils.md5DigestAsHex(userLoginRequest.getPassword().getBytes());
+        String hashedPassword = DigestUtils.md5DigestAsHex(userLoginRequest.getPassword().getBytes());
 
         // 比較 password
         if (user1.getPassword().equals(hashedPassword)) {
@@ -78,8 +79,8 @@ public class UserServiceImpl implements UserService {
 
     // 查詢所有使用者
     @Override
-    public List<User> getAllUsers() {
-        return userDao.getAllUsers();
+    public List<User> getAllUsers(UserQueryParams userQueryParams) {
+        return userDao.getAllUsers(userQueryParams);
     }
 
     // 依照 ID 刪除使用者
@@ -91,6 +92,11 @@ public class UserServiceImpl implements UserService {
     // 更新使用者
     @Override
     public void updateUser(UserUpdateRequest userUpdateRequest) {
+
+        // 生成密碼的雜湊值
+        String hashedPassword = DigestUtils.md5DigestAsHex(userUpdateRequest.getPassword().getBytes());
+        userUpdateRequest.setPassword(hashedPassword);
+
         userDao.updateUser(userUpdateRequest);
     }
 

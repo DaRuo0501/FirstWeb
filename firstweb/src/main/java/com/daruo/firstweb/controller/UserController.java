@@ -1,6 +1,7 @@
 package com.daruo.firstweb.controller;
 
 import com.daruo.firstweb.dto.UserLoginRequest;
+import com.daruo.firstweb.dto.UserQueryParams;
 import com.daruo.firstweb.dto.UserRegisterRequest;
 import com.daruo.firstweb.dto.UserUpdateRequest;
 import com.daruo.firstweb.model.User;
@@ -8,15 +9,14 @@ import com.daruo.firstweb.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,8 +30,7 @@ public class UserController {
 
     // 註冊
     @PostMapping("/users/register")
-    public String register(HttpServletRequest request, @ModelAttribute("user") @Valid UserRegisterRequest userRegisterRequest) {
-        HttpSession session = request.getSession();
+    public String register(@ModelAttribute("user") @Valid UserRegisterRequest userRegisterRequest) {
 
         if (userRegisterRequest.getPassword().equals(userRegisterRequest.getPassword1())) {
 
@@ -53,7 +52,13 @@ public class UserController {
     @PostMapping("/users/login")
     public String login(@ModelAttribute @Valid UserLoginRequest userLoginRequest,
                         Model model,
-                        HttpSession session) {
+                        HttpSession session,
+
+                        // 分頁 Pagination
+                        @RequestParam(defaultValue = "5") @Max(1000) @Min(0) Integer limit,
+                        @RequestParam(defaultValue = "0") @Min(0) Integer offset
+
+    ) {
 
         User user = userService.login(userLoginRequest);
 
@@ -61,10 +66,14 @@ public class UserController {
 
         session.setAttribute("showUserName", user);
 
+        UserQueryParams userQueryParams = new UserQueryParams();
+        userQueryParams.setLimit(limit);
+        userQueryParams.setOffset(offset);
+
         if (user == null) {
             return "redirect:login";
         } else {
-            List<User> userList = userService.getAllUsers();
+            List<User> userList = userService.getAllUsers(userQueryParams);
             model.addAttribute("users", userList);
 
             log.info("登入帳號為:" + user.getUserName());
@@ -94,20 +103,17 @@ public class UserController {
     // 前往修改頁面
     @GetMapping("/users/goToUpdatePage/{userId}")
     public String goToUpdateUserPage(@PathVariable(name = "userId") Integer userId,
-                                     Model model,
-                                     HttpSession session) {
-        User tempUser = (User) session.getAttribute("showUserName");
+                                     Model model) {
+
         User user = userService.getUserById(userId);
 
-        model.addAttribute("updateUser", user);
+            model.addAttribute("updateUser", user);
 
-        if (user == null) {
-            throw new RuntimeException();
-        } else {
+            if (user == null) {
+                throw new RuntimeException();
+            } else {
 
-            model.addAttribute("tempUser", tempUser);
-
-            return "userUpdate";
-        }
+                return "userUpdate";
+            }
     }
 }
