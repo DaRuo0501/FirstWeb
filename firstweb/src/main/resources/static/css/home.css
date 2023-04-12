@@ -392,11 +392,18 @@ header span {
     border: 3px solid #45f3ff;
 }
 
+.search-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 75%;
+    margin: 20px auto 50px auto;
+}
+
 .search-input {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 15px;
 }
 
 .search-input span {
@@ -436,7 +443,6 @@ header span {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 10px;
 }
 
 .page-btn .prev-btn {
