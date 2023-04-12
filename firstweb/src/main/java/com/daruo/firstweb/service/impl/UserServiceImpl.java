@@ -93,10 +93,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUser(UserUpdateRequest userUpdateRequest) {
 
-        // 生成密碼的雜湊值
-        String hashedPassword = DigestUtils.md5DigestAsHex(userUpdateRequest.getPassword().getBytes());
-        userUpdateRequest.setPassword(hashedPassword);
-
         userDao.updateUser(userUpdateRequest);
     }
 
@@ -104,5 +100,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(Integer userId) {
         return userDao.getUserById(userId);
+    }
+
+    @Override
+    public List<User> getUsersByName(String userName) {
+        return userDao.getUsersByName(userName);
     }
 }

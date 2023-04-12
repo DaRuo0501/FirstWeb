@@ -6,7 +6,6 @@ import com.daruo.firstweb.dto.UserRegisterRequest;
 import com.daruo.firstweb.dto.UserUpdateRequest;
 import com.daruo.firstweb.model.User;
 import com.daruo.firstweb.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
@@ -62,9 +61,7 @@ public class UserController {
 
         User user = userService.login(userLoginRequest);
 
-        model.addAttribute("user1", user);  // 將登入的用戶傳給 home 頁面
-
-        session.setAttribute("showUserName", user);
+        session.setAttribute("showUserName", user); // 將登入的用戶傳給 home 頁面
 
         UserQueryParams userQueryParams = new UserQueryParams();
         userQueryParams.setLimit(limit);
@@ -82,13 +79,25 @@ public class UserController {
         }
     }
 
+    // 查詢
+    @GetMapping("/users/select")
+    public String getUserByName(@ModelAttribute User user,
+                                Model model) {
+
+        List<User> userList = userService.getUsersByName(user.getUserName());
+
+        model.addAttribute("users", userList);
+
+        return "home";
+    }
+
     // 刪除
     @GetMapping("/users/deleteUser/{userId}")
     public String delete(@PathVariable(name = "userId") Integer userId) {
 
         userService.deleteUserById(userId);
 
-        return "redirect:home";
+        return "redirect:/users/home";
     }
 
     // 修改

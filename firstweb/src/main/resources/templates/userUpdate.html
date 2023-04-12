@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,17 +10,18 @@
     <link rel="stylesheet" href="/css/userUpdate.css">
 
     <!-- JQuery 連結 -->
-    <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
     <!-- Boxicon CDN link -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
-          rel='stylesheet'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- FontAwesome 連結 -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
+    <!-- DataTable 連結 -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
     <title>首頁</title>
 </head>
@@ -304,10 +304,6 @@
                 <tr>
                     <td class="td-1">帳號:</td>
                     <td><input type="text" th:field="${updateUser.userName}" autocomplete="off"></td>
-                </tr>
-                <tr>
-                    <td class="td-1">密碼:</td>
-                    <td><input type="text" th:field="${updateUser.password}" autocomplete="off"></td>
                 </tr>
                 <tr>
                     <td class="td-1">電子信箱:</td>

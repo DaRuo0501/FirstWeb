@@ -22,6 +22,6 @@ public interface UserService {
 
     User getUserById(Integer userId);
 
-
+    List<User> getUsersByName(String userName);
 
 }

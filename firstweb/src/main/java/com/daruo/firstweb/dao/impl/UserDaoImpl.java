@@ -116,14 +116,12 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void updateUser(UserUpdateRequest userUpdateRequest) {
 
-        String sql = "UPDATE user SET user_id = :userId, user_name = :userName, " +
-                "password = :password, email = :email " +
+        String sql = "UPDATE user SET user_id = :userId, user_name = :userName, email = :email " +
                 "WHERE user_id = :userId;";
 
         Map<String, Object> map = new HashMap<>();
         map.put("userId", userUpdateRequest.getUserId());
         map.put("userName", userUpdateRequest.getUserName());
-        map.put("password", userUpdateRequest.getPassword());
         map.put("email", userUpdateRequest.getEmail());
 
         namedParameterJdbcTemplate.update(sql, map);
@@ -141,11 +139,24 @@ public class UserDaoImpl implements UserDao {
 
         List<User> userList = namedParameterJdbcTemplate.query(sql, map, new UserRowMapper());
 
-
         if (userList.size() > 0) {
             return userList.get(0);
         } else {
             return null;
         }
+    }
+
+    @Override
+    public List<User> getUsersByName(String userName) {
+
+        String sql = "SELECT user_id, user_name, password, email, created_date, last_modified_date " +
+                "FROM user WHERE user_name like :userName";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("userName", "%" + userName + "%");
+
+        List<User> userList = namedParameterJdbcTemplate.query(sql, map, new UserRowMapper());
+
+        return userList;
     }
 }

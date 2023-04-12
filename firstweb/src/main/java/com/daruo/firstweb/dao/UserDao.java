@@ -23,6 +23,6 @@ public interface UserDao {
 
     User getUserById(Integer userId);
 
-//    User getUserByVO(UserVO tempVO);
+    List<User> getUsersByName(String userName);
 
 }

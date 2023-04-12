@@ -10,16 +10,19 @@
     <link rel="stylesheet" href="/css/home.css">
 
     <!-- JQuery 連結 -->
-    <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
     <!-- Boxicon CDN link -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
-          rel='stylesheet'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- FontAwesome 連結 -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+    <!-- DataTable 連結 -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
 
 
     <title>首頁</title>
@@ -55,7 +58,8 @@
 
         <li>
             <div class="icon-link">
-                <a href="#"> <i class="fa-solid fa-shop"></i> <span class="link_name" onclick="goToShopPage()">商城</span>
+                <a href="#"> <i class="fa-solid fa-shop"></i> <span class="link_name"
+                                                                    onclick="goToShopPage()">商城</span>
                 </a>
             </div>
         </li>
@@ -195,6 +199,7 @@
     </ul>
 </div>
 
+<!-- 內文的標頭 -->
 <div class="content">
     <div class="content-title active">
         <span class="content-text">首頁</span>
@@ -238,21 +243,21 @@
     <!--    </div>-->
 
     <!-- 商城 子選單內文 -->
-<!--    <div class="content-title1">-->
-<!--        <span class="content-text">( 武器店 )</span>-->
-<!--    </div>-->
+    <!--    <div class="content-title1">-->
+    <!--        <span class="content-text">( 武器店 )</span>-->
+    <!--    </div>-->
 
-<!--    <div class="content-title1">-->
-<!--        <span class="content-text">( 防具店 )</span>-->
-<!--    </div>-->
+    <!--    <div class="content-title1">-->
+    <!--        <span class="content-text">( 防具店 )</span>-->
+    <!--    </div>-->
 
-<!--    <div class="content-title1">-->
-<!--        <span class="content-text">( 藥水店 )</span>-->
-<!--    </div>-->
+    <!--    <div class="content-title1">-->
+    <!--        <span class="content-text">( 藥水店 )</span>-->
+    <!--    </div>-->
 
-<!--    <div class="content-title1">-->
-<!--        <span class="content-text">( 雜貨店 )</span>-->
-<!--    </div>-->
+    <!--    <div class="content-title1">-->
+    <!--        <span class="content-text">( 雜貨店 )</span>-->
+    <!--    </div>-->
 
     <!-- 遊戲 子選單內文 -->
     <!--    <div class="content-title1">-->
@@ -286,6 +291,7 @@
 
 </div>
 
+<!-- 內文 -->
 <div class="right-body">
     <div class="t-title">
         <h2>使用者總表單</h2>
@@ -321,9 +327,23 @@
             </tbody>
         </table>
     </div>
-<!--    <div class="right-input">-->
-<!--        <input type="submit" value="查詢" href="/users/all">-->
-<!--    </div>-->
+
+    <!--  帳號查詢  -->
+    <form class="search-input" action="/users/select" method="GET">
+        <span>查詢 :</span>
+        <input type="text" name="userName" placeholder="請輸入想查詢的帳號" autocomplete="off" required>
+        <input type="submit" value="確認">
+    </form>
+
+    <!--  換頁  -->
+    <div class="page-btn">
+        <div class="prev-btn">
+            <p>上一頁</p>
+        </div>
+        <div class="next-btn">
+            <p>下一頁</p>
+        </div>
+    </div>
 </div>
 
 
