@@ -2,6 +2,7 @@ CREATE DATABASE IF NOT EXISTS firstweb;
 
 DROP TABLE IF EXISTS user;
 
+# 新增 User 表
 CREATE TABLE IF NOT EXISTS user
 (
     user_id            INT          NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -39,3 +40,36 @@ VALUES  ('John', '202cb962ac59075b964b07152d234b70', 'john@gmail.com', '2023-03-
         ('000', '202cb962ac59075b964b07152d234b70', '555@gmail.com', '2023-03-09 11:20:00', '2023-03-09 11:20:00');
 
 SELECT user_id, user_name, password, email, created_date, last_modified_date from user LIMIT 5 OFFSET 0;
+
+# 新增 Pokemon 表
+DROP TABLE IF EXISTS pokemon;
+
+CREATE TABLE IF NOT EXISTS pokemon
+(
+    pokemon_id         INT          NOT NULL PRIMARY KEY,
+    pokemon_name       VARCHAR(128) NOT NULL,
+    image_url          VARCHAR(255) NOT NULL,
+    category           VARCHAR(32)  NOT NULL,
+    life               INT          NOT NULL,
+    exp                INT          NOT NULL,
+    attack             INT          NOT NULL,
+    skill_1            VARCHAR(255) ,
+    skill_2            VARCHAR(255) ,
+    skill_3            VARCHAR(255) ,
+    skill_4            VARCHAR(255) ,
+    created_date       TIMESTAMP    NOT NULL,
+    last_modified_date TIMESTAMP    NOT NULL
+);
+
+INSERT INTO pokemon(pokemon_id, pokemon_name, image_url, category, life, exp, attack, skill_1, skill_2, skill_3, skill_4, created_date, last_modified_date)
+VALUES (0001, '妙蛙種子', 'static/images/0001-妙蛙種子.png', 'GRASS', 100, 0, 10, '衝撞', '藤鞭', '飛業快刀', '', '2022-03-19 17:00:00', '2022-03-22 18:00:00'),
+       (0004, '小火龍', 'static/images/0004-小火龍.png', 'FIRE', 100, 0, 10, '衝撞', '抓', '火焰', '', '2022-03-19 17:00:00', '2022-03-22 18:00:00'),
+       (0007, '傑尼龜', 'static/images/0007-傑尼龜.png', 'WATER', 100, 0, 10, '衝撞', '縮殼', '水槍', '', '2022-03-19 17:00:00', '2022-03-22 18:00:00'),
+       (0010, '綠毛蟲', 'static/images/0010-綠毛蟲.png', 'BUG', 100, 0, 10, '衝撞', '吐絲', '', '', '2022-03-19 17:00:00', '2022-03-22 18:00:00'),
+       (0016, '波波', 'static/images/0016-波波.png', 'FLYING', 100, 0, 10, '衝撞', '啄', '烈暴風', '', '2022-03-19 17:00:00', '2022-03-22 18:00:00'),
+       (0019, '小拉達', 'static/images/0019-小拉達.png', 'NORMAL', 100, 0, 10, '衝撞', '咬咬', '抓', '', '2022-03-19 17:00:00', '2022-03-22 18:00:00'),
+       (0025, '皮卡丘', 'static/images/0025-皮卡丘.png', 'ELECTR', 100, 0, 10, '衝撞', '電擊', '電光一閃', '', '2022-03-19 17:00:00', '2022-03-22 18:00:00'),
+       (0054, '可達鴨', 'static/images/0054-可達鴨.png', 'WATER', 100, 0, 10, '衝撞', '抓', '水槍', '', '2022-03-19 17:00:00', '2022-03-22 18:00:00'),
+       (0133, '伊布', 'static/images/0133-伊布.png', 'NORMAL', 100, 0, 10, '衝撞', '抓', '', '', '2022-03-19 17:00:00', '2022-03-22 18:00:00');
+
+SELECT pokemon_id, pokemon_name, image_url, category, life, exp, attack, skill_1, skill_2, skill_3, skill_4, created_date, last_modified_date FROM pokemon;
