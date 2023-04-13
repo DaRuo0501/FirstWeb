@@ -5,7 +5,7 @@ import java.util.Date;
 public class UserQueryParams {
 
     private Integer limit;
-    private Integer offset;
+    private Integer offset = 0;
 
     public Integer getLimit() {
         return limit;

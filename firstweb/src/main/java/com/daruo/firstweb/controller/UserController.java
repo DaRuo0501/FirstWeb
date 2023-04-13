@@ -61,7 +61,8 @@ public class UserController {
 
         User user = userService.login(userLoginRequest);
 
-        session.setAttribute("showUserName", user); // 將登入的用戶傳給 home 頁面
+        // 將登入的用戶存在 session 再傳給 home 頁面
+        session.setAttribute("showUserName", user);
 
         UserQueryParams userQueryParams = new UserQueryParams();
         userQueryParams.setLimit(limit);
@@ -75,11 +76,11 @@ public class UserController {
 
             log.info("登入帳號為:" + user.getUserName());
 
-            return "home";
+            return "redirect:/users/home";
         }
     }
 
-    // 查詢
+    // 使用 帳號 查詢
     @GetMapping("/users/select")
     public String getUserByName(@ModelAttribute User user,
                                 Model model) {
@@ -91,13 +92,25 @@ public class UserController {
         return "home";
     }
 
-    // 刪除
-    @GetMapping("/users/deleteUser/{userId}")
-    public String delete(@PathVariable(name = "userId") Integer userId) {
+    // 使用 頁數 查詢
+    @GetMapping("/users/page")
+    public String next(@RequestParam Integer page,
+                       Model model,
+                       // 分頁 Pagination
+                       @RequestParam(defaultValue = "5") @Max(1000) @Min(0) Integer limit
+    ) {
 
-        userService.deleteUserById(userId);
+        Integer offset = page * 5 - 5;
 
-        return "redirect:/users/home";
+        UserQueryParams userQueryParams = new UserQueryParams();
+        userQueryParams.setLimit(limit);
+        userQueryParams.setOffset(offset);
+
+        List<User> userList = userService.getAllUsers(userQueryParams);
+
+        model.addAttribute("users", userList);
+
+        return "home";
     }
 
     // 修改
@@ -109,20 +122,13 @@ public class UserController {
         return "redirect:home";
     }
 
-    // 前往修改頁面
-    @GetMapping("/users/goToUpdatePage/{userId}")
-    public String goToUpdateUserPage(@PathVariable(name = "userId") Integer userId,
-                                     Model model) {
+    // 刪除
+    @GetMapping("/users/deleteUser/{userId}")
+    public String delete(@PathVariable(name = "userId") Integer userId) {
 
-        User user = userService.getUserById(userId);
+        userService.deleteUserById(userId);
 
-            model.addAttribute("updateUser", user);
-
-            if (user == null) {
-                throw new RuntimeException();
-            } else {
-
-                return "userUpdate";
-            }
+        return "redirect:/users/home";
     }
+
 }
