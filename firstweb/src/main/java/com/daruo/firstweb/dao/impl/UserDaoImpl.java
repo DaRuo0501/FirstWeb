@@ -24,6 +24,7 @@ public class UserDaoImpl implements UserDao {
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+    // 新增
     @Override
     public Integer createUser(UserRegisterRequest userRegisterRequest) {
 
@@ -48,6 +49,7 @@ public class UserDaoImpl implements UserDao {
         return userId;
     }
 
+    // 使用 帳號 查詢 單一個
     @Override
     public User getUserByName(String userName) {
 
@@ -66,6 +68,7 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    // 使用 信箱 查詢
     @Override
     public User getUserByEmail(String userEmail) {
         String sql = "SELECT user_id, user_name, password, email, created_date, last_modified_date " +
@@ -83,6 +86,7 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    // 查詢全部
     @Override
     public List<User> getAllUsers(UserQueryParams userQueryParams) {
 
@@ -101,6 +105,7 @@ public class UserDaoImpl implements UserDao {
         return userList;
     }
 
+    // 使用 ID 刪除
     @Override
     public void deleteUserById(Integer userId) {
 
@@ -113,21 +118,24 @@ public class UserDaoImpl implements UserDao {
 
     }
 
+    // 更新
     @Override
     public void updateUser(UserUpdateRequest userUpdateRequest) {
 
-        String sql = "UPDATE user SET user_id = :userId, user_name = :userName, email = :email " +
+        String sql = "UPDATE user SET user_id = :userId, user_name = :userName, password = :password, email = :email " +
                 "WHERE user_id = :userId;";
 
         Map<String, Object> map = new HashMap<>();
         map.put("userId", userUpdateRequest.getUserId());
         map.put("userName", userUpdateRequest.getUserName());
+        map.put("password", userUpdateRequest.getPassword());
         map.put("email", userUpdateRequest.getEmail());
 
         namedParameterJdbcTemplate.update(sql, map);
 
     }
 
+    // 使用 ID 查詢
     @Override
     public User getUserById(Integer userId) {
 
@@ -146,6 +154,7 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    // 使用 帳號 查詢 多個
     @Override
     public List<User> getUsersByName(String userName) {
 

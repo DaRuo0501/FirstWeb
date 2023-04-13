@@ -93,7 +93,24 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUser(UserUpdateRequest userUpdateRequest) {
 
-        userDao.updateUser(userUpdateRequest);
+        // 使用 ID 從資料庫 取出同一筆 使用者資料
+        User user = getUserById(userUpdateRequest.getUserId());
+
+        // 比較前端與資料庫，同一筆資料的密碼是否相同
+        if (userUpdateRequest.getPassword().equals(user.getPassword())) {
+
+            // 如果密碼相同，代表前端此次未修改密碼
+            // 不需產生新的雜湊值，直接更新資料
+            userDao.updateUser(userUpdateRequest);
+        } else {
+
+            // 生成密碼的雜湊值
+            String hashedPassword = DigestUtils.md5DigestAsHex(userUpdateRequest.getPassword().getBytes());
+            userUpdateRequest.setPassword(hashedPassword);
+
+            // 更新資料
+            userDao.updateUser(userUpdateRequest);
+        }
     }
 
     // 使用 ID 查詢使用者
