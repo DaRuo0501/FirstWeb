@@ -2,7 +2,9 @@ package com.daruo.firstweb.controller;
 
 
 import com.daruo.firstweb.dto.UserQueryParams;
+import com.daruo.firstweb.model.Pokemon;
 import com.daruo.firstweb.model.User;
+import com.daruo.firstweb.service.PokemonService;
 import com.daruo.firstweb.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.constraints.Max;
@@ -21,6 +23,9 @@ public class PageController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PokemonService pokemonService;
 
     // 登入頁面
     @GetMapping("/users/login")
@@ -73,7 +78,12 @@ public class PageController {
 
     // 商城頁面
     @GetMapping("users/shop")
-    public String shop() {
+    public String shop(Model model) {
+
+        List<Pokemon> pokemonList = pokemonService.getAllPokemons();
+
+        model.addAttribute("pokemons", pokemonList);
+
         return "shop";
     }
 

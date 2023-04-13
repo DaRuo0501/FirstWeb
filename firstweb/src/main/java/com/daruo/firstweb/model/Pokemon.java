@@ -2,6 +2,8 @@ package com.daruo.firstweb.model;
 
 import com.daruo.firstweb.constant.PokemonCategory;
 
+import java.util.Date;
+
 public class Pokemon {
 
     private Integer pokemonId;
@@ -11,12 +13,20 @@ public class Pokemon {
     private Integer life;
     private Integer exp;
     private Integer attack;
-    private String skill;
+    private String skill1;
+    private String skill2;
+    private String skill3;
+    private String skill4;
+    private Date createdDate;
+    private Date lastModifiedDate;
 
     public Pokemon() {
     }
 
-    public Pokemon(Integer pokemonId, String pokemonName, String imageUrl, PokemonCategory category, Integer life, Integer exp, Integer attack, String skill) {
+    public Pokemon(Integer pokemonId, String pokemonName, String imageUrl, PokemonCategory category,
+                   Integer life, Integer exp, Integer attack,
+                   String skill1, String skill2, String skill3, String skill4,
+                   Date createdDate, Date lastModifiedDate) {
         this.pokemonId = pokemonId;
         this.pokemonName = pokemonName;
         this.imageUrl = imageUrl;
@@ -24,7 +34,12 @@ public class Pokemon {
         this.life = life;
         this.exp = exp;
         this.attack = attack;
-        this.skill = skill;
+        this.skill1 = skill1;
+        this.skill2 = skill2;
+        this.skill3 = skill3;
+        this.skill4 = skill4;
+        this.createdDate = createdDate;
+        this.lastModifiedDate = lastModifiedDate;
     }
 
     public Integer getPokemonId() {
@@ -83,11 +98,51 @@ public class Pokemon {
         this.attack = attack;
     }
 
-    public String getSkill() {
-        return skill;
+    public String getSkill1() {
+        return skill1;
     }
 
-    public void setSkill(String skill) {
-        this.skill = skill;
+    public void setSkill1(String skill1) {
+        this.skill1 = skill1;
+    }
+
+    public String getSkill2() {
+        return skill2;
+    }
+
+    public void setSkill2(String skill2) {
+        this.skill2 = skill2;
+    }
+
+    public String getSkill3() {
+        return skill3;
+    }
+
+    public void setSkill3(String skill3) {
+        this.skill3 = skill3;
+    }
+
+    public String getSkill4() {
+        return skill4;
+    }
+
+    public void setSkill4(String skill4) {
+        this.skill4 = skill4;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(Date lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 }

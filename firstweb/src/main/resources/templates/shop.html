@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- CSS 連結 -->
-  <link rel="stylesheet" href="/css/home.css">
+  <link rel="stylesheet" href="/css/shop.css">
 
   <!-- JQuery 連結 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -298,22 +298,42 @@
       <tr>
         <th class="t-id">Id</th>
         <th class="t-name">Name</th>
-        <th class="t-email">Email</th>
+        <th class="t-image">Image</th>
+        <th class="t-category">Category</th>
+        <th class="t-life">Life</th>
+        <th class="t-exp">Exp</th>
+        <th class="t-attack">Attack</th>
+        <th class="t-skill-1">Skill-1</th>
+        <th class="t-skill-2">Skill-2</th>
+        <th class="t-skill-3">Skill-3</th>
+        <th class="t-skill-4">Skill-4</th>
+        <th class="t-create-date">CreateDate</th>
+        <th class="t-last-date">LastDate</th>
         <th class="t-edit">Edit</th>
       </tr>
       </thead>
 
       <tbody>
-      <tr th:each="user : ${users}">
-        <td class="td-id" th:text="*{user.userId}"></td>
-        <td class="td-name" th:text="*{user.userName}"></td>
-        <td class="td-email" th:text="*{user.email}"></td>
+      <tr th:each="pokemon : ${pokemons}">
+        <td class="td-id" th:text="*{pokemon.pokemonId}"></td>
+        <td class="td-name" th:text="*{pokemon.pokemonName}"></td>
+        <td class="td-image"><img th:src="@{*{pokemon.imageUrl}}"></td>
+        <td class="td-category" th:text="*{pokemon.category}"></td>
+        <td class="td-life" th:text="*{pokemon.life}"></td>
+        <td class="td-exp" th:text="*{pokemon.exp}"></td>
+        <td class="td-attack" th:text="*{pokemon.attack}"></td>
+        <td class="td-skill-1" th:text="*{pokemon.skill1}"></td>
+        <td class="td-skill-2" th:text="*{pokemon.skill2}"></td>
+        <td class="td-skill-3" th:text="*{pokemon.skill3}"></td>
+        <td class="td-skill-4" th:text="*{pokemon.skill4}"></td>
+        <td class="td-create-date" th:text="*{pokemon.createdDate}"></td>
+        <td class="td-last-date" th:text="*{pokemon.lastModifiedDate}"></td>
         <td class="td-edit">
           <div class="update-box">
-            <a class="btn-update" th:href="@{'/users/updateUser/' + ${user.userId}}">update</a>
+            <a class="btn-update" th:href="@{'/users/updateUser/' + ${pokemon.pokemonId}}">update</a>
           </div>
           <div class="delete-box">
-            <a class="btn-delete" th:href="@{'/users/deleteUser/' + ${user.userId}}">delete</a>
+            <a class="btn-delete" th:href="@{'/users/deleteUser/' + ${pokemon.pokemonId}}">delete</a>
           </div>
         </td>
       </tr>
