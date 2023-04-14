@@ -275,7 +275,7 @@ header span {
 
 .right {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     width: 80%;
     height: auto;
@@ -291,7 +291,7 @@ header span {
     width: 320px;
     height: 250px;
     color: #efeff1;
-    margin: 5px;
+    margin: 15px;
     background: #1f1f23;
     border: 2px solid #45f3ff;
     border-radius: 8px;
