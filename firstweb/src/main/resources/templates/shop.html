@@ -288,57 +288,69 @@
 </div>
 
 <div class="right-body">
-  <div class="t-title">
-    <h2>商品總表單</h2>
-  </div>
+<!--  <div class="t-title">-->
+<!--    <h2>商品總表單</h2>-->
+<!--  </div>-->
 
   <div class="right">
-    <table class="right-table">
-      <thead>
-      <tr>
-        <th class="t-id">Id</th>
-        <th class="t-name">Name</th>
-        <th class="t-image">Image</th>
-        <th class="t-category">Category</th>
-        <th class="t-life">Life</th>
-        <th class="t-exp">Exp</th>
-        <th class="t-attack">Attack</th>
-        <th class="t-skill-1">Skill-1</th>
-        <th class="t-skill-2">Skill-2</th>
-        <th class="t-skill-3">Skill-3</th>
-        <th class="t-skill-4">Skill-4</th>
-        <th class="t-create-date">CreateDate</th>
-        <th class="t-last-date">LastDate</th>
-        <th class="t-edit">Edit</th>
-      </tr>
-      </thead>
+    <div class="poke-box" th:each="pokemon : ${pokemons}">
+      <div class="poke-image-box">
+        <a><img th:src="@{*{pokemon.imageUrl}}"></a>
+      </div>
+        <div class="poke-text-box">
+          <a th:text="'編號 : ' + *{pokemon.pokemonId} "></a>
+          <a th:text="'名稱 : ' + *{pokemon.pokemonName}"></a>
+          <a th:text="'屬性 : ' + *{pokemon.category}"></a>
+        </div>
+        <div class="poke-skill-box">
+          <a th:text="'技能一 : ' + *{pokemon.skill1}"></a>
+          <a th:text="'技能二 : ' + *{pokemon.skill2}"></a>
+          <a th:text="'技能三 : ' + *{pokemon.skill3}"></a>
+          <a th:text="'技能四 : ' + *{pokemon.skill4}"></a>
+        </div>
+    </div>
+<!--    <table class="right-table">-->
+<!--      <thead>-->
+<!--      <tr>-->
+<!--        <th class="t-id">Id</th>-->
+<!--        <th class="t-name">Name</th>-->
+<!--        <th class="t-image">Image</th>-->
+<!--        <th class="t-category">Category</th>-->
+<!--        <th class="t-life">Life</th>-->
+<!--        <th class="t-exp">Exp</th>-->
+<!--        <th class="t-attack">Attack</th>-->
+<!--        <th class="t-skill-1">Skill-1</th>-->
+<!--        <th class="t-skill-2">Skill-2</th>-->
+<!--        <th class="t-skill-3">Skill-3</th>-->
+<!--        <th class="t-skill-4">Skill-4</th>-->
+<!--        <th class="t-edit">Edit</th>-->
+<!--      </tr>-->
+<!--      </thead>-->
 
-      <tbody>
-      <tr th:each="pokemon : ${pokemons}">
-        <td class="td-id" th:text="*{pokemon.pokemonId}"></td>
-        <td class="td-name" th:text="*{pokemon.pokemonName}"></td>
-        <td class="td-image"><img th:src="@{*{pokemon.imageUrl}}"></td>
-        <td class="td-category" th:text="*{pokemon.category}"></td>
-        <td class="td-life" th:text="*{pokemon.life}"></td>
-        <td class="td-exp" th:text="*{pokemon.exp}"></td>
-        <td class="td-attack" th:text="*{pokemon.attack}"></td>
-        <td class="td-skill-1" th:text="*{pokemon.skill1}"></td>
-        <td class="td-skill-2" th:text="*{pokemon.skill2}"></td>
-        <td class="td-skill-3" th:text="*{pokemon.skill3}"></td>
-        <td class="td-skill-4" th:text="*{pokemon.skill4}"></td>
-        <td class="td-create-date" th:text="*{pokemon.createdDate}"></td>
-        <td class="td-last-date" th:text="*{pokemon.lastModifiedDate}"></td>
-        <td class="td-edit">
-          <div class="update-box">
-            <a class="btn-update" th:href="@{'/users/updateUser/' + ${pokemon.pokemonId}}">update</a>
-          </div>
-          <div class="delete-box">
-            <a class="btn-delete" th:href="@{'/users/deleteUser/' + ${pokemon.pokemonId}}">delete</a>
-          </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+<!--      <tbody>-->
+<!--      <tr th:each="pokemon : ${pokemons}">-->
+<!--        <td class="td-id" th:text="*{pokemon.pokemonId}"></td>-->
+<!--        <td class="td-name" th:text="*{pokemon.pokemonName}"></td>-->
+<!--        <td class="td-image"><img th:src="@{*{pokemon.imageUrl}}"></td>-->
+<!--        <td class="td-category" th:text="*{pokemon.category}"></td>-->
+<!--        <td class="td-life" th:text="*{pokemon.life}"></td>-->
+<!--        <td class="td-exp" th:text="*{pokemon.exp}"></td>-->
+<!--        <td class="td-attack" th:text="*{pokemon.attack}"></td>-->
+<!--        <td class="td-skill-1" th:text="*{pokemon.skill1}"></td>-->
+<!--        <td class="td-skill-2" th:text="*{pokemon.skill2}"></td>-->
+<!--        <td class="td-skill-3" th:text="*{pokemon.skill3}"></td>-->
+<!--        <td class="td-skill-4" th:text="*{pokemon.skill4}"></td>-->
+<!--        <td class="td-edit">-->
+<!--          <div class="update-box">-->
+<!--            <a class="btn-update" th:href="@{'/users/updateUser/' + ${pokemon.pokemonId}}">update</a>-->
+<!--          </div>-->
+<!--          <div class="delete-box">-->
+<!--            <a class="btn-delete" th:href="@{'/users/deleteUser/' + ${pokemon.pokemonId}}">delete</a>-->
+<!--          </div>-->
+<!--        </td>-->
+<!--      </tr>-->
+<!--      </tbody>-->
+<!--    </table>-->
   </div>
 </div>
 
