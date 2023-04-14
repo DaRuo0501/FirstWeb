@@ -78,9 +78,18 @@ public class PageController {
 
     // 商城頁面
     @GetMapping("users/shop")
-    public String shop(Model model) {
+    public String shop(Model model,
 
-        List<Pokemon> pokemonList = pokemonService.getAllPokemons();
+                       // 分頁 Pagination
+                       @RequestParam(defaultValue = "6") @Max(1000) @Min(0) Integer limit,
+                       @RequestParam(defaultValue = "0") @Min(0) Integer offset
+    ) {
+
+        UserQueryParams userQueryParams = new UserQueryParams();
+        userQueryParams.setLimit(limit);
+        userQueryParams.setOffset(offset);
+
+        List<Pokemon> pokemonList = pokemonService.getAllPokemons(userQueryParams);
 
         model.addAttribute("pokemons", pokemonList);
 
