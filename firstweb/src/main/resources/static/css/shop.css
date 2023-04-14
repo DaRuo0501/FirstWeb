@@ -276,12 +276,13 @@ header span {
 .right {
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
-    width: 80%;
-    height: auto;
+    width: 1050px;
+    height: 400px;
+    font-weight: 600;
     margin-left: auto;
     margin-right: auto;
-    font-weight: 600;
 }
 
 .poke-box {
@@ -291,7 +292,7 @@ header span {
     width: 320px;
     height: 250px;
     color: #efeff1;
-    margin: 15px;
+    margin: 10px;
     background: #1f1f23;
     border: 2px solid #45f3ff;
     border-radius: 8px;
