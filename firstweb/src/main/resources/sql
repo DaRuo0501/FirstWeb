@@ -57,12 +57,14 @@ CREATE TABLE IF NOT EXISTS pokemon
     skill_2            VARCHAR(255) ,
     skill_3            VARCHAR(255) ,
     skill_4            VARCHAR(255) ,
+    price              INT          ,
+    stock              INT          ,
     created_date       TIMESTAMP    NOT NULL,
     last_modified_date TIMESTAMP    NOT NULL
 );
 
 INSERT INTO pokemon(pokemon_id, pokemon_name, image_url, category, life, exp, attack, skill_1, skill_2, skill_3, skill_4, price, stock, created_date, last_modified_date)
-VALUES (0001, '妙蛙種子', '/images/0001-妙蛙種子.png', '草', 100, 0, 10, '衝撞', '藤鞭', '飛業快刀', '', 100 , 3, '2022-03-19 17:00:00', '2022-03-22 18:00:00'),
+VALUES (0001, '妙蛙種子', '/images/0001-妙蛙種子.png', '草', 100, 0, 10, '衝撞', '藤鞭', '飛葉快刀', '', 100 , 3, '2022-03-19 17:00:00', '2022-03-22 18:00:00'),
        (0004, '小火龍', '/images/0004-小火龍.png', '火', 100, 0, 10, '衝撞', '抓', '火焰', '', 100 , 3, '2022-03-19 17:00:00', '2022-03-22 18:00:00'),
        (0007, '傑尼龜', '/images/0007-傑尼龜.png', '水', 100, 0, 10, '衝撞', '縮殼', '水槍', '', 100 , 3, '2022-03-19 17:00:00', '2022-03-22 18:00:00'),
        (0010, '綠毛蟲', '/images/0010-綠毛蟲.png', '蟲', 100, 0, 10, '衝撞', '吐絲', '', '', 10 , 100, '2022-03-19 17:00:00', '2022-03-22 18:00:00'),

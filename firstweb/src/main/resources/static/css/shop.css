@@ -231,7 +231,7 @@ header span {
     background: #010101;
 }
 
-.content .content-title.active{
+.content .content-title.active {
     display: flex;
 }
 
@@ -276,10 +276,10 @@ header span {
 }
 
 .content .content-title .poke-search-box input[type="submit"]:hover {
-    font-size: 18px;
+    color: #010101;
+    background: #45f3ff;
     font-weight: 600;
 }
-
 
 
 .content-title1 {
@@ -330,7 +330,7 @@ header span {
     align-items: center;
     flex-direction: column;
     width: 320px;
-    height: 240px;
+    height: 230px;
     margin: 40px 15px;
     color: #efeff1;
     background: #1f1f23;
@@ -338,12 +338,24 @@ header span {
     border-radius: 8px;
 }
 
-.poke-box img {
+.poke-image-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100px;
     height: 100px;
-    background: #1f1f23;
     border: 2px solid #45f3ff;
     border-radius: 8px;
+    margin-bottom: 10px;
+    background: #1f1f23;
+}
+
+.poke-box img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
 }
 
 .poke-text-box {
