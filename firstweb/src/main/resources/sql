@@ -53,6 +53,8 @@ CREATE TABLE IF NOT EXISTS pokemon
     life               INT          NOT NULL,
     exp                INT          NOT NULL,
     attack             INT          NOT NULL,
+    price              INT          ,
+    stock              INT          ,
     skill_1            VARCHAR(255) ,
     skill_2            VARCHAR(255) ,
     skill_3            VARCHAR(255) ,
