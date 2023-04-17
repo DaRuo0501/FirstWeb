@@ -81,7 +81,7 @@ public class PageController {
     public String shop(Model model,
 
                        // 分頁 Pagination
-                       @RequestParam(defaultValue = "6") @Max(1000) @Min(0) Integer limit,
+                       @RequestParam(defaultValue = "12") @Max(1000) @Min(0) Integer limit,
                        @RequestParam(defaultValue = "0") @Min(0) Integer offset
     ) {
 

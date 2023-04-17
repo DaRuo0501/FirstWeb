@@ -17,6 +17,8 @@ public class Pokemon {
     private String skill2;
     private String skill3;
     private String skill4;
+    private Integer price;
+    private Integer stock;
     private Date createdDate;
     private Date lastModifiedDate;
 
@@ -26,6 +28,7 @@ public class Pokemon {
     public Pokemon(Integer pokemonId, String pokemonName, String imageUrl, PokemonCategory category,
                    Integer life, Integer exp, Integer attack,
                    String skill1, String skill2, String skill3, String skill4,
+                   Integer price, Integer stock,
                    Date createdDate, Date lastModifiedDate) {
         this.pokemonId = pokemonId;
         this.pokemonName = pokemonName;
@@ -38,6 +41,8 @@ public class Pokemon {
         this.skill2 = skill2;
         this.skill3 = skill3;
         this.skill4 = skill4;
+        this.price = price;
+        this.stock = stock;
         this.createdDate = createdDate;
         this.lastModifiedDate = lastModifiedDate;
     }
@@ -128,6 +133,22 @@ public class Pokemon {
 
     public void setSkill4(String skill4) {
         this.skill4 = skill4;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 
     public Date getCreatedDate() {

@@ -2,58 +2,6 @@ package com.daruo.firstweb.constant;
 
 public enum PokemonCategory {
 
-    // 火
-    FIRE,
-
-    // 水
-    WATER,
-
-    // 電
-    ELECTR,
-
-    // 草
-    GRASS,
-
-    // 冰
-    ICE,
-
-    // 岩石
-    ROCK,
-
-    // 飛行
-    FLYING,
-
-    // 地面
-    GROUND,
-
-    // 蟲
-    BUG,
-
-    // 普通
-    NORMAL,
-
-    // 鋼
-    STEEL,
-
-    // 毒
-    POISON,
-
-    // 幽靈
-    GHOST,
-
-    // 惡
-    DARK,
-
-    // 妖精
-    FAIRY,
-
-    // 超能力
-    PSYCHC,
-
-    // 龍
-    DRAGON,
-
-    // 格鬥
-    FIGHT
+    火, 水, 電, 草, 冰, 岩石, 飛行, 地面, 蟲, 普通, 鋼, 毒, 幽靈, 惡, 妖精, 超能力, 龍, 格鬥
 
 }

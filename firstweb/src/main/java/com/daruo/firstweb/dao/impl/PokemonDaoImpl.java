@@ -23,7 +23,7 @@ public class PokemonDaoImpl implements PokemonDao {
 
         String sql = "SELECT pokemon_id, pokemon_name, image_url," +
                 " category, life, exp, attack," +
-                " skill_1, skill_2, skill_3, skill_4, created_date, last_modified_date" +
+                " skill_1, skill_2, skill_3, skill_4, price, stock, created_date, last_modified_date" +
                 " FROM pokemon WHERE 1 = 1";
 
         Map<String, Object> map = new HashMap<>();

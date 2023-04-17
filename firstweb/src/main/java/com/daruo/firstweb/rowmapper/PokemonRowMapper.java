@@ -27,6 +27,8 @@ public class PokemonRowMapper implements RowMapper<Pokemon> {
         pokemon.setSkill2(resultSet.getString("skill_2"));
         pokemon.setSkill3(resultSet.getString("skill_3"));
         pokemon.setSkill4(resultSet.getString("skill_4"));
+        pokemon.setPrice(resultSet.getInt("price"));
+        pokemon.setStock(resultSet.getInt("stock"));
         pokemon.setCreatedDate(resultSet.getTimestamp("created_date"));
         pokemon.setLastModifiedDate(resultSet.getTimestamp("last_modified_date"));
 

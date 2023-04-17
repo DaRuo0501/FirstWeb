@@ -210,7 +210,7 @@
   <!--    </div>-->
 
   <div class="content-title active">
-    <span class="content-text">商城</span>
+    <span class="content-text">商品列表</span>
   </div>
 
   <!--    <div class="content-title">-->
@@ -288,9 +288,6 @@
 </div>
 
 <div class="right-body">
-<!--  <div class="t-title">-->
-<!--    <h2>商品總表單</h2>-->
-<!--  </div>-->
 
   <div class="right">
     <div class="poke-box" th:each="pokemon : ${pokemons}">
@@ -307,6 +304,10 @@
         <a th:text="'技能二 : ' + *{pokemon.skill2}"></a>
         <a th:text="'技能三 : ' + *{pokemon.skill3}"></a>
         <a th:text="'技能四 : ' + *{pokemon.skill4}"></a>
+      </div>
+      <div class="poke-price-stock-box">
+        <a th:text="'商品價格 : ' + *{pokemon.price}"></a>
+        <a th:text="'商品數量 : ' + *{pokemon.stock}"></a>
       </div>
       <div class="poke-input-box">
         <input type="submit" value="加入購物車">
