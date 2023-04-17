@@ -97,7 +97,11 @@ public class PageController {
         return "shop";
     }
 
-
+    // 個人資料頁面
+    @GetMapping("/users/user")
+    public String userPage() {
+        return "user";
+    }
 
     // 登出(返回登入頁面)
     @GetMapping("/users/logout")
