@@ -1,6 +1,7 @@
 package com.daruo.firstweb.controller;
 
 
+import com.daruo.firstweb.dto.PokemonQueryParams;
 import com.daruo.firstweb.dto.UserQueryParams;
 import com.daruo.firstweb.model.Pokemon;
 import com.daruo.firstweb.model.User;
@@ -85,11 +86,11 @@ public class PageController {
                        @RequestParam(defaultValue = "0") @Min(0) Integer offset
     ) {
 
-        UserQueryParams userQueryParams = new UserQueryParams();
-        userQueryParams.setLimit(limit);
-        userQueryParams.setOffset(offset);
+        PokemonQueryParams pokemonQueryParams = new PokemonQueryParams();
+        pokemonQueryParams.setLimit(limit);
+        pokemonQueryParams.setOffset(offset);
 
-        List<Pokemon> pokemonList = pokemonService.getAllPokemons(userQueryParams);
+        List<Pokemon> pokemonList = pokemonService.getPokemons(pokemonQueryParams);
 
         model.addAttribute("pokemons", pokemonList);
 

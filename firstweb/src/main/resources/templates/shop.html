@@ -212,9 +212,9 @@
   <div class="content-title active">
     <span class="content-text">商品列表</span>
 
-    <form class="poke-search-box">
+    <form class="poke-search-box" action="/pokemons/get" method="get">
       <span>查詢 :</span>
-      <input type="text" placeholder="請輸入想查詢的關鍵字" autocomplete="off" required>
+      <input type="text" name="search" placeholder="輸入關鍵字" autocomplete="off" >
       <input type="submit" value="確認">
     </form>
   </div>
