@@ -77,6 +77,18 @@ public class PageController {
         }
     }
 
+    // 個人資料頁面
+    @GetMapping("/users/user")
+    public String userPage() {
+        return "user";
+    }
+
+    // 背包
+    @GetMapping("/users/bag")
+    public String bag() {
+        return "bag";
+    }
+
     // 商城頁面
     @GetMapping("users/shop")
     public String shop(Model model,
@@ -95,12 +107,6 @@ public class PageController {
         model.addAttribute("pokemons", pokemonList);
 
         return "shop";
-    }
-
-    // 個人資料頁面
-    @GetMapping("/users/user")
-    public String userPage() {
-        return "user";
     }
 
     // 登出(返回登入頁面)
