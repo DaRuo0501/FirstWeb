@@ -90,7 +90,7 @@ header span {
     background: #18181b;
     cursor: pointer;
     border: 3px solid #45f3ff;
-} 
+}
 
 /* 全部選單 */
 .sidebar .nav-links {
@@ -100,7 +100,7 @@ header span {
 
 /* 隱藏滾輪的圖樣，因為太醜了 */
 .sidebar .nav-links::-webkit-scrollbar {
-    display: none; 
+    display: none;
 }
 
 .sidebar .nav-links li {
@@ -151,11 +151,11 @@ header span {
 }
 
 .sidebar .openMenu {
-    display: none;
+    display: block;
 }
 
 .sidebar .openMenu.ok {
-    display: block;
+    display: none;
 }
 
 .sidebar .sub-menu li {
@@ -218,11 +218,12 @@ header span {
 
 .content .content-title {
     display: none;
+    justify-content: space-around;
     align-items: center;
     position: fixed;
     left: 260px;
     top: 50px;
-    width: 100%;
+    width: calc(100% - 260px);
     height: 60px;
     padding: 20px 0 6px 30px;
     color: #efeff1;
@@ -230,7 +231,7 @@ header span {
     background: #010101;
 }
 
-.content .content-title.active{
+.content .content-title.active {
     display: block;
 }
 
@@ -239,6 +240,55 @@ header span {
     font-weight: 600;
     letter-spacing: 10px;
 }
+
+.content .content-title .poke-search-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content .content-title .poke-search-box span {
+    width: 50px;
+    font-size: 16px;
+}
+
+.content .content-title .poke-search-box input[type="text"] {
+    width: 150px;
+    height: 30px;
+    font-size: 10px;
+    color: #010101;
+    background: #45f3ff;
+    border: 1px solid #efeff1;
+    border-radius: 16px;
+    padding-left: 12px;
+    outline: medium;
+    transition: 0.5s;
+}
+
+.content .content-title .poke-search-box input[type="text"]:hover {
+    font-size: 14px;
+    font-weight: 600;
+    width: 250px;
+    background: #efeff1;
+}
+
+.content .content-title .poke-search-box input[type="submit"] {
+    width: 50px;
+    height: 22px;
+    color: #45f3ff;
+    background: #010101;
+    border: 2px solid #45f3ff;
+    border-radius: 8px;
+    margin-left: 10px;
+    outline: medium;
+}
+
+.content .content-title .poke-search-box input[type="submit"]:hover {
+    color: #010101;
+    background: #45f3ff;
+    font-weight: 600;
+}
+
 
 .content-title1 {
     display: none;
@@ -276,9 +326,10 @@ header span {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     width: 100%;
     height: calc(100% - 60px);
-    margin-top: 100px;
+    margin-top: 70px;
 }
 
 .right-table {

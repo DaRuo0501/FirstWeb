@@ -10,3 +10,7 @@ function goToShopPage() {
     window.location.href = "/users/shop";
 }
 
+function goToUserPage() {
+    window.location.href = "/users/user";
+}
+

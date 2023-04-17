@@ -144,11 +144,11 @@ header span {
 }
 
 .sidebar .openMenu {
-    display: none;
+    display: block;
 }
 
 .sidebar .openMenu.ok {
-    display: block;
+    display: none;
 }
 
 .sidebar .sub-menu li {

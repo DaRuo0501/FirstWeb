@@ -1,29 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+      <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- CSS 連結 -->
-  <link rel="stylesheet" href="/css/shop.css">
+      <!-- CSS 連結 -->
+      <link rel="stylesheet" href="/css/user.css">
 
-  <!-- JQuery 連結 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+      <!-- JQuery 連結 -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
-  <!-- Boxicon CDN link -->
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+      <!-- Boxicon CDN link -->
+      <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-  <!-- FontAwesome 連結 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+      <!-- FontAwesome 連結 -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
-  <!-- DataTable 連結 -->
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+      <!-- DataTable 連結 -->
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
 
-  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+      <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
-  <title>商城</title>
+
+
+      <title>個人資料</title>
 </head>
 
 <body>
@@ -56,7 +58,7 @@
 
     <!-- 商城 -->
     <li>
-      <div class="icon-link active">
+      <div class="icon-link">
         <a href="/users/shop"> <i class="fa-solid fa-shop"></i> <span class="link_name">商城</span>
         </a>
       </div>
@@ -64,11 +66,26 @@
 
     <!-- 個人資料 -->
     <li>
-        <div class="icon-link open">
-            <a href="/users/user"> <i class='bx bx-user'></i> <span class="link_name">個人資料</span>
-                <i class="fa-solid fa-caret-down"></i>
-            </a>
-        </div>
+      <div class="icon-link active open">
+        <a href="#"> <i class='bx bx-user'></i> <span class="link_name">個人資料</span>
+          <i class="fa-solid fa-caret-down"></i>
+        </a>
+      </div> <!-- 子選單 -->
+      <div class="openMenu">
+        <ul class="sub-menu">
+          <li class="box-menu active"><a href="#"> <i
+                  class="fa-regular fa-address-card"></i> <span class="link_name">名片</span>
+          </a></li>
+
+          <li class="box-menu"><a href="#"> <i
+                  class="fa-solid fa-book"></i> <span class="link_name">部落格</span>
+          </a></li>
+
+          <li class="box-menu"><a href="#"> <i
+                  class="fa-solid fa-bag-shopping"></i> <span class="link_name">背包</span>
+          </a></li>
+        </ul>
+      </div>
     </li>
 
     <!-- 信箱 -->
@@ -181,23 +198,18 @@
   </ul>
 </div>
 
+<!-- 內文的標頭 -->
 <div class="content">
   <div class="content-title">
-    <span class="content-text">首頁</span>
+    <span class="content-text">使用者總表單</span>
+  </div>
+
+  <div class="content-title">
+    <span class="content-text">商城</span>
   </div>
 
   <div class="content-title active">
-    <span class="content-text">商品列表</span>
-
-    <form class="poke-search-box" action="/pokemons/get" method="get">
-      <span>查詢 :</span>
-      <input type="text" name="search" placeholder="輸入關鍵字，進行查詢!" autocomplete="off" >
-      <input type="submit" value="確認">
-    </form>
-  </div>
-
-  <div class="content-title">
-      <span class="content-text">個人資料</span>
+    <span class="content-text">個人資料</span>
   </div>
 
   <!--    <div class="content-title">-->
@@ -214,6 +226,19 @@
 
   <!--    <div class="content-title">-->
   <!--        <span class="content-text">設定</span>-->
+  <!--    </div>-->
+
+  <!-- 個人資料 子選單內文 -->
+  <!--    <div class="content-title1">-->
+  <!--        <span class="content-text">( 名片 )</span>-->
+  <!--    </div>-->
+
+  <!--    <div class="content-title1">-->
+  <!--        <span class="content-text">( 部落格 )</span>-->
+  <!--    </div>-->
+
+  <!--    <div class="content-title1">-->
+  <!--        <span class="content-text">( 背包 )</span>-->
   <!--    </div>-->
 
   <!-- 商城 子選單內文 -->
@@ -265,76 +290,36 @@
 
 </div>
 
+<!-- 內文 -->
 <div class="right-body">
 
   <div class="right">
-    <div class="poke-box" th:each="pokemon : ${pokemons}">
-      <div class="poke-image-box">
-        <a><img th:src="@{*{pokemon.imageUrl}}"></a>
-      </div>
-      <div class="poke-text-box">
-        <a th:text="'編號 : ' + *{pokemon.pokemonId} "></a>
-        <a th:text="'名稱 : ' + *{pokemon.pokemonName}"></a>
-        <a th:text="'屬性 : ' + *{pokemon.category}"></a>
-      </div>
-      <div class="poke-skill-box">
-        <a th:text="'技能一 : ' + *{pokemon.skill1}"></a>
-        <a th:text="'技能二 : ' + *{pokemon.skill2}"></a>
-        <a th:text="'技能三 : ' + *{pokemon.skill3}"></a>
-        <a th:text="'技能四 : ' + *{pokemon.skill4}"></a>
-      </div>
-      <div class="poke-price-stock-box">
-        <a th:text="'商品價格 : ' + *{pokemon.price}"></a>
-        <a th:text="'商品數量 : ' + *{pokemon.stock}"></a>
-      </div>
-      <div class="poke-input-box">
-        <input type="submit" value="加入購物車">
-      </div>
-    </div>
-<!--    <table class="right-table">-->
-<!--      <thead>-->
-<!--      <tr>-->
-<!--        <th class="t-id">Id</th>-->
-<!--        <th class="t-name">Name</th>-->
-<!--        <th class="t-image">Image</th>-->
-<!--        <th class="t-category">Category</th>-->
-<!--        <th class="t-life">Life</th>-->
-<!--        <th class="t-exp">Exp</th>-->
-<!--        <th class="t-attack">Attack</th>-->
-<!--        <th class="t-skill-1">Skill-1</th>-->
-<!--        <th class="t-skill-2">Skill-2</th>-->
-<!--        <th class="t-skill-3">Skill-3</th>-->
-<!--        <th class="t-skill-4">Skill-4</th>-->
-<!--        <th class="t-edit">Edit</th>-->
-<!--      </tr>-->
-<!--      </thead>-->
 
-<!--      <tbody>-->
-<!--      <tr th:each="pokemon : ${pokemons}">-->
-<!--        <td class="td-id" th:text="*{pokemon.pokemonId}"></td>-->
-<!--        <td class="td-name" th:text="*{pokemon.pokemonName}"></td>-->
-<!--        <td class="td-image"><img th:src="@{*{pokemon.imageUrl}}"></td>-->
-<!--        <td class="td-category" th:text="*{pokemon.category}"></td>-->
-<!--        <td class="td-life" th:text="*{pokemon.life}"></td>-->
-<!--        <td class="td-exp" th:text="*{pokemon.exp}"></td>-->
-<!--        <td class="td-attack" th:text="*{pokemon.attack}"></td>-->
-<!--        <td class="td-skill-1" th:text="*{pokemon.skill1}"></td>-->
-<!--        <td class="td-skill-2" th:text="*{pokemon.skill2}"></td>-->
-<!--        <td class="td-skill-3" th:text="*{pokemon.skill3}"></td>-->
-<!--        <td class="td-skill-4" th:text="*{pokemon.skill4}"></td>-->
-<!--        <td class="td-edit">-->
-<!--          <div class="update-box">-->
-<!--            <a class="btn-update" th:href="@{'/users/updateUser/' + ${pokemon.pokemonId}}">update</a>-->
-<!--          </div>-->
-<!--          <div class="delete-box">-->
-<!--            <a class="btn-delete" th:href="@{'/users/deleteUser/' + ${pokemon.pokemonId}}">delete</a>-->
-<!--          </div>-->
-<!--        </td>-->
-<!--      </tr>-->
-<!--      </tbody>-->
-<!--    </table>-->
   </div>
 </div>
+
+<div class="search-box">
+
+  <div class="search-box1">
+
+    <!--  帳號查詢  -->
+    <form class="search-input" action="/users/select" method="GET">
+      <span>查詢 :</span>
+      <input type="text" name="userName" placeholder="請輸入想查詢的帳號" autocomplete="off" required>
+      <input type="submit" value="確認">
+    </form>
+
+    <!--  頁數查詢  -->
+    <form class="search-input" action="/users/page" method="GET">
+      <span>查詢 :</span>
+      <input type="text" name="page" placeholder="請輸入頁數" autocomplete="off" required >
+      <input type="submit" value="確認">
+    </form>
+
+  </div>
+
+</div>
+
 
 <script src="/js/page.js"></script>
 
@@ -417,4 +402,4 @@
 </script>
 
 </body>
-
+</html>
