@@ -297,17 +297,20 @@
       <div class="poke-image-box">
         <a><img th:src="@{*{pokemon.imageUrl}}"></a>
       </div>
-        <div class="poke-text-box">
-          <a th:text="'編號 : ' + *{pokemon.pokemonId} "></a>
-          <a th:text="'名稱 : ' + *{pokemon.pokemonName}"></a>
-          <a th:text="'屬性 : ' + *{pokemon.category}"></a>
-        </div>
-        <div class="poke-skill-box">
-          <a th:text="'技能一 : ' + *{pokemon.skill1}"></a>
-          <a th:text="'技能二 : ' + *{pokemon.skill2}"></a>
-          <a th:text="'技能三 : ' + *{pokemon.skill3}"></a>
-          <a th:text="'技能四 : ' + *{pokemon.skill4}"></a>
-        </div>
+      <div class="poke-text-box">
+        <a th:text="'編號 : ' + *{pokemon.pokemonId} "></a>
+        <a th:text="'名稱 : ' + *{pokemon.pokemonName}"></a>
+        <a th:text="'屬性 : ' + *{pokemon.category}"></a>
+      </div>
+      <div class="poke-skill-box">
+        <a th:text="'技能一 : ' + *{pokemon.skill1}"></a>
+        <a th:text="'技能二 : ' + *{pokemon.skill2}"></a>
+        <a th:text="'技能三 : ' + *{pokemon.skill3}"></a>
+        <a th:text="'技能四 : ' + *{pokemon.skill4}"></a>
+      </div>
+      <div class="poke-input-box">
+        <input type="submit" value="加入購物車">
+      </div>
     </div>
 <!--    <table class="right-table">-->
 <!--      <thead>-->
