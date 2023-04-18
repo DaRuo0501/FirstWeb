@@ -86,3 +86,31 @@ VALUES (0001, '妙蛙種子', '/images/0001-妙蛙種子.png', '草', 100, 0, 10
        (0133, '伊布', '/images/0133-伊布.png', '普通', 100, 0, 10, '衝撞', '抓', '', '', 80 , 15, '2022-03-19 17:00:00', '2022-03-22 18:00:00');
 
 SELECT pokemon_id, pokemon_name, image_url, category, life, exp, attack, skill_1, skill_2, skill_3, skill_4, created_date, last_modified_date FROM pokemon;
+
+# 屬性
+CREATE TABLE IF NOT EXISTS category(
+    category_id    INT       NOT NULL PRIMARY KEY,
+    category_name  CHAR(10)  NOT NULL
+);
+
+INSERT INTO category(category_id, category_name)
+VALUES (1, "火"),
+       (2, "水"),
+       (3, "電"),
+       (4, "草"),
+       (5, "冰"),
+       (6, "岩石"),
+       (7, "飛行"),
+       (8, "地面"),
+       (9, "格鬥"),
+       (10, "蟲"),
+       (11, "普通"),
+       (12, "鋼"),
+       (13, "毒"),
+       (14, "幽靈"),
+       (15, "惡"),
+       (16, "妖精"),
+       (17, "超能力"),
+       (18, "龍");
+
+SELECT category_id, category_name from category ORDER BY category_id ASC;
