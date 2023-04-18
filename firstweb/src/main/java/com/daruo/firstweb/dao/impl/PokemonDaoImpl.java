@@ -67,13 +67,21 @@ public class PokemonDaoImpl implements PokemonDao {
                                    Map<String, Object> map,
                                    PokemonQueryParams pokemonQueryParams) {
 
-        if (pokemonQueryParams.getSearch() != null) {
+        if (pokemonQueryParams.getPokemonCategory() != null) {
 
-            // 查詢 名稱
-            sql += " AND pokemon_name LIKE :search";
+            sql += " AND category LIKE :category";
+            map.put("category", pokemonQueryParams.getPokemonCategory().name());
+
+        } else if (pokemonQueryParams.getSearch() != null) {
 
             // 查詢 編號
-            sql += " OR pokemon_id LIKE :search";
+            sql += " AND pokemon_id LIKE :search";
+
+            // 查詢 屬性
+            sql += " OR category LIKE :search";
+
+            // 查詢 名稱
+            sql += " OR pokemon_name LIKE :search";
 
             // 查詢 技能
             sql += " OR skill_1 LIKE :search" +
