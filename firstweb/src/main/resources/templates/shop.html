@@ -186,11 +186,32 @@
   <div class="content-title active">
     <span class="content-text">商品列表</span>
 
-    <form class="poke-search-box" action="/pokemons/get" method="get">
-      <span>查詢 :</span>
-      <input type="text" name="search" placeholder="輸入關鍵字，進行查詢!" autocomplete="off" >
-      <input type="submit" value="確認">
-    </form>
+    <div class="content-category">
+
+      <form class="category-box" action="/pokemons/get" method="get">
+        <span>編號 :</span>
+        <select name="sort">
+          <optgroup label="請選擇排列順序">
+            <option value="asc">由小到大</option>
+            <option value="desc">由大到小</option>
+          </optgroup>
+        </select>
+
+        <span>屬性 :</span>
+        <select name="category">
+          <optgroup label="請選擇屬性">
+            <option value=""></option>
+            <option th:each="category : ${categorys}" th:text="*{category.category}"></option>
+          </optgroup>
+        </select>
+
+        <span>查詢 :</span>
+        <input type="text" name="search" placeholder="輸入關鍵字，進行查詢!" autocomplete="off">
+
+        <input type="submit" value="確認">
+      </form>
+
+    </div>
   </div>
 
   <!--    <div class="content-title">-->
@@ -278,7 +299,7 @@
       </div>
       <div class="poke-price-stock-box">
         <a th:text="'商品價格 : ' + *{pokemon.price}"></a>
-        <a th:text="'商品數量 : ' + *{pokemon.stock}"></a>
+        <a th:text="'庫存數量 : ' + *{pokemon.stock}"></a>
       </div>
       <div class="poke-input-box">
         <input type="submit" value="加入購物車">

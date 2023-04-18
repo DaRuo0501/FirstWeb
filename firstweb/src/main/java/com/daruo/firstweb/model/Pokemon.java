@@ -166,4 +166,25 @@ public class Pokemon {
     public void setLastModifiedDate(Date lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
     }
+
+    @Override
+    public String toString() {
+        return "Pokemon{" +
+                "pokemonId=" + pokemonId +
+                ", pokemonName='" + pokemonName + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", category=" + category +
+                ", life=" + life +
+                ", exp=" + exp +
+                ", attack=" + attack +
+                ", skill1='" + skill1 + '\'' +
+                ", skill2='" + skill2 + '\'' +
+                ", skill3='" + skill3 + '\'' +
+                ", skill4='" + skill4 + '\'' +
+                ", price=" + price +
+                ", stock=" + stock +
+                ", createdDate=" + createdDate +
+                ", lastModifiedDate=" + lastModifiedDate +
+                '}';
+    }
 }

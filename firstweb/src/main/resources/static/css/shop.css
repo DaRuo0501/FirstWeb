@@ -241,54 +241,78 @@ header span {
     letter-spacing: 10px;
 }
 
-.content .content-title .poke-search-box {
+.content-title .content-category {
+    display: flex;
+}
+
+.content-title select {
+    outline: none;
+    width: 50px;
+    height: 30px;
+    background: #45f3ff;
+    border: 1px solid #18181b;
+    border-radius: 15px;
+    padding-left: 3px;
+    transition: 0.5s;
+}
+
+.content-title select:hover {
+    width: 100px;
+}
+
+.content-title option {
+    background: #45f3ff;
+}
+
+.content .content-title .category-box {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-left: 20px;
 }
 
-.content .content-title .poke-search-box span {
+.content .content-title .category-box span {
     width: 50px;
     font-size: 16px;
 }
 
-.content .content-title .poke-search-box input[type="text"] {
+.content .content-title .category-box input[type="text"] {
     width: 150px;
     height: 30px;
     font-size: 10px;
     color: #010101;
     background: #45f3ff;
-    border: 1px solid #efeff1;
+    border: 1px solid #18181b;
     border-radius: 16px;
     padding-left: 12px;
     outline: medium;
     transition: 0.5s;
 }
 
-.content .content-title .poke-search-box input[type="text"]:hover {
+.content .content-title .category-box input[type="text"]:hover {
     font-size: 14px;
     font-weight: 600;
     width: 250px;
     background: #efeff1;
+    border: 1px solid #45f3ff;
 }
 
-.content .content-title .poke-search-box input[type="submit"] {
+.content-title input[type="submit"] {
     width: 50px;
     height: 22px;
     color: #45f3ff;
     background: #010101;
     border: 2px solid #45f3ff;
     border-radius: 8px;
-    margin-left: 10px;
+    margin-left: 5px;
     outline: medium;
 }
 
-.content .content-title .poke-search-box input[type="submit"]:hover {
+.content-title input[type="submit"]:hover {
     color: #010101;
     background: #45f3ff;
     font-weight: 600;
 }
-
 
 .content-title1 {
     display: none;

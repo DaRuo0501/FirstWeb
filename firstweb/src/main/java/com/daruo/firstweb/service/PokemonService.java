@@ -9,4 +9,6 @@ import java.util.List;
 public interface PokemonService {
 
     List<Pokemon> getPokemons(PokemonQueryParams pokemonQueryParams);
+
+    List<Pokemon> getCategory();
 }

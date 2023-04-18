@@ -21,4 +21,9 @@ public class PokemonServiceImpl implements PokemonService {
 
         return pokemonDao.getPokemons(pokemonQueryParams);
     }
+
+    @Override
+    public List<Pokemon> getCategory() {
+        return pokemonDao.getCategory();
+    }
 }

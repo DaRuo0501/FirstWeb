@@ -1,5 +1,6 @@
 package com.daruo.firstweb;
 
+import com.daruo.firstweb.constant.PokemonCategory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

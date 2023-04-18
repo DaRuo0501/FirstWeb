@@ -1,6 +1,7 @@
 package com.daruo.firstweb.controller;
 
 
+import com.daruo.firstweb.constant.PokemonCategory;
 import com.daruo.firstweb.dto.PokemonQueryParams;
 import com.daruo.firstweb.dto.UserQueryParams;
 import com.daruo.firstweb.model.Pokemon;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -27,6 +29,8 @@ public class PageController {
 
     @Autowired
     private PokemonService pokemonService;
+
+    private Pokemon pokemon;
 
     // 登入頁面
     @GetMapping(value = {"/users/login", "/"})
@@ -93,18 +97,32 @@ public class PageController {
     @GetMapping("users/shop")
     public String shop(Model model,
 
+                       // 查詢條件 Filtering
+                       @RequestParam(required = false) PokemonCategory category,
+
+                       // 排序 Sorting
+                       @RequestParam(defaultValue = "pokemon_id") String orderBy,
+                       @RequestParam(defaultValue = "asc") String sort,
+
                        // 分頁 Pagination
                        @RequestParam(defaultValue = "12") @Max(1000) @Min(0) Integer limit,
                        @RequestParam(defaultValue = "0") @Min(0) Integer offset
     ) {
 
         PokemonQueryParams pokemonQueryParams = new PokemonQueryParams();
+        pokemonQueryParams.setPokemonCategory(category);
+        pokemonQueryParams.setOrderBy(orderBy);
+        pokemonQueryParams.setSort(sort);
         pokemonQueryParams.setLimit(limit);
         pokemonQueryParams.setOffset(offset);
 
         List<Pokemon> pokemonList = pokemonService.getPokemons(pokemonQueryParams);
 
         model.addAttribute("pokemons", pokemonList);
+
+        List<Pokemon> categorys = pokemonService.getCategory();
+
+        model.addAttribute("categorys", categorys);
 
         return "shop";
     }
