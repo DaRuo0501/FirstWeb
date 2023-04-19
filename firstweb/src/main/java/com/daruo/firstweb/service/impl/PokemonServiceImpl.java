@@ -8,6 +8,7 @@ import com.daruo.firstweb.service.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -25,5 +26,33 @@ public class PokemonServiceImpl implements PokemonService {
     @Override
     public List<Pokemon> getCategory() {
         return pokemonDao.getCategory();
+    }
+
+    @Override
+    public List<Integer> getPokemonsCount(PokemonQueryParams pokemonQueryParams) {
+
+        // 取得 資料庫中，寶可夢的總數
+        Integer total = pokemonDao.getPokemonsCount(pokemonQueryParams);
+
+        // 每頁要顯示的數量: 12個
+        Integer count = 12;
+
+        // 總共會產生多少頁數，初始值為: 0
+        Integer page = 0;
+
+        // 將迴圈取得的頁數，存放於 List 裡面
+        List<Integer> integerList = new ArrayList<>();
+
+        for (int i = 0; i < total; i++) {
+
+            total += -count;
+            page++;
+            integerList.add(page);
+        }
+
+        page++;
+        integerList.add(page);
+
+        return integerList;
     }
 }

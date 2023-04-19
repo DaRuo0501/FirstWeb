@@ -11,4 +11,6 @@ public interface PokemonDao {
     List<Pokemon> getPokemons(PokemonQueryParams pokemonQueryParams);
 
     List<Pokemon> getCategory();
+
+    Integer getPokemonsCount(PokemonQueryParams pokemonQueryParams);
 }

@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -116,13 +117,20 @@ public class PageController {
         pokemonQueryParams.setLimit(limit);
         pokemonQueryParams.setOffset(offset);
 
+        // 獲取 寶可夢
         List<Pokemon> pokemonList = pokemonService.getPokemons(pokemonQueryParams);
 
         model.addAttribute("pokemons", pokemonList);
 
+        // 獲取 屬性
         List<Pokemon> categorys = pokemonService.getCategory();
 
         model.addAttribute("categorys", categorys);
+
+        // 獲取 頁數
+        List<Integer> pages = pokemonService.getPokemonsCount(pokemonQueryParams);
+
+        model.addAttribute("pages", pages);
 
         return "shop";
     }

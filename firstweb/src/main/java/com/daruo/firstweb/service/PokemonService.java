@@ -11,4 +11,6 @@ public interface PokemonService {
     List<Pokemon> getPokemons(PokemonQueryParams pokemonQueryParams);
 
     List<Pokemon> getCategory();
+
+    List<Integer> getPokemonsCount(PokemonQueryParams pokemonQueryParams);
 }

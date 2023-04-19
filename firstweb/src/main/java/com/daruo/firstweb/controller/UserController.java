@@ -94,13 +94,15 @@ public class UserController {
 
     // 使用 頁數 查詢
     @GetMapping("/users/page")
-    public String next(@RequestParam Integer page,
-                       Model model,
+    public String next(Model model,
+
                        // 分頁 Pagination
-                       @RequestParam(defaultValue = "5") @Max(1000) @Min(0) Integer limit
+                       @RequestParam(defaultValue = "5") @Max(1000) @Min(0) Integer limit,
+                       @RequestParam(defaultValue = "0") @Min(0) Integer offset
+
     ) {
 
-        Integer offset = page * 5 - 5;
+        offset = offset * 5 - 5;
 
         UserQueryParams userQueryParams = new UserQueryParams();
         userQueryParams.setLimit(limit);

@@ -36,8 +36,12 @@ public class PokemonController {
 
                               // 分頁 Pagination
                               @RequestParam(defaultValue = "12") @Max(1000) @Min(0) Integer limit,
-                              @RequestParam(defaultValue = "0") @Min(0) Integer offset
+                              @RequestParam(defaultValue = "0") @Min(0) Integer offset,
+
+                              @RequestParam(defaultValue = "1") @Min(1) Integer page
     ) {
+
+        offset = (page * limit) - limit;
 
         pokemonQueryParams.setPokemonCategory(category);
         pokemonQueryParams.setOrderBy(orderBy);
@@ -54,6 +58,11 @@ public class PokemonController {
         List<Pokemon> categorys = pokemonService.getCategory();
 
         model.addAttribute("categorys", categorys);
+
+        // 獲取 頁數
+        List<Integer> pages = pokemonService.getPokemonsCount(pokemonQueryParams);
+
+        model.addAttribute("pages", pages);
 
         return "shop";
     }
