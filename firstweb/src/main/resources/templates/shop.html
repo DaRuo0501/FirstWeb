@@ -187,19 +187,16 @@
     <span class="content-text">商品列表</span>
 
     <div class="content-category">
-      <form class="category-box" action="/pokemons/get" method="get">
-
-      <!--  依頁數 查詢  -->
-      <span>頁數 :</span>
-      <select name="page">
-        <optgroup label="請選擇頁數">
-          <option  th:each="page :${pages}" th:text="${page}"></option>
-        </optgroup>
-      </select>
-        <input type="submit" value="確認">
-      </form>
 
       <form class="category-box" action="/pokemons/get" method="get">
+
+        <!--  依頁數 查詢  -->
+        <span>頁數 :</span>
+        <select name="page">
+          <optgroup label="請選擇頁數">
+            <option  th:each="page :${pages}" th:text="${page}"></option>
+          </optgroup>
+        </select>
 
         <!--  依編號 查詢  -->
         <span>編號 :</span>

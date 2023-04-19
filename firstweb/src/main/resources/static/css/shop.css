@@ -218,7 +218,7 @@ header span {
 
 .content .content-title {
     display: none;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     position: fixed;
     left: 260px;

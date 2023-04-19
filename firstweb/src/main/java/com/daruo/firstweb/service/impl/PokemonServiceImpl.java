@@ -50,8 +50,11 @@ public class PokemonServiceImpl implements PokemonService {
             integerList.add(page);
         }
 
-        page++;
-        integerList.add(page);
+        if (total > 0) {
+
+            page++;
+            integerList.add(page);
+        }
 
         return integerList;
     }
