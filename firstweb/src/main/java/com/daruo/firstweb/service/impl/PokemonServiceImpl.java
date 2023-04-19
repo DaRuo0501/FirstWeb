@@ -2,7 +2,6 @@ package com.daruo.firstweb.service.impl;
 
 import com.daruo.firstweb.dao.PokemonDao;
 import com.daruo.firstweb.dto.PokemonQueryParams;
-import com.daruo.firstweb.dto.UserQueryParams;
 import com.daruo.firstweb.model.Pokemon;
 import com.daruo.firstweb.service.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +42,7 @@ public class PokemonServiceImpl implements PokemonService {
         // 將迴圈取得的頁數，存放於 List 裡面
         List<Integer> integerList = new ArrayList<>();
 
+        // 總數 - 每頁顯示數量 = 頁數 + 1
         for (int i = 0; i < total; i++) {
 
             total += -count;
@@ -50,6 +50,7 @@ public class PokemonServiceImpl implements PokemonService {
             integerList.add(page);
         }
 
+        // 當 total 的餘數 少於 count， 餘數 = 頁數 + 1
         if (total > 0) {
 
             page++;
