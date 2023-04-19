@@ -189,6 +189,7 @@
     <div class="content-category">
 
       <form class="category-box" action="/pokemons/get" method="get">
+
         <span>編號 :</span>
         <select name="sort">
           <optgroup label="請選擇排列順序">
@@ -205,12 +206,14 @@
           </optgroup>
         </select>
 
-        <span>查詢 :</span>
-        <input type="text" name="search" placeholder="輸入關鍵字，進行查詢!" autocomplete="off">
-
         <input type="submit" value="確認">
       </form>
 
+      <form class="category-box" action="/pokemons/get" method="get">
+        <span>查詢 :</span>
+        <input type="text" name="search" placeholder="輸入關鍵字，進行查詢!" autocomplete="off">
+        <input type="submit" value="確認">
+      </form>
     </div>
   </div>
 

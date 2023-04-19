@@ -32,17 +32,13 @@ public class PokemonDaoImpl implements PokemonDao {
         // 查詢條件
         sql = addFilteringSql(sql, map, pokemonQueryParams);
 
-
         // 排序
         sql += " ORDER BY " + pokemonQueryParams.getOrderBy() + " " + pokemonQueryParams.getSort();
-
 
         // 分頁
         sql += " LIMIT :limit OFFSET :offset";
         map.put("limit", pokemonQueryParams.getLimit());
         map.put("offset", pokemonQueryParams.getOffset());
-
-        System.out.println(sql);
 
         List<Pokemon> pokemonList = namedParameterJdbcTemplate.query(sql, map, new PokemonRowMapper());
 
@@ -74,14 +70,14 @@ public class PokemonDaoImpl implements PokemonDao {
 
         } else if (pokemonQueryParams.getSearch() != null) {
 
+            // 查詢 名稱
+            sql += " AND pokemon_name LIKE :search";
+
             // 查詢 編號
-            sql += " AND pokemon_id LIKE :search";
+            sql += " OR pokemon_id LIKE :search";
 
             // 查詢 屬性
             sql += " OR category LIKE :search";
-
-            // 查詢 名稱
-            sql += " OR pokemon_name LIKE :search";
 
             // 查詢 技能
             sql += " OR skill_1 LIKE :search" +

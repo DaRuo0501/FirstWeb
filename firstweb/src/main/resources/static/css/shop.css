@@ -252,15 +252,18 @@ header span {
     background: #45f3ff;
     border: 1px solid #18181b;
     border-radius: 15px;
-    padding-left: 3px;
+    margin-right: 3px;
     transition: 0.5s;
+    text-align: center;
 }
 
 .content-title select:hover {
     width: 100px;
 }
 
-.content-title option {
+.content-title select option {
+    display: flex;
+    justify-content: flex-start;
     background: #45f3ff;
 }
 
@@ -268,7 +271,7 @@ header span {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left: 20px;
+    margin-right: 20px;
 }
 
 .content .content-title .category-box span {
@@ -295,6 +298,18 @@ header span {
     width: 250px;
     background: #efeff1;
     border: 1px solid #45f3ff;
+}
+
+.content-title .category-search {
+    display: flex;
+    width: 100px;
+    height: 30px;
+    flex-wrap: wrap;
+}
+
+.content-title .category-search ul {
+    width: 80%;
+    list-style: none;
 }
 
 .content-title input[type="submit"] {
