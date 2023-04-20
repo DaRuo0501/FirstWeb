@@ -77,18 +77,10 @@ public class PokemonDaoImpl implements PokemonDao {
     @Override
     public Integer getPokemonsCountByCategory(PokemonQueryParams pokemonQueryParams) {
 
-        String sql = "SELECT count(pokemon_id) FROM pokemon WHERE 1 = 1";
+        String sql = "SELECT count(pokemon_id) FROM pokemon WHERE category = :category;";
 
         Map<String, Object> map = new HashMap<>();
         map.put("category", pokemonQueryParams.getPokemonCategory().name());
-
-        if (pokemonQueryParams.getPokemonCategory() != null) {
-
-            sql += " AND category LIKE :category";
-        }
-
-        // 查詢條件
-        sql = addFilteringSql(sql, map, pokemonQueryParams);
 
         Integer categoryCount = namedParameterJdbcTemplate.queryForObject(sql, map, Integer.class);
 
