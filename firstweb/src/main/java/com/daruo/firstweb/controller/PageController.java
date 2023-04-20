@@ -109,10 +109,8 @@ public class PageController {
 
                        // 分頁 Pagination
                        @RequestParam(defaultValue = "12") @Max(1000) @Min(0) Integer limit,
-                       @RequestParam(defaultValue = "0") @Min(0) Integer offset,
                        @RequestParam(defaultValue = "1") @Min(1) Integer page
     ) {
-        offset = (page * limit) - limit;
 
         PokemonQueryParams pokemonQueryParams = new PokemonQueryParams();
         pokemonQueryParams.setPokemonCategory(category);
@@ -120,7 +118,28 @@ public class PageController {
         pokemonQueryParams.setOrderBy(orderBy);
         pokemonQueryParams.setSort(sort);
         pokemonQueryParams.setLimit(limit);
-        pokemonQueryParams.setOffset(offset);
+
+        /*
+            檢查 屬性 是否為 null
+            如果是 null 直接查詢全部商品的頁數
+            如果不是 null 傳入屬性，查詢該屬性商品的總頁數
+        */
+        if (category != null) {
+
+            // 該屬性擁有的的總頁數
+            Integer tempPage = pokemonService.getCategoryCount(pokemonQueryParams);
+
+            Integer offset = (tempPage * limit) - limit;
+
+            pokemonQueryParams.setOffset(offset);
+
+        } else {
+
+            Integer offset = (page * limit) - limit;
+
+            pokemonQueryParams.setOffset(offset);
+        }
+
 
         // 獲取 寶可夢
         List<Pokemon> pokemonList = pokemonService.getPokemons(pokemonQueryParams);
@@ -137,7 +156,7 @@ public class PageController {
 
         model.addAttribute("pages", pages);
 
-
+        // 將前端傳入的 Page, Category 存入 Session，使前端可以調用成為選取後的默認值
         session.setAttribute("nowPage", page);
         session.setAttribute("nowCategory", category);
 

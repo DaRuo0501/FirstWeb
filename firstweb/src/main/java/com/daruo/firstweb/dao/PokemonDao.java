@@ -1,5 +1,6 @@
 package com.daruo.firstweb.dao;
 
+import com.daruo.firstweb.constant.PokemonCategory;
 import com.daruo.firstweb.dto.PokemonQueryParams;
 import com.daruo.firstweb.dto.UserQueryParams;
 import com.daruo.firstweb.model.Pokemon;
@@ -13,4 +14,6 @@ public interface PokemonDao {
     List<Pokemon> getCategory();
 
     Integer getPokemonsCount(PokemonQueryParams pokemonQueryParams);
+
+    Integer getPokemonsCountByCategory(PokemonQueryParams pokemonQueryParams);
 }

@@ -1,5 +1,6 @@
 package com.daruo.firstweb.dao.impl;
 
+import com.daruo.firstweb.constant.PokemonCategory;
 import com.daruo.firstweb.dao.PokemonDao;
 import com.daruo.firstweb.dto.PokemonQueryParams;
 import com.daruo.firstweb.model.Pokemon;
@@ -71,6 +72,27 @@ public class PokemonDaoImpl implements PokemonDao {
         Integer total = namedParameterJdbcTemplate.queryForObject(sql, map, Integer.class);
 
         return total;
+    }
+
+    @Override
+    public Integer getPokemonsCountByCategory(PokemonQueryParams pokemonQueryParams) {
+
+        String sql = "SELECT count(pokemon_id) FROM pokemon WHERE 1 = 1";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("category", pokemonQueryParams.getPokemonCategory().name());
+
+        if (pokemonQueryParams.getPokemonCategory() != null) {
+
+            sql += " AND category LIKE :category";
+        }
+
+        // 查詢條件
+        sql = addFilteringSql(sql, map, pokemonQueryParams);
+
+        Integer categoryCount = namedParameterJdbcTemplate.queryForObject(sql, map, Integer.class);
+
+        return categoryCount;
     }
 
     // 共用查詢條件

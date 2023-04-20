@@ -1,5 +1,6 @@
 package com.daruo.firstweb.service.impl;
 
+import com.daruo.firstweb.constant.PokemonCategory;
 import com.daruo.firstweb.dao.PokemonDao;
 import com.daruo.firstweb.dto.PokemonQueryParams;
 import com.daruo.firstweb.model.Pokemon;
@@ -34,8 +35,35 @@ public class PokemonServiceImpl implements PokemonService {
         // 取得 資料庫中，寶可夢的總數
         Integer total = pokemonDao.getPokemonsCount(pokemonQueryParams);
 
+        // 調用 共用的 頁數 計算方法
+        Integer page = pageCount(pokemonQueryParams, total);
+
+        // 將迴圈取得的頁數，存放於 List 裡面
+        List<Integer> integerList = new ArrayList<>();
+        for (int i = 1; i <= page; i++) {
+            integerList.add(i);
+        }
+
+        return integerList;
+    }
+
+    @Override
+    public Integer getCategoryCount(PokemonQueryParams pokemonQueryParams) {
+
+        // 依照 屬性 取得資料庫中，寶可夢的總數
+        Integer total = pokemonDao.getPokemonsCountByCategory(pokemonQueryParams);
+
+        // 調用 共用的 頁數 計算方法
+        Integer page = pageCount(pokemonQueryParams, total);
+
+        return page;
+    }
+
+    // 共用的 頁數 計算方法
+    private Integer pageCount(PokemonQueryParams pokemonQueryParams, Integer total) {
+
         // 每頁要顯示的數量: 12個
-        Integer count = 12;
+        Integer count = pokemonQueryParams.getLimit();
 
         // 總共會產生多少頁數，初始值為: 0
         Integer page = 0;
@@ -46,12 +74,6 @@ public class PokemonServiceImpl implements PokemonService {
             page = total/count+1;
         }
 
-        // 將迴圈取得的頁數，存放於 List 裡面
-        List<Integer> integerList = new ArrayList<>();
-        for (int i = 1; i <= page; i++) {
-            integerList.add(i);
-        }
-
-        return integerList;
+        return page;
     }
 }
