@@ -11,6 +11,7 @@ import com.daruo.firstweb.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import org.apache.coyote.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -97,9 +98,10 @@ public class PageController {
     // 商城頁面
     @GetMapping("users/shop")
     public String shop(Model model,
-
+                       HttpSession session,
                        // 查詢條件 Filtering
                        @RequestParam(required = false) PokemonCategory category,
+                       @RequestParam(required = false) String search,
 
                        // 排序 Sorting
                        @RequestParam(defaultValue = "pokemon_id") String orderBy,
@@ -107,11 +109,14 @@ public class PageController {
 
                        // 分頁 Pagination
                        @RequestParam(defaultValue = "12") @Max(1000) @Min(0) Integer limit,
-                       @RequestParam(defaultValue = "0") @Min(0) Integer offset
+                       @RequestParam(defaultValue = "0") @Min(0) Integer offset,
+                       @RequestParam(defaultValue = "1") @Min(1) Integer page
     ) {
+        offset = (page * limit) - limit;
 
         PokemonQueryParams pokemonQueryParams = new PokemonQueryParams();
         pokemonQueryParams.setPokemonCategory(category);
+        pokemonQueryParams.setSearch(search);
         pokemonQueryParams.setOrderBy(orderBy);
         pokemonQueryParams.setSort(sort);
         pokemonQueryParams.setLimit(limit);
@@ -131,6 +136,10 @@ public class PageController {
         List<Integer> pages = pokemonService.getPokemonsCount(pokemonQueryParams);
 
         model.addAttribute("pages", pages);
+
+
+        session.setAttribute("nowPage", page);
+        session.setAttribute("nowCategory", category);
 
         return "shop";
     }

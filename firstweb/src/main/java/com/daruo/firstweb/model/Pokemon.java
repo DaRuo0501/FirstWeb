@@ -25,8 +25,8 @@ public class Pokemon {
     public Pokemon() {
     }
 
-    public Pokemon(Integer pokemonId, String pokemonName, String imageUrl, PokemonCategory category,
-                   Integer life, Integer exp, Integer attack,
+    public Pokemon(Integer pokemonId, String pokemonName, String imageUrl,
+                   PokemonCategory category, Integer life, Integer exp, Integer attack,
                    String skill1, String skill2, String skill3, String skill4,
                    Integer price, Integer stock,
                    Date createdDate, Date lastModifiedDate) {

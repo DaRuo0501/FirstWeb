@@ -252,7 +252,7 @@ header span {
     background: #45f3ff;
     border: 1px solid #18181b;
     border-radius: 15px;
-    margin-right: 3px;
+    margin-right: 10px;
     transition: 0.5s;
     text-align: center;
 }
@@ -271,11 +271,11 @@ header span {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 20px;
+    margin-right: 30px;
 }
 
 .content .content-title .category-box span {
-    width: 50px;
+    width: 45px;
     font-size: 16px;
 }
 

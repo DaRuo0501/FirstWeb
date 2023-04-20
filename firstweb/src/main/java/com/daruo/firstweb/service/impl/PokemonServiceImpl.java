@@ -7,6 +7,7 @@ import com.daruo.firstweb.service.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,22 +40,16 @@ public class PokemonServiceImpl implements PokemonService {
         // 總共會產生多少頁數，初始值為: 0
         Integer page = 0;
 
-        // 將迴圈取得的頁數，存放於 List 裡面
-        List<Integer> integerList = new ArrayList<>();
-
-        // 總數 - 每頁顯示數量 = 頁數 + 1
-        for (int i = 0; i < total; i++) {
-
-            total += -count;
-            page++;
-            integerList.add(page);
+        if(total%count == 0){
+            page = total/count;
+        }else{
+            page = total/count+1;
         }
 
-        // 當 total 的餘數 少於 count， 餘數 = 頁數 + 1
-        if (total > 0) {
-
-            page++;
-            integerList.add(page);
+        // 將迴圈取得的頁數，存放於 List 裡面
+        List<Integer> integerList = new ArrayList<>();
+        for (int i = 1; i <= page; i++) {
+            integerList.add(i);
         }
 
         return integerList;
