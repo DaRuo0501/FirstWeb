@@ -24,4 +24,5 @@ public interface UserService {
 
     List<User> getUsersByName(String userName);
 
+    User getUserByName(User user);
 }

@@ -1,14 +1,13 @@
 package com.daruo.firstweb.service.impl;
 
-import com.daruo.firstweb.constant.PokemonCategory;
 import com.daruo.firstweb.dao.PokemonDao;
 import com.daruo.firstweb.dto.PokemonQueryParams;
 import com.daruo.firstweb.model.Pokemon;
+import com.daruo.firstweb.model.User;
 import com.daruo.firstweb.service.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,19 +17,22 @@ public class PokemonServiceImpl implements PokemonService {
     @Autowired
     private PokemonDao pokemonDao;
 
+    // 取得 全部商品
     @Override
     public List<Pokemon> getPokemons(PokemonQueryParams pokemonQueryParams) {
 
         return pokemonDao.getPokemons(pokemonQueryParams);
     }
 
+    // 取得 屬性
     @Override
     public List<Pokemon> getCategory() {
         return pokemonDao.getCategory();
     }
 
+
     @Override
-    public List<Integer> getPokemonsCount(PokemonQueryParams pokemonQueryParams) {
+    public List<Integer> getPokemonsPage(PokemonQueryParams pokemonQueryParams) {
 
         // 取得 資料庫中，寶可夢的總數
         Integer total = pokemonDao.getPokemonsCount(pokemonQueryParams);
@@ -44,14 +46,23 @@ public class PokemonServiceImpl implements PokemonService {
             integerList.add(i);
         }
 
+        // 回傳 所有頁數
         return integerList;
     }
 
+    // 新增商品至購物車
     @Override
-    public Integer getCategoryCount(PokemonQueryParams pokemonQueryParams) {
+    public Pokemon createShopCarById(Integer pokemonId, User user) {
+        Pokemon pokemon = pokemonDao.getPokemonById(pokemonId);
 
-        // 依照 屬性 取得資料庫中，寶可夢的總數
-        Integer total = pokemonDao.getPokemonsCountByCategory(pokemonQueryParams);
+        pokemonDao.createShopCar(pokemon, user);
+
+        return pokemon;
+    }
+
+    @Override
+    public Integer getPokemonCategoryPage(PokemonQueryParams pokemonQueryParams) {
+        Integer total = pokemonDao.getPokemonsCount(pokemonQueryParams);
 
         // 調用 共用的 頁數 計算方法
         Integer page = pageCount(pokemonQueryParams, total);

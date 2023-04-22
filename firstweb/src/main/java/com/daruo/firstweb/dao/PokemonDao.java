@@ -1,9 +1,9 @@
 package com.daruo.firstweb.dao;
 
-import com.daruo.firstweb.constant.PokemonCategory;
 import com.daruo.firstweb.dto.PokemonQueryParams;
-import com.daruo.firstweb.dto.UserQueryParams;
+import com.daruo.firstweb.dto.PokemonRequest;
 import com.daruo.firstweb.model.Pokemon;
+import com.daruo.firstweb.model.User;
 
 import java.util.List;
 
@@ -15,5 +15,7 @@ public interface PokemonDao {
 
     Integer getPokemonsCount(PokemonQueryParams pokemonQueryParams);
 
-    Integer getPokemonsCountByCategory(PokemonQueryParams pokemonQueryParams);
+    Pokemon getPokemonById(Integer pokemonId);
+
+    void createShopCar(Pokemon pokemon, User user);
 }

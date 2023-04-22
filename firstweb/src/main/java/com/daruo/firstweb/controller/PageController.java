@@ -111,22 +111,14 @@ public class PageController {
                        // 分頁 Pagination
                        @RequestParam(defaultValue = "12") @Max(1000) @Min(0) Integer limit,
                        @RequestParam(defaultValue = "0") @Min(0) Integer offset,
-                       @RequestParam(defaultValue = "1") @Min(1) Integer page
+                       @RequestParam(defaultValue = "1") @Min(1) Integer page,
+                       @RequestParam(defaultValue = "0") @Min(0) Integer priceMin,
+                       @RequestParam(defaultValue = "100000000") @Max(100000000) @Min(0) Integer priceMax
     ) {
-
-
 
         // 將前端傳入的 Page, Category 存入 Session，使前端可以調用，並使其成為選取後的顯示的欄位參數
         session.setAttribute("nowPage", page);
         session.setAttribute("nowCategory", category);
-
-        // 查詢的條件中帶有 屬性 ，頁數預設呈現第一頁
-        if (category != null) {
-            page = 1;
-        }
-
-        // 每一頁的第一筆 = 頁數 * 單頁數量 - 單頁數量
-        offset = page * limit - limit;
 
         PokemonQueryParams pokemonQueryParams = new PokemonQueryParams();
         pokemonQueryParams.setPokemonCategory(category);
@@ -134,6 +126,27 @@ public class PageController {
         pokemonQueryParams.setOrderBy(orderBy);
         pokemonQueryParams.setSort(sort);
         pokemonQueryParams.setLimit(limit);
+        pokemonQueryParams.setPriceMin(priceMin);
+        pokemonQueryParams.setPriceMax(priceMax);
+
+        /*
+        預設進入商城，查詢全部商品
+        屬性為 null
+         */
+        if (category != null) {
+
+            // 查詢的條件中帶有 屬性，先查詢該屬性的總頁數
+            Integer tempPage = pokemonService.getPokemonCategoryPage(pokemonQueryParams);
+
+            // 屬性的總頁數 小於 前端傳入頁數，頁數預設結果為該屬性的第一頁
+            if (tempPage < page) {
+                page = 1;
+            }
+        }
+
+        // 每一頁的第一筆 = 頁數 * 單頁數量 - 單頁數量
+        offset = page * limit - limit;
+
         pokemonQueryParams.setOffset(offset);
 
         // 獲取 寶可夢
@@ -147,7 +160,7 @@ public class PageController {
         model.addAttribute("categorys", categorys);
 
         // 獲取 頁數
-        List<Integer> pages = pokemonService.getPokemonsCount(pokemonQueryParams);
+        List<Integer> pages = pokemonService.getPokemonsPage(pokemonQueryParams);
 
         model.addAttribute("pages", pages);
 

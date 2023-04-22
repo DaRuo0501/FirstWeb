@@ -40,7 +40,7 @@
         <div class="logo-img">
             <img src="/images/0025-皮卡丘.png" alt="logo">
         </div>
-        <span class="logo_name" th:text="${session.showUserName.userName}"></span> <i class="fa-solid fa-bars"></i>
+        <span class="logo_name" th:text="${session.showUserName.userName}" th:value="${session.showUserName.userId}"></span> <i class="fa-solid fa-bars"></i>
     </div>
 
     <!-- 主選單 -->
@@ -66,7 +66,7 @@
         <!-- 商城 -->
         <li>
             <div class="icon-link active open">
-                <a href="/users/shop"> <i class="fa-solid fa-shop"></i> <span class="link_name">商城</span>
+                <a href="#"> <i class="fa-solid fa-shop"></i> <span class="link_name">商城</span>
                     <i class="fa-solid fa-caret-down"></i>
                 </a>
             </div>
@@ -108,15 +108,6 @@
 
             <form id="search-reflash" class="category-box" action="/users/shop" method="get">
 
-                <!--  排序  -->
-                <span>排序 :</span>
-                <select name="sort" id="sort" onchange="reflashPage()">
-                    <optgroup label="請選擇排列順序">
-                        <option value="asc">由小到大</option>
-                        <option value="desc">由大到小</option>
-                    </optgroup>
-                </select>
-
                 <!--  依屬性 查詢  -->
                 <span>屬性 :</span>
                 <select name="category" id="category" onchange="reflashPage()">
@@ -140,15 +131,31 @@
                 <!--  頁數選擇後不被重置的默認值  -->
                 <span id="hidPage" th:text="${session.nowPage}" hidden="hidden"></span>
 
+                <!--  排序  -->
+                <span>編號排序 :</span>
+                <select name="sort" id="sort" onchange="reflashPage()">
+                    <optgroup label="請選擇排列順序">
+                        <option value="asc">由小到大</option>
+                        <option value="desc">由大到小</option>
+                    </optgroup>
+                </select>
+
+                <!--  價格  -->
+                <span>價格 :</span>
+                <input type="text" name="priceMin" placeholder="最小值" autocomplete="off">
+                <input type="text" name="priceMax" placeholder="最大值" autocomplete="off">
+                <input type="submit" value="查詢">
+
             </form>
 
             <!--  依關鍵字  查詢  -->
             <form class="category-box" action="/users/shop" method="get">
 
-                <span>查詢 :</span>
-                <input type="text" name="search" placeholder="輸入關鍵字，進行查詢!" autocomplete="off">
-                <input type="submit" value="確認">
+                <span>關鍵字 :</span>
+                <input type="text" name="search" placeholder="關鍵字" autocomplete="off">
+                <input type="submit" value="查詢">
             </form>
+
         </div>
     </div>
 
@@ -157,12 +164,12 @@
 <div class="right-body">
 
     <div class="right">
-        <div class="poke-box" th:each="pokemon : ${pokemons}">
+        <form class="poke-box" th:each="pokemon : ${pokemons}">
             <div class="poke-image-box">
                 <a><img th:src="@{*{pokemon.imageUrl}}"></a>
             </div>
             <div class="poke-text-box">
-                <a th:text="'編號 : ' + *{pokemon.pokemonId} "></a>
+                <a th:text="'編號 : ' + *{pokemon.pokemonId}"></a>
                 <a th:text="'名稱 : ' + *{pokemon.pokemonName}"></a>
                 <a th:text="'屬性 : ' + *{pokemon.category}"></a>
             </div>
@@ -176,10 +183,10 @@
                 <a th:text="'商品價格 : ' + *{pokemon.price}"></a>
                 <a th:text="'庫存數量 : ' + *{pokemon.stock}"></a>
             </div>
-            <div class="poke-input-box">
-                <input type="submit" value="加入購物車">
+            <div class="poke-add-box">
+                <a class="btn-add" th:href="@{'/pokemons/addShopCar/' + ${pokemon.pokemonId}}">加入購物車</a>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 

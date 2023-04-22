@@ -10,6 +10,9 @@ public class PokemonQueryParams {
     private String sort;
     private Integer limit;
     private Integer offset;
+    private Integer priceMin;
+    private Integer priceMax;
+    private Integer buyCnt;
 
     public PokemonCategory getPokemonCategory() {
         return pokemonCategory;
@@ -57,5 +60,21 @@ public class PokemonQueryParams {
 
     public void setOffset(Integer offset) {
         this.offset = offset;
+    }
+
+    public Integer getPriceMin() {
+        return priceMin;
+    }
+
+    public void setPriceMin(Integer priceMin) {
+        this.priceMin = priceMin;
+    }
+
+    public Integer getPriceMax() {
+        return priceMax;
+    }
+
+    public void setPriceMax(Integer priceMax) {
+        this.priceMax = priceMax;
     }
 }

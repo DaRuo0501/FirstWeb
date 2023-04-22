@@ -19,6 +19,7 @@ public class Pokemon {
     private String skill4;
     private Integer price;
     private Integer stock;
+    private Integer buyCnt;
     private Date createdDate;
     private Date lastModifiedDate;
 
@@ -149,6 +150,14 @@ public class Pokemon {
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public Integer getBuyCnt() {
+        return buyCnt;
+    }
+
+    public void setBuyCnt(Integer buyCnt) {
+        this.buyCnt = buyCnt;
     }
 
     public Date getCreatedDate() {

@@ -1,12 +1,13 @@
 package com.daruo.firstweb.dao.impl;
 
-import com.daruo.firstweb.constant.PokemonCategory;
 import com.daruo.firstweb.dao.PokemonDao;
 import com.daruo.firstweb.dto.PokemonQueryParams;
 import com.daruo.firstweb.model.Pokemon;
+import com.daruo.firstweb.model.User;
 import com.daruo.firstweb.rowmapper.PokemonCategoryRowMapper;
 import com.daruo.firstweb.rowmapper.PokemonRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -24,22 +25,27 @@ public class PokemonDaoImpl implements PokemonDao {
     public List<Pokemon> getPokemons(PokemonQueryParams pokemonQueryParams) {
 
         String sql = "SELECT pokemon_id, pokemon_name, image_url," +
-                " category, life, exp, attack," +
-                " skill_1, skill_2, skill_3, skill_4, price, stock, created_date, last_modified_date" +
+                " category, life, exp, attack, price, stock," +
+                " skill_1, skill_2, skill_3, skill_4, created_date, last_modified_date" +
                 " FROM pokemon WHERE 1 = 1";
 
         Map<String, Object> map = new HashMap<>();
+        map.put("priceMin", pokemonQueryParams.getPriceMin());
+        map.put("priceMax", pokemonQueryParams.getPriceMax());
+        map.put("limit", pokemonQueryParams.getLimit());
+        map.put("offset", pokemonQueryParams.getOffset());
 
         // 查詢條件
         sql = addFilteringSql(sql, map, pokemonQueryParams);
+
+        // 價格
+        sql += " AND price BETWEEN :priceMin AND :priceMax";
 
         // 排序
         sql += " ORDER BY " + pokemonQueryParams.getOrderBy() + " " + pokemonQueryParams.getSort();
 
         // 分頁
         sql += " LIMIT :limit OFFSET :offset";
-        map.put("limit", pokemonQueryParams.getLimit());
-        map.put("offset", pokemonQueryParams.getOffset());
 
         List<Pokemon> pokemonList = namedParameterJdbcTemplate.query(sql, map, new PokemonRowMapper());
 
@@ -59,6 +65,7 @@ public class PokemonDaoImpl implements PokemonDao {
         return pokemonList;
     }
 
+    // 查詢商品的數量
     @Override
     public Integer getPokemonsCount(PokemonQueryParams pokemonQueryParams) {
 
@@ -74,17 +81,39 @@ public class PokemonDaoImpl implements PokemonDao {
         return total;
     }
 
+    // 依照編號查詢單筆商品
     @Override
-    public Integer getPokemonsCountByCategory(PokemonQueryParams pokemonQueryParams) {
+    public Pokemon getPokemonById(Integer pokemonId) {
 
-        String sql = "SELECT count(pokemon_id) FROM pokemon WHERE category = :category;";
+        String sql = "SELECT pokemon_id, pokemon_name, image_url," +
+                " category, life, exp, attack, price, stock," +
+                " skill_1, skill_2, skill_3, skill_4, created_date, last_modified_date" +
+                " FROM pokemon WHERE pokemon_id = :pokemonId";
 
         Map<String, Object> map = new HashMap<>();
-        map.put("category", pokemonQueryParams.getPokemonCategory().name());
+        map.put("pokemonId", pokemonId);
 
-        Integer categoryCount = namedParameterJdbcTemplate.queryForObject(sql, map, Integer.class);
+        List<Pokemon> pokemonList = namedParameterJdbcTemplate.query(sql, map , new PokemonRowMapper());
 
-        return categoryCount;
+        if (pokemonList.size() > 0) {
+            return pokemonList.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    // 建立購物車
+    @Override
+    public void createShopCar(Pokemon pokemon, User user) {
+
+        String sql = "INSERT INTO shopping_car(user_id, pokemon_id, buy_cnt) VALUES (:userId, :pokemonId, 1);";
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("userId", user.getUserId());
+        map.put("pokemonId", pokemon.getPokemonId());
+
+        namedParameterJdbcTemplate.update(sql,  new MapSqlParameterSource(map));
+
     }
 
     // 共用查詢條件

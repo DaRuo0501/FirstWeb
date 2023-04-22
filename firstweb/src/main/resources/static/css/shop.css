@@ -275,12 +275,11 @@ header span {
 }
 
 .content .content-title .category-box span {
-    width: 45px;
     font-size: 16px;
 }
 
 .content .content-title .category-box input[type="text"] {
-    width: 150px;
+    width: 70px;
     height: 30px;
     font-size: 10px;
     color: #010101;
@@ -295,7 +294,7 @@ header span {
 .content .content-title .category-box input[type="text"]:hover {
     font-size: 14px;
     font-weight: 600;
-    width: 250px;
+    width: 120px;
     background: #efeff1;
     border: 1px solid #45f3ff;
 }
@@ -440,33 +439,31 @@ header span {
     padding: 3px;
 }
 
-.poke-input-box {
+.poke-add-box {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 10px;
-    width: 100px;
-
 }
 
-.poke-input-box input[type="submit"] {
+.poke-add-box .btn-add {
     display: flex;
     justify-content: center;
     align-items: center;
-    outline: none;
-    width: 100%;
+    width: 90px;
     height: 30px;
-    color: #45f3ff;
-    background: #23242a;
-    border: 2px solid #45f3ff;
-    border-radius: 8px;
-}
-
-.poke-input-box input[type="submit"]:hover {
+    font-size: 14px;
     color: #010101;
-    background: #45f3ff;
-    font-size: 16px;
-    font-weight: 600;
+    background: #efeff1;
+    border: 1px solid #45f3ff;
+    border-radius: 8px;
+    text-decoration: none;
 }
 
+.poke-add-box .btn-add:hover {
+    width: 100px;
+    font-weight: 600;
+    background: #45f3ff;
+    border: 1px solid #010101;
+}
 
