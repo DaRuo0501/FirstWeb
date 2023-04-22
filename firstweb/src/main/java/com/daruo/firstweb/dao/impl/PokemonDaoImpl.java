@@ -3,9 +3,11 @@ package com.daruo.firstweb.dao.impl;
 import com.daruo.firstweb.dao.PokemonDao;
 import com.daruo.firstweb.dto.PokemonQueryParams;
 import com.daruo.firstweb.model.Pokemon;
+import com.daruo.firstweb.model.ShopCar;
 import com.daruo.firstweb.model.User;
 import com.daruo.firstweb.rowmapper.PokemonCategoryRowMapper;
 import com.daruo.firstweb.rowmapper.PokemonRowMapper;
+import com.daruo.firstweb.rowmapper.ShopCarRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -113,6 +115,38 @@ public class PokemonDaoImpl implements PokemonDao {
         map.put("pokemonId", pokemon.getPokemonId());
 
         namedParameterJdbcTemplate.update(sql,  new MapSqlParameterSource(map));
+
+    }
+
+    @Override
+    public ShopCar getShopCarPokemonByUserId(Integer pokemonId, User user) {
+
+        String sql = "SELECT seq_no, user_id, pokemon_id, buy_cnt FROM shopping_car WHERE user_id = :userId AND pokemon_id = :pokemonId;";
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("userId", user.getUserId());
+        map.put("pokemonId", pokemonId);
+
+        List<ShopCar> shopCarList = namedParameterJdbcTemplate.query(sql, map, new ShopCarRowMapper());
+
+        if (shopCarList.size() > 0) {
+            return shopCarList.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    // 更新購物車
+    @Override
+    public void addShopCarPokemonCount(Pokemon pokemon, User user) {
+
+        String sql = "UPDATE shopping_car SET buy_cnt = buy_cnt + 1 WHERE user_id = :userId AND pokemon_id = :pokemonId;";
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("userId", user.getUserId());
+        map.put("pokemonId", pokemon.getPokemonId());
+
+        namedParameterJdbcTemplate.update(sql, map);
 
     }
 

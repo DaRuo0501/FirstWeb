@@ -32,8 +32,9 @@ public class PokemonController {
 
     // 新增商品至購物車
     @GetMapping("/pokemons/addShopCar/{pokemonId}")
-    public void createShopCar(@PathVariable(name = "pokemonId") Integer pokemonId,
-                             HttpServletRequest request) {
+    public String createShopCar(@PathVariable(name = "pokemonId") Integer pokemonId,
+                             HttpServletRequest request,
+                             Model model) {
 
         // 取得 當前登入的使用者
         HttpSession session = request.getSession();
@@ -41,8 +42,12 @@ public class PokemonController {
         User tempUser = userService.getUserByName(user);
         user.setUserId(tempUser.getUserId());
 
-        // 依照前端給的 pokemonId 與 當前登入的 userId ，傳入購物車
-        pokemonService.createShopCarById(pokemonId, user);
+        // 依照前端給的 userId & pokemonId 從資料庫取出該筆資訊
+        Pokemon pokemon = pokemonService.createShopCarById(pokemonId, user);
+
+        model.addAttribute("pokemon", pokemon);
+
+        return "redirect:/users/shop";
     }
 
 }

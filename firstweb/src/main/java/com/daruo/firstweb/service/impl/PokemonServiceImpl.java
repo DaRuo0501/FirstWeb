@@ -3,6 +3,7 @@ package com.daruo.firstweb.service.impl;
 import com.daruo.firstweb.dao.PokemonDao;
 import com.daruo.firstweb.dto.PokemonQueryParams;
 import com.daruo.firstweb.model.Pokemon;
+import com.daruo.firstweb.model.ShopCar;
 import com.daruo.firstweb.model.User;
 import com.daruo.firstweb.service.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class PokemonServiceImpl implements PokemonService {
         return pokemonDao.getCategory();
     }
 
-
+    // 取得 商品 的總頁數
     @Override
     public List<Integer> getPokemonsPage(PokemonQueryParams pokemonQueryParams) {
 
@@ -53,13 +54,27 @@ public class PokemonServiceImpl implements PokemonService {
     // 新增商品至購物車
     @Override
     public Pokemon createShopCarById(Integer pokemonId, User user) {
+
+        // 取得 商品 資訊
         Pokemon pokemon = pokemonDao.getPokemonById(pokemonId);
 
-        pokemonDao.createShopCar(pokemon, user);
+        // 取得 當前使用者 購物車內的商品編號 與 前端傳入的商品編號 相同的資料
+        ShopCar shopCar = pokemonDao.getShopCarPokemonByUserId(pokemonId, user);
+
+        if (shopCar != null) {
+
+            // 此商品已存在該使用者的購物車內，商品數量 +1
+            pokemonDao.addShopCarPokemonCount(pokemon, user);
+        } else {
+
+            // 購物車內無此商品，將商品加入購物車內
+            pokemonDao.createShopCar(pokemon, user);
+        }
 
         return pokemon;
     }
 
+    // 查詢 屬性 所擁有的頁數
     @Override
     public Integer getPokemonCategoryPage(PokemonQueryParams pokemonQueryParams) {
         Integer total = pokemonDao.getPokemonsCount(pokemonQueryParams);

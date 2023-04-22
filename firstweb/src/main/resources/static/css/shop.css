@@ -454,16 +454,18 @@ header span {
     height: 30px;
     font-size: 14px;
     color: #010101;
-    background: #efeff1;
-    border: 1px solid #45f3ff;
+    background: #28292d;
+    border: 2px solid #010101;
     border-radius: 8px;
     text-decoration: none;
 }
 
 .poke-add-box .btn-add:hover {
-    width: 100px;
+    width: 110px;
+    font-size: 16px;
     font-weight: 600;
-    background: #45f3ff;
-    border: 1px solid #010101;
+    color: #45f3ff;
+    background: #18181b;
+    border: 2px solid #45f3ff;
 }
 
