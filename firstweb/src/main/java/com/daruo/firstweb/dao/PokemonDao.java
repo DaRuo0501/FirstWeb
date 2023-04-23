@@ -17,10 +17,13 @@ public interface PokemonDao {
 
     Pokemon getPokemonById(Integer pokemonId);
 
-    void createShopCar(Pokemon pokemon, User user);
+    void createShopCar(Pokemon pokemon, ShopCar shopCar, User user);
 
-    ShopCar getShopCarPokemonByUserId(Integer pokemonId, User user);
+    ShopCar getShopCarPokemonByPokemonId(Integer pokemonId, User user);
 
-    void addShopCarPokemonCount(Pokemon pokemon, User user);
+    ShopCar getShopCarPokemonByUserId(User user);
 
+    void addShopCarPokemonCount(ShopCar shopCar);
+
+    void createFirstShopCar(Pokemon pokemon, User user);
 }

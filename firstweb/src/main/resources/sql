@@ -162,13 +162,23 @@ SELECT count(pokemon_id) FROM pokemon WHERE category = '水';
 DROP TABLE IF EXISTS shopping_car;
 
 CREATE TABLE IF NOT EXISTS shopping_car(
-    seq_no      INT   NOT NULL PRIMARY KEY AUTO_INCREMENT,
     user_id     INT   NOT NULL,
+    seq_no      INT   NOT NULL,
     pokemon_id  INT   NOT NULL,
-    buy_cnt     INT   NOT NULL
+    buy_cnt     INT   NOT NULL,
+    PRIMARY KEY shopping_car (user_id,seq_no)
 );
 
-INSERT INTO shopping_car(seq_no, user_id, pokemon_id, buy_cnt) VALUES (1, 1, 2, 1);
+INSERT INTO shopping_car(user_id, seq_no, pokemon_id, buy_cnt) VALUES (1, 1, 4, 1);
+INSERT INTO shopping_car(user_id, seq_no, pokemon_id, buy_cnt) VALUES (1, 2, 25, 1);
+INSERT INTO shopping_car(user_id, seq_no, pokemon_id, buy_cnt) VALUES (1, 3, 155, 1);
 
-SELECT seq_no, user_id, pokemon_id, buy_cnt FROM shopping_car;
+SELECT user_id, seq_no, pokemon_id, buy_cnt FROM shopping_car;
+
+SELECT user_id, seq_no, pokemon_id, buy_cnt FROM shopping_car WHERE user_id = 1 AND pokemon_id = 4;
+
+UPDATE shopping_car SET buy_cnt = shopping_car.buy_cnt+1 WHERE user_id = 1 AND pokemon_id = 4;
+
+SELECT user_id, seq_no, pokemon_id, buy_cnt FROM shopping_car WHERE user_id = 1 ORDER BY seq_no DESC;
+
 

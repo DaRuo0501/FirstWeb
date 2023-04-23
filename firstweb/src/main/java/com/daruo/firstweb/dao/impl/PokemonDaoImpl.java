@@ -106,20 +106,22 @@ public class PokemonDaoImpl implements PokemonDao {
 
     // 建立購物車
     @Override
-    public void createShopCar(Pokemon pokemon, User user) {
+    public void createShopCar(Pokemon pokemon, ShopCar shopCar, User user) {
 
-        String sql = "INSERT INTO shopping_car(user_id, pokemon_id, buy_cnt) VALUES (:userId, :pokemonId, 1);";
+        String sql = "INSERT INTO shopping_car(user_id, seq_no, pokemon_id, buy_cnt) VALUES (:userId, :seqNo, :pokemonId, 1);";
 
         Map<String,Object> map = new HashMap<>();
         map.put("userId", user.getUserId());
+        map.put("seqNo", shopCar.getSeqNo() + 1);
         map.put("pokemonId", pokemon.getPokemonId());
 
         namedParameterJdbcTemplate.update(sql,  new MapSqlParameterSource(map));
 
     }
 
+    // 查詢 使用者的購物車 單筆 商品資料
     @Override
-    public ShopCar getShopCarPokemonByUserId(Integer pokemonId, User user) {
+    public ShopCar getShopCarPokemonByPokemonId(Integer pokemonId, User user) {
 
         String sql = "SELECT seq_no, user_id, pokemon_id, buy_cnt FROM shopping_car WHERE user_id = :userId AND pokemon_id = :pokemonId;";
 
@@ -136,17 +138,47 @@ public class PokemonDaoImpl implements PokemonDao {
         }
     }
 
+    @Override
+    public ShopCar getShopCarPokemonByUserId(User user) {
+
+        String sql = "SELECT seq_no, user_id, pokemon_id, buy_cnt FROM shopping_car WHERE user_id = :userId ORDER BY seq_no DESC;";
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("userId", user.getUserId());
+
+        List<ShopCar> shopCarList = namedParameterJdbcTemplate.query(sql, map, new ShopCarRowMapper());
+
+        if (shopCarList.size() > 0) {
+            return shopCarList.get(0);
+        } else {
+            return null;
+        }
+    }
+
     // 更新購物車
     @Override
-    public void addShopCarPokemonCount(Pokemon pokemon, User user) {
+    public void addShopCarPokemonCount(ShopCar shopCar) {
 
         String sql = "UPDATE shopping_car SET buy_cnt = buy_cnt + 1 WHERE user_id = :userId AND pokemon_id = :pokemonId;";
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("userId", shopCar.getUserId());
+        map.put("pokemonId", shopCar.getPokemonId());
+
+        namedParameterJdbcTemplate.update(sql, map);
+
+    }
+
+    @Override
+    public void createFirstShopCar(Pokemon pokemon, User user) {
+
+        String sql = "INSERT INTO shopping_car(user_id, seq_no, pokemon_id, buy_cnt) VALUES (:userId, 1, :pokemonId, 1);";
 
         Map<String,Object> map = new HashMap<>();
         map.put("userId", user.getUserId());
         map.put("pokemonId", pokemon.getPokemonId());
 
-        namedParameterJdbcTemplate.update(sql, map);
+        namedParameterJdbcTemplate.update(sql,  new MapSqlParameterSource(map));
 
     }
 

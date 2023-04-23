@@ -282,7 +282,8 @@ header span {
     width: 70px;
     height: 30px;
     font-size: 10px;
-    color: #010101;
+    font-weight: 500;
+    color: #8f8f8f;
     background: #45f3ff;
     border: 1px solid #18181b;
     border-radius: 16px;
@@ -293,8 +294,9 @@ header span {
 
 .content .content-title .category-box input[type="text"]:hover {
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 900;
     width: 120px;
+    color: #010101;
     background: #efeff1;
     border: 1px solid #45f3ff;
 }
@@ -352,12 +354,49 @@ header span {
 
 .right-body {
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     width: calc(100% - 260px);
     height: 100%;
     padding: 20px 0 6px 0;
     color: #efeff1;
     margin-top: 60px;
     margin-left: 260px;
+}
+
+.msg-box {
+    display: block;
+    justify-content: center;
+    width: calc(100% - 260px);
+    height: 40px;
+    margin-top: 40px;
+}
+
+.msg-box .msg-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    font-size: 26px;
+    font-weight: 600;
+    color: #010101;
+    background: #010101;
+    border: 2px solid #010101;
+    border-radius: 16px;
+}
+
+.msg-box .show-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    font-size: 30px;
+    font-weight: 600;
+    color: #ff0000;
 }
 
 .right {
@@ -367,7 +406,7 @@ header span {
     flex-wrap: wrap;
     width: 100%;
     height: calc(100% - 60px);
-    margin-top: 70px;
+    margin-top: 40px;
 }
 
 .poke-box {

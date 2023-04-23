@@ -6,6 +6,8 @@ import com.daruo.firstweb.model.Pokemon;
 import com.daruo.firstweb.model.ShopCar;
 import com.daruo.firstweb.model.User;
 import com.daruo.firstweb.service.PokemonService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +16,8 @@ import java.util.List;
 
 @Component
 public class PokemonServiceImpl implements PokemonService {
+
+    private final static Logger log = LoggerFactory.getLogger(PokemonServiceImpl.class);
 
     @Autowired
     private PokemonDao pokemonDao;
@@ -51,27 +55,52 @@ public class PokemonServiceImpl implements PokemonService {
         return integerList;
     }
 
+    @Override
+    public Pokemon getPokemonById(Integer pokemonId) {
+        return pokemonDao.getPokemonById(pokemonId);
+    }
+
     // 新增商品至購物車
     @Override
-    public Pokemon createShopCarById(Integer pokemonId, User user) {
+    public Pokemon createShopCarById(Pokemon pokemon, User user) {
 
-        // 取得 商品 資訊
-        Pokemon pokemon = pokemonDao.getPokemonById(pokemonId);
+        try {
 
-        // 取得 當前使用者 購物車內的商品編號 與 前端傳入的商品編號 相同的資料
-        ShopCar shopCar = pokemonDao.getShopCarPokemonByUserId(pokemonId, user);
+            // 取得 當前使用者 購物車內的商品編號 與 前端傳入的商品編號 相同的資料
+            ShopCar shopCar = pokemonDao.getShopCarPokemonByPokemonId(pokemon.getPokemonId(), user);
 
-        if (shopCar != null) {
+            ShopCar tempShopCar = pokemonDao.getShopCarPokemonByUserId(user);
 
-            // 此商品已存在該使用者的購物車內，商品數量 +1
-            pokemonDao.addShopCarPokemonCount(pokemon, user);
-        } else {
+            if (tempShopCar != null) {
 
-            // 購物車內無此商品，將商品加入購物車內
-            pokemonDao.createShopCar(pokemon, user);
+                if (shopCar == null) {
+
+                    // 購物車內無此商品，將商品加入購物車內
+                    pokemonDao.createShopCar(pokemon, tempShopCar, user);
+
+                    return pokemon;
+
+                } else {
+
+                    // 此商品已存在該使用者的購物車內
+                    log.warn("此商品已存在於該使用者的購物車內!");
+
+                    return null;
+                }
+
+            } else {
+
+                pokemonDao.createFirstShopCar(pokemon, user);
+
+                return pokemon;
+            }
+
+
+        } catch (Exception e) {
+
+            log.warn(e.getMessage());
+            return null;
         }
-
-        return pokemon;
     }
 
     // 查詢 屬性 所擁有的頁數
@@ -94,10 +123,10 @@ public class PokemonServiceImpl implements PokemonService {
         // 總共會產生多少頁數，初始值為: 0
         Integer page = 0;
 
-        if(total%count == 0){
-            page = total/count;
-        }else{
-            page = total/count+1;
+        if (total % count == 0) {
+            page = total / count;
+        } else {
+            page = total / count + 1;
         }
 
         return page;

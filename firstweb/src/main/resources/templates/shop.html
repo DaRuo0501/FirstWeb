@@ -66,7 +66,9 @@
         <!-- 商城 -->
         <li>
             <div class="icon-link active open">
-                <a href="#"> <i class="fa-solid fa-shop"></i> <span class="link_name">商城</span>
+                <a>
+                    <i class="fa-solid fa-shop"></i>
+                    <span class="link_name">商城</span>
                     <i class="fa-solid fa-caret-down"></i>
                 </a>
             </div>
@@ -75,15 +77,25 @@
             <div class="openMenu">
                 <ul class="sub-menu active">
                     <li class="box-menu active">
+                        <a href="/users/shop">
+                            <i class="fa-solid fa-shop"></i>
+                            <span class="link_name">商城</span>
+                        </a>
+                    </li>
+
+                    <li class="box-menu">
                         <a href="/users/shopCar">
                             <i class="fa-solid fa-cart-shopping"></i>
                             <span class="link_name">購物車</span>
                         </a>
                     </li>
 
-                    <li class="box-menu"><a href="#"> <i class="fa-regular fa-rectangle-list"></i> <span
-                            class="link_name">訂單</span>
-                    </a></li>
+                    <li class="box-menu">
+                        <a href="#">
+                            <i class="fa-regular fa-rectangle-list"></i>
+                            <span class="link_name">訂單</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </li>
@@ -163,6 +175,14 @@
 
 <div class="right-body">
 
+    <!--  訊息顯示  -->
+    <div class="msg-box" id="errorMsg" hidden="hidden">
+        <p>
+            <span class="msg-text" id="msg-text" th:text="${session.msg.text}"></span>
+            <span id="hidErrorMsg" th:text="${session.errorFlag}" hidden="hidden"></span>
+        </p>
+    </div>
+
     <div class="right">
         <form class="poke-box" th:each="pokemon : ${pokemons}">
             <div class="poke-image-box">
@@ -212,13 +232,43 @@
 
     // 下拉是選單 頁數、屬性 選擇後，不要重置為 null 欄位
     function doOnload() {
+
         var tempHidPage = document.getElementById("hidPage").textContent;
         document.getElementById("page").value = tempHidPage;
 
         var tempHidCategory = document.getElementById("hidCategory").textContent;
         document.getElementById("category").value = tempHidCategory;
 
+        var tempHidErrorMsg = document.getElementById("hidErrorMsg").textContent;
+        if(tempHidErrorMsg == "Y"){
+
+            document.getElementById("errorMsg").hidden = false;
+            document.getElementById("msg-text").classList.add("show-text");
+
+            // 控制訊息顯示時間，預設5秒後消失
+            timeUp();
+        }else{
+            document.getElementById("errorMsg").hidden = true;
+        }
     }
+
+    // 倒計時器
+    var count = 5;
+    function timeUp() {
+
+        count -= 1;
+
+        if (count == 0) {
+            document.getElementById("msg-text").classList.remove("show-text");
+        }
+
+        setTimeout("timeUp()", 1000);
+
+        if (count < 0) {
+            count = 0;
+        }
+    }
+
 
     // 下拉選單 選擇後 自動 submit 向後台傳遞參數
     function reflashPage() {

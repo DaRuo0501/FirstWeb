@@ -2,7 +2,7 @@ package com.daruo.firstweb.model;
 
 public class ShopCar {
 
-    private Integer seqNo;
+    private Integer seqNo = 0;
     private Integer userId;
     private Integer pokemonId;
     private Integer buyCnt;

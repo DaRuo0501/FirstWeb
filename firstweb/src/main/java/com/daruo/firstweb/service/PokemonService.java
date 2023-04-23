@@ -1,10 +1,8 @@
 package com.daruo.firstweb.service;
 
-import com.daruo.firstweb.constant.PokemonCategory;
 import com.daruo.firstweb.dto.PokemonQueryParams;
-import com.daruo.firstweb.dto.PokemonRequest;
-import com.daruo.firstweb.dto.UserQueryParams;
 import com.daruo.firstweb.model.Pokemon;
+import com.daruo.firstweb.model.ShopCar;
 import com.daruo.firstweb.model.User;
 
 import java.util.List;
@@ -17,7 +15,9 @@ public interface PokemonService {
 
     List<Integer> getPokemonsPage(PokemonQueryParams pokemonQueryParams);
 
-    Pokemon createShopCarById(Integer pokemonId, User userId);
+    Pokemon getPokemonById(Integer pokemonId);
+
+    Pokemon createShopCarById(Pokemon pokemon, User userId);
 
     Integer getPokemonCategoryPage(PokemonQueryParams pokemonQueryParams);
 }

@@ -2,16 +2,21 @@ package com.daruo.firstweb.controller;
 
 
 import com.daruo.firstweb.constant.PokemonCategory;
+import com.daruo.firstweb.dto.Msg;
 import com.daruo.firstweb.dto.PokemonQueryParams;
 import com.daruo.firstweb.dto.UserQueryParams;
 import com.daruo.firstweb.model.Pokemon;
+import com.daruo.firstweb.model.ShopCar;
 import com.daruo.firstweb.model.User;
 import com.daruo.firstweb.service.PokemonService;
 import com.daruo.firstweb.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import org.apache.coyote.Request;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -25,6 +30,8 @@ import java.util.List;
 
 @Controller
 public class PageController {
+
+    private final static Logger log = LoggerFactory.getLogger(PageController.class);
 
     @Autowired
     private UserService userService;
@@ -98,6 +105,7 @@ public class PageController {
     // 商城頁面
     @GetMapping("users/shop")
     public String shop(Model model,
+                       Msg msg,
                        HttpSession session,
 
                        // 查詢條件 Filtering
@@ -116,54 +124,96 @@ public class PageController {
                        @RequestParam(defaultValue = "100000000") @Max(100000000) @Min(0) Integer priceMax
     ) {
 
-        // 將前端傳入的 Page, Category 存入 Session，使前端可以調用，並使其成為選取後的顯示的欄位參數
-        session.setAttribute("nowPage", page);
-        session.setAttribute("nowCategory", category);
+        try {
 
-        PokemonQueryParams pokemonQueryParams = new PokemonQueryParams();
-        pokemonQueryParams.setPokemonCategory(category);
-        pokemonQueryParams.setSearch(search);
-        pokemonQueryParams.setOrderBy(orderBy);
-        pokemonQueryParams.setSort(sort);
-        pokemonQueryParams.setLimit(limit);
-        pokemonQueryParams.setPriceMin(priceMin);
-        pokemonQueryParams.setPriceMax(priceMax);
+            // 將前端傳入的 Page, Category 存入 Session，使前端可以調用，並使其成為選取後的顯示的欄位參數
+            session.setAttribute("nowPage", page);
+            session.setAttribute("nowCategory", category);
+
+            User user = (User) session.getAttribute("showUserName");
+
+            PokemonQueryParams pokemonQueryParams = new PokemonQueryParams();
+            pokemonQueryParams.setPokemonCategory(category);
+            pokemonQueryParams.setSearch(search);
+            pokemonQueryParams.setOrderBy(orderBy);
+            pokemonQueryParams.setSort(sort);
+            pokemonQueryParams.setLimit(limit);
+            pokemonQueryParams.setPriceMin(priceMin);
+            pokemonQueryParams.setPriceMax(priceMax);
 
         /*
         預設進入商城，查詢全部商品
         屬性為 null
          */
-        if (category != null) {
+            if (category != null) {
 
-            // 查詢的條件中帶有 屬性，先查詢該屬性的總頁數
-            Integer tempPage = pokemonService.getPokemonCategoryPage(pokemonQueryParams);
+                // 查詢的條件中帶有 屬性，先查詢該屬性的總頁數
+                Integer tempPage = pokemonService.getPokemonCategoryPage(pokemonQueryParams);
 
-            // 屬性的總頁數 小於 前端傳入頁數，頁數預設結果為該屬性的第一頁
-            if (tempPage < page) {
-                page = 1;
+                // 屬性的總頁數 小於 前端傳入頁數，頁數預設結果為該屬性的第一頁
+                if (tempPage < page) {
+                    page = 1;
+                }
             }
+
+            // 每一頁的第一筆 = 頁數 * 單頁數量 - 單頁數量
+            offset = page * limit - limit;
+
+            pokemonQueryParams.setOffset(offset);
+
+            // 獲取 寶可夢
+            List<Pokemon> pokemonList = pokemonService.getPokemons(pokemonQueryParams);
+
+            model.addAttribute("pokemons", pokemonList);
+
+            // 獲取 屬性
+            List<Pokemon> categorys = pokemonService.getCategory();
+
+            model.addAttribute("categorys", categorys);
+
+            // 獲取 頁數
+            List<Integer> pages = pokemonService.getPokemonsPage(pokemonQueryParams);
+
+            model.addAttribute("pages", pages);
+
+            // session 不是 null
+            if (session.getAttribute("msg") != null) {
+
+                // 取出 session 中的內容
+                Msg tempMsg = (Msg) session.getAttribute("msg");
+
+                // 檢查錯誤訊息，是否執行過
+                if (tempMsg.getCount() == 1) {
+
+                    // msg 的默認值覆蓋重寫
+                    session.setAttribute("msg", msg);
+
+                    // 錯誤訊息已經執行過 count -1
+                    tempMsg.setCount(0);
+
+                } else {
+
+                    // 錯誤訊息執行 count +1
+                    tempMsg.setCount(1);
+
+                    // session 的內容是空白
+                    if ("".equals(tempMsg.getText()))
+
+                        // msg 的默認值覆蓋重寫
+                        session.setAttribute("msg", msg);
+
+                }
+
+            } else {
+
+                // msg 的默認值覆蓋重寫
+                session.setAttribute("msg", msg);
+            }
+
+        } catch (Exception e) {
+
+            log.error(e.toString());
         }
-
-        // 每一頁的第一筆 = 頁數 * 單頁數量 - 單頁數量
-        offset = page * limit - limit;
-
-        pokemonQueryParams.setOffset(offset);
-
-        // 獲取 寶可夢
-        List<Pokemon> pokemonList = pokemonService.getPokemons(pokemonQueryParams);
-
-        model.addAttribute("pokemons", pokemonList);
-
-        // 獲取 屬性
-        List<Pokemon> categorys = pokemonService.getCategory();
-
-        model.addAttribute("categorys", categorys);
-
-        // 獲取 頁數
-        List<Integer> pages = pokemonService.getPokemonsPage(pokemonQueryParams);
-
-        model.addAttribute("pages", pages);
-
         return "shop";
     }
 
