@@ -69,10 +69,13 @@ public class PokemonServiceImpl implements PokemonService {
             // 取得 當前使用者 購物車內的商品編號 與 前端傳入的商品編號 相同的資料
             ShopCar shopCar = pokemonDao.getShopCarPokemonByPokemonId(pokemon.getPokemonId(), user);
 
+            // 取得 當前使用者的 購物車
             ShopCar tempShopCar = pokemonDao.getShopCarPokemonByUserId(user);
 
+            // 確認是否有購物車
             if (tempShopCar != null) {
 
+                // 確認購物車內 受否已經有相同的商品
                 if (shopCar == null) {
 
                     // 購物車內無此商品，將商品加入購物車內
@@ -90,6 +93,7 @@ public class PokemonServiceImpl implements PokemonService {
 
             } else {
 
+                // 無購物車 新建第一筆購物車
                 pokemonDao.createFirstShopCar(pokemon, user);
 
                 return pokemon;

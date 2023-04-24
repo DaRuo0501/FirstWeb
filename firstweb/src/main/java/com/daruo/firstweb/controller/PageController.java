@@ -4,11 +4,13 @@ package com.daruo.firstweb.controller;
 import com.daruo.firstweb.constant.PokemonCategory;
 import com.daruo.firstweb.dto.Msg;
 import com.daruo.firstweb.dto.PokemonQueryParams;
+import com.daruo.firstweb.dto.TempPokemon;
 import com.daruo.firstweb.dto.UserQueryParams;
 import com.daruo.firstweb.model.Pokemon;
 import com.daruo.firstweb.model.ShopCar;
 import com.daruo.firstweb.model.User;
 import com.daruo.firstweb.service.PokemonService;
+import com.daruo.firstweb.service.ShopCarService;
 import com.daruo.firstweb.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -38,6 +40,9 @@ public class PageController {
 
     @Autowired
     private PokemonService pokemonService;
+
+    @Autowired
+    private ShopCarService shopCarService;
 
     private Pokemon pokemon;
 
@@ -130,8 +135,6 @@ public class PageController {
             session.setAttribute("nowPage", page);
             session.setAttribute("nowCategory", category);
 
-            User user = (User) session.getAttribute("showUserName");
-
             PokemonQueryParams pokemonQueryParams = new PokemonQueryParams();
             pokemonQueryParams.setPokemonCategory(category);
             pokemonQueryParams.setSearch(search);
@@ -217,8 +220,31 @@ public class PageController {
         return "shop";
     }
 
+    // 購物車
     @GetMapping("/users/shopCar")
-    public String shopCar(Model model) {
+    public String shopCar(Model model,
+                          Msg msg,
+                          HttpSession session,
+                          HttpServletRequest request
+    ) {
+
+        try {
+
+            session = request.getSession();
+
+            User user = (User) session.getAttribute("showUserName");
+
+            List<TempPokemon> tempPokemons = shopCarService.getShopCarList(user);
+
+            model.addAttribute("shopCars", tempPokemons);
+
+            return "shopCar";
+
+        } catch (Exception e){
+
+            log.warn(e.getMessage());
+        }
+
         return "shopCar";
     }
 

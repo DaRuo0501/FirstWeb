@@ -2,173 +2,250 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- CSS 連結 -->
-  <link rel="stylesheet" href="/css/shop.css">
+    <!-- CSS 連結 -->
+    <link rel="stylesheet" href="/css/shopCar.css">
 
-  <!-- JQuery 連結 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <!-- JQuery 連結 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
-  <!-- Boxicon CDN link -->
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Boxicon CDN link -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-  <!-- FontAwesome 連結 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <!-- FontAwesome 連結 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
-  <!-- DataTable 連結 -->
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css"/>
+    <!-- DataTable 連結 -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css"/>
 
-  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
-  <title>購物車</title>
+    <title>購物車</title>
 </head>
 
 <body onload="doOnload()">
 
 <header>
-  <span>夏天的風</span>
+    <span>夏天的風</span>
 </header>
 
 <!-- 左側欄 -->
 <div class="sidebar">
 
-  <!-- 左側欄 標頭 -->
-  <div class="logo-details">
-    <div class="logo-img">
-      <img src="/images/0025-皮卡丘.png" alt="logo">
+    <!-- 左側欄 標頭 -->
+    <div class="logo-details">
+        <div class="logo-img">
+            <img src="/images/0025-皮卡丘.png" alt="logo">
+        </div>
+        <span class="logo_name" th:text="${session.showUserName.userName}"></span> <i class="fa-solid fa-bars"></i>
     </div>
-    <span class="logo_name" th:text="${session.showUserName.userName}"></span> <i class="fa-solid fa-bars"></i>
-  </div>
 
-  <!-- 主選單 -->
-  <ul class="nav-links">
+    <!-- 主選單 -->
+    <ul class="nav-links">
 
-    <!-- 首頁 -->
-    <li>
-      <div class="icon-link">
-        <a href="/users/home"> <i class='bx bx-home'></i> <span class="link_name">首頁</span>
-        </a>
-      </div>
-    </li>
+        <!-- 首頁 -->
+        <li>
+            <div class="icon-link">
+                <a href="/users/home"> <i class='bx bx-home'></i> <span class="link_name">首頁</span>
+                </a>
+            </div>
+        </li>
 
-    <!-- 個人資料 -->
-    <li>
-      <div class="icon-link">
-        <a href="/users/user"> <i class='bx bx-user'></i> <span class="link_name">個人資料</span>
-          <i class="fa-solid fa-caret-down"></i>
-        </a>
-      </div>
-    </li>
+        <!-- 個人資料 -->
+        <li>
+            <div class="icon-link">
+                <a href="/users/user"> <i class='bx bx-user'></i> <span class="link_name">個人資料</span>
+                    <i class="fa-solid fa-caret-down"></i>
+                </a>
+            </div>
+        </li>
 
-    <!-- 商城 -->
-    <li>
-      <div class="icon-link active open">
-        <a href="/users/shop"> <i class="fa-solid fa-shop"></i> <span class="link_name">商城</span>
-          <i class="fa-solid fa-caret-down"></i>
-        </a>
-      </div>
+        <!-- 商城 -->
+        <li>
+            <div class="icon-link active open">
+                <a href="/users/shop"> <i class="fa-solid fa-shop"></i> <span class="link_name">商城</span>
+                    <i class="fa-solid fa-caret-down"></i>
+                </a>
+            </div>
 
-      <!-- 子選單 -->
-      <div class="openMenu">
-        <ul class="sub-menu active">
-          <li class="box-menu active"><a href="/users/shopCar"> <i class="fa-solid fa-cart-shopping"></i> <span
-                  class="link_name">購物車</span>
-          </a></li>
+            <!-- 子選單 -->
+            <div class="openMenu">
+                <ul class="sub-menu active">
+                    <li class="box-menu active">
+                        <a href="/users/shop">
+                            <i class="fa-solid fa-shop"></i>
+                            <span class="link_name">商城</span>
+                        </a>
+                    </li>
 
-          <li class="box-menu"><a href="#"> <i class="fa-regular fa-rectangle-list"></i> <span
-                  class="link_name">訂單</span>
-          </a></li>
-        </ul>
-      </div>
-    </li>
+                    <li class="box-menu active">
+                        <a href="/users/shopCar">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="link_name">購物車</span>
+                        </a>
+                    </li>
 
-    <!-- 頁尾 ( 登出 ) -->
-    <div class="footer">
-      <div class="footer-content" onclick="logout()">
-        <span class="logout">登出</span>
-        <i class="fa-solid fa-arrow-right-from-bracket"></i>
-      </div>
-    </div>
-  </ul>
+                    <li class="box-menu">
+                        <a href="#">
+                            <i class="fa-regular fa-rectangle-list"></i>
+                            <span class="link_name">訂單</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <!-- 頁尾 ( 登出 ) -->
+        <div class="footer">
+            <div class="footer-content" onclick="logout()">
+                <span class="logout">登出</span>
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </div>
+        </div>
+    </ul>
 </div>
 
 <!-- 內文 -->
 <div class="content">
 
-  <div class="content-title active">
-    <span class="content-text">購物車</span>
+    <div class="content-title active">
 
+        <span class="content-text">購物車</span>
 
-  </div>
+    </div>
 
 </div>
 
 <div class="right-body">
 
-  <div class="right">
-    <div class="poke-box" th:each="pokemon : ${pokemons}">
-      <div class="poke-image-box">
-        <a><img th:src="@{*{pokemon.imageUrl}}"></a>
-      </div>
-      <div class="poke-text-box">
-        <a th:text="'編號 : ' + *{pokemon.pokemonId} "></a>
-        <a th:text="'名稱 : ' + *{pokemon.pokemonName}"></a>
-        <a th:text="'屬性 : ' + *{pokemon.category}"></a>
-      </div>
-      <div class="poke-skill-box">
-        <a th:text="'技能一 : ' + *{pokemon.skill1}"></a>
-        <a th:text="'技能二 : ' + *{pokemon.skill2}"></a>
-        <a th:text="'技能三 : ' + *{pokemon.skill3}"></a>
-        <a th:text="'技能四 : ' + *{pokemon.skill4}"></a>
-      </div>
-      <div class="poke-price-stock-box">
-        <a th:text="'商品價格 : ' + *{pokemon.price}"></a>
-        <a th:text="'庫存數量 : ' + *{pokemon.stock}"></a>
-      </div>
-      <div class="poke-input-box">
-        <input type="submit" value="加入購物車">
-      </div>
+    <div class="content-body">
+
+        <form class="shop-car-box">
+
+            <div class="content-table-box">
+                <table>
+                    <thead>
+                    <tr>
+                        <th class="sc-head" id="th-number">項次</th>
+                        <th class="sc-head" id="th-img">商品圖片</th>
+                        <th class="sc-head" id="th-name">商品名稱</th>
+                        <th class="sc-head" id="th-price">價格</th>
+                        <th class="sc-head" id="th-stock">庫存</th>
+                        <th class="sc-head" id="th-total">總金額</th>
+                        <th class="sc-head" id="th-update">數量</th>
+                        <th class="sc-head" id="th-delete">刪除</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="shopCar,s : ${shopCars}">
+                        <td class="sc-body" id="td-number">
+                            <div class="check-box">
+                                <input type="checkbox">
+                            </div>
+                        </td>
+                        <td class="sc-body" id="td-img"><img th:src="@{*{shopCar.imageUrl}}"></td>
+                        <td class="sc-body" id="td-name" th:text="*{shopCar.pokemonName}">商品名稱</td>
+                        <td class="sc-body" id="td-price" th:text="*{shopCar.price}">價格</td>
+                        <td class="sc-body" id="td-stock" th:text="*{shopCar.stock}">庫存</td>
+                        <td class="sc-body" id="td-total" th:text="*{shopCar.price * shopCar.buyCnt}">購買金額</td>
+                        <td class="sc-body" id="td-update">
+                            <div class="td-update-box">
+                                <i class="fa-solid fa-caret-up"></i>
+                                <input type="text" th:value="*{shopCar.buyCnt}">
+                                <i class="fa-solid fa-caret-down"></i>
+                            </div>
+                        </td>
+                        <td class="sc-body" id="td-delete">
+                            <div class="td-delete-box">
+                                <i class="fa-solid fa-trash"></i>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="content-table-footer">
+                <div class="total-box">
+                    <input type="text" th:value="000">
+                    <input type="submit" value="結帳">
+                </div>
+            </div>
+
+        </form>
+
     </div>
-  </div>
+
 </div>
 
 <script>
 
-  function logout() {
-    window.location.href = "/users/login";
-  }
+    function logout() {
+        window.location.href = "/users/login";
+    }
 
-  // 開啟、關閉 子欄位
-  const opens = document.querySelectorAll(".open");
-  const menus = document.querySelectorAll(".openMenu");
+    // 開啟、關閉 子欄位
+    const opens = document.querySelectorAll(".open");
+    const menus = document.querySelectorAll(".openMenu");
 
-  opens.forEach((open, index) => {
+    opens.forEach((open, index) => {
 
-    open.addEventListener("click", () => {
+        open.addEventListener("click", () => {
 
-      menus[index].classList.toggle("ok");
+            menus[index].classList.toggle("ok");
+
+        });
 
     });
 
-  });
+    // 下拉式選單 頁數、屬性 選擇後，不要重置為 null 欄位
+    function doOnload() {
 
-  // 下拉是選單 頁數、屬性 選擇後，不要重置為 null 欄位
-  function doOnload() {
-    var tempHidPage = document.getElementById("hidPage").textContent;
-    document.getElementById("page").value = tempHidPage;
+        var tempHidPage = document.getElementById("hidPage").textContent;
+        document.getElementById("page").value = tempHidPage;
 
-    var tempHidCategory = document.getElementById("hidCategory").textContent;
-    document.getElementById("category").value = tempHidCategory;
+        var tempHidCategory = document.getElementById("hidCategory").textContent;
+        document.getElementById("category").value = tempHidCategory;
 
-  }
+        var tempHidErrorMsg = document.getElementById("hidErrorMsg").textContent;
+        if (tempHidErrorMsg == "Y") {
 
-  // 下拉選單 選擇後 自動 submit 向後台傳遞參數
-  function reflashPage() {
-    document.getElementById("search-reflash").submit();
-  }
+            document.getElementById("errorMsg").hidden = false;
+            document.getElementById("msg-text").classList.add("show-text");
+
+            // 控制訊息顯示時間，預設5秒後消失
+            timeUp();
+        } else {
+            document.getElementById("errorMsg").hidden = true;
+        }
+    }
+
+    // 下拉選單 選擇後 自動 submit 向後台傳遞參數
+    function reflashPage() {
+        document.getElementById("search-reflash").submit();
+    }
+
+    // 倒計時器
+    var count = 5;
+
+    function timeUp() {
+
+        count -= 1;
+
+        if (count == 0) {
+            document.getElementById("msg-text").classList.remove("show-text");
+        }
+
+        setTimeout("timeUp()", 1000);
+
+        if (count < 0) {
+            count = 0;
+        }
+    }
 
 </script>
 
