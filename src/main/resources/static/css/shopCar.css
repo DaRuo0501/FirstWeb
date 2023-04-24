@@ -406,6 +406,13 @@ thead tr {
     border-radius: 0 0 8px 8px;
 }
 
+#th-number {
+    display: flex;
+    border-right: 1px solid #45f3ff;
+    width: 50px;
+    height: 50px;
+}
+
 #th-img {
     display: flex;
     border-right: 1px solid #45f3ff;
@@ -463,12 +470,12 @@ thead tr {
 
 tbody {
     display: block;
-    margin-top: 55px;
-    margin-bottom: 105px;
+    margin-top: 60px;
+    margin-bottom: 60px;
 }
 
 tbody tr {
-    margin-top: 15px;
+    margin-top: 5px;
     border: 3px solid #45f3ff;
     border-radius: 8px;
     background: #23242a;
@@ -481,51 +488,53 @@ tbody tr {
     text-align: center;
 }
 
-.check-box input {
-    width: 20px;
-    height: 20px;
+#td-number {
+    display: flex;
+    border-right: 1px solid #45f3ff;
+    width: 50px;
+    height: 100px;
 }
 
 #td-img {
     display: flex;
     border-right: 1px solid #45f3ff;
     width: 100px;
-    height: 90px;
+    height: 100px;
 }
 
 #td-name {
     display: flex;
     border-right: 1px solid #45f3ff;
     width: 150px;
-    height: 90px;
+    height: 100px;
 }
 
 #td-price {
     display: flex;
     border-right: 1px solid #45f3ff;
     width: 80px;
-    height: 90px;
+    height: 100px;
 }
 
 #td-stock {
     display: flex;
     border-right: 1px solid #45f3ff;
     width: 80px;
-    height: 90px;
+    height: 100px;
 }
 
 #td-buy-count {
     display: flex;
     border-right: 1px solid #45f3ff;
     width: 80px;
-    height: 90px;
+    height: 100px;
 }
 
 #td-total {
     display: flex;
     border-right: 1px solid #45f3ff;
     width: 120px;
-    height: 90px;
+    height: 100px;
 }
 
 #td-update {
@@ -534,7 +543,7 @@ tbody tr {
     align-items: center;
     border-right: 1px solid #45f3ff;
     width: 250px;
-    height: 90px;
+    height: 100px;
 }
 
 #td-update .td-update-box {
@@ -542,7 +551,7 @@ tbody tr {
     justify-content: space-around;
     align-items: center;
     width: 80%;
-    height: 90%;
+    height: 100%;
 }
 
 #td-update input {
@@ -550,9 +559,9 @@ tbody tr {
     text-align: center;
     width: 100px;
     height: 30px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #363639;
+    font-size: 14px;
+    font-weight: 500;
+    color: #010101;
     background: #45f3ff;
     border: 2px solid #1f1f23;
     border-radius: 8px;
@@ -561,51 +570,21 @@ tbody tr {
 }
 
 #td-update input:hover {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 900;
     background: #efeff1;
     border: 2px solid #45f3ff;
 }
 
-#td-update i {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    border: 3px solid #363639;
-    border-radius: 50%;
-    transition: 0.5s;
-}
-
-#td-update i:hover {
-    color: #45f3ff;
-    border: 3px solid #45f3ff;
-}
-
 #td-delete {
     display: flex;
     width: 80px;
-    height: 90px;
-}
-
-#td-delete i {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    border: 3px solid #363639;
-    border-radius: 50%;
-    transition: 0.5s;
-}
-
-#td-delete i:hover {
-    color: #45f3ff;
-    border: 3px solid #45f3ff;
+    height: 100px;
 }
 
 .sc-body img {
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
 }
 
 .content-table-footer {
@@ -615,50 +594,7 @@ tbody tr {
     align-items: center;
     bottom: 0;
     width: calc(100% - 260px);
-    height: 105px;
-    background: #23242a;
+    height: 53px;
+    background: #18181b;
     border-top: 3px solid #45f3ff;
-}
-
-.total-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.total-box input[type="text"] {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 150px;
-    height: 40px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #363639;
-    background: #45f3ff;
-    border: 1px solid #010101;
-    border-radius: 8px;
-    outline: none;
-    padding-left: 10px;
-    margin-left: 10px;
-}
-
-.total-box input[type="submit"] {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    height: 30px;
-    font-size: 16px;
-    font-weight: 600;
-    background: #363639;
-    border: 1px solid #23242a;
-    border-radius: 8px;
-    margin-left: 10px;
-}
-
-.total-box input[type="submit"]:hover {
-    color: #010101;
-    background: #45f3ff;
-    border: 3px solid #45f3ff;
 }

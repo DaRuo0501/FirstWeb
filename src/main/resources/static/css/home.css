@@ -218,7 +218,7 @@ header span {
 
 .content .content-title {
     display: none;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     position: fixed;
     left: 260px;
@@ -232,7 +232,7 @@ header span {
 }
 
 .content .content-title.active {
-    display: flex;
+    display: block;
 }
 
 .content .content-title .content-text {
@@ -241,94 +241,54 @@ header span {
     letter-spacing: 10px;
 }
 
-.content-title .content-category {
-    display: flex;
-}
-
-.content-title select {
-    outline: none;
-    width: 50px;
-    height: 30px;
-    background: #45f3ff;
-    border: 1px solid #18181b;
-    border-radius: 15px;
-    margin-right: 10px;
-    transition: 0.5s;
-    text-align: center;
-}
-
-.content-title select:hover {
-    width: 100px;
-}
-
-.content-title select option {
-    display: flex;
-    justify-content: flex-start;
-    background: #45f3ff;
-}
-
-.content .content-title .category-box {
+.content .content-title .poke-search-box {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 30px;
 }
 
-.content .content-title .category-box span {
+.content .content-title .poke-search-box span {
+    width: 50px;
     font-size: 16px;
 }
 
-.content .content-title .category-box input[type="text"] {
-    width: 70px;
+.content .content-title .poke-search-box input[type="text"] {
+    width: 150px;
     height: 30px;
     font-size: 10px;
-    font-weight: 500;
-    color: #8f8f8f;
+    color: #010101;
     background: #45f3ff;
-    border: 1px solid #18181b;
+    border: 1px solid #efeff1;
     border-radius: 16px;
     padding-left: 12px;
     outline: medium;
     transition: 0.5s;
 }
 
-.content .content-title .category-box input[type="text"]:hover {
+.content .content-title .poke-search-box input[type="text"]:hover {
     font-size: 14px;
-    font-weight: 900;
-    width: 120px;
-    color: #010101;
+    font-weight: 600;
+    width: 250px;
     background: #efeff1;
-    border: 1px solid #45f3ff;
 }
 
-.content-title .category-search {
-    display: flex;
-    width: 100px;
-    height: 30px;
-    flex-wrap: wrap;
-}
-
-.content-title .category-search ul {
-    width: 80%;
-    list-style: none;
-}
-
-.content-title input[type="submit"] {
+.content .content-title .poke-search-box input[type="submit"] {
     width: 50px;
     height: 22px;
     color: #45f3ff;
     background: #010101;
     border: 2px solid #45f3ff;
     border-radius: 8px;
-    margin-left: 5px;
+    margin-left: 10px;
     outline: medium;
 }
 
-.content-title input[type="submit"]:hover {
+.content .content-title .poke-search-box input[type="submit"]:hover {
     color: #010101;
     background: #45f3ff;
     font-weight: 600;
 }
+
 
 .content-title1 {
     display: none;
@@ -354,311 +314,192 @@ header span {
 
 .right-body {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
     width: calc(100% - 260px);
     height: 100%;
     padding: 20px 0 6px 0;
     color: #efeff1;
-    margin-top: 90px;
+    margin-top: 60px;
     margin-left: 260px;
 }
 
-.content-body {
+.right {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 60px);
+    margin-top: 70px;
 }
 
-.shop-car-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    font-size: 22px;
-    font-weight: 600;
+.right-table {
+    width: 100vh;
 }
 
-.shop-car-box tr {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.shop-car-box tr th {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.right-table th {
     height: 50px;
-}
-
-thead {
-    position: fixed;
-    top: 108px;
-}
-
-thead tr {
-    height: 50px;
-    background: #18181b;
-    border: 3px solid #45f3ff;
-    border-radius: 0 0 8px 8px;
-}
-
-#th-img {
-    display: flex;
-    border-right: 1px solid #45f3ff;
-    width: 100px;
-    height: 50px;
-}
-
-#th-name {
-    display: flex;
-    border-right: 1px solid #45f3ff;
-    width: 150px;
-    height: 50px;
-}
-
-#th-price {
-    display: flex;
-    border-right: 1px solid #45f3ff;
-    width: 80px;
-    height: 50px;
-}
-
-#th-stock {
-    display: flex;
-    border-right: 1px solid #45f3ff;
-    width: 80px;
-    height: 50px;
-}
-
-#th-buy-count {
-    display: flex;
-    border-right: 1px solid #45f3ff;
-    width: 80px;
-    height: 50px;
-}
-
-#th-total {
-    display: flex;
-    border-right: 1px solid #45f3ff;
-    width: 120px;
-    height: 50px;
-}
-
-#th-update {
-    display: flex;
-    border-right: 1px solid #45f3ff;
-    width: 250px;
-    height: 50px;
-}
-
-#th-delete {
-    display: flex;
-    width: 80px;
-    height: 50px;
-}
-
-tbody {
-    display: block;
-    margin-top: 55px;
-    margin-bottom: 105px;
-}
-
-tbody tr {
-    margin-top: 15px;
-    border: 3px solid #45f3ff;
-    border-radius: 8px;
     background: #23242a;
 }
 
-.sc-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.right-table td {
+    height: 60px;
+    padding-left: 50px;
+    border-bottom: 1px solid #45f3ff;
 }
 
-.check-box input {
-    width: 20px;
-    height: 20px;
-}
-
-#td-img {
-    display: flex;
-    border-right: 1px solid #45f3ff;
+.right-table .t-id {
     width: 100px;
-    height: 90px;
 }
 
-#td-name {
-    display: flex;
-    border-right: 1px solid #45f3ff;
+.right-table .t-name {
     width: 150px;
-    height: 90px;
 }
 
-#td-price {
+.right-table .t-email {
+    width: 350px;
+}
+
+.right-table .t-edit {
+    width: 250px;
+}
+
+.edit-box {
     display: flex;
-    border-right: 1px solid #45f3ff;
-    width: 80px;
-    height: 90px;
 }
 
-#td-stock {
-    display: flex;
-    border-right: 1px solid #45f3ff;
-    width: 80px;
-    height: 90px;
-}
-
-#td-buy-count {
-    display: flex;
-    border-right: 1px solid #45f3ff;
-    width: 80px;
-    height: 90px;
-}
-
-#td-total {
-    display: flex;
-    border-right: 1px solid #45f3ff;
-    width: 120px;
-    height: 90px;
-}
-
-#td-update {
+.update-box {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-right: 1px solid #45f3ff;
-    width: 250px;
-    height: 90px;
+    width: 80px;
+    height: 35px;
 }
 
-#td-update .td-update-box {
+.update-box:hover {
+    border: 1px solid #45f3ff;
+    border-radius: 6px;
+}
+
+.btn-update {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #efeff1;
+    text-decoration: none;
+    height: 35px;
+    width: 80px;
+}
+
+.btn-update:hover {
+    color: #45f3ff;
+}
+
+.delete-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: 80px;
+}
+
+.delete-box:hover {
+    border: 1px solid #45f3ff;
+    border-radius: 6px;
+}
+
+.btn-delete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #efeff1;
+    text-decoration: none;
+    height: 35px;
+    width: 80px;
+}
+
+.btn-delete:hover {
+    color: #45f3ff;
+}
+
+.right-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+}
+
+.right-input input {
+    width: 80px;
+    font-size: 20px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    outline: medium;
+    background: #45f3ff;
+}
+
+.right-input input:hover {
+    font-size: 22px;
+    color: #45f3ff;
+    background: #010101;
+    border: 3px solid #45f3ff;
+}
+
+.search-box {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    width: calc(100% - 260px);
+    bottom: 20px;
+    margin-left: 260px;
+}
+
+.search-box1 {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 80%;
-    height: 90%;
-}
-
-#td-update input {
-    display: flex;
-    text-align: center;
-    width: 100px;
-    height: 30px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #363639;
-    background: #45f3ff;
-    border: 2px solid #1f1f23;
-    border-radius: 8px;
-    outline: none;
-    transition: 0.5s;
-}
-
-#td-update input:hover {
-    font-size: 20px;
-    font-weight: 900;
-    background: #efeff1;
-    border: 2px solid #45f3ff;
-}
-
-#td-update i {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    border: 3px solid #363639;
-    border-radius: 50%;
-    transition: 0.5s;
-}
-
-#td-update i:hover {
     color: #45f3ff;
-    border: 3px solid #45f3ff;
+    width: 100%;
 }
 
-#td-delete {
-    display: flex;
-    width: 80px;
-    height: 90px;
-}
 
-#td-delete i {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    border: 3px solid #363639;
-    border-radius: 50%;
-    transition: 0.5s;
-}
-
-#td-delete i:hover {
-    color: #45f3ff;
-    border: 3px solid #45f3ff;
-}
-
-.sc-body img {
-    width: 90px;
-    height: 90px;
-}
-
-.content-table-footer {
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    bottom: 0;
-    width: calc(100% - 260px);
-    height: 105px;
-    background: #23242a;
-    border-top: 3px solid #45f3ff;
-}
-
-.total-box {
+.search-input {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.total-box input[type="text"] {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 150px;
+.search-input span {
+    width: 70px;
+    font-size: 22px;
+}
+
+.search-input input[type="text"] {
+    width: 250px;
     height: 40px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #363639;
-    background: #45f3ff;
-    border: 1px solid #010101;
+    font-size: 20px;
+    color: #010101;
+    background: #efeff1;
+    border: 1px solid #efeff1;
     border-radius: 8px;
-    outline: none;
     padding-left: 10px;
-    margin-left: 10px;
+    outline: medium;
 }
 
-.total-box input[type="submit"] {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.search-input input[type="submit"] {
     width: 50px;
     height: 30px;
-    font-size: 16px;
-    font-weight: 600;
-    background: #363639;
-    border: 1px solid #23242a;
+    color: #45f3ff;
+    background: #010101;
+    border: 3px solid #45f3ff;
     border-radius: 8px;
     margin-left: 10px;
+    outline: medium;
 }
 
-.total-box input[type="submit"]:hover {
-    color: #010101;
-    background: #45f3ff;
-    border: 3px solid #45f3ff;
+.search-input input[type="submit"]:hover {
+    font-size: 18px;
+    font-weight: 600;
 }
+

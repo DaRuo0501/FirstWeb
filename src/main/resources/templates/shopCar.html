@@ -129,11 +129,12 @@
                 <table>
                     <thead>
                     <tr>
+                        <th class="sc-head" id="th-number">項次</th>
                         <th class="sc-head" id="th-img">商品圖片</th>
                         <th class="sc-head" id="th-name">商品名稱</th>
-                        <th class="sc-head" id="th-price">單價</th>
+                        <th class="sc-head" id="th-price">價格</th>
                         <th class="sc-head" id="th-stock">庫存</th>
-                        <th class="sc-head" id="th-total">購買金額</th>
+                        <th class="sc-head" id="th-total">總金額</th>
                         <th class="sc-head" id="th-update">數量</th>
                         <th class="sc-head" id="th-delete">刪除</th>
                     </tr>
@@ -141,11 +142,12 @@
 
                     <tbody>
                     <tr th:each="shopCar,s : ${shopCars}">
+                        <td class="sc-body" id="td-number" th:text="1">項次</td>
                         <td class="sc-body" id="td-img"><img th:src="@{*{shopCar.imageUrl}}"></td>
-                        <td class="sc-body" id="td-name" th:text="*{shopCar.pokemonName}"></td>
-                        <td class="sc-body" id="td-price" th:text="*{shopCar.price}"></td>
-                        <td class="sc-body" id="td-stock" th:text="*{shopCar.stock}"></td>
-                        <td class="sc-body" id="td-total" th:text="*{shopCar.price * shopCar.buyCnt}"></td>
+                        <td class="sc-body" id="td-name" th:text="*{shopCar.pokemonName}">商品名稱</td>
+                        <td class="sc-body" id="td-price" th:text="*{shopCar.price}">價格</td>
+                        <td class="sc-body" id="td-stock" th:text="*{shopCar.stock}">庫存</td>
+                        <td class="sc-body" id="td-total" th:text="*{shopCar.price * shopCar.buyCnt}">總金額</td>
                         <td class="sc-body" id="td-update">
                             <div class="td-update-box">
                                 <i class="fa-solid fa-caret-up"></i>
@@ -154,9 +156,7 @@
                             </div>
                         </td>
                         <td class="sc-body" id="td-delete">
-                            <div class="td-delete-box">
-                                <i class="fa-solid fa-trash"></i>
-                            </div>
+                            <a class="sc-body-btn-delete" th:text="*{shopCar.pokemonId}">刪除</a>
                         </td>
                     </tr>
                     </tbody>
@@ -164,11 +164,9 @@
             </div>
 
             <div class="content-table-footer">
-                <div class="total-box">
-                    <span>總金額: </span>
-                    <input type="text" readonly="readonly">
-                    <input type="submit" value="結帳">
-                </div>
+                <i class="fa-solid fa-caret-left"></i>
+                <input type="submit" value="頁數">
+                <i class="fa-solid fa-caret-right"></i>
             </div>
 
         </form>
