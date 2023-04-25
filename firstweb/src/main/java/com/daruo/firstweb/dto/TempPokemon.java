@@ -8,18 +8,7 @@ public class TempPokemon {
     private Integer price;
     private Integer stock;
     private Integer buyCnt;
-
-    public TempPokemon() {
-    }
-
-    public TempPokemon(Integer pokemonId, String pokemonName, String imageUrl, Integer price, Integer stock, Integer buyCnt) {
-        this.pokemonId = pokemonId;
-        this.pokemonName = pokemonName;
-        this.imageUrl = imageUrl;
-        this.price = price;
-        this.stock = stock;
-        this.buyCnt = buyCnt;
-    }
+    private Integer amount;
 
     public Integer getPokemonId() {
         return pokemonId;
@@ -67,5 +56,13 @@ public class TempPokemon {
 
     public void setBuyCnt(Integer buyCnt) {
         this.buyCnt = buyCnt;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
     }
 }

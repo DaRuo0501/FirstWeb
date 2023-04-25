@@ -2,6 +2,7 @@ package com.daruo.firstweb.service.impl;
 
 import com.daruo.firstweb.dao.PokemonDao;
 import com.daruo.firstweb.dto.PokemonQueryParams;
+import com.daruo.firstweb.dto.TempPokemon;
 import com.daruo.firstweb.model.Pokemon;
 import com.daruo.firstweb.model.ShopCar;
 import com.daruo.firstweb.model.User;
@@ -58,6 +59,12 @@ public class PokemonServiceImpl implements PokemonService {
     @Override
     public Pokemon getPokemonById(Integer pokemonId) {
         return pokemonDao.getPokemonById(pokemonId);
+    }
+
+    @Override
+    public TempPokemon getTempPokemonById(Integer pokemonId) {
+
+        return pokemonDao.getTempPokemonById(pokemonId);
     }
 
     // 新增商品至購物車

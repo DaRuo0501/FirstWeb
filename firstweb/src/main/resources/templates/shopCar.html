@@ -142,21 +142,23 @@
                     <tbody>
                     <tr th:each="shopCar,s : ${shopCars}">
                         <td class="sc-body" id="td-img"><img th:src="@{*{shopCar.imageUrl}}"></td>
-                        <td class="sc-body" id="td-name" th:text="*{shopCar.pokemonName}"></td>
-                        <td class="sc-body" id="td-price" th:text="*{shopCar.price}"></td>
-                        <td class="sc-body" id="td-stock" th:text="*{shopCar.stock}"></td>
-                        <td class="sc-body" id="td-total" th:text="*{shopCar.price * shopCar.buyCnt}"></td>
+                        <td class="sc-body" id="td-name" th:text="*{shopCar.pokemonName}">商品名稱</td>
+                        <td class="sc-body" id="td-price" th:text="*{shopCar.price}">價格</td>
+                        <td class="sc-body" id="td-stock" th:text="*{shopCar.stock}">庫存</td>
+                        <td class="sc-body" id="td-total" th:text="*{shopCar.price * shopCar.buyCnt}">總金額</td>
                         <td class="sc-body" id="td-update">
                             <div class="td-update-box">
-                                <i class="fa-solid fa-caret-up"></i>
+                                <a th:href="@{'/shopCar/addCount/' + ${shopCar.pokemonId}}">
+                                    <i class="fa-solid fa-caret-up"></i>
+                                </a>
                                 <input type="text" th:value="*{shopCar.buyCnt}">
+                                <a th:href="@{'/shopCar/reduceCount/' + ${shopCar.pokemonId}}">
                                 <i class="fa-solid fa-caret-down"></i>
+                                </a>
                             </div>
                         </td>
                         <td class="sc-body" id="td-delete">
-                            <div class="td-delete-box">
-                                <i class="fa-solid fa-trash"></i>
-                            </div>
+                            <a class="sc-body-btn-delete" th:text="*{shopCar.pokemonId}">刪除</a>
                         </td>
                     </tr>
                     </tbody>
@@ -166,7 +168,7 @@
             <div class="content-table-footer">
                 <div class="total-box">
                     <span>總金額: </span>
-                    <input type="text" readonly="readonly">
+                    <input type="text"  readonly="readonly">
                     <input type="submit" value="結帳">
                 </div>
             </div>

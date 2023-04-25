@@ -15,6 +15,7 @@ public class ShopCarRowMapper implements RowMapper {
         shopCar.setUserId(rs.getInt("user_id"));
         shopCar.setPokemonId(rs.getInt("pokemon_id"));
         shopCar.setBuyCnt(rs.getInt("buy_cnt"));
+        shopCar.setAmount(rs.getInt("amount"));
 
         return shopCar;
     }

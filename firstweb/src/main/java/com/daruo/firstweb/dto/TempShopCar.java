@@ -1,6 +1,6 @@
-package com.daruo.firstweb.model;
+package com.daruo.firstweb.dto;
 
-public class ShopCar {
+public class TempShopCar {
 
     private Integer seqNo = 0;
     private Integer userId;

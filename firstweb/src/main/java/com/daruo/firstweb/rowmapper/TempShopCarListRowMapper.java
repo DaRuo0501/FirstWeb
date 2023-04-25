@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ShopCarListRowMapper implements RowMapper {
+public class TempShopCarListRowMapper implements RowMapper {
     @Override
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 
@@ -17,7 +17,6 @@ public class ShopCarListRowMapper implements RowMapper {
         tempPokemon.setPrice(rs.getInt("price"));
         tempPokemon.setStock(rs.getInt("stock"));
         tempPokemon.setBuyCnt(rs.getInt("buy_cnt"));
-        tempPokemon.setAmount(rs.getInt("amount"));
 
         return tempPokemon;
     }

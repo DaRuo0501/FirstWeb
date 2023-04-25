@@ -1,6 +1,7 @@
 package com.daruo.firstweb.dao;
 
 import com.daruo.firstweb.dto.PokemonQueryParams;
+import com.daruo.firstweb.dto.TempPokemon;
 import com.daruo.firstweb.model.Pokemon;
 import com.daruo.firstweb.model.ShopCar;
 import com.daruo.firstweb.model.User;
@@ -16,6 +17,8 @@ public interface PokemonDao {
     Integer getPokemonsCount(PokemonQueryParams pokemonQueryParams);
 
     Pokemon getPokemonById(Integer pokemonId);
+
+    TempPokemon getTempPokemonById(Integer pokemonId);
 
     void createShopCar(Pokemon pokemon, ShopCar shopCar, User user);
 
