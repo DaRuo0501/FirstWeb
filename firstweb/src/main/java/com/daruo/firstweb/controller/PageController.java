@@ -234,14 +234,10 @@ public class PageController {
 
             int totalAmount = 0;
 
+            // 將每一筆的金額 加總起來
             for (TempPokemon tp : tempPokemons) {
 
                 totalAmount += tp.getAmount();
-
-                System.out.println("每一個: " + tp.getAmount());
-
-                System.out.println("加總: " + totalAmount);
-
             }
 
             model.addAttribute("totalAmount", totalAmount);

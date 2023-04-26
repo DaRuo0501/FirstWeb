@@ -19,7 +19,9 @@ public interface ShopCarService {
 
     void deletePokemonById(ShopCar shopCar);
 
-    void updateAmount(ShopCar shopCar, Pokemon pokemon);
+    void updateAmountById(ShopCar shopCar, Pokemon pokemon);
 
     ShopCar getTotal(User user);
+
+    void updateBuyCntById(ShopCar shopCar);
 }

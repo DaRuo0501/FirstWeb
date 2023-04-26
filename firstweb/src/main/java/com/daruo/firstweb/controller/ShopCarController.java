@@ -63,7 +63,7 @@ public class ShopCarController {
             ShopCar tpBuyCnt = shopCarService.getBuyCnt(shopCar);
 
             // 更新 單一商品的 購買金額
-            shopCarService.updateAmount(tpBuyCnt, pokemon);
+            shopCarService.updateAmountById(tpBuyCnt, pokemon);
 
 
         } catch (Exception e) {
@@ -111,7 +111,7 @@ public class ShopCarController {
             ShopCar tpBuyCnt = shopCarService.getBuyCnt(shopCar);
 
             // 更新 單一商品的 購買金額
-            shopCarService.updateAmount(tpBuyCnt, pokemon);
+            shopCarService.updateAmountById(tpBuyCnt, pokemon);
 
 
         } catch (Exception e) {
@@ -122,30 +122,37 @@ public class ShopCarController {
     }
 
     // 更改 購買數量
-//    @GetMapping("/shopCar/updateCount/pokemonId}")
-//    public String updateCount(@PathVariable(name = "pokemonId") Integer pokemonId,
-//                              HttpServletRequest request,
-//                              HttpSession session
-//    ) {
-//
-//        try {
-//
-//            // 取得 當前使用者
-//            session = request.getSession();
-//            User user = (User) session.getAttribute("showUserName");
-//
-//            ShopCar shopCar = new ShopCar();
-//            shopCar.setUserId(user.getUserId());
-//            shopCar.setPokemonId(pokemonId);
-//
-//
-//
-//        } catch (Exception e) {
-//            log.warn(e.toString());
-//        }
-//
-//        return "redirect:/users/shopCar";
-//    }
+    @GetMapping("/shopCar/updateCount/{pokemonId}/{buyCnt}")
+    public String updateCount(@PathVariable Integer pokemonId, Integer buyCnt,
+                              HttpServletRequest request,
+                              HttpSession session
+    ) {
+
+        try {
+
+            // 取得 當前使用者
+            session = request.getSession();
+            User user = (User) session.getAttribute("showUserName");
+
+            Pokemon pokemon = pokemonService.getPokemonById(pokemonId);
+
+            ShopCar shopCar = new ShopCar();
+            shopCar.setUserId(user.getUserId());
+            shopCar.setPokemonId(pokemonId);
+            shopCar.setBuyCnt(buyCnt);
+
+            // 更改 預購買數量
+            shopCarService.updateBuyCntById(shopCar);
+
+            // 更新 單一商品的 購買金額
+            shopCarService.updateAmountById(shopCar, pokemon);
+
+        } catch (Exception e) {
+            log.warn(e.toString());
+        }
+
+        return "redirect:/users/shopCar";
+    }
 
 
     // 商品 從購物車中移除
@@ -165,6 +172,7 @@ public class ShopCarController {
             shopCar.setUserId(user.getUserId());
             shopCar.setPokemonId(pokemonId);
 
+            // 刪除
             shopCarService.deletePokemonById(shopCar);
 
 

@@ -131,4 +131,18 @@ public class ShopCarDaoImpl implements ShopCarDao {
 
         return null;
     }
+
+    @Override
+    public void updateBuyCntById(ShopCar shopCar) {
+
+        String sql = "UPDATE shopping_car SET buy_cnt = :buyCnt WHERE user_id = :userId AND pokemon_id = :pokemonId;";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", shopCar.getUserId());
+        map.put("pokemonId", shopCar.getPokemonId());
+        map.put("buyCnt", shopCar.getBuyCnt());
+
+        namedParameterJdbcTemplate.update(sql, map);
+
+    }
 }

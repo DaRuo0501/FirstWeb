@@ -22,4 +22,6 @@ public interface ShopCarDao {
     void updateAmountById(ShopCar shopCar, Pokemon pokemon);
 
     ShopCar getTotal(User user);
+
+    void updateBuyCntById(ShopCar shopCar);
 }

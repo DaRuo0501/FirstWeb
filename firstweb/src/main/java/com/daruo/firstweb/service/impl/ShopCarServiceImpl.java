@@ -47,7 +47,7 @@ public class ShopCarServiceImpl implements ShopCarService {
     }
 
     @Override
-    public void updateAmount(ShopCar shopCar, Pokemon pokemon) {
+    public void updateAmountById(ShopCar shopCar, Pokemon pokemon) {
 
         shopCarDao.updateAmountById(shopCar, pokemon);
     }
@@ -56,5 +56,11 @@ public class ShopCarServiceImpl implements ShopCarService {
     public ShopCar getTotal(User user) {
 
         return shopCarDao.getTotal(user);
+    }
+
+    @Override
+    public void updateBuyCntById(ShopCar shopCar) {
+
+        shopCarDao.updateBuyCntById(shopCar);
     }
 }
