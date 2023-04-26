@@ -127,6 +127,8 @@
 
             <div class="content-table-box">
                 <table>
+
+                    <!--  表頭  -->
                     <thead>
                     <tr>
                         <th class="sc-head" id="th-img">商品圖片</th>
@@ -139,6 +141,7 @@
                     </tr>
                     </thead>
 
+                    <!--  表內容  -->
                     <tbody>
                     <tr th:each="shopCar,s : ${shopCars}">
                         <td class="sc-body" id="td-img"><img th:src="@{*{shopCar.imageUrl}}"></td>
@@ -153,26 +156,29 @@
                                 </a>
                                 <input type="text" th:value="*{shopCar.buyCnt}">
                                 <a th:href="@{'/shopCar/reduceCount/' + ${shopCar.pokemonId}}">
-                                <i class="fa-solid fa-caret-down"></i>
+                                    <i class="fa-solid fa-caret-down"></i>
                                 </a>
                             </div>
                         </td>
                         <td class="sc-body" id="td-delete">
-                            <a class="sc-body-btn-delete" th:text="*{shopCar.pokemonId}">刪除</a>
+                            <a class="sc-body-btn-delete" th:href="@{'/shopCar/deletePokemon/' + ${shopCar.pokemonId}}">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
                         </td>
+
+                        <!--  總金額  -->
+                        <div class="content-table-footer">
+                            <div class="total-box">
+                                <span>總金額: </span>
+                                <input type="text" th:value="${totalAmount}" readonly="readonly">
+                                <input type="submit" value="結帳">
+                            </div>
+                        </div>
+
                     </tr>
                     </tbody>
                 </table>
             </div>
-
-            <div class="content-table-footer">
-                <div class="total-box">
-                    <span>總金額: </span>
-                    <input type="text"  readonly="readonly">
-                    <input type="submit" value="結帳">
-                </div>
-            </div>
-
         </form>
 
     </div>

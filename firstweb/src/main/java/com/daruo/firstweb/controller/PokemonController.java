@@ -52,6 +52,8 @@ public class PokemonController {
 
                 if (tempPokemon == null) {
 
+                    log.warn("此商品: {}，已在購物車內!", pokemon.getPokemonName());
+
                     String errorStr = "此商品: " + pokemon.getPokemonName() + " ，已在購物車內!";
 
                     ErrorMsg(errorStr, session);
@@ -61,7 +63,7 @@ public class PokemonController {
 
             } else { // 庫存為 0 ，返回庫存不足的訊息給前端使用者
 
-                log.warn("此商品: " + pokemon.getPokemonName() + " 的庫存為 : 0 個，無法購買!");
+                log.warn("此商品: {} 的庫存為 : 0 個，無法購買!", pokemon.getPokemonName());
 
                 String errorStr = "此商品: " + pokemon.getPokemonName() + " 的庫存為 : 0 個，無法購買!";
 

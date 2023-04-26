@@ -2,6 +2,7 @@ package com.daruo.firstweb.service.impl;
 
 import com.daruo.firstweb.dao.ShopCarDao;
 import com.daruo.firstweb.dto.TempPokemon;
+import com.daruo.firstweb.model.Pokemon;
 import com.daruo.firstweb.model.ShopCar;
 import com.daruo.firstweb.model.User;
 import com.daruo.firstweb.service.ShopCarService;
@@ -37,5 +38,23 @@ public class ShopCarServiceImpl implements ShopCarService {
     public void reduceCount(ShopCar shopCar) {
 
         shopCarDao.reduceCount(shopCar);
+    }
+
+    @Override
+    public void deletePokemonById(ShopCar shopCar) {
+
+        shopCarDao.deletePokemonById(shopCar);
+    }
+
+    @Override
+    public void updateAmount(ShopCar shopCar, Pokemon pokemon) {
+
+        shopCarDao.updateAmountById(shopCar, pokemon);
+    }
+
+    @Override
+    public ShopCar getTotal(User user) {
+
+        return shopCarDao.getTotal(user);
     }
 }

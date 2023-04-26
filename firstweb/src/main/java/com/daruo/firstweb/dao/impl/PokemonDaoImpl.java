@@ -130,12 +130,14 @@ public class PokemonDaoImpl implements PokemonDao {
     @Override
     public void createShopCar(Pokemon pokemon, ShopCar shopCar, User user) {
 
-        String sql = "INSERT INTO shopping_car(user_id, seq_no, pokemon_id, buy_cnt, amount) VALUES (:userId, :seqNo, :pokemonId, 1, :amount);";
+        String sql = "INSERT INTO shopping_car(user_id, seq_no, pokemon_id, order_id, buy_cnt, amount) " +
+                "VALUES (:userId, :seqNo, :pokemonId, :orderId, 1, :amount);";
 
         Map<String,Object> map = new HashMap<>();
         map.put("userId", user.getUserId());
         map.put("seqNo", shopCar.getSeqNo() + 1);
         map.put("pokemonId", pokemon.getPokemonId());
+        map.put("orderId", 1);
         map.put("amount", pokemon.getPrice() * shopCar.getBuyCnt());
 
         namedParameterJdbcTemplate.update(sql,  new MapSqlParameterSource(map));
@@ -146,7 +148,8 @@ public class PokemonDaoImpl implements PokemonDao {
     @Override
     public ShopCar getShopCarPokemonByPokemonId(Integer pokemonId, User user) {
 
-        String sql = "SELECT seq_no, user_id, pokemon_id, buy_cnt, amount FROM shopping_car WHERE user_id = :userId AND pokemon_id = :pokemonId;";
+        String sql = "SELECT seq_no, user_id, pokemon_id, order_id, buy_cnt, amount FROM shopping_car " +
+                "WHERE user_id = :userId AND pokemon_id = :pokemonId;";
 
         Map<String,Object> map = new HashMap<>();
         map.put("userId", user.getUserId());
@@ -164,7 +167,10 @@ public class PokemonDaoImpl implements PokemonDao {
     @Override
     public ShopCar getShopCarPokemonByUserId(User user) {
 
-        String sql = "SELECT seq_no, user_id, pokemon_id, buy_cnt, amount FROM shopping_car WHERE user_id = :userId ORDER BY seq_no DESC;";
+        String sql = "SELECT seq_no, user_id, pokemon_id, order_id, buy_cnt, amount " +
+                "FROM shopping_car " +
+                "WHERE user_id = :userId " +
+                "ORDER BY seq_no DESC;";
 
         Map<String,Object> map = new HashMap<>();
         map.put("userId", user.getUserId());
@@ -182,7 +188,9 @@ public class PokemonDaoImpl implements PokemonDao {
     @Override
     public void addShopCarPokemonCount(ShopCar shopCar) {
 
-        String sql = "UPDATE shopping_car SET buy_cnt = buy_cnt + 1 WHERE user_id = :userId AND pokemon_id = :pokemonId;";
+        String sql = "UPDATE shopping_car SET buy_cnt = buy_cnt + 1 " +
+                "WHERE user_id = :userId " +
+                "AND pokemon_id = :pokemonId;";
 
         Map<String,Object> map = new HashMap<>();
         map.put("userId", shopCar.getUserId());
@@ -195,7 +203,8 @@ public class PokemonDaoImpl implements PokemonDao {
     @Override
     public void createFirstShopCar(Pokemon pokemon, User user) {
 
-        String sql = "INSERT INTO shopping_car(user_id, seq_no, pokemon_id, buy_cnt, amount) VALUES (:userId, 1, :pokemonId, 1, :amount);";
+        String sql = "INSERT INTO shopping_car(user_id, seq_no, pokemon_id, order_id, buy_cnt, amount) " +
+                "VALUES (:userId, 1, :pokemonId, 1, 1, :amount);";
 
         Map<String,Object> map = new HashMap<>();
         map.put("userId", user.getUserId());

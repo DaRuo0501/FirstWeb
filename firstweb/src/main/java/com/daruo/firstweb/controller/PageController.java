@@ -224,11 +224,27 @@ public class PageController {
 
         try {
 
+            // 取得 當前使用者
             session = request.getSession();
 
             User user = (User) session.getAttribute("showUserName");
 
+            // 取得 使用者的 購物車清單
             List<TempPokemon> tempPokemons = shopCarService.getShopCarList(user);
+
+            int totalAmount = 0;
+
+            for (TempPokemon tp : tempPokemons) {
+
+                totalAmount += tp.getAmount();
+
+                System.out.println("每一個: " + tp.getAmount());
+
+                System.out.println("加總: " + totalAmount);
+
+            }
+
+            model.addAttribute("totalAmount", totalAmount);
 
             model.addAttribute("shopCars", tempPokemons);
 

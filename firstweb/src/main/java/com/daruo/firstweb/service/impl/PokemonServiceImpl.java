@@ -82,7 +82,7 @@ public class PokemonServiceImpl implements PokemonService {
             // 確認是否有購物車
             if (tempShopCar != null) {
 
-                // 確認購物車內 受否已經有相同的商品
+                // 確認購物車內 是否已經有相同的商品
                 if (shopCar == null) {
 
                     // 購物車內無此商品，將商品加入購物車內
@@ -91,9 +91,6 @@ public class PokemonServiceImpl implements PokemonService {
                     return pokemon;
 
                 } else {
-
-                    // 此商品已存在該使用者的購物車內
-                    log.warn("此商品已存在於該使用者的購物車內!");
 
                     return null;
                 }

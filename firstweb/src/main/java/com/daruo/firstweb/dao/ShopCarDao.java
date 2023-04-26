@@ -1,8 +1,7 @@
 package com.daruo.firstweb.dao;
 
 import com.daruo.firstweb.dto.TempPokemon;
-import com.daruo.firstweb.dto.TempShopCar;
-import com.daruo.firstweb.dto.TempUser;
+import com.daruo.firstweb.model.Pokemon;
 import com.daruo.firstweb.model.ShopCar;
 import com.daruo.firstweb.model.User;
 
@@ -17,4 +16,10 @@ public interface ShopCarDao {
     void addCount(ShopCar shopCar);
 
     void reduceCount(ShopCar shopCar);
+
+    void deletePokemonById(ShopCar shopCar);
+
+    void updateAmountById(ShopCar shopCar, Pokemon pokemon);
+
+    ShopCar getTotal(User user);
 }

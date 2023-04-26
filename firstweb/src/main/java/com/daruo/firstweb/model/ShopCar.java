@@ -5,9 +5,9 @@ public class ShopCar {
     private Integer seqNo = 0;
     private Integer userId;
     private Integer pokemonId;
+    private Integer orderId;
     private Integer buyCnt;
     private Integer amount;
-    private Integer total;
 
     public Integer getSeqNo() {
         return seqNo;
@@ -33,6 +33,14 @@ public class ShopCar {
         this.pokemonId = pokemonId;
     }
 
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
+
     public Integer getBuyCnt() {
         return buyCnt;
     }
@@ -47,13 +55,5 @@ public class ShopCar {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
-    }
-
-    public Integer getTotal() {
-        return total;
-    }
-
-    public void setTotal(Integer total) {
-        this.total = total;
     }
 }
