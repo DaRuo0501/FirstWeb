@@ -653,6 +653,10 @@ tbody tr {
     align-items: center;
 }
 
+.total-box a {
+    text-decoration: none;
+}
+
 .total-box input[type="text"] {
     display: flex;
     justify-content: center;

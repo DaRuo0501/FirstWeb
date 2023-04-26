@@ -215,6 +215,19 @@ public class PokemonDaoImpl implements PokemonDao {
 
     }
 
+    @Override
+    public void updatePokemonCountById(int tempStock, Integer pokemonId) {
+
+        String sql = "UPDATE pokemon SET stock = :stock WHERE pokemon_id = :pokemonId;";
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("pokemonId", pokemonId);
+        map.put("stock", tempStock);
+
+        namedParameterJdbcTemplate.update(sql, map);
+
+    }
+
     // 共用查詢條件
     private String addFilteringSql(String sql,
                                    Map<String, Object> map,

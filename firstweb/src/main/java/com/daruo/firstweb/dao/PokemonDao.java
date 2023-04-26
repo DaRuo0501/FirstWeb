@@ -29,4 +29,6 @@ public interface PokemonDao {
     void addShopCarPokemonCount(ShopCar shopCar);
 
     void createFirstShopCar(Pokemon pokemon, User user);
+
+    void updatePokemonCountById(int tempStock, Integer pokemonId);
 }

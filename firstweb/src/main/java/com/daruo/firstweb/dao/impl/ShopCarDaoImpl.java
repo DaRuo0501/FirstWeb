@@ -115,24 +115,6 @@ public class ShopCarDaoImpl implements ShopCarDao {
     }
 
     @Override
-    public ShopCar getTotal(User user) {
-
-        String sql = "SELECT seq_no, user_id, pokemon_id, buy_cnt, amount = SUM(amount) FROM shopping_car WHERE user_id = :userId;";
-
-        Map<String, Object> map = new HashMap<>();
-        map.put("userId", user.getUserId());
-
-        List<ShopCar> shopCarList = namedParameterJdbcTemplate.query(sql, map, new ShopCarRowMapper());
-
-        if (shopCarList.size() > 0) {
-
-            return shopCarList.get(0);
-        }
-
-        return null;
-    }
-
-    @Override
     public void updateBuyCntById(ShopCar shopCar) {
 
         String sql = "UPDATE shopping_car SET buy_cnt = :buyCnt WHERE user_id = :userId AND pokemon_id = :pokemonId;";
@@ -141,6 +123,18 @@ public class ShopCarDaoImpl implements ShopCarDao {
         map.put("userId", shopCar.getUserId());
         map.put("pokemonId", shopCar.getPokemonId());
         map.put("buyCnt", shopCar.getBuyCnt());
+
+        namedParameterJdbcTemplate.update(sql, map);
+
+    }
+
+    @Override
+    public void removeShopCarByUserId(User user) {
+
+        String sql = "DELETE FROM shopping_car WHERE user_id = :userId";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", user.getUserId());
 
         namedParameterJdbcTemplate.update(sql, map);
 

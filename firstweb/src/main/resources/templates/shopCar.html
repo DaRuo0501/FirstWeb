@@ -177,8 +177,10 @@
                     <div class="content-table-footer">
                         <div class="total-box">
                             <span>總金額: </span>
-                            <input type="text" th:value="${totalAmount}" readonly="readonly">
-                            <input type="submit" value="結帳">
+                            <input type="text" name="totalAmount" th:value="${totalAmount}" readonly="readonly">
+                            <a th:href="@{'/orders/create/' + ${totalAmount}}">
+                                <input type="submit" value="結帳">
+                            </a>
                         </div>
                     </div>
                 </table>
