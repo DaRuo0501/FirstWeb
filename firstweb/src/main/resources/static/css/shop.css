@@ -414,7 +414,7 @@ header span {
     align-items: center;
     flex-direction: column;
     width: 320px;
-    height: 235px;
+    height: 290px;
     margin: 30px 15px;
     color: #efeff1;
     background: #1f1f23;
@@ -444,10 +444,15 @@ header span {
 
 .poke-text-box {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    flex-wrap: wrap;
     width: 100%;
-    padding: 5px;
     background: #18181b;
+    padding: 5px 3px;
+}
+
+.poke-text-box .text-box {
+    width: 50%;
 }
 
 .poke-text-box span {
@@ -462,6 +467,7 @@ header span {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
+    width: 100%;
     background: #23242a;
     padding: 5px 3px;
 }
@@ -483,11 +489,15 @@ header span {
 
 .poke-price-stock-box {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
     width: 100%;
     background: #18181b;
-    padding-left: 3px;
+    padding: 5px 3px;
+}
+
+.poke-price-stock-box .price-stock-box {
+    width: 50%;
 }
 
 .poke-price-stock-box span {
