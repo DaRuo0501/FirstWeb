@@ -12,8 +12,8 @@ public class BagServiceImpl implements BagService {
     private BagDao bagDao;
 
     @Override
-    public void createBag(Integer userId, Integer pokemonId) {
+    public void createBag(Integer userId, Integer pokemonId, String pokemonName) {
 
-        bagDao.createBag(userId, pokemonId);
+        bagDao.createBag(userId, pokemonId, pokemonName);
     }
 }

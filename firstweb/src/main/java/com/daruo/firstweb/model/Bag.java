@@ -5,6 +5,7 @@ public class Bag {
     private Integer bagId;
     private Integer userId;
     private Integer pokemonId;
+    private String pokemonNewName;
 
     public Integer getBagId() {
         return bagId;
@@ -28,5 +29,13 @@ public class Bag {
 
     public void setPokemonId(Integer pokemonId) {
         this.pokemonId = pokemonId;
+    }
+
+    public String getPokemonNewName() {
+        return pokemonNewName;
+    }
+
+    public void setPokemonNewName(String pokemonNewName) {
+        this.pokemonNewName = pokemonNewName;
     }
 }

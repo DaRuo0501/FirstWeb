@@ -11,6 +11,7 @@ public class Pokemon {
     private String imageUrl;
     private PokemonCategory category;
     private Integer life;
+    private Integer lv;
     private Integer exp;
     private Integer attack;
     private String skill1;
@@ -27,7 +28,7 @@ public class Pokemon {
     }
 
     public Pokemon(Integer pokemonId, String pokemonName, String imageUrl,
-                   PokemonCategory category, Integer life, Integer exp, Integer attack,
+                   PokemonCategory category, Integer life, Integer lv, Integer exp, Integer attack,
                    String skill1, String skill2, String skill3, String skill4,
                    Integer price, Integer stock,
                    Date createdDate, Date lastModifiedDate) {
@@ -36,6 +37,7 @@ public class Pokemon {
         this.imageUrl = imageUrl;
         this.category = category;
         this.life = life;
+        this.lv = lv;
         this.exp = exp;
         this.attack = attack;
         this.skill1 = skill1;
@@ -86,6 +88,14 @@ public class Pokemon {
 
     public void setLife(Integer life) {
         this.life = life;
+    }
+
+    public Integer getLv() {
+        return lv;
+    }
+
+    public void setLv(Integer lv) {
+        this.lv = lv;
     }
 
     public Integer getExp() {

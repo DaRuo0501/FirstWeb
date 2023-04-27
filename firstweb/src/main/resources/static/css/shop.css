@@ -414,7 +414,7 @@ header span {
     align-items: center;
     flex-direction: column;
     width: 320px;
-    height: 260px;
+    height: 235px;
     margin: 30px 15px;
     color: #efeff1;
     background: #1f1f23;
@@ -450,17 +450,35 @@ header span {
     background: #18181b;
 }
 
+.poke-text-box span {
+    color: #45f3ff;
+}
+
+.poke-text-box a {
+    color: #efeff1;
+}
+
 .poke-skill-box {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
     background: #23242a;
     padding: 5px 3px;
 }
 
+.poke-skill-box .skill-box {
+    width: 50%;
+}
+
+.poke-skill-box span {
+    color: #45f3ff;
+
+}
+
 .poke-skill-box a {
     width: 140px;
     padding: 5px 3px;
+    color: #efeff1;
 }
 
 .poke-price-stock-box {
@@ -472,9 +490,14 @@ header span {
     padding-left: 3px;
 }
 
+.poke-price-stock-box span {
+    color: #45f3ff;
+}
+
 .poke-price-stock-box a {
     width: 140px;
     padding: 3px;
+    color: #efeff1;
 }
 
 .poke-add-box {

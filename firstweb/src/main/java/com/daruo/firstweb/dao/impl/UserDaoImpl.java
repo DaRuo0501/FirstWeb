@@ -28,13 +28,14 @@ public class UserDaoImpl implements UserDao {
     @Override
     public Integer createUser(UserRegisterRequest userRegisterRequest) {
 
-        String sql = "INSERT INTO user(user_name, password, email, created_date, last_modified_date) " +
-                "VALUES (:userName, :password, :email, :createdDate, :lastModifiedDate);";
+        String sql = "INSERT INTO user(user_name, password, email, money, created_date, last_modified_date) " +
+                "VALUES (:userName, :password, :email, :money, :createdDate, :lastModifiedDate);";
 
         Map<String, Object> map = new HashMap<>();
         map.put("userName", userRegisterRequest.getUserName());
         map.put("password", userRegisterRequest.getPassword());
         map.put("email", userRegisterRequest.getEmail());
+        map.put("money", 100);
 
         Date now = new Date();
         map.put("createdDate", now);
@@ -53,7 +54,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getUserByName(String userName) {
 
-        String sql = "SELECT user_id, user_name, password, email, created_date, last_modified_date " +
+        String sql = "SELECT user_id, user_name, password, email, money, created_date, last_modified_date " +
                 "FROM user WHERE user_name = :userName;";
 
         Map<String, Object> map = new HashMap<>();
@@ -71,7 +72,7 @@ public class UserDaoImpl implements UserDao {
     // 使用 信箱 查詢
     @Override
     public User getUserByEmail(String userEmail) {
-        String sql = "SELECT user_id, user_name, password, email, created_date, last_modified_date " +
+        String sql = "SELECT user_id, user_name, password, email, money, created_date, last_modified_date " +
                 "FROM user WHERE email = :email;";
 
         Map<String, Object> map = new HashMap<>();
@@ -90,7 +91,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> getAllUsers(UserQueryParams userQueryParams) {
 
-        String sql = "SELECT user_id, user_name, password, email, created_date, last_modified_date " +
+        String sql = "SELECT user_id, user_name, password, email, money, created_date, last_modified_date " +
                 "FROM user WHERE 1 = 1";
 
         Map<String, Object> map = new HashMap<>();
@@ -122,7 +123,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void updateUser(UserUpdateRequest userUpdateRequest) {
 
-        String sql = "UPDATE user SET user_id = :userId, user_name = :userName, password = :password, email = :email " +
+        String sql = "UPDATE user SET user_id = :userId, user_name = :userName, password = :password, email = :email, money = :money " +
                 "WHERE user_id = :userId;";
 
         Map<String, Object> map = new HashMap<>();
@@ -130,6 +131,7 @@ public class UserDaoImpl implements UserDao {
         map.put("userName", userUpdateRequest.getUserName());
         map.put("password", userUpdateRequest.getPassword());
         map.put("email", userUpdateRequest.getEmail());
+        map.put("money", userUpdateRequest.getMoney());
 
         namedParameterJdbcTemplate.update(sql, map);
 
@@ -139,7 +141,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getUserById(Integer userId) {
 
-        String sql = "SELECT user_id, user_name, password, email, created_date, last_modified_date " +
+        String sql = "SELECT user_id, user_name, password, email, money, created_date, last_modified_date " +
                 "FROM user WHERE user_id = :userId;";
 
         Map<String, Object> map = new HashMap<>();
@@ -158,7 +160,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> getUsersByName(String userName) {
 
-        String sql = "SELECT user_id, user_name, password, email, created_date, last_modified_date " +
+        String sql = "SELECT user_id, user_name, password, email, money, created_date, last_modified_date " +
                 "FROM user WHERE user_name like :userName";
 
         Map<String, Object> map = new HashMap<>();

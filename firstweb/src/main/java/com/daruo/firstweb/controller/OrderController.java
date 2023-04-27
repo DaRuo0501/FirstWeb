@@ -63,7 +63,7 @@ public class OrderController {
             // 將 商品 放入 使用者 的背包
             for (TempPokemon tp : tempPokemonList) {
 
-                bagService.createBag(user.getUserId(), tp.getPokemonId());
+                bagService.createBag(user.getUserId(), tp.getPokemonId(), tp.getPokemonName());
             }
 
             // 清除購物車內，已轉入 訂單 的 商品

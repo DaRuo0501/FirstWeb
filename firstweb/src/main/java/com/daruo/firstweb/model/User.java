@@ -8,6 +8,7 @@ public class User {
     private String userName;
     private String password;
     private String email;
+    private Integer money;
     private Date createdDate;
     private Date lastModifiedDate;
 
@@ -41,6 +42,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getMoney() {
+        return money;
+    }
+
+    public void setMoney(Integer money) {
+        this.money = money;
     }
 
     public Date getCreatedDate() {

@@ -21,6 +21,7 @@ public class PokemonRowMapper implements RowMapper<Pokemon> {
         pokemon.setCategory(category);
 
         pokemon.setLife(resultSet.getInt("life"));
+        pokemon.setLv(resultSet.getInt("lv"));
         pokemon.setExp(resultSet.getInt("exp"));
         pokemon.setAttack(resultSet.getInt("attack"));
         pokemon.setSkill1(resultSet.getString("skill_1"));

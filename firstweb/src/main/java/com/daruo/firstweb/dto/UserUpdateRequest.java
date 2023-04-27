@@ -18,6 +18,8 @@ public class UserUpdateRequest {
     @Email
     private String email;
 
+    private Integer money;
+
     public Integer getUserId() {
         return userId;
     }
@@ -48,5 +50,13 @@ public class UserUpdateRequest {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getMoney() {
+        return money;
+    }
+
+    public void setMoney(Integer money) {
+        this.money = money;
     }
 }

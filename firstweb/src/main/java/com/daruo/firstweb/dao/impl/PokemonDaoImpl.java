@@ -29,7 +29,7 @@ public class PokemonDaoImpl implements PokemonDao {
     public List<Pokemon> getPokemons(PokemonQueryParams pokemonQueryParams) {
 
         String sql = "SELECT pokemon_id, pokemon_name, image_url," +
-                " category, life, exp, attack, price, stock," +
+                " category, life, lv, exp, attack, price, stock," +
                 " skill_1, skill_2, skill_3, skill_4, created_date, last_modified_date" +
                 " FROM pokemon WHERE 1 = 1";
 
@@ -90,7 +90,7 @@ public class PokemonDaoImpl implements PokemonDao {
     public Pokemon getPokemonById(Integer pokemonId) {
 
         String sql = "SELECT pokemon_id, pokemon_name, image_url," +
-                " category, life, exp, attack, price, stock," +
+                " category, life, lv, exp, attack, price, stock," +
                 " skill_1, skill_2, skill_3, skill_4, created_date, last_modified_date" +
                 " FROM pokemon WHERE pokemon_id = :pokemonId";
 
@@ -110,7 +110,7 @@ public class PokemonDaoImpl implements PokemonDao {
     public TempPokemon getTempPokemonById(Integer pokemonId) {
 
         String sql = "SELECT pokemon_id, pokemon_name, image_url," +
-                " category, life, exp, attack, price, stock," +
+                " category, life, lv, exp, attack, price, stock," +
                 " skill_1, skill_2, skill_3, skill_4, created_date, last_modified_date" +
                 " FROM pokemon WHERE pokemon_id = :pokemonId";
 

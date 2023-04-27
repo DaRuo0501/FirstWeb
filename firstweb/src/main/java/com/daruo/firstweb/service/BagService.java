@@ -1,5 +1,5 @@
 package com.daruo.firstweb.service;
 
 public interface BagService {
-    void createBag(Integer userId, Integer pokemonId);
+    void createBag(Integer userId, Integer pokemonId, String pokemonName);
 }

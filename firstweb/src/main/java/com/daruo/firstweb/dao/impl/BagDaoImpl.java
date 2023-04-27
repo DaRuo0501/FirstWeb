@@ -19,14 +19,15 @@ public class BagDaoImpl implements BagDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public void createBag(Integer userId, Integer pokemonId) {
+    public void createBag(Integer userId, Integer pokemonId, String pokemonName) {
 
-        String sql = "INSERT INTO bag (user_id, pokemon_id, create_date, last_modified_date) " +
-                "VALUES (:userId, :pokemonId, :createdDate, :lastModifiedDate);";
+        String sql = "INSERT INTO bag (user_id, pokemon_id, pokemon_new_name, create_date, last_modified_date) " +
+                "VALUES (:userId, :pokemonId, :pokemonNewName, :createdDate, :lastModifiedDate);";
 
         Map<String, Object> map = new HashMap<>();
         map.put("userId", userId);
         map.put("pokemonId", pokemonId);
+        map.put("pokemonNewName", pokemonName);
 
         Date now = new Date();
         map.put("createdDate", now);
