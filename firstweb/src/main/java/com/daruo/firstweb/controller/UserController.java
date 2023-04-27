@@ -89,7 +89,7 @@ public class UserController {
 
         model.addAttribute("users", userList);
 
-        return "home";
+        return "userList";
     }
 
     // 使用 頁數 查詢
@@ -112,7 +112,7 @@ public class UserController {
 
         model.addAttribute("users", userList);
 
-        return "home";
+        return "userList";
     }
 
     // 修改
@@ -121,7 +121,7 @@ public class UserController {
 
         userService.updateUser(userUpdateRequest);
 
-        return "redirect:home";
+        return "redirect:/users/userList";
     }
 
     // 刪除
@@ -130,7 +130,7 @@ public class UserController {
 
         userService.deleteUserById(userId);
 
-        return "redirect:/users/home";
+        return "redirect:/users/userList";
     }
 
 }

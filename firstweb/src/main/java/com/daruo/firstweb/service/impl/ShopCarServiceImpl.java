@@ -6,7 +6,6 @@ import com.daruo.firstweb.dto.TempPokemon;
 import com.daruo.firstweb.model.Pokemon;
 import com.daruo.firstweb.model.ShopCar;
 import com.daruo.firstweb.model.User;
-import com.daruo.firstweb.service.PokemonService;
 import com.daruo.firstweb.service.ShopCarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,9 +22,9 @@ public class ShopCarServiceImpl implements ShopCarService {
     private PokemonDao pokemonDao;
 
     @Override
-    public List<TempPokemon> getShopCarList(User user) {
+    public List<TempPokemon> getShopCarList(Integer userId) {
 
-        return shopCarDao.getShopCarList(user);
+        return shopCarDao.getShopCarList(userId);
     }
 
     @Override
@@ -67,21 +66,5 @@ public class ShopCarServiceImpl implements ShopCarService {
     public void removeShopCarByUserId(User user) {
 
         shopCarDao.removeShopCarByUserId(user);
-    }
-
-    @Override
-    public void removePokemonCount(User user) {
-
-        // 取得要扣除數量的 商品
-        List<TempPokemon> shopCarList = shopCarDao.getShopCarList(user);
-
-        for (TempPokemon tp : shopCarList) {
-
-            // 取得貨架上的商品數量
-            Pokemon tpPokemon = pokemonDao.getPokemonById(tp.getPokemonId());
-
-            // 更新貨架上的 商品數量 = 貨架上的數量 - 購買數量
-            pokemonDao.updatePokemonCountById(tpPokemon.getStock() - tp.getBuyCnt(), tpPokemon.getPokemonId());
-        }
     }
 }

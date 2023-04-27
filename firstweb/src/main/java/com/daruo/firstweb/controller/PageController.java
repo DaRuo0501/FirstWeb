@@ -4,11 +4,8 @@ package com.daruo.firstweb.controller;
 import com.daruo.firstweb.constant.PokemonCategory;
 import com.daruo.firstweb.dto.*;
 import com.daruo.firstweb.model.Pokemon;
-import com.daruo.firstweb.model.ShopCar;
 import com.daruo.firstweb.model.User;
-import com.daruo.firstweb.service.PokemonService;
-import com.daruo.firstweb.service.ShopCarService;
-import com.daruo.firstweb.service.UserService;
+import com.daruo.firstweb.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.constraints.Max;
@@ -38,6 +35,12 @@ public class PageController {
     @Autowired
     private ShopCarService shopCarService;
 
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private BagService bagService;
+
     private Pokemon pokemon;
 
     // 登入頁面
@@ -54,21 +57,7 @@ public class PageController {
 
     // 首頁
     @GetMapping("/users/home")
-    public String home(Model model,
-
-                       // 分頁 Pagination
-                       @RequestParam(defaultValue = "5") @Max(1000) @Min(0) Integer limit,
-                       @RequestParam(defaultValue = "0") @Min(0) Integer offset
-    ) {
-
-        UserQueryParams userQueryParams = new UserQueryParams();
-        userQueryParams.setLimit(limit);
-        userQueryParams.setOffset(offset);
-
-        List<User> userList = userService.getAllUsers(userQueryParams);
-
-        model.addAttribute("users", userList);
-
+    public String home() {
         return "home";
     }
 
@@ -230,7 +219,7 @@ public class PageController {
             User user = (User) session.getAttribute("showUserName");
 
             // 取得 使用者的 購物車清單
-            List<TempPokemon> tempPokemons = shopCarService.getShopCarList(user);
+            List<TempPokemon> tempPokemons = shopCarService.getShopCarList(user.getUserId());
 
             int totalAmount = 0;
 
@@ -252,6 +241,45 @@ public class PageController {
         }
 
         return "shopCar";
+    }
+
+    // 訂單
+    @GetMapping("/users/order")
+    public String order(Model model,
+                        HttpSession session,
+                        HttpServletRequest request
+    ) {
+
+        // 取得 當前使用者
+        session = request.getSession();
+
+        User user = (User) session.getAttribute("showUserName");
+
+        List<TempOrder> tempOrderList = orderService.getOrderById(user.getUserId());
+
+        model.addAttribute("orders", tempOrderList);
+
+        return "order";
+    }
+
+    // 使用者清單
+    @GetMapping("/users/userList")
+    public String home(Model model,
+
+                       // 分頁 Pagination
+                       @RequestParam(defaultValue = "5") @Max(1000) @Min(0) Integer limit,
+                       @RequestParam(defaultValue = "0") @Min(0) Integer offset
+    ) {
+
+        UserQueryParams userQueryParams = new UserQueryParams();
+        userQueryParams.setLimit(limit);
+        userQueryParams.setOffset(offset);
+
+        List<User> userList = userService.getAllUsers(userQueryParams);
+
+        model.addAttribute("users", userList);
+
+        return "userList";
     }
 
     // 登出(返回登入頁面)

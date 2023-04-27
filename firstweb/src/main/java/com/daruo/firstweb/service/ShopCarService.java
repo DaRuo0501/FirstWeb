@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ShopCarService {
 
-    List<TempPokemon> getShopCarList(User user);
+    List<TempPokemon> getShopCarList(Integer userId);
 
     ShopCar getBuyCnt(ShopCar shopCar);
 
@@ -24,6 +24,4 @@ public interface ShopCarService {
     void updateBuyCntById(ShopCar shopCar);
 
     void removeShopCarByUserId(User user);
-
-    void removePokemonCount(User user);
 }

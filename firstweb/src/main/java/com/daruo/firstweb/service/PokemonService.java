@@ -22,4 +22,6 @@ public interface PokemonService {
     Pokemon createShopCarById(Pokemon pokemon, User userId);
 
     Integer getPokemonCategoryPage(PokemonQueryParams pokemonQueryParams);
+
+    List<TempPokemon> removePokemonCount(Integer userId);
 }

@@ -22,7 +22,7 @@ public class ShopCarDaoImpl implements ShopCarDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public List<TempPokemon> getShopCarList(User user) {
+    public List<TempPokemon> getShopCarList(Integer userId) {
 
         String sql = "SELECT sc.user_id, sc.buy_cnt, sc.amount, " +
                 "poke.pokemon_id, poke.pokemon_name, poke.image_url, " +
@@ -32,7 +32,7 @@ public class ShopCarDaoImpl implements ShopCarDao {
                 "AND user_id = :userId";
 
         Map<String, Object> map = new HashMap<>();
-        map.put("userId", user.getUserId());
+        map.put("userId", userId);
 
         List<TempPokemon> shopCarList = namedParameterJdbcTemplate.query(sql, map, new ShopCarListRowMapper());
 

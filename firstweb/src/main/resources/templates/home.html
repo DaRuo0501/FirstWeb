@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- CSS 連結 -->
-    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/shopCar.css">
 
     <!-- JQuery 連結 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -19,16 +19,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
     <!-- DataTable 連結 -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css"/>
 
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
-
-
-    <title>首頁</title>
+    <title>購物車</title>
 </head>
 
-<body>
+<body onload="doOnload()">
 
 <header>
     <span>夏天的風</span>
@@ -42,7 +40,7 @@
         <div class="logo-img">
             <img src="/images/0025-皮卡丘.png" alt="logo">
         </div>
-        <span class="logo_name" name="userName" th:text="${session.showUserName.userName}"></span> <i class="fa-solid fa-bars"></i>
+        <span class="logo_name" th:text="${session.showUserName.userName}"></span> <i class="fa-solid fa-bars"></i>
     </div>
 
     <!-- 主選單 -->
@@ -50,7 +48,7 @@
 
         <!-- 首頁 -->
         <li>
-            <div class="icon-link active">
+            <div class="icon-link">
                 <a href="/users/home"> <i class='bx bx-home'></i> <span class="link_name">首頁</span>
                 </a>
             </div>
@@ -67,9 +65,17 @@
 
         <!-- 商城 -->
         <li>
-            <div class="icon-link">
+            <div class="icon-link active open">
                 <a href="/users/shop"> <i class="fa-solid fa-shop"></i> <span class="link_name">商城</span>
                     <i class="fa-solid fa-caret-down"></i>
+                </a>
+            </div>
+        </li>
+
+        <!-- 使用者清單 -->
+        <li>
+            <div class="icon-link">
+                <a href="/users/userList"> <i class="fa-solid fa-user-pen"></i> <span class="link_name">修改測試</span>
                 </a>
             </div>
         </li>
@@ -84,67 +90,22 @@
     </ul>
 </div>
 
-<!-- 內文的標頭 -->
+<!-- 內文 -->
 <div class="content">
 
     <div class="content-title active">
-        <span class="content-text">使用者總表單</span>
+
+        <span class="content-text">首頁</span>
+
     </div>
 
 </div>
 
-<!-- 內文 -->
 <div class="right-body">
 
-    <div class="right">
-        <table class="right-table">
-            <thead>
-            <tr>
-                <th class="t-id">Id</th>
-                <th class="t-name">Name</th>
-                <th class="t-email">Email</th>
-                <th class="t-edit">Edit</th>
-            </tr>
-            </thead>
+    <div class="content-body">
 
-            <tbody>
-            <tr th:each="user,s : ${users}">
-                <td class="td-id" th:text="*{user.userId}"></td>
-                <td class="td-name" th:text="*{user.userName}"></td>
-                <td class="td-email" th:text="*{user.email}"></td>
-                <td class="td-edit">
-                    <div class="edit-box">
-                        <div class="update-box">
-                            <a class="btn-update" th:href="@{'/users/goToUpdatePage/' + ${user.userId}}">update</a>
-                        </div>
-                        <div class="delete-box">
-                            <a class="btn-delete" th:href="@{'/users/deleteUser/' + ${user.userId}}">delete</a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
 
-<div class="search-box">
-
-    <div class="search-box1">
-
-        <!--  帳號查詢  -->
-        <form class="search-input" action="/users/select" method="GET">
-            <span>查詢 :</span>
-            <input type="text" name="userName" placeholder="請輸入想查詢的帳號" autocomplete="off" required>
-            <input type="submit" value="確認">
-        </form>
-
-        <!--  頁數查詢  -->
-        <form class="search-input" action="/users/page" method="GET">
-            <span>查詢 :</span>
-            <input type="text" name="offset" placeholder="請輸入頁數" autocomplete="off" required >
-            <input type="submit" value="確認">
-        </form>
 
     </div>
 
@@ -170,65 +131,50 @@
 
     });
 
-    // 選擇子欄位，並切換為正確的內文
-    // const menuOk = document.querySelectorAll(".box-menu");
-    // const menuOp = document.querySelectorAll(".content-title1");
-    //
-    // menuOk.forEach((menu1, index1) => {
-    //
-    //     menu1.addEventListener("click", (e) => {
-    //
-    //         menuOk.forEach(menu1 => {
-    //
-    //             menu1.classList.remove("active");
-    //         });
-    //         menu1.classList.add("active");
-    //
-    //         menuOp.forEach(mp => {
-    //
-    //             mp.classList.remove("active");
-    //         })
-    //
-    //         menuOp[index1].classList.add("active");
-    //
-    //     })
-    //
-    // })
+    // 下拉式選單 頁數、屬性 選擇後，不要重置為 null 欄位
+    function doOnload() {
 
+        var tempHidPage = document.getElementById("hidPage").textContent;
+        document.getElementById("page").value = tempHidPage;
 
-    // 選擇主欄位，並切換為正確的內文
-    // const btns = document.querySelectorAll(".icon-link");
-    // const all_content = document.querySelectorAll(".content-title");
-    //
-    // btns.forEach((btn, index) => {
-    //
-    //     btn.addEventListener("click", (e) => {
-    //
-    //         btns.forEach(btn => {
-    //
-    //             btn.classList.remove("active");
-    //         });
-    //
-    //         btn.classList.add("active");
-    //
-    //         all_content.forEach(content => {
-    //
-    //             content.classList.remove("active");
-    //         });
-    //
-    //         all_content[index].classList.add("active");
-    //
-    //         menuOp.forEach(mp => {
-    //
-    //             mp.classList.remove("active");
-    //         })
-    //
-    //         menuOp[index].classList.remove("active");
-    //
-    //     });
-    //
-    // });
+        var tempHidCategory = document.getElementById("hidCategory").textContent;
+        document.getElementById("category").value = tempHidCategory;
 
+        var tempHidErrorMsg = document.getElementById("hidErrorMsg").textContent;
+        if (tempHidErrorMsg == "Y") {
+
+            document.getElementById("errorMsg").hidden = false;
+            document.getElementById("msg-text").classList.add("show-text");
+
+            // 控制訊息顯示時間，預設5秒後消失
+            timeUp();
+        } else {
+            document.getElementById("errorMsg").hidden = true;
+        }
+    }
+
+    // 下拉選單 選擇後 自動 submit 向後台傳遞參數
+    function reflashPage() {
+        document.getElementById("search-reflash").submit();
+    }
+
+    // 倒計時器
+    var count = 5;
+
+    function timeUp() {
+
+        count -= 1;
+
+        if (count == 0) {
+            document.getElementById("msg-text").classList.remove("show-text");
+        }
+
+        setTimeout("timeUp()", 1000);
+
+        if (count < 0) {
+            count = 0;
+        }
+    }
 
 </script>
 

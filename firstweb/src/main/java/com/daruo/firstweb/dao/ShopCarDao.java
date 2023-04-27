@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ShopCarDao {
 
-    List<TempPokemon> getShopCarList(User user);
+    List<TempPokemon> getShopCarList(Integer userId);
 
     ShopCar getBuyCnt(ShopCar shopCar);
 

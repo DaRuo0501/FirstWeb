@@ -5,7 +5,6 @@ public class TempUser {
     private Integer userId;
     private String userName;
     private String userImgUrl;
-    private Integer money;
 
     public Integer getUserId() {
         return userId;
@@ -29,13 +28,5 @@ public class TempUser {
 
     public void setUserImgUrl(String userImgUrl) {
         this.userImgUrl = userImgUrl;
-    }
-
-    public Integer getMoney() {
-        return money;
-    }
-
-    public void setMoney(Integer money) {
-        this.money = money;
     }
 }
