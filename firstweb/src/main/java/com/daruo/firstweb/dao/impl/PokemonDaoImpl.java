@@ -4,14 +4,10 @@ import com.daruo.firstweb.dao.PokemonDao;
 import com.daruo.firstweb.dto.PokemonQueryParams;
 import com.daruo.firstweb.dto.TempPokemon;
 import com.daruo.firstweb.model.Pokemon;
-import com.daruo.firstweb.model.ShopCar;
-import com.daruo.firstweb.model.User;
 import com.daruo.firstweb.rowmapper.PokemonCategoryRowMapper;
 import com.daruo.firstweb.rowmapper.PokemonRowMapper;
-import com.daruo.firstweb.rowmapper.ShopCarRowMapper;
 import com.daruo.firstweb.rowmapper.TempPokemonRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +25,7 @@ public class PokemonDaoImpl implements PokemonDao {
     public List<Pokemon> getPokemons(PokemonQueryParams pokemonQueryParams) {
 
         String sql = "SELECT pokemon_id, pokemon_name, image_url," +
-                " category, life, lv, exp, attack, price, stock," +
+                " category, hp, lv, exp, attack, price, stock, defense, speed," +
                 " skill_1, skill_2, skill_3, skill_4, created_date, last_modified_date" +
                 " FROM pokemon WHERE 1 = 1";
 
@@ -90,7 +86,7 @@ public class PokemonDaoImpl implements PokemonDao {
     public Pokemon getPokemonById(Integer pokemonId) {
 
         String sql = "SELECT pokemon_id, pokemon_name, image_url," +
-                " category, life, lv, exp, attack, price, stock," +
+                " category, hp, lv, exp, attack, price, stock, defense, speed," +
                 " skill_1, skill_2, skill_3, skill_4, created_date, last_modified_date" +
                 " FROM pokemon WHERE pokemon_id = :pokemonId";
 
@@ -110,7 +106,7 @@ public class PokemonDaoImpl implements PokemonDao {
     public TempPokemon getTempPokemonById(Integer pokemonId) {
 
         String sql = "SELECT pokemon_id, pokemon_name, image_url," +
-                " category, life, lv, exp, attack, price, stock," +
+                " category, hp, lv, exp, attack, price, stock, defense, speed," +
                 " skill_1, skill_2, skill_3, skill_4, created_date, last_modified_date" +
                 " FROM pokemon WHERE pokemon_id = :pokemonId";
 

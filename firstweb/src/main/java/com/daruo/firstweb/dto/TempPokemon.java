@@ -7,6 +7,8 @@ public class TempPokemon {
     private String imageUrl;
     private Integer price;
     private Integer stock;
+    private Integer defense;
+    private Integer speed;
     private Integer buyCnt;
     private Integer amount;
 
@@ -48,6 +50,22 @@ public class TempPokemon {
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public Integer getDefense() {
+        return defense;
+    }
+
+    public void setDefense(Integer defense) {
+        this.defense = defense;
+    }
+
+    public Integer getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(Integer speed) {
+        this.speed = speed;
     }
 
     public Integer getBuyCnt() {

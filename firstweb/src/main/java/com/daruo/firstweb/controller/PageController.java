@@ -86,7 +86,19 @@ public class PageController {
 
     // 背包
     @GetMapping("/users/bag")
-    public String bag() {
+    public String bag(Model model,
+                         HttpSession session,
+                         HttpServletRequest request
+    ) {
+
+        // 取得 當前使用者
+        session = request.getSession();
+        User user = (User) session.getAttribute("showUserName");
+
+        List<TempBag> tempBagList = bagService.getBag(user.getUserId());
+
+        model.addAttribute("bags", tempBagList);
+
         return "bag";
     }
 

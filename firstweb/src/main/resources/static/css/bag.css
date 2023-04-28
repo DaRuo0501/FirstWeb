@@ -243,8 +243,8 @@ header span {
 
 .right-body {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: flex-start;
     width: calc(100% - 260px);
     height: 100%;
     padding: 20px 0 6px 0;
@@ -255,22 +255,34 @@ header span {
 
 .content-body {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    width: 80%;
     height: 100%;
-    background: red;
+}
+
+.content-box {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 350px;
+    height: 100%;
+    margin-top: 20px;
+    border: none;
 }
 
 .pokemon-box {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    width: 400px;
-    height: 120px;
-    border: 1px solid #45f3ff;
+    width: 350px;
+    height: 90px;
+    background: #23242a;
+    border: 3px solid #45f3ff;
+    border-radius: 16px;
     padding: 10px;
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 .pokemon-text-box {
@@ -279,33 +291,172 @@ header span {
     align-content: center;
     align-items: center;
     flex-wrap: wrap;
-    width: 150px;
-    height: 100px;
-    margin-right: 20px;
+    width: 120px;
+    height: 80px;
+    margin-right: 5px;
 }
 
 .pokemon-text-box .pokemon-name {
     width: 100%;
     margin-bottom: 10px;
+    padding-left: 10px;
+    font-size: 22px;
+    font-weight: 900;
 }
 
-.pokemon-text-box .pokemon-life {
+.pokemon-text-box .pokemon-hp {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     width: 100%;
+    border: 1px solid #45f3ff;
+    border-radius: 8px;
+}
+
+.pokemon-text-box .pokemon-hp a {
+    padding-right: 5px;
+}
+
+.pokemon-text-box .pokemon-hp span {
+    color: #45f3ff;
+    padding-right: 5px;
 }
 
 .pokemon-img {
-    margin-right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    margin-right: 5px;
 }
 
 .pokemon-img img {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
 }
 
 .pokemon-lv {
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    width: 70px;
+    height: 80%;
+}
+
+.pokemon-lv p {
+    color: #45f3ff;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.pokemon-lv span {
+    width: 20px;
+}
+
+.pokemon-skill-box {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 350px;
+    height: 350px;
+    background: #363639;
+    border: 3px solid #45f3ff;
+    border-radius: 16px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.skill-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    font-weight: 600;
+    background: #18181b;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    letter-spacing: 5px;
+}
+
+.pokemon-skill {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    background: #28292d;
+    padding: 10px;
+    margin-top: 9px;
+    margin-bottom: 9px;
+}
+
+.skill-category {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     width: 100px;
-    height: 60%;
+    padding-left: 20px;
+}
+
+.skill-name {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 200px;
+    padding-left: 20px;
+}
+
+.skill-text {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 350px;
+    height: 100%;
+    background: #1f1f23;
+    border: 3px solid #45f3ff;
+    border-radius: 16px;
+    margin-top: 385px;
+}
+
+.skill-content {
+    position: fixed;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 350px;
+    height: 50px;
+    border-bottom: 2px solid #45f3ff;
+}
+
+.skill-content-text {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin-left: 15px;
+}
+
+.skill-content-text p {
+    color: #45f3ff;
+    background: #363639;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.skill-description {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 350px;
+    height: 150px;
+    background: #363639;
+    border-radius: 14px;
+    padding: 10px 16px;
+    margin-top: 50px;
 }
