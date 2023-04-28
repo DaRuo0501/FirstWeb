@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface OrderService {
 
-    void createOrderById(Order order);
+    void createOrderById(Order order, int user);
 
     List<TempOrder> getOrderById(Integer userId);
 }

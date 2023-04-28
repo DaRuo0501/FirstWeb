@@ -50,25 +50,36 @@ public class OrderController {
             session = request.getSession();
             User user = (User) session.getAttribute("showUserName");
 
-            Order order = new Order();
-            order.setUserId(user.getUserId());
-            order.setTotalAmount(totalAmount);
+            // 取得 要更新的 金額
+            int newMoney = user.getMoney() - totalAmount;
 
-            // 建立訂單
-            orderService.createOrderById(order);
+            // 檢查 使用者的現金是否足夠
+            if (user.getMoney() >= totalAmount) {
 
-            // 扣除商品架上的數量
-            List<TempPokemon> tempPokemonList = pokemonService.removePokemonCount(user.getUserId());
+                Order order = new Order();
+                order.setUserId(user.getUserId());
+                order.setTotalAmount(totalAmount);
 
-            // 將 商品 放入 使用者 的背包
-            for (TempPokemon tp : tempPokemonList) {
+                // 建立訂單
+                orderService.createOrderById(order, newMoney);
 
-                bagService.createBag(user.getUserId(), tp.getPokemonId(), tp.getPokemonName());
+                // 扣除商品架上的數量
+                List<TempPokemon> tempPokemonList = pokemonService.removePokemonCount(user.getUserId());
+
+                // 將 商品 放入 使用者 的背包
+                for (TempPokemon tp : tempPokemonList) {
+
+                    bagService.createBag(user.getUserId(), tp.getPokemonId(), tp.getPokemonName());
+                }
+
+                // 清除購物車內，已轉入 訂單 的 商品
+                shopCarService.removeShopCarByUserId(user);
+
+            } else {
+
+                log.warn("這張訂單的總價格為: {}，購買者: {} 的現金只剩下 {}元，訂單無法成立!",
+                        totalAmount, user.getUserName(), user.getMoney());
             }
-
-            // 清除購物車內，已轉入 訂單 的 商品
-            shopCarService.removeShopCarByUserId(user);
-
 
         } catch (Exception e) {
             log.warn(e.toString());

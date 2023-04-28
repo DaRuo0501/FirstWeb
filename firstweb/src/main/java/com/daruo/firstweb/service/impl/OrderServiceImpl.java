@@ -1,9 +1,6 @@
 package com.daruo.firstweb.service.impl;
 
-import com.daruo.firstweb.dao.BagDao;
-import com.daruo.firstweb.dao.OrderDao;
-import com.daruo.firstweb.dao.PokemonDao;
-import com.daruo.firstweb.dao.ShopCarDao;
+import com.daruo.firstweb.dao.*;
 import com.daruo.firstweb.dto.TempOrder;
 import com.daruo.firstweb.model.Order;
 import com.daruo.firstweb.service.OrderService;
@@ -30,19 +27,25 @@ public class OrderServiceImpl implements OrderService {
     private ShopCarDao shopCarDao;
 
     @Autowired
+    private UserDao userDao;
+
+    @Autowired
     private BagDao bagDao;
 
     @Transactional
     @Override
-    public void createOrderById(Order order) {
+    public void createOrderById(Order order, int newMoney) {
 
         try {
 
-            // 檢查 前段 是否有傳入 商品
+            // 檢查 前端 是否有傳入 商品
             if (order.getTotalAmount() > 0) {
 
-                // 有傳入 商品 可以 建立訂單
+                // 建立訂單
                 orderDao.createOrderById(order);
+
+                // 更新 使用者的 現金
+                userDao.updateUserMoney(order.getUserId(), newMoney);
 
             } else {
 

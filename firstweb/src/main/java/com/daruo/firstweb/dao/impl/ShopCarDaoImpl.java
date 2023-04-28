@@ -8,6 +8,7 @@ import com.daruo.firstweb.model.User;
 import com.daruo.firstweb.rowmapper.ShopCarListRowMapper;
 import com.daruo.firstweb.rowmapper.ShopCarRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +22,7 @@ public class ShopCarDaoImpl implements ShopCarDao {
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+    // 查詢 購物車內的 所有商品
     @Override
     public List<TempPokemon> getShopCarList(Integer userId) {
 
@@ -39,6 +41,7 @@ public class ShopCarDaoImpl implements ShopCarDao {
         return shopCarList;
     }
 
+    // 查詢 購物車內的 單筆商品
     @Override
     public ShopCar getBuyCnt(ShopCar shopCar) {
 
@@ -58,6 +61,7 @@ public class ShopCarDaoImpl implements ShopCarDao {
         return null;
     }
 
+    // 購買數量 +1
     @Override
     public void addCount(ShopCar shopCar) {
 
@@ -72,6 +76,7 @@ public class ShopCarDaoImpl implements ShopCarDao {
 
     }
 
+    // 購買數量 -1
     @Override
     public void reduceCount(ShopCar shopCar) {
 
@@ -86,6 +91,7 @@ public class ShopCarDaoImpl implements ShopCarDao {
 
     }
 
+    // 刪除 購物車 內的 單筆 商品
     @Override
     public void deletePokemonById(ShopCar shopCar) {
 
@@ -99,6 +105,7 @@ public class ShopCarDaoImpl implements ShopCarDao {
 
     }
 
+    // 更新 購買金額 使其與 購買數量 相符合
     @Override
     public void updateAmountById(ShopCar shopCar, Pokemon pokemon) {
 
@@ -114,6 +121,7 @@ public class ShopCarDaoImpl implements ShopCarDao {
 
     }
 
+    // 更改 購買的 數量
     @Override
     public void updateBuyCntById(ShopCar shopCar) {
 
@@ -128,6 +136,7 @@ public class ShopCarDaoImpl implements ShopCarDao {
 
     }
 
+    // 刪除 購物車 內的 所有商品
     @Override
     public void removeShopCarByUserId(User user) {
 
@@ -137,6 +146,81 @@ public class ShopCarDaoImpl implements ShopCarDao {
         map.put("userId", user.getUserId());
 
         namedParameterJdbcTemplate.update(sql, map);
+
+    }
+
+    // 添加 商品 至 購物車
+    @Override
+    public void createShopCar(Pokemon pokemon, ShopCar shopCar, User user) {
+
+        String sql = "INSERT INTO shopping_car(user_id, seq_no, pokemon_id, order_id, buy_cnt, amount) " +
+                "VALUES (:userId, :seqNo, :pokemonId, :orderId, 1, :amount);";
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("userId", user.getUserId());
+        map.put("seqNo", shopCar.getSeqNo() + 1);
+        map.put("pokemonId", pokemon.getPokemonId());
+        map.put("orderId", 1);
+        map.put("amount", pokemon.getPrice() * shopCar.getBuyCnt());
+
+        namedParameterJdbcTemplate.update(sql,  new MapSqlParameterSource(map));
+
+    }
+
+    // 查詢 使用者的購物車 單筆 商品資料
+    @Override
+    public ShopCar getShopCarPokemonByPokemonId(Integer pokemonId, User user) {
+
+        String sql = "SELECT seq_no, user_id, pokemon_id, order_id, buy_cnt, amount FROM shopping_car " +
+                "WHERE user_id = :userId AND pokemon_id = :pokemonId;";
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("userId", user.getUserId());
+        map.put("pokemonId", pokemonId);
+
+        List<ShopCar> shopCarList = namedParameterJdbcTemplate.query(sql, map, new ShopCarRowMapper());
+
+        if (shopCarList.size() > 0) {
+            return shopCarList.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    // 查詢 購物車內 單筆 商品
+    @Override
+    public ShopCar getShopCarPokemonByUserId(User user) {
+
+        String sql = "SELECT seq_no, user_id, pokemon_id, order_id, buy_cnt, amount " +
+                "FROM shopping_car " +
+                "WHERE user_id = :userId " +
+                "ORDER BY seq_no DESC;";
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("userId", user.getUserId());
+
+        List<ShopCar> shopCarList = namedParameterJdbcTemplate.query(sql, map, new ShopCarRowMapper());
+
+        if (shopCarList.size() > 0) {
+            return shopCarList.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    // 添加 第一筆 商品至購物車
+    @Override
+    public void createFirstShopCar(Pokemon pokemon, User user) {
+
+        String sql = "INSERT INTO shopping_car(user_id, seq_no, pokemon_id, order_id, buy_cnt, amount) " +
+                "VALUES (:userId, 1, :pokemonId, 1, 1, :amount);";
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("userId", user.getUserId());
+        map.put("pokemonId", pokemon.getPokemonId());
+        map.put("amount", pokemon.getPrice());
+
+        namedParameterJdbcTemplate.update(sql,  new MapSqlParameterSource(map));
 
     }
 }

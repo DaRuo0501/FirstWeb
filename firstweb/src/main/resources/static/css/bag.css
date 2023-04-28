@@ -218,7 +218,7 @@ header span {
 
 .content .content-title {
     display: none;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     position: fixed;
     left: 260px;
@@ -232,7 +232,7 @@ header span {
 }
 
 .content .content-title.active {
-    display: block;
+    display: flex;
 }
 
 .content .content-title .content-text {
@@ -243,11 +243,13 @@ header span {
 
 .right-body {
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     width: calc(100% - 260px);
     height: 100%;
     padding: 20px 0 6px 0;
     color: #efeff1;
-    margin-top: 60px;
+    margin-top: 90px;
     margin-left: 260px;
 }
 
@@ -255,8 +257,55 @@ header span {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
     width: 100%;
-    height: calc(100% - 60px);
-    margin-top: 70px;
+    height: 100%;
+    background: red;
+}
+
+.pokemon-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 120px;
+    border: 1px solid #45f3ff;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.pokemon-text-box {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 150px;
+    height: 100px;
+    margin-right: 20px;
+}
+
+.pokemon-text-box .pokemon-name {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.pokemon-text-box .pokemon-life {
+    width: 100%;
+}
+
+.pokemon-img {
+    margin-right: 20px;
+}
+
+.pokemon-img img {
+    width: 100px;
+    height: 100px;
+}
+
+.pokemon-lv {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100px;
+    height: 60%;
 }

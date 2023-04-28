@@ -25,4 +25,5 @@ public interface UserDao {
 
     List<User> getUsersByName(String userName);
 
+    void updateUserMoney(int userId, int money);
 }

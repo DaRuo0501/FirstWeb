@@ -24,4 +24,12 @@ public interface ShopCarDao {
     void updateBuyCntById(ShopCar shopCar);
 
     void removeShopCarByUserId(User user);
+
+    void createShopCar(Pokemon pokemon, ShopCar shopCar, User user);
+
+    ShopCar getShopCarPokemonByPokemonId(Integer pokemonId, User user);
+
+    ShopCar getShopCarPokemonByUserId(User user);
+
+    void createFirstShopCar(Pokemon pokemon, User user);
 }

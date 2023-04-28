@@ -20,15 +20,5 @@ public interface PokemonDao {
 
     TempPokemon getTempPokemonById(Integer pokemonId);
 
-    void createShopCar(Pokemon pokemon, ShopCar shopCar, User user);
-
-    ShopCar getShopCarPokemonByPokemonId(Integer pokemonId, User user);
-
-    ShopCar getShopCarPokemonByUserId(User user);
-
-    void addShopCarPokemonCount(ShopCar shopCar);
-
-    void createFirstShopCar(Pokemon pokemon, User user);
-
     void updatePokemonCountById(int tempStock, Integer pokemonId);
 }
