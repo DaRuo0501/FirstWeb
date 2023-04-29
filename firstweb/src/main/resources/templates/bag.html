@@ -24,7 +24,7 @@
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
 
-    <title>個人資料</title>
+    <title>背包</title>
 </head>
 
 <body>
@@ -132,10 +132,13 @@
 
         <div class="content-box">
 
-            <div class="pokemon-box active" th:each="bag : ${bags}">
+            <div class="pokemon-box" th:each="bag : ${bags}">
 
                 <!--  六隻 寶可夢的選擇欄  -->
-                <div class="pokemon-text-box">
+                <div class="pokemon-text-box" onclick="clickPokemon();">
+
+                    <a></a>
+<!--   th:href="@{'/bag/getPokemon/' + ${bag.pokemonId}}"  -->
 
                     <!--  名字  -->
                     <div class="pokemon-name">
@@ -165,10 +168,10 @@
         <div class="skill-box">
 
             <!--  目前持有技能  -->
-            <div class="pokemon-skill-box active" th:each="bag : ${bags}">
+            <div class="pokemon-skill-box">
 
                 <div class="skill-title">
-                    <p th:text="*{bag.pokemonName}"></p><p>可使用的技能</p>
+                    <p></p><p>可使用的技能</p>
                 </div>
 
                 <div class="pokemon-skill">
@@ -178,19 +181,7 @@
                     </div>
 
                     <div class="skill-name">
-                        <a th:text="*{bag.skill1}"></a>
-                    </div>
-
-                </div>
-
-                <div class="pokemon-skill">
-
-                    <div class="skill-category">
-                        <a>屬性</a>
-                    </div>
-
-                    <div class="skill-name">
-                        <a th:text="*{bag.skill2}"></a>
+                        <a></a>
                     </div>
 
                 </div>
@@ -202,7 +193,7 @@
                     </div>
 
                     <div class="skill-name">
-                        <a th:text="*{bag.skill3}"></a>
+                        <a></a>
                     </div>
 
                 </div>
@@ -214,7 +205,19 @@
                     </div>
 
                     <div class="skill-name">
-                        <a th:text="*{bag.skill4}"></a>
+                        <a></a>
+                    </div>
+
+                </div>
+
+                <div class="pokemon-skill">
+
+                    <div class="skill-category">
+                        <a>屬性</a>
+                    </div>
+
+                    <div class="skill-name">
+                        <a></a>
                     </div>
 
                 </div>
@@ -223,15 +226,15 @@
 
             <div class="skill-text">
 
-                <div class="skill-content" th:each="bag : ${bags}">
+                <div class="skill-content">
                     <div class="skill-content-text">
-                        <p>攻擊力 :</p><span th:text="*{bag.attack}"></span>
+                        <p>攻擊力 :</p><span></span>
                     </div>
                     <div class="skill-content-text">
-                        <p>防禦力 :</p><span th:text="*{bag.defense}"></span>
+                        <p>防禦力 :</p><span></span>
                     </div>
                     <div class="skill-content-text">
-                        <p>速度 :</p><span th:text="*{bag.speed}"></span>
+                        <p>速度 :</p><span></span>
                     </div>
                 </div>
 
@@ -248,6 +251,10 @@
 </div>
 
 <script>
+
+    function clickPokemon() {
+
+    }
 
     function logout() {
         window.location.href = "/users/login";
@@ -294,37 +301,37 @@
 
 
     // 選擇主欄位，並切換為正確的內文
-    const btns = document.querySelectorAll(".pokemon-box");
-    const all_content = document.querySelectorAll(".pokemon-skill-box");
-
-    btns.forEach((btn, index) => {
-
-        btn.addEventListener("click", (e) => {
-
-            btns.forEach(btn => {
-
-                btn.classList.remove("active");
-            });
-
-            btn.classList.add("active");
-
-            all_content.forEach(content => {
-
-                content.classList.remove("active");
-            });
-
-            all_content[index].classList.add("active");
-
-            menuOp.forEach(mp => {
-
-                mp.classList.remove("active");
-            })
-
-            menuOp[index].classList.remove("active");
-
-        });
-
-    });
+    // const btns = document.querySelectorAll(".pokemon-box");
+    // const all_content = document.querySelectorAll(".pokemon-skill-box");
+    //
+    // btns.forEach((btn, index) => {
+    //
+    //     btn.addEventListener("click", (e) => {
+    //
+    //         btns.forEach(btn => {
+    //
+    //             btn.classList.remove("active");
+    //         });
+    //
+    //         btn.classList.add("active");
+    //
+    //         all_content.forEach(content => {
+    //
+    //             content.classList.remove("active");
+    //         });
+    //
+    //         all_content[index].classList.add("active");
+    //
+    //         menuOp.forEach(mp => {
+    //
+    //             mp.classList.remove("active");
+    //         })
+    //
+    //         menuOp[index].classList.remove("active");
+    //
+    //     });
+    //
+    // });
 
 </script>
 </body>

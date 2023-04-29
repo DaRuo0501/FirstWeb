@@ -16,7 +16,7 @@ public interface PokemonDao {
 
     Integer getPokemonsCount(PokemonQueryParams pokemonQueryParams);
 
-    Pokemon getPokemonById(Integer pokemonId);
+    TempPokemon getPokemonById(Integer pokemonId);
 
     TempPokemon getTempPokemonById(Integer pokemonId);
 

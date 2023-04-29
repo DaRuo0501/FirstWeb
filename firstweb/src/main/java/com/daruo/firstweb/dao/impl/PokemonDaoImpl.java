@@ -83,7 +83,7 @@ public class PokemonDaoImpl implements PokemonDao {
 
     // 依照編號查詢單筆商品
     @Override
-    public Pokemon getPokemonById(Integer pokemonId) {
+    public TempPokemon getPokemonById(Integer pokemonId) {
 
         String sql = "SELECT pokemon_id, pokemon_name, image_url," +
                 " category, hp, lv, exp, attack, price, stock, defense, speed," +
@@ -93,10 +93,10 @@ public class PokemonDaoImpl implements PokemonDao {
         Map<String, Object> map = new HashMap<>();
         map.put("pokemonId", pokemonId);
 
-        List<Pokemon> pokemonList = namedParameterJdbcTemplate.query(sql, map , new PokemonRowMapper());
+        List<TempPokemon> tempPokemonList = namedParameterJdbcTemplate.query(sql, map , new TempPokemonRowMapper());
 
-        if (pokemonList.size() > 0) {
-            return pokemonList.get(0);
+        if (tempPokemonList.size() > 0) {
+            return tempPokemonList.get(0);
         } else {
             return null;
         }

@@ -231,19 +231,53 @@ public class PageController {
             User user = (User) session.getAttribute("showUserName");
 
             // 取得 使用者的 購物車清單
-            List<TempPokemon> tempPokemons = shopCarService.getShopCarList(user.getUserId());
+            List<TempShopCar> tempShopCarList = shopCarService.getShopCarList(user.getUserId());
 
             int totalAmount = 0;
 
             // 將每一筆的金額 加總起來
-            for (TempPokemon tp : tempPokemons) {
+            for (TempShopCar tempShopCar : tempShopCarList) {
 
-                totalAmount += tp.getAmount();
+                totalAmount += tempShopCar.getAmount();
             }
 
             model.addAttribute("totalAmount", totalAmount);
 
-            model.addAttribute("shopCars", tempPokemons);
+            model.addAttribute("shopCars", tempShopCarList);
+
+            // session 不是 null
+            if (session.getAttribute("msg") != null) {
+
+                // 取出 session 中的內容
+                Msg tempMsg = (Msg) session.getAttribute("msg");
+
+                // 檢查錯誤訊息，是否執行過
+                if (tempMsg.getCount() == 1) {
+
+                    // msg 的默認值覆蓋重寫
+                    session.setAttribute("msg", msg);
+
+                    // 錯誤訊息已經執行過 count -1
+                    tempMsg.setCount(0);
+
+                } else {
+
+                    // 錯誤訊息執行 count +1
+                    tempMsg.setCount(1);
+
+                    // session 的內容是空白
+                    if ("".equals(tempMsg.getText()))
+
+                        // msg 的默認值覆蓋重寫
+                        session.setAttribute("msg", msg);
+
+                }
+
+            } else {
+
+                // msg 的默認值覆蓋重寫
+                session.setAttribute("msg", msg);
+            }
 
             return "shopCar";
 

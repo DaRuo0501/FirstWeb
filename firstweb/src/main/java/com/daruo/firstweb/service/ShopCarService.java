@@ -1,27 +1,29 @@
 package com.daruo.firstweb.service;
 
 import com.daruo.firstweb.dto.TempPokemon;
+import com.daruo.firstweb.dto.TempShopCar;
+import com.daruo.firstweb.dto.TempUser;
 import com.daruo.firstweb.model.Pokemon;
 import com.daruo.firstweb.model.ShopCar;
-import com.daruo.firstweb.model.User;
+import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
 
 public interface ShopCarService {
 
-    List<TempPokemon> getShopCarList(Integer userId);
+    List<TempShopCar> getShopCarList(Integer userId);
 
-    ShopCar getBuyCnt(ShopCar shopCar);
+    TempShopCar getBuyCnt(TempShopCar tempShopCar);
 
-    void addCount(ShopCar shopCar);
+    void addCount(TempShopCar tempShopCar);
 
-    void reduceCount(ShopCar tempBuyCnt);
+    void reduceCount(TempShopCar tempBuyCnt);
 
-    void deletePokemonById(ShopCar shopCar);
+    void deletePokemonById(TempShopCar tempShopCar);
 
-    void updateAmountById(ShopCar shopCar, Pokemon pokemon);
+    void updateAmountById(TempShopCar tempShopCar, TempPokemon tempPokemon);
 
-    void updateBuyCntById(ShopCar shopCar);
+    void updateBuyCntById(TempShopCar tempShopCar);
 
-    void removeShopCarByUserId(User user);
+    void createShopCar(TempUser tempUser, Integer pokemonId, HttpSession session);
 }

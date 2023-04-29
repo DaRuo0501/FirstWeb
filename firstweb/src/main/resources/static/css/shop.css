@@ -370,7 +370,6 @@ header span {
     justify-content: center;
     width: calc(100% - 260px);
     height: 50px;
-    background: red;
 }
 
 .msg-box .msg-text {

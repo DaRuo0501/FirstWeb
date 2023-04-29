@@ -153,15 +153,30 @@ UPDATE shopping_car SET buy_cnt = shopping_car.buy_cnt+1 WHERE user_id = 1 AND p
 DROP TABLE IF EXISTS category;
 
 CREATE TABLE IF NOT EXISTS category(
-                                       category_id    INT       NOT NULL PRIMARY KEY,
-                                       category_name  CHAR(10)  NOT NULL
+                                       category_id          INT            NOT NULL PRIMARY KEY,
+                                       category_name        CHAR(10)       NOT NULL,
+                                       category_image_url   VARCHAR(255)   NOT NULL
 );
 
-INSERT INTO category(category_id, category_name)
-VALUES (1, '火'), (2, '水'), (3, '電'), (4, '草'), (5, '冰'),
-       (6, '岩石'), (7, '飛行'), (8, '地面'), (9, '格鬥'), (10, '蟲'),
-       (11, '一般'), (12, '鋼'), (13, '毒'), (14, '幽靈'), (15, '惡'),
-       (16, '妖精'), (17, '超能力'), (18, '龍');
+INSERT INTO category(category_id, category_name, category_image_url)
+VALUES (1, '火', '/images/category-Logo/Pokemon_Type_Icon_Fire.png'),
+       (2, '水', '/images/category-Logo/Pokemon_Type_Icon_Water.png'),
+       (3, '電', '/images/category-Logo/Pokemon_Type_Icon_Electric.png'),
+       (4, '草', '/images/category-Logo/Pokemon_Type_Icon_Grass.png'),
+       (5, '冰', '/images/category-Logo/Pokemon_Type_Icon_Ice.png'),
+       (6, '岩石', '/images/category-Logo/Pokemon_Type_Icon_Rock.png'),
+       (7, '飛行', '/images/category-Logo/Pokemon_Type_Icon_Flying.png'),
+       (8, '地面', '/images/category-Logo/Pokemon_Type_Icon_Ground.png'),
+       (9, '格鬥', '/images/category-Logo/Pokemon_Type_Icon_Fighting.png'),
+       (10, '蟲', '/images/category-Logo/Pokemon_Type_Icon_Bug.png'),
+       (11, '一般', '/images/category-Logo/Pokemon_Type_Icon_Normal.png'),
+       (12, '鋼', '/images/category-Logo/Pokemon_Type_Icon_Steel.png'),
+       (13, '毒', '/images/category-Logo/Pokemon_Type_Icon_Poison.png'),
+       (14, '幽靈', '/images/category-Logo/Pokemon_Type_Icon_Ghost.png'),
+       (15, '惡', '/images/category-Logo/Pokemon_Type_Icon_Dark.png'),
+       (16, '妖精', '/images/category-Logo/Pokemon_Type_Icon_Fairy.png'),
+       (17, '超能力', '/images/category-Logo/Pokemon_Type_Icon_Psychic.png'),
+       (18, '龍', '/images/category-Logo/Pokemon_Type_Icon_Dragon.png');
 
 SELECT category_id, category_name from category;
 
@@ -234,12 +249,28 @@ CREATE TABLE IF NOT EXISTS bag
   bag_id                INT            NOT NULL   PRIMARY KEY   AUTO_INCREMENT,
   user_id               INT            NOT NULL,
   pokemon_id            INT            NOT NULL,
-  pokemon_new_name      VARCHAR(255)   NOT NULL,
+  pokemon_name          INT            NOT NULL,
+  image_url             VARCHAR(255)   NOT NULL,
+  category              VARCHAR(32)    NOT NULL,
+  hp                    INT            NOT NULL,
+  lv                    INT            NOT NULL,
+  exp                   INT            NOT NULL,
+  attack                INT            NOT NULL,
+  defense               INT            NOT NULL,
+  speed                 INT            NOT NULL,
+  price                 INT            NOT NULL,
+  stock                 INT            NOT NULL,
+  skill_1               VARCHAR(255) ,
+  skill_2               VARCHAR(255) ,
+  skill_3               VARCHAR(255) ,
+  skill_4               VARCHAR(255) ,
   create_date           TIMESTAMP      NOT NULL,
   last_modified_date    TIMESTAMP      NOT NULL
 );
 
-INSERT INTO bag (user_id, pokemon_id,pokemon_new_name, create_date, last_modified_date) VALUES (:userId, :pokemonId, :pokemonNewName, :createdDate, :lastModifiedDate);
+INSERT INTO bag (user_id, pokemon_id, pokemon_name, image_url, category, hp, lv, exp, attack, defense, speed, price, stock, skill_1, skill_2, skill_3, skill_4, create_date, last_modified_date) VALUES (:userId, :pokemonId, :pokemonName, :imageUrl, :category, :hp, :lv, :exp, :attack, :defense, :speed, :price, :stock, :createdDate, :lastModifiedDate);
 
+SELECT user_id, pokemon_id from bag WHERE user_id = :userId;
 
+SELECT * FROM bag b, pokemon p WHERE b.pokemon_id = p.pokemon_id;
 

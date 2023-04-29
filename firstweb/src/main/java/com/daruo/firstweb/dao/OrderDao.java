@@ -6,7 +6,8 @@ import com.daruo.firstweb.model.Order;
 import java.util.List;
 
 public interface OrderDao {
-    void createOrderById(Order order);
+
+    void createOrderById(TempOrder tempOrder);
 
     List<TempOrder> getOrderById(Integer userId);
 }

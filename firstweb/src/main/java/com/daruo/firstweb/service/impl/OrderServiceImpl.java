@@ -2,6 +2,8 @@ package com.daruo.firstweb.service.impl;
 
 import com.daruo.firstweb.dao.*;
 import com.daruo.firstweb.dto.TempOrder;
+import com.daruo.firstweb.dto.TempShopCar;
+import com.daruo.firstweb.dto.TempUser;
 import com.daruo.firstweb.model.Order;
 import com.daruo.firstweb.service.OrderService;
 import org.slf4j.Logger;
@@ -34,18 +36,26 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional
     @Override
-    public void createOrderById(Order order, int newMoney) {
+    public void createOrderById(TempOrder tempOrder, TempUser tempUser) {
 
         try {
 
             // 檢查 前端 是否有傳入 商品
-            if (order.getTotalAmount() > 0) {
+            if (tempOrder.getTotalAmount() > 0) {
+
+                // 取得 使用者的購物車內容
+                List<TempShopCar> tempShopCar = shopCarDao.getShopCarList(tempOrder.getUserId());
+
+                // 扣除貨架上的商品
+                // 如果有貨才可建立訂單
+
+
 
                 // 建立訂單
-                orderDao.createOrderById(order);
+                orderDao.createOrderById(tempOrder);
 
                 // 更新 使用者的 現金
-                userDao.updateUserMoney(order.getUserId(), newMoney);
+//                userDao.updateUserMoney(tempOrder.getUserId(), newMoney);
 
             } else {
 

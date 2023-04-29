@@ -1,7 +1,9 @@
 package com.daruo.firstweb.service.impl;
 
 import com.daruo.firstweb.dao.BagDao;
+import com.daruo.firstweb.dao.PokemonDao;
 import com.daruo.firstweb.dto.TempBag;
+import com.daruo.firstweb.dto.TempPokemon;
 import com.daruo.firstweb.service.BagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,15 +16,24 @@ public class BagServiceImpl implements BagService {
     @Autowired
     private BagDao bagDao;
 
-    @Override
-    public void createBag(Integer userId, Integer pokemonId, String pokemonName) {
+    @Autowired
+    private PokemonDao pokemonDao;
 
-        bagDao.createBag(userId, pokemonId, pokemonName);
+    @Override
+    public void createBag(Integer userId, TempBag tempBag) {
+
+        bagDao.createBag(userId, tempBag);
     }
 
     @Override
     public List<TempBag> getBag(Integer userId) {
 
         return bagDao.getBag(userId);
+    }
+
+    @Override
+    public TempPokemon getPokemonById(Integer userId, Integer pokemonId) {
+
+        return null;
     }
 }

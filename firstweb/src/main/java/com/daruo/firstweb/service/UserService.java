@@ -18,8 +18,4 @@ public interface UserService {
     void updateUser(UserUpdateRequest userUpdateRequest);
 
     User getUserById(Integer userId);
-
-    List<User> getUsersByName(String userName);
-
-    User getUserByName(User user);
 }

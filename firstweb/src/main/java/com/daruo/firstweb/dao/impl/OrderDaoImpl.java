@@ -23,14 +23,14 @@ public class OrderDaoImpl implements OrderDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public void createOrderById(Order order) {
+    public void createOrderById(TempOrder tempOrder) {
 
         String sql = "INSERT INTO `order`(user_id, total_amount, created_date, last_modified_date) " +
                 "VALUES (:userId, :totalAmount, :createdDate, :lastModifiedDate);";
 
         Map<String, Object> map = new HashMap<>();
-        map.put("userId", order.getUserId());
-        map.put("totalAmount", order.getTotalAmount());
+        map.put("userId", tempOrder.getUserId());
+        map.put("totalAmount", tempOrder.getTotalAmount());
 
         Date now = new Date();
         map.put("createdDate", now);

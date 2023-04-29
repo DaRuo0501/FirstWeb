@@ -61,7 +61,7 @@ public class PokemonServiceImpl implements PokemonService {
     }
 
     @Override
-    public Pokemon getPokemonById(Integer pokemonId) {
+    public TempPokemon getPokemonById(Integer pokemonId) {
         return pokemonDao.getPokemonById(pokemonId);
     }
 
@@ -69,50 +69,6 @@ public class PokemonServiceImpl implements PokemonService {
     public TempPokemon getTempPokemonById(Integer pokemonId) {
 
         return pokemonDao.getTempPokemonById(pokemonId);
-    }
-
-    // 新增商品至購物車
-    @Override
-    public Pokemon createShopCarById(Pokemon pokemon, User user) {
-
-        try {
-
-            // 取得 當前使用者 購物車內的商品編號 與 前端傳入的商品編號 相同的資料
-            ShopCar shopCar = shopCarDao.getShopCarPokemonByPokemonId(pokemon.getPokemonId(), user);
-
-            // 取得 當前使用者的 購物車
-            ShopCar tempShopCar = shopCarDao.getShopCarPokemonByUserId(user);
-
-            // 確認是否有購物車
-            if (tempShopCar != null) {
-
-                // 確認購物車內 是否已經有相同的商品
-                if (shopCar == null) {
-
-                    // 購物車內無此商品，將商品加入購物車內
-                    shopCarDao.createShopCar(pokemon, tempShopCar, user);
-
-                    return pokemon;
-
-                } else {
-
-                    return null;
-                }
-
-            } else {
-
-                // 無購物車 新建第一筆購物車
-                shopCarDao.createFirstShopCar(pokemon, user);
-
-                return pokemon;
-            }
-
-
-        } catch (Exception e) {
-
-            log.warn(e.getMessage());
-            return null;
-        }
     }
 
     // 查詢 屬性 所擁有的頁數
@@ -124,24 +80,6 @@ public class PokemonServiceImpl implements PokemonService {
         Integer page = pageCount(pokemonQueryParams, total);
 
         return page;
-    }
-
-    @Override
-    public List<TempPokemon> removePokemonCount(Integer userId) {
-
-        // 取得要扣除數量的 商品
-        List<TempPokemon> shopCarList = shopCarDao.getShopCarList(userId);
-
-        for (TempPokemon tp : shopCarList) {
-
-            // 取得貨架上的商品數量
-            Pokemon tpPokemon = pokemonDao.getPokemonById(tp.getPokemonId());
-
-            // 更新貨架上的 商品數量 = 貨架上的數量 - 購買數量
-            pokemonDao.updatePokemonCountById(tpPokemon.getStock() - tp.getBuyCnt(), tpPokemon.getPokemonId());
-        }
-
-        return shopCarList;
     }
 
     // 共用的 頁數 計算方法

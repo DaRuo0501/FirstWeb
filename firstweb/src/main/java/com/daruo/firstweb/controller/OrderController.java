@@ -1,6 +1,6 @@
 package com.daruo.firstweb.controller;
 
-import com.daruo.firstweb.dto.TempPokemon;
+import com.daruo.firstweb.dto.*;
 import com.daruo.firstweb.model.Order;
 import com.daruo.firstweb.model.User;
 import com.daruo.firstweb.service.BagService;
@@ -50,35 +50,27 @@ public class OrderController {
             session = request.getSession();
             User user = (User) session.getAttribute("showUserName");
 
-            // 取得 要更新的 金額
-            int newMoney = user.getMoney() - totalAmount;
+            TempUser tempUser = new TempUser();
+            tempUser.setUserId(user.getUserId());
 
             // 檢查 使用者的現金是否足夠
             if (user.getMoney() >= totalAmount) {
 
-                Order order = new Order();
-                order.setUserId(user.getUserId());
-                order.setTotalAmount(totalAmount);
+                TempOrder tempOrder = new TempOrder();
+                tempOrder.setUserId(user.getUserId());  // 購買人
+                tempOrder.setTotalAmount(totalAmount);  // 訂單的 總價格
 
                 // 建立訂單
-                orderService.createOrderById(order, newMoney);
-
-                // 扣除商品架上的數量
-                List<TempPokemon> tempPokemonList = pokemonService.removePokemonCount(user.getUserId());
-
-                // 將 商品 放入 使用者 的背包
-                for (TempPokemon tp : tempPokemonList) {
-
-                    bagService.createBag(user.getUserId(), tp.getPokemonId(), tp.getPokemonName());
-                }
-
-                // 清除購物車內，已轉入 訂單 的 商品
-                shopCarService.removeShopCarByUserId(user);
+                orderService.createOrderById(tempOrder, tempUser);
 
             } else {
 
                 log.warn("這張訂單的總價格為: {}，購買者: {} 的現金只剩下 {}元，訂單無法成立!",
                         totalAmount, user.getUserName(), user.getMoney());
+
+                String errorStr = "您的現金不足! 無法提繳訂單!";
+
+                ErrorMsg(errorStr, session);
             }
 
         } catch (Exception e) {
@@ -86,5 +78,15 @@ public class OrderController {
         }
 
         return "redirect:/users/shopCar";
+    }
+
+    public static void ErrorMsg(String errorStr, HttpSession session) {
+
+        Msg msg = new Msg();
+        msg.setText(errorStr);
+
+        session.setAttribute("msg", msg);
+        session.setAttribute("errorFlag", "Y");
+
     }
 }

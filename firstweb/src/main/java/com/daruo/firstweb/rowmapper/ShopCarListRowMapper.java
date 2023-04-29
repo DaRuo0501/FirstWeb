@@ -1,6 +1,7 @@
 package com.daruo.firstweb.rowmapper;
 
 import com.daruo.firstweb.dto.TempPokemon;
+import com.daruo.firstweb.dto.TempShopCar;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -10,15 +11,16 @@ public class ShopCarListRowMapper implements RowMapper {
     @Override
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-        TempPokemon tempPokemon = new TempPokemon();
-        tempPokemon.setPokemonId(rs.getInt("pokemon_id"));
-        tempPokemon.setPokemonName(rs.getString("pokemon_name"));
-        tempPokemon.setImageUrl(rs.getString("image_url"));
-        tempPokemon.setPrice(rs.getInt("price"));
-        tempPokemon.setStock(rs.getInt("stock"));
-        tempPokemon.setBuyCnt(rs.getInt("buy_cnt"));
-        tempPokemon.setAmount(rs.getInt("amount"));
+        TempShopCar tempShopCar = new TempShopCar();
+        tempShopCar.setUserId(rs.getInt("user_id"));
+        tempShopCar.setSeqNo(rs.getInt("seq_no"));
+        tempShopCar.setPokemonId(rs.getInt("pokemon_id"));
+        tempShopCar.setPokemonName(rs.getString("pokemon_name"));
+        tempShopCar.setImageUel(rs.getString("pokemon_image_url"));
+        tempShopCar.setOrderId(rs.getInt("order_id"));
+        tempShopCar.setBuyCnt(rs.getInt("buy_cnt"));
+        tempShopCar.setAmount(rs.getInt("amount"));
 
-        return tempPokemon;
+        return tempShopCar;
     }
 }

@@ -119,9 +119,17 @@
 <!-- 內文 -->
 <div class="content">
 
-    <div class="content-title active">
+    <div class="content-title">
 
         <span class="content-text">購物車</span>
+
+        <!--  訊息顯示  -->
+        <div class="msg-box" id="errorMsg" hidden="hidden">
+            <p>
+                <span class="msg-text" id="msg-text" th:text="${session.msg.text}"></span>
+                <span id="hidErrorMsg" th:text="${session.errorFlag}" hidden="hidden"></span>
+            </p>
+        </div>
 
     </div>
 
@@ -152,7 +160,7 @@
                     <!--  表內容  -->
                     <tbody>
                     <tr th:each="shopCar,s : ${shopCars}">
-                        <td class="sc-body" id="td-img"><img th:src="@{*{shopCar.imageUrl}}"></td>
+                        <td class="sc-body" id="td-img"><img th:src="@{*{shopCar.imageUel}}"></td>
                         <td class="sc-body" id="td-name" th:text="*{shopCar.pokemonName}">商品名稱</td>
                         <td class="sc-body" id="td-price" th:text="*{shopCar.price}">價格</td>
                         <td class="sc-body" id="td-stock" th:text="*{shopCar.stock}">庫存</td>
@@ -184,7 +192,12 @@
                     <!--  總金額  -->
                     <div class="content-table-footer">
                         <div class="total-box">
-                            <span>總金額: </span>
+                            <span>您擁有的現金: </span>
+                            <input type="text" name="totalAmount" th:value="${session.showUserName.money}" readonly="readonly">
+                        </div>
+
+                        <div class="total-box">
+                            <span>訂單的總金額: </span>
                             <input type="text" name="totalAmount" th:value="${totalAmount}" readonly="readonly">
                             <a th:href="@{'/orders/create/' + ${totalAmount}}">
                                 <input type="submit" value="結帳">
@@ -221,12 +234,6 @@
 
     // 下拉式選單 頁數、屬性 選擇後，不要重置為 null 欄位
     function doOnload() {
-
-        var tempHidPage = document.getElementById("hidPage").textContent;
-        document.getElementById("page").value = tempHidPage;
-
-        var tempHidCategory = document.getElementById("hidCategory").textContent;
-        document.getElementById("category").value = tempHidCategory;
 
         var tempHidErrorMsg = document.getElementById("hidErrorMsg").textContent;
         if (tempHidErrorMsg == "Y") {

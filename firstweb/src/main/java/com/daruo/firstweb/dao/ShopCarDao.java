@@ -1,35 +1,34 @@
 package com.daruo.firstweb.dao;
 
 import com.daruo.firstweb.dto.TempPokemon;
+import com.daruo.firstweb.dto.TempShopCar;
+import com.daruo.firstweb.dto.TempUser;
 import com.daruo.firstweb.model.Pokemon;
 import com.daruo.firstweb.model.ShopCar;
-import com.daruo.firstweb.model.User;
 
 import java.util.List;
 
 public interface ShopCarDao {
 
-    List<TempPokemon> getShopCarList(Integer userId);
+    List<TempShopCar> getShopCarList(Integer userId);
 
-    ShopCar getBuyCnt(ShopCar shopCar);
+    TempShopCar getBuyCnt(TempShopCar tempShopCar);
 
-    void addCount(ShopCar shopCar);
+    void addCount(TempShopCar tempShopCar);
 
-    void reduceCount(ShopCar shopCar);
+    void reduceCount(TempShopCar tempShopCar);
 
-    void deletePokemonById(ShopCar shopCar);
+    void deletePokemonById(TempShopCar tempShopCar);
 
-    void updateAmountById(ShopCar shopCar, Pokemon pokemon);
+    void updateAmountById(TempShopCar tempShopCar, TempPokemon tempPokemon);
 
-    void updateBuyCntById(ShopCar shopCar);
+    void updateBuyCntById(TempShopCar tempShopCar);
 
-    void removeShopCarByUserId(User user);
+    TempShopCar getShopCarPokemonByPokemonId(Integer userId, Integer pokemonId);
 
-    void createShopCar(Pokemon pokemon, ShopCar shopCar, User user);
+    void createFirstShopCar(TempUser tempUser, TempPokemon tempPokemon);
 
-    ShopCar getShopCarPokemonByPokemonId(Integer pokemonId, User user);
+    void addShopCar(TempUser tempUser, TempPokemon tempPokemon, TempShopCar tempShopCar);
 
-    ShopCar getShopCarPokemonByUserId(User user);
-
-    void createFirstShopCar(Pokemon pokemon, User user);
+    TempShopCar getShopCarLastPokemonByUserId(Integer userId);
 }

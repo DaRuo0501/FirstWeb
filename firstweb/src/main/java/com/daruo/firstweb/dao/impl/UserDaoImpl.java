@@ -1,10 +1,12 @@
 package com.daruo.firstweb.dao.impl;
 
 import com.daruo.firstweb.dao.UserDao;
+import com.daruo.firstweb.dto.TempUser;
 import com.daruo.firstweb.dto.UserQueryParams;
 import com.daruo.firstweb.dto.UserRegisterRequest;
 import com.daruo.firstweb.dto.UserUpdateRequest;
 import com.daruo.firstweb.model.User;
+import com.daruo.firstweb.rowmapper.TempUserRowMapper;
 import com.daruo.firstweb.rowmapper.UserRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -182,5 +184,23 @@ public class UserDaoImpl implements UserDao {
 
         namedParameterJdbcTemplate.update(sql, map);
 
+    }
+
+    @Override
+    public TempUser getTempUserById(Integer userId) {
+
+        String sql = "SELECT user_id, user_name, password, email, user_image_url, money, created_date, last_modified_date " +
+                "FROM user WHERE user_id = :userId;";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+
+        List<TempUser> tempUserList = namedParameterJdbcTemplate.query(sql, map, new TempUserRowMapper());
+
+        if (tempUserList.size() > 0) {
+            return tempUserList.get(0);
+        } else {
+            return null;
+        }
     }
 }

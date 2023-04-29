@@ -110,19 +110,8 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    // 使用 ID 查詢使用者
     @Override
     public User getUserById(Integer userId) {
         return userDao.getUserById(userId);
-    }
-
-    @Override
-    public List<User> getUsersByName(String userName) {
-        return userDao.getUsersByName(userName);
-    }
-
-    @Override
-    public User getUserByName(User user) {
-        return userDao.getUserByName(user.getUserName());
     }
 }

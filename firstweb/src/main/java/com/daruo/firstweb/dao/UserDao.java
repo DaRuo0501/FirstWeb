@@ -1,5 +1,6 @@
 package com.daruo.firstweb.dao;
 
+import com.daruo.firstweb.dto.TempUser;
 import com.daruo.firstweb.dto.UserQueryParams;
 import com.daruo.firstweb.dto.UserRegisterRequest;
 import com.daruo.firstweb.dto.UserUpdateRequest;
@@ -26,4 +27,6 @@ public interface UserDao {
     List<User> getUsersByName(String userName);
 
     void updateUserMoney(int userId, int money);
+
+    TempUser getTempUserById(Integer userId);
 }

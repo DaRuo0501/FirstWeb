@@ -1,9 +1,6 @@
 package com.daruo.firstweb.controller;
 
-import com.daruo.firstweb.dto.UserLoginRequest;
-import com.daruo.firstweb.dto.UserQueryParams;
-import com.daruo.firstweb.dto.UserRegisterRequest;
-import com.daruo.firstweb.dto.UserUpdateRequest;
+import com.daruo.firstweb.dto.*;
 import com.daruo.firstweb.model.User;
 import com.daruo.firstweb.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -78,18 +75,6 @@ public class UserController {
 
             return "redirect:/users/home";
         }
-    }
-
-    // 使用 帳號 查詢
-    @GetMapping("/users/select")
-    public String getUserByName(@ModelAttribute User user,
-                                Model model) {
-
-        List<User> userList = userService.getUsersByName(user.getUserName());
-
-        model.addAttribute("users", userList);
-
-        return "userList";
     }
 
     // 使用 頁數 查詢

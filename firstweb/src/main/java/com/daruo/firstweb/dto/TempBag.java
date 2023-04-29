@@ -2,8 +2,11 @@ package com.daruo.firstweb.dto;
 
 import com.daruo.firstweb.constant.PokemonCategory;
 
+import java.util.Date;
+
 public class TempBag {
 
+    private Integer bagId;
     private Integer userId;
     private Integer pokemonId;
     private String pokemonName;
@@ -19,6 +22,19 @@ public class TempBag {
     private String skill2;
     private String skill3;
     private String skill4;
+    private Integer price;
+    private Integer stock;
+    private Integer buyCnt;
+    private Date createdDate;
+    private Date lastModifiedDate;
+
+    public Integer getBagId() {
+        return bagId;
+    }
+
+    public void setBagId(Integer bagId) {
+        this.bagId = bagId;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -138,5 +154,45 @@ public class TempBag {
 
     public void setSkill4(String skill4) {
         this.skill4 = skill4;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
+    public Integer getBuyCnt() {
+        return buyCnt;
+    }
+
+    public void setBuyCnt(Integer buyCnt) {
+        this.buyCnt = buyCnt;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(Date lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 }
