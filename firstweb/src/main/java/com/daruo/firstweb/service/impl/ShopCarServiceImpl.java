@@ -56,9 +56,9 @@ public class ShopCarServiceImpl implements ShopCarService {
     }
 
     @Override
-    public void deletePokemonById(TempShopCar tempShopCar) {
+    public void deletePokemonById(Integer userId, Integer pokemoId) {
 
-        shopCarDao.deletePokemonById(tempShopCar);
+        shopCarDao.deletePokemonById(userId, pokemoId);
     }
 
     @Override

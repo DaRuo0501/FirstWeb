@@ -41,6 +41,8 @@ public class PageController {
     @Autowired
     private BagService bagService;
 
+    @Autowired SkillService skillService;
+
     private Pokemon pokemon;
 
     // 登入頁面
@@ -91,13 +93,22 @@ public class PageController {
                          HttpServletRequest request
     ) {
 
-        // 取得 當前使用者
-        session = request.getSession();
-        User user = (User) session.getAttribute("showUserName");
+        try {
 
-        List<TempBag> tempBagList = bagService.getBag(user.getUserId());
+            // 取得 當前使用者
+            session = request.getSession();
+            User user = (User) session.getAttribute("showUserName");
 
-        model.addAttribute("bags", tempBagList);
+            List<TempBag> tempBagList = bagService.getBag(user.getUserId());
+
+            model.addAttribute("bags", tempBagList);
+
+            return "bag";
+
+        } catch (Exception e) {
+
+            log.warn(e.toString());
+        }
 
         return "bag";
     }

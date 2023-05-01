@@ -6,7 +6,7 @@ import com.daruo.firstweb.dto.TempPokemon;
 import java.util.List;
 
 public interface BagService {
-    void createBag(Integer userId, TempBag tempBag);
+    void createBag(Integer userId, TempPokemon tempPokemon);
 
     List<TempBag> getBag(Integer userId);
 

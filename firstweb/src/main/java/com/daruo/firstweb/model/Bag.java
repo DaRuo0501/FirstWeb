@@ -23,8 +23,6 @@ public class Bag {
     private String skill3;
     private String skill4;
     private Integer price;
-    private Integer stock;
-    private Integer buyCnt;
     private Date createdDate;
     private Date lastModifiedDate;
 
@@ -162,22 +160,6 @@ public class Bag {
 
     public void setPrice(Integer price) {
         this.price = price;
-    }
-
-    public Integer getStock() {
-        return stock;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
-
-    public Integer getBuyCnt() {
-        return buyCnt;
-    }
-
-    public void setBuyCnt(Integer buyCnt) {
-        this.buyCnt = buyCnt;
     }
 
     public Date getCreatedDate() {

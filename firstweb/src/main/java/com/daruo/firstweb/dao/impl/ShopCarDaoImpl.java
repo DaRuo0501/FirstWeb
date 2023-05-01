@@ -90,13 +90,13 @@ public class ShopCarDaoImpl implements ShopCarDao {
 
     // 刪除 購物車 內的 單筆 商品
     @Override
-    public void deletePokemonById(TempShopCar tempShopCar) {
+    public void deletePokemonById(Integer userId, Integer pokemonId) {
 
         String sql = "DELETE FROM shopping_car WHERE user_id = :userId AND pokemon_id = :pokemonId";
 
         Map<String, Object> map = new HashMap<>();
-        map.put("userId", tempShopCar.getUserId());
-        map.put("pokemonId", tempShopCar.getPokemonId());
+        map.put("userId", userId);
+        map.put("pokemonId", pokemonId);
 
         namedParameterJdbcTemplate.update(sql, map);
 
@@ -140,14 +140,14 @@ public class ShopCarDaoImpl implements ShopCarDao {
         String sql = "INSERT INTO shopping_car(user_id, seq_no, pokemon_id, pokemon_name, " +
                 "pokemon_image_url, order_id, price, stock, buy_cnt, amount) " +
                 "VALUES (:userId, :seqNo, :pokemonId, :pokemonName, " +
-                ":pokemonImageUel, :orderId, :price, :stock, 1, :amount);";
+                ":pokemonImageUrl, :orderId, :price, :stock, 1, :amount);";
 
         Map<String,Object> map = new HashMap<>();
         map.put("userId", tempUser.getUserId());
         map.put("seqNo", tempShopCar.getSeqNo() + 1);
         map.put("pokemonId", tempPokemon.getPokemonId());
         map.put("pokemonName", tempPokemon.getPokemonName());
-        map.put("pokemonImageUel", tempPokemon.getImageUrl());
+        map.put("pokemonImageUrl", tempPokemon.getPokemonImageUrl());
         map.put("orderId", tempShopCar.getOrderId());
         map.put("price", tempPokemon.getPrice());
         map.put("stock", tempPokemon.getStock());
@@ -184,13 +184,13 @@ public class ShopCarDaoImpl implements ShopCarDao {
 
         String sql = "INSERT INTO shopping_car(user_id, seq_no, pokemon_id, pokemon_name, " +
                 "pokemon_image_url, order_id, price, stock, buy_cnt, amount) " +
-                "VALUES (:userId, 1, :pokemonId, :pokemonName, :pokemonImageUel, 1, :price, :stock, 1, :amount);";
+                "VALUES (:userId, 1, :pokemonId, :pokemonName, :pokemonImageUrl, 1, :price, :stock, 1, :amount);";
 
         Map<String,Object> map = new HashMap<>();
         map.put("userId", tempUser.getUserId());
         map.put("pokemonId", tempPokemon.getPokemonId());
         map.put("pokemonName", tempPokemon.getPokemonName());
-        map.put("pokemonImageUel", tempPokemon.getImageUrl());
+        map.put("pokemonImageUrl", tempPokemon.getPokemonImageUrl());
         map.put("price", tempPokemon.getPrice());
         map.put("stock", tempPokemon.getStock());
         map.put("amount", tempPokemon.getPrice());
@@ -218,5 +218,16 @@ public class ShopCarDaoImpl implements ShopCarDao {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public void deleteShopCarByUserId(Integer userId) {
+
+        String sql = "DELETE FROM shopping_car WHERE user_id = :userId;";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+
+        namedParameterJdbcTemplate.update(sql, map);
     }
 }

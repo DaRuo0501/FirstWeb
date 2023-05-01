@@ -14,7 +14,7 @@ public class PokemonRowMapper implements RowMapper<Pokemon> {
         Pokemon pokemon = new Pokemon();
         pokemon.setPokemonId(resultSet.getInt("pokemon_id"));
         pokemon.setPokemonName(resultSet.getString("pokemon_name"));
-        pokemon.setImageUrl(resultSet.getString("image_url"));
+        pokemon.setPokemonImageUrl(resultSet.getString("pokemon_image_url"));
 
         String categoryStr = resultSet.getString("category");
         PokemonCategory category = PokemonCategory.valueOf(categoryStr);

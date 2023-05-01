@@ -20,9 +20,9 @@ public class BagServiceImpl implements BagService {
     private PokemonDao pokemonDao;
 
     @Override
-    public void createBag(Integer userId, TempBag tempBag) {
+    public void createBag(Integer userId, TempPokemon tempPokemon) {
 
-        bagDao.createBag(userId, tempBag);
+        bagDao.createBag(userId, tempPokemon);
     }
 
     @Override

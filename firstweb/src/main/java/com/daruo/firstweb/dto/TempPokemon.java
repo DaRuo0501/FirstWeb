@@ -8,7 +8,7 @@ public class TempPokemon {
 
     private Integer pokemonId;
     private String pokemonName;
-    private String imageUrl;
+    private String pokemonImageUrl;
     private PokemonCategory category;
     private Integer hp;
     private Integer lv;
@@ -22,6 +22,7 @@ public class TempPokemon {
     private String skill4;
     private Integer price;
     private Integer stock;
+    private String description;
     private Date createdDate;
     private Date lastModifiedDate;
 
@@ -41,12 +42,12 @@ public class TempPokemon {
         this.pokemonName = pokemonName;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getPokemonImageUrl() {
+        return pokemonImageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setPokemonImageUrl(String pokemonImageUrl) {
+        this.pokemonImageUrl = pokemonImageUrl;
     }
 
     public PokemonCategory getCategory() {
@@ -151,6 +152,14 @@ public class TempPokemon {
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getCreatedDate() {

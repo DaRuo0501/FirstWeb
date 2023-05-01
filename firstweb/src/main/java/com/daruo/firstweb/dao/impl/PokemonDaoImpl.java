@@ -24,7 +24,7 @@ public class PokemonDaoImpl implements PokemonDao {
     @Override
     public List<Pokemon> getPokemons(PokemonQueryParams pokemonQueryParams) {
 
-        String sql = "SELECT pokemon_id, pokemon_name, image_url," +
+        String sql = "SELECT pokemon_id, pokemon_name, pokemon_image_url," +
                 " category, hp, lv, exp, attack, price, stock, defense, speed," +
                 " skill_1, skill_2, skill_3, skill_4, created_date, last_modified_date" +
                 " FROM pokemon WHERE 1 = 1";
@@ -85,8 +85,8 @@ public class PokemonDaoImpl implements PokemonDao {
     @Override
     public TempPokemon getPokemonById(Integer pokemonId) {
 
-        String sql = "SELECT pokemon_id, pokemon_name, image_url," +
-                " category, hp, lv, exp, attack, price, stock, defense, speed," +
+        String sql = "SELECT pokemon_id, pokemon_name, pokemon_image_url," +
+                " category, hp, lv, exp, attack, defense, speed, price, stock, description," +
                 " skill_1, skill_2, skill_3, skill_4, created_date, last_modified_date" +
                 " FROM pokemon WHERE pokemon_id = :pokemonId";
 
@@ -105,8 +105,8 @@ public class PokemonDaoImpl implements PokemonDao {
     @Override
     public TempPokemon getTempPokemonById(Integer pokemonId) {
 
-        String sql = "SELECT pokemon_id, pokemon_name, image_url," +
-                " category, hp, lv, exp, attack, price, stock, defense, speed," +
+        String sql = "SELECT pokemon_id, pokemon_name, pokemon_image_url," +
+                " category, hp, lv, exp, attack, defense, speed, price, stock, description," +
                 " skill_1, skill_2, skill_3, skill_4, created_date, last_modified_date" +
                 " FROM pokemon WHERE pokemon_id = :pokemonId";
 
@@ -123,13 +123,13 @@ public class PokemonDaoImpl implements PokemonDao {
     }
 
     @Override
-    public void updatePokemonCountById(int tempStock, Integer pokemonId) {
+    public void updatePokemonCountById(Integer pokemonId, Integer stock) {
 
         String sql = "UPDATE pokemon SET stock = :stock WHERE pokemon_id = :pokemonId;";
 
         Map<String,Object> map = new HashMap<>();
         map.put("pokemonId", pokemonId);
-        map.put("stock", tempStock);
+        map.put("stock", stock);
 
         namedParameterJdbcTemplate.update(sql, map);
 

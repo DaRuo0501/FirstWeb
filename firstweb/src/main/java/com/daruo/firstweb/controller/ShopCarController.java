@@ -221,7 +221,7 @@ public class ShopCarController {
             tempShopCar.setPokemonId(pokemonId);
 
             // 刪除
-            shopCarService.deletePokemonById(tempShopCar);
+            shopCarService.deletePokemonById(tempShopCar.getUserId(), tempShopCar.getPokemonId());
 
 
         } catch (Exception e) {

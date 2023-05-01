@@ -135,10 +135,7 @@
             <div class="pokemon-box" th:each="bag : ${bags}">
 
                 <!--  六隻 寶可夢的選擇欄  -->
-                <div class="pokemon-text-box" onclick="clickPokemon();">
-
-                    <a></a>
-<!--   th:href="@{'/bag/getPokemon/' + ${bag.pokemonId}}"  -->
+                <div class="pokemon-text-box">
 
                     <!--  名字  -->
                     <div class="pokemon-name">
@@ -153,16 +150,26 @@
 
                 <!--  圖片  -->
                 <div class="pokemon-img">
-                    <img th:src="@{*{bag.imageUrl}}">
+                    <img th:src="@{*{bag.pokemonImageUrl}}">
                 </div>
 
-                <!--  等級  -->
-                <div class="pokemon-lv">
-                    <p>等級 :</p><span th:text="*{bag.lv}"></span>
-                </div>
+                <div class="pokemon-text-box">
 
+                    <!--  等級  -->
+                    <div class="pokemon-lv">
+                        <p>等級 :</p><span th:text="*{bag.lv}"></span>
+                    </div>
+
+                    <div class="btn-box">
+
+                        <!--  查看 能力值  -->
+                        <div class="pokemon-btn">
+                            <a>查看</a>
+                        </div>
+
+                    </div>
+                </div>
             </div>
-
         </div>
 
         <div class="skill-box">
@@ -174,49 +181,21 @@
                     <p></p><p>可使用的技能</p>
                 </div>
 
-                <div class="pokemon-skill">
+                <div class="skill-title-text">
+                    <p>屬性</p><p>名稱</p><p>威力</p>
+                </div>
+
+                <div class="pokemon-skill" th:each="skill,s : ${skilltest}">
 
                     <div class="skill-category">
-                        <a>屬性</a>
+                        <img>
                     </div>
 
                     <div class="skill-name">
                         <a></a>
                     </div>
 
-                </div>
-
-                <div class="pokemon-skill">
-
-                    <div class="skill-category">
-                        <a>屬性</a>
-                    </div>
-
-                    <div class="skill-name">
-                        <a></a>
-                    </div>
-
-                </div>
-
-                <div class="pokemon-skill">
-
-                    <div class="skill-category">
-                        <a>屬性</a>
-                    </div>
-
-                    <div class="skill-name">
-                        <a></a>
-                    </div>
-
-                </div>
-
-                <div class="pokemon-skill">
-
-                    <div class="skill-category">
-                        <a>屬性</a>
-                    </div>
-
-                    <div class="skill-name">
+                    <div class="skill-attack">
                         <a></a>
                     </div>
 
@@ -239,7 +218,19 @@
                 </div>
 
                 <div class="skill-description">
-                    <p>123456</p>
+                    <p></p>
+                </div>
+
+                <div class="pokemon-btn-box">
+                    <div class="pokemon-btn">
+                        <a>道具</a>
+                    </div>
+                    <div class="pokemon-btn">
+                        <a>盒子</a>
+                    </div>
+                    <div class="pokemon-btn">
+                        <a>放生</a>
+                    </div>
                 </div>
 
             </div>
@@ -251,10 +242,6 @@
 </div>
 
 <script>
-
-    function clickPokemon() {
-
-    }
 
     function logout() {
         window.location.href = "/users/login";

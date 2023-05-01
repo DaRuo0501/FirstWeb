@@ -194,7 +194,7 @@
     <div class="right">
         <form class="poke-box" th:each="pokemon : ${pokemons}">
             <div class="poke-image-box">
-                <a><img th:src="@{*{pokemon.imageUrl}}"></a>
+                <a><img th:src="@{*{pokemon.pokemonImageUrl}}"></a>
             </div>
             <div class="poke-text-box">
                 <div class="text-box"><span>編號 : <a th:text="*{pokemon.pokemonId}"></a></span></div>

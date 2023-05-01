@@ -19,7 +19,7 @@ public interface ShopCarService {
 
     void reduceCount(TempShopCar tempBuyCnt);
 
-    void deletePokemonById(TempShopCar tempShopCar);
+    void deletePokemonById(Integer userId, Integer pokemonId);
 
     void updateAmountById(TempShopCar tempShopCar, TempPokemon tempPokemon);
 

@@ -52,6 +52,7 @@ public class OrderController {
 
             TempUser tempUser = new TempUser();
             tempUser.setUserId(user.getUserId());
+            tempUser.setMoney(user.getMoney());
 
             // 檢查 使用者的現金是否足夠
             if (user.getMoney() >= totalAmount) {
@@ -61,7 +62,7 @@ public class OrderController {
                 tempOrder.setTotalAmount(totalAmount);  // 訂單的 總價格
 
                 // 建立訂單
-                orderService.createOrderById(tempOrder, tempUser);
+                orderService.createOrderById(tempOrder, tempUser, session);
 
             } else {
 

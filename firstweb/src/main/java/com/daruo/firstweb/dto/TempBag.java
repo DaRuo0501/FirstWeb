@@ -10,7 +10,7 @@ public class TempBag {
     private Integer userId;
     private Integer pokemonId;
     private String pokemonName;
-    private String imageUrl;
+    private String pokemonImageUrl;
     private PokemonCategory category;
     private Integer hp;
     private Integer lv;
@@ -18,13 +18,12 @@ public class TempBag {
     private Integer attack;
     private Integer defense;
     private Integer speed;
+    private Integer price;
+    private String description;
     private String skill1;
     private String skill2;
     private String skill3;
     private String skill4;
-    private Integer price;
-    private Integer stock;
-    private Integer buyCnt;
     private Date createdDate;
     private Date lastModifiedDate;
 
@@ -60,12 +59,12 @@ public class TempBag {
         this.pokemonName = pokemonName;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getPokemonImageUrl() {
+        return pokemonImageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setPokemonImageUrl(String pokemonImageUrl) {
+        this.pokemonImageUrl = pokemonImageUrl;
     }
 
     public PokemonCategory getCategory() {
@@ -124,6 +123,22 @@ public class TempBag {
         this.speed = speed;
     }
 
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getSkill1() {
         return skill1;
     }
@@ -154,30 +169,6 @@ public class TempBag {
 
     public void setSkill4(String skill4) {
         this.skill4 = skill4;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    public Integer getStock() {
-        return stock;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
-
-    public Integer getBuyCnt() {
-        return buyCnt;
-    }
-
-    public void setBuyCnt(Integer buyCnt) {
-        this.buyCnt = buyCnt;
     }
 
     public Date getCreatedDate() {

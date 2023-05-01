@@ -8,7 +8,7 @@ public class Pokemon {
 
     private Integer pokemonId;
     private String pokemonName;
-    private String imageUrl;
+    private String pokemonImageUrl;
     private PokemonCategory category;
     private Integer hp;
     private Integer lv;
@@ -42,12 +42,12 @@ public class Pokemon {
         this.pokemonName = pokemonName;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getPokemonImageUrl() {
+        return pokemonImageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setPokemonImageUrl(String pokemonImageUrl) {
+        this.pokemonImageUrl = pokemonImageUrl;
     }
 
     public PokemonCategory getCategory() {

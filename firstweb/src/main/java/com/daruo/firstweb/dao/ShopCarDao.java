@@ -18,7 +18,7 @@ public interface ShopCarDao {
 
     void reduceCount(TempShopCar tempShopCar);
 
-    void deletePokemonById(TempShopCar tempShopCar);
+    void deletePokemonById(Integer userId, Integer pokemonId);
 
     void updateAmountById(TempShopCar tempShopCar, TempPokemon tempPokemon);
 
@@ -31,4 +31,6 @@ public interface ShopCarDao {
     void addShopCar(TempUser tempUser, TempPokemon tempPokemon, TempShopCar tempShopCar);
 
     TempShopCar getShopCarLastPokemonByUserId(Integer userId);
+
+    void deleteShopCarByUserId(Integer userId);
 }

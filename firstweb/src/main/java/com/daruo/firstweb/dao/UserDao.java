@@ -26,7 +26,7 @@ public interface UserDao {
 
     List<User> getUsersByName(String userName);
 
-    void updateUserMoney(int userId, int money);
+    void updateUserMoney(Integer userId, Integer updateMoney);
 
     TempUser getTempUserById(Integer userId);
 }

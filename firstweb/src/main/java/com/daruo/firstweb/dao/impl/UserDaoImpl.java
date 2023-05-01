@@ -174,13 +174,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void updateUserMoney(int userId, int newMoney) {
+    public void updateUserMoney(Integer userId, Integer updateMoney) {
 
         String sql = "UPDATE user SET money = :money WHERE user_id = :userId;";
 
         Map<String, Object> map = new HashMap<>();
         map.put("userId", userId);
-        map.put("money", newMoney);
+        map.put("money", updateMoney);
 
         namedParameterJdbcTemplate.update(sql, map);
 

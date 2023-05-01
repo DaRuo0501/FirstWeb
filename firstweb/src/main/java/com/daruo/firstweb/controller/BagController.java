@@ -35,7 +35,6 @@ public class BagController {
         TempPokemon tempPokemon = bagService.getPokemonById(user.getUserId(), pokemonId);
 
         model.addAttribute("skills", tempPokemon);
-
         return "bag";
     }
 }
