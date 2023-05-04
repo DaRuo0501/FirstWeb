@@ -615,6 +615,8 @@ tbody tr {
     border: 1px solid #23242a;
     border-radius: 8px;
     margin-left: 10px;
+    cursor: pointer;
+    user-select: none;
 }
 
 .total-box input[type="submit"]:hover {

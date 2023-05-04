@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS user
 
 INSERT INTO user(user_name, password, email, user_image_url, money, created_date, last_modified_date)
 VALUES  ('John'  , '202cb962ac59075b964b07152d234b70', 'john@gmail.com', '', 1000, '2023-03-08 12:30:00', '2023-03-08 12:30:00'),
-        ('DaRuo' , '202cb962ac59075b964b07152d234b70', 'daruo@gmail.com', '', 100, '2023-03-08 12:35:00', '2023-03-08 12:35:00'),
+        ('DaRuo' , '202cb962ac59075b964b07152d234b70', 'daruo@gmail.com', '', 1000, '2023-03-08 12:35:00', '2023-03-08 12:35:00'),
         ('XingYi', '202cb962ac59075b964b07152d234b70', 'xingyi@gmail.com', '', 100, '2023-03-08 12:37:00', '2023-03-08 12:37:00'),
         ('Jay'   , '202cb962ac59075b964b07152d234b70', 'jay@gmail.com', '', 100, '2023-03-09 08:15:00', '2023-03-09 08:15:00'),
         ('Jolin' , '202cb962ac59075b964b07152d234b70', 'jolin@gmail.com', '', 100, '2023-03-09 11:20:00', '2023-03-09 11:20:00'),
@@ -315,7 +315,7 @@ DROP TABLE IF EXISTS bag;
 
 CREATE TABLE IF NOT EXISTS bag
 (
-  bag_id                INT            NOT NULL   PRIMARY KEY   AUTO_INCREMENT,
+  bag_id                INT            NOT NULL,
   user_id               INT            NOT NULL,
   pokemon_id            INT            NOT NULL,
   pokemon_name          VARCHAR(255)   NOT NULL,
@@ -337,19 +337,38 @@ CREATE TABLE IF NOT EXISTS bag
   last_modified_date    TIMESTAMP      NOT NULL
 );
 
-INSERT INTO bag (user_id, pokemon_id, pokemon_name, pokemon_image_url, category, hp, lv, exp, attack, defense, speed, price, description, skill_1, skill_2, skill_3, skill_4, created_date, last_modified_date)
-VALUES (:userId, :pokemonId, :pokemonName, :pokemonImageUrl, :category, :hp, :lv, :exp, :attack, :defense, :speed, :price, :description, :skill1, :skill2, :skill3, :skill4, :createdDate, :lastModifiedDate);
 
-SELECT user_id, pokemon_id from bag WHERE user_id = :userId;
+SELECT * from bag WHERE user_id = 1 LIMIT 6 OFFSET 1;
 
-SELECT * FROM bag b, pokemon p WHERE b.pokemon_id = p.pokemon_id;
+DELETE FROM bag WHERE user_id = 2 AND bag_id = 4;
 
-SELECT * FROM shopping_car WHERE user_id = :userId;
+UPDATE bag SET bag_id = 4 WHERE user_id = 1 AND bag_id = 5;
 
-SELECT user_id, user_name, password, email, money, created_date, last_modified_date FROM user WHERE user_id = :userId;
+UPDATE shopping_car SET buy_cnt = :buyCnt WHERE user_id = :userId AND pokemon_id = :pokemonId;
 
-INSERT INTO shopping_car(user_id, seq_no, pokemon_id, pokemon_name, pokemon_image_url, order_id, price, stock, buy_cnt, amount) VALUES (:userId, :seqNo, :pokemonId, :pokemonName, :pokemonImageUel, :orderId, :price, :stock, 1, :amount);
+# 盒子
+DROP TABLE IF EXISTS box;
 
-SELECT seq_no, user_id, pokemon_id, pokemon_name, pokemon_image_url, order_id, price, stock, buy_cnt, amount FROM shopping_car WHERE user_id = :userId ORDER BY seq_no DESC;
-
-
+CREATE TABLE IF NOT EXISTS box
+(
+    box_id                INT            NOT NULL   PRIMARY KEY,
+    user_id               INT            NOT NULL,
+    pokemon_id            INT            NOT NULL,
+    pokemon_name          VARCHAR(255)   NOT NULL,
+    pokemon_image_url     VARCHAR(255)   NOT NULL,
+    category              VARCHAR(32)    NOT NULL,
+    hp                    INT            NOT NULL,
+    lv                    INT            NOT NULL,
+    exp                   INT            NOT NULL,
+    attack                INT            NOT NULL,
+    defense               INT            NOT NULL,
+    speed                 INT            NOT NULL,
+    price                 INT            NOT NULL,
+    description           VARCHAR(1024),
+    skill_1               VARCHAR(255) ,
+    skill_2               VARCHAR(255) ,
+    skill_3               VARCHAR(255) ,
+    skill_4               VARCHAR(255) ,
+    created_date          TIMESTAMP      NOT NULL,
+    last_modified_date    TIMESTAMP      NOT NULL
+);

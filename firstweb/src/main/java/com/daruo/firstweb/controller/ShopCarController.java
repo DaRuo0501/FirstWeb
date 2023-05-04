@@ -35,7 +35,6 @@ public class ShopCarController {
     // 新增商品至購物車
     @GetMapping("/shopCar/create/{pokemonId}")
     public String createShopCar(@PathVariable(name = "pokemonId") Integer pokemonId,
-                                Model model,
                                 HttpSession session,
                                 HttpServletRequest request) {
 

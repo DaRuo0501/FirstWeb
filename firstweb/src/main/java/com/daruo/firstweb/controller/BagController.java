@@ -1,40 +1,64 @@
 package com.daruo.firstweb.controller;
 
-import com.daruo.firstweb.dto.TempBag;
-import com.daruo.firstweb.dto.TempPokemon;
 import com.daruo.firstweb.dto.TempUser;
 import com.daruo.firstweb.model.User;
 import com.daruo.firstweb.service.BagService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
-import java.util.List;
 
 @Controller
 public class BagController {
 
+    private final static Logger log = LoggerFactory.getLogger(BagController.class);
+
     @Autowired
     private BagService bagService;
 
-    @GetMapping("/bag/getPokemon/{pokemonId}")
-    public String getPokemonById(@PathVariable Integer pokemonId,
-                                 HttpServletRequest request,
-                                 HttpSession session,
-                                 Model model
+    // 刪除
+    @GetMapping("/users/bag/delete/{bagId}")
+    public String deleteById(@PathVariable Integer bagId,
+                             HttpServletRequest request,
+                             HttpSession session
     ) {
 
         // 取得 當前使用者
         session = request.getSession();
         User user = (User) session.getAttribute("showUserName");
 
-        TempPokemon tempPokemon = bagService.getPokemonById(user.getUserId(), pokemonId);
+        TempUser tempUser = new TempUser();
+        tempUser.setUserId(user.getUserId());
+        tempUser.setMoney(user.getMoney());
 
-        model.addAttribute("skills", tempPokemon);
-        return "bag";
+        bagService.deleteById(tempUser.getUserId(), bagId);
+
+        return "redirect:/users/bag";
     }
+
+    // 收藏
+    @GetMapping("/users/bag/goToBox/{bagId}")
+    public String goToBoxById(@PathVariable Integer bagId,
+                              HttpServletRequest request,
+                              HttpSession session
+    ) {
+
+        // 取得 當前使用者
+        session = request.getSession();
+        User user = (User) session.getAttribute("showUserName");
+
+        TempUser tempUser = new TempUser();
+        tempUser.setUserId(user.getUserId());
+        tempUser.setMoney(user.getMoney());
+
+        bagService.goToBoxById(tempUser.getUserId(), bagId);
+
+
+        return "redirect:/users/bag";
+    }
+
 }

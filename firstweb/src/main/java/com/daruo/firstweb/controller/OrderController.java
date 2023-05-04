@@ -3,10 +3,7 @@ package com.daruo.firstweb.controller;
 import com.daruo.firstweb.dto.*;
 import com.daruo.firstweb.model.Order;
 import com.daruo.firstweb.model.User;
-import com.daruo.firstweb.service.BagService;
-import com.daruo.firstweb.service.OrderService;
-import com.daruo.firstweb.service.PokemonService;
-import com.daruo.firstweb.service.ShopCarService;
+import com.daruo.firstweb.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
@@ -23,6 +20,9 @@ import java.util.List;
 public class OrderController {
 
     private final static Logger log = LoggerFactory.getLogger(OrderController.class);
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private OrderService orderService;
@@ -55,7 +55,7 @@ public class OrderController {
             tempUser.setMoney(user.getMoney());
 
             // 檢查 使用者的現金是否足夠
-            if (user.getMoney() >= totalAmount) {
+            if (tempUser.getMoney() >= totalAmount) {
 
                 TempOrder tempOrder = new TempOrder();
                 tempOrder.setUserId(user.getUserId());  // 購買人

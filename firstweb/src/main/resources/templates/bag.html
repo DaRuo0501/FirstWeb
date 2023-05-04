@@ -71,10 +71,6 @@
                         </a>
                     </li>
 
-                    <li class="box-menu"><a href="#"> <i
-                            class="fa-regular fa-address-card"></i> <span class="link_name">名片</span>
-                    </a></li>
-
                     <li class="box-menu active">
                         <a href="#">
                             <i class="fa-solid fa-bag-shopping"></i>
@@ -82,9 +78,19 @@
                         </a>
                     </li>
 
-                    <li class="box-menu"><a href="#"> <i
-                            class="fa-solid fa-book"></i> <span class="link_name">部落格</span>
-                    </a></li>
+                    <li class="box-menu">
+                        <a href="#">
+                            <i class="fa-solid fa-box-archive"></i>
+                            <span class="link_name">盒子</span>
+                        </a>
+                    </li>
+
+                    <li class="box-menu">
+                        <a href="#">
+                            <i class="fa-solid fa-book"></i>
+                            <span class="link_name">技能</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </li>
@@ -128,13 +134,13 @@
 <!-- 內文 -->
 <div class="right-body">
 
-    <div class="content-body">
+    <form class="content-body" action="/users/bag" method="get">
 
         <div class="content-box">
 
-            <div class="pokemon-box" th:each="bag : ${bags}">
+            <!--  六隻 寶可夢的選擇欄  -->
+            <div class="pokemon-box" th:each="bag : ${bagList}">
 
-                <!--  六隻 寶可夢的選擇欄  -->
                 <div class="pokemon-text-box">
 
                     <!--  名字  -->
@@ -153,95 +159,58 @@
                     <img th:src="@{*{bag.pokemonImageUrl}}">
                 </div>
 
-                <div class="pokemon-text-box">
+                <div class="pokemon-lv-box">
 
                     <!--  等級  -->
                     <div class="pokemon-lv">
                         <p>等級 :</p><span th:text="*{bag.lv}"></span>
                     </div>
 
-                    <div class="btn-box">
-
-                        <!--  查看 能力值  -->
-                        <div class="pokemon-btn">
-                            <a>查看</a>
-                        </div>
-
-                    </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="skill-box">
-
-            <!--  目前持有技能  -->
-            <div class="pokemon-skill-box">
-
-                <div class="skill-title">
-                    <p></p><p>可使用的技能</p>
-                </div>
-
-                <div class="skill-title-text">
-                    <p>屬性</p><p>名稱</p><p>威力</p>
-                </div>
-
-                <div class="pokemon-skill" th:each="skill,s : ${skilltest}">
-
-                    <div class="skill-category">
-                        <img>
-                    </div>
-
-                    <div class="skill-name">
-                        <a></a>
-                    </div>
-
-                    <div class="skill-attack">
-                        <a></a>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="skill-text">
 
                 <div class="skill-content">
                     <div class="skill-content-text">
-                        <p>攻擊力 :</p><span></span>
+                        <p>攻擊力 :</p><span th:text="*{bag.attack}"></span>
                     </div>
                     <div class="skill-content-text">
-                        <p>防禦力 :</p><span></span>
+                        <p>防禦力 :</p><span th:text="*{bag.defense}"></span>
                     </div>
                     <div class="skill-content-text">
-                        <p>速度 :</p><span></span>
+                        <p>速度 :</p><span th:text="*{bag.speed}"></span>
                     </div>
                 </div>
 
                 <div class="skill-description">
-                    <p></p>
+                    <p  th:text="*{bag.description}"></p>
                 </div>
 
                 <div class="pokemon-btn-box">
                     <div class="pokemon-btn">
+                        <a>技能</a>
+                    </div>
+                    <div class="pokemon-btn">
                         <a>道具</a>
                     </div>
                     <div class="pokemon-btn">
-                        <a>盒子</a>
+                        <a th:href="@{'/users/bag/goToBox/' + *{bag.getBagId()}}">盒子</a>
                     </div>
                     <div class="pokemon-btn">
-                        <a>放生</a>
+                        <a th:href="@{'/users/bag/delete/' + *{bag.getBagId()}}">放生</a>
                     </div>
                 </div>
-
             </div>
 
         </div>
 
-    </div>
+    </form>
 
 </div>
 
 <script>
+
+    function clickPage() {
+        document.getElementById("btn-right-box").submit();
+    }
 
     function logout() {
         window.location.href = "/users/login";

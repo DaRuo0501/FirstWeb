@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -41,9 +42,8 @@ public class PageController {
     @Autowired
     private BagService bagService;
 
-    @Autowired SkillService skillService;
-
-    private Pokemon pokemon;
+    @Autowired
+    private SkillService skillService;
 
     // 登入頁面
     @GetMapping(value = {"/users/login", "/"})
@@ -89,8 +89,11 @@ public class PageController {
     // 背包
     @GetMapping("/users/bag")
     public String bag(Model model,
-                         HttpSession session,
-                         HttpServletRequest request
+                      HttpSession session,
+                      HttpServletRequest request,
+
+                      // 查詢條件 Filtering
+                      @RequestParam(defaultValue = "0") @Min(0) @Max(5) Integer bagId
     ) {
 
         try {
@@ -99,9 +102,25 @@ public class PageController {
             session = request.getSession();
             User user = (User) session.getAttribute("showUserName");
 
+            TempUser tempUser = new TempUser();
+            tempUser.setUserId(user.getUserId());
+
+            // 取得 使用者的背包
             List<TempBag> tempBagList = bagService.getBag(user.getUserId());
 
-            model.addAttribute("bags", tempBagList);
+            model.addAttribute("bagList", tempBagList);
+
+            model.addAttribute("bagId",bagId);
+
+            // 取得 背包的 第一個商品
+            String tempPokemonName = tempBagList.get(bagId).getPokemonName();
+
+            model.addAttribute("pokemonName", tempPokemonName);
+
+            // 取得 商品的 技能
+            List<TempSkill> tempSkillList = skillService.getSkillByName(tempUser, tempPokemonName);
+
+            model.addAttribute("skillList", tempSkillList);
 
             return "bag";
 
@@ -256,6 +275,10 @@ public class PageController {
 
             model.addAttribute("shopCars", tempShopCarList);
 
+            User u = userService.getUserById(user.getUserId());
+
+            model.addAttribute("user", u);
+
             // session 不是 null
             if (session.getAttribute("msg") != null) {
 
@@ -321,7 +344,7 @@ public class PageController {
 
     // 使用者清單
     @GetMapping("/users/userList")
-    public String home(Model model,
+    public String userList(Model model,
 
                        // 分頁 Pagination
                        @RequestParam(defaultValue = "5") @Max(1000) @Min(0) Integer limit,

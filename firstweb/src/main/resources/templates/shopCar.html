@@ -193,7 +193,7 @@
                     <div class="content-table-footer">
                         <div class="total-box">
                             <span>您擁有的現金: </span>
-                            <input type="text" name="totalAmount" th:value="${session.showUserName.money}" readonly="readonly">
+                            <input type="text" name="totalAmount" th:value="${user.money}" readonly="readonly">
                         </div>
 
                         <div class="total-box">
@@ -246,11 +246,6 @@
         } else {
             document.getElementById("errorMsg").hidden = true;
         }
-    }
-
-    // 下拉選單 選擇後 自動 submit 向後台傳遞參數
-    function reflashPage() {
-        document.getElementById("search-reflash").submit();
     }
 
     // 倒計時器

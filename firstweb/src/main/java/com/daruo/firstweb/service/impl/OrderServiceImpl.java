@@ -32,6 +32,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private BagDao bagDao;
 
+    @Autowired
+    private  BoxDao boxDao;
+
     @Transactional
     @Override
     public void createOrderById(TempOrder tempOrder, TempUser tempUser, HttpSession session) {
@@ -50,15 +53,33 @@ public class OrderServiceImpl implements OrderService {
                     // 查詢 欲購買的商品 架上是否有貨
                     TempPokemon tempPokemon = pokemonDao.getPokemonById(tempShopCar.getPokemonId());
 
+                    // 檢查 商品的 庫存 是否還有貨
                     if (tempPokemon.getStock() > 0) {
 
+                        // 預更新的商品庫存 = 商品庫存 - 訂單購買數量
                         tempPokemon.setStock(tempPokemon.getStock() - tempShopCar.getBuyCnt());
 
                         // 扣除貨架上的商品數量
                         pokemonDao.updatePokemonCountById(tempShopCar.getPokemonId(), tempPokemon.getStock());
 
-                        // 將商品 放入使用者的背包
-                        bagDao.createBag(tempOrder.getUserId(), tempPokemon);
+                        // 取得 使用者的 背包
+                        List<TempBag> tempBagList = bagDao.getBag(tempUser.getUserId());
+
+                        // 背包容量 只能放入 6 個商品，其餘的商品放入 盒子
+                        if (tempBagList.size() < 6) {
+
+                            Integer tempBagLastId = bagDao.getLastBagIdByUserId(tempOrder.getUserId());
+
+                            // 將商品 放入使用者的背包
+                            bagDao.createBag(tempOrder.getUserId(), tempPokemon, tempBagLastId);
+
+                        } else {
+
+                            Integer tempBoxLastId = boxDao.getLastBoxIdByUserId(tempOrder.getUserId());
+
+                            // 將商品 放入使用者的盒子
+                            boxDao.createBox(tempOrder.getUserId(), tempPokemon, tempBoxLastId);
+                        }
 
                     } else {
 

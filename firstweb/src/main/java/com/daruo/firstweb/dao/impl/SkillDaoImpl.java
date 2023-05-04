@@ -20,7 +20,8 @@ public class SkillDaoImpl implements SkillDao {
     @Override
     public List<TempSkill> getSkillByName(String skillName1, String skillName2, String skillName3, String skillName4) {
 
-        String sql = "SELECT * FROM skill WHERE skill_name = :skillName1 OR skill_name = :skillName2 OR skill_name = :skillName3 OR skill_name = :skillName4;";
+        String sql = "SELECT * FROM skill WHERE skill_name = :skillName1 OR skill_name = :skillName2 " +
+                "OR skill_name = :skillName3 OR skill_name = :skillName4;";
 
         Map<String, Object> map = new HashMap<>();
         map.put("skillName1", skillName1);

@@ -12,6 +12,7 @@ public class TempBagRowMapper implements RowMapper {
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 
         TempBag tempBag = new TempBag();
+        tempBag.setBagId(rs.getInt("bag_id"));
         tempBag.setUserId(rs.getInt("user_id"));
         tempBag.setPokemonId(rs.getInt("pokemon_id"));
         tempBag.setPokemonName(rs.getString("pokemon_name"));
