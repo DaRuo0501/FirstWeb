@@ -413,7 +413,7 @@ header span {
     align-items: center;
     flex-direction: column;
     width: 320px;
-    height: 290px;
+    height: 220px;
     margin: 30px 15px;
     color: #efeff1;
     background: #1f1f23;
@@ -447,7 +447,7 @@ header span {
     flex-wrap: wrap;
     width: 100%;
     background: #18181b;
-    padding: 5px 3px;
+    padding: 5px 10px;
 }
 
 .poke-text-box .text-box {
@@ -468,7 +468,7 @@ header span {
     flex-wrap: wrap;
     width: 100%;
     background: #23242a;
-    padding: 5px 3px;
+    padding: 5px 10px;
 }
 
 .poke-skill-box .skill-box {
@@ -492,7 +492,7 @@ header span {
     flex-wrap: wrap;
     width: 100%;
     background: #18181b;
-    padding: 5px 3px;
+    padding: 5px 10px;
 }
 
 .poke-price-stock-box .price-stock-box {

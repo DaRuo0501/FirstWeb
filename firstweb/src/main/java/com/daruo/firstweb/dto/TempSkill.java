@@ -11,6 +11,8 @@ public class TempSkill {
     private String skillCategoryUrl;
     private Integer skillAttack;
     private String skillDescription;
+    private Integer pokemonId;
+    private String pokemonName;
 
     public Integer getSkillId() {
         return skillId;
@@ -66,5 +68,21 @@ public class TempSkill {
 
     public void setSkillDescription(String skillDescription) {
         this.skillDescription = skillDescription;
+    }
+
+    public Integer getPokemonId() {
+        return pokemonId;
+    }
+
+    public void setPokemonId(Integer pokemonId) {
+        this.pokemonId = pokemonId;
+    }
+
+    public String getPokemonName() {
+        return pokemonName;
+    }
+
+    public void setPokemonName(String pokemonName) {
+        this.pokemonName = pokemonName;
     }
 }

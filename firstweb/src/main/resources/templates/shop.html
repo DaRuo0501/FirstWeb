@@ -204,14 +204,9 @@
                 <div class="skill-box"><span>屬性 : <a th:text="*{pokemon.category}"></a></span></div>
                 <div class="skill-box"><span>等級 : <a th:text="*{pokemon.lv}"></a></span></div>
             </div>
-            <div class="poke-text-box">
-                <div class="text-box"><span>技能一 : <a></a></span></div>
-                <div class="text-box"><span>技能二 : <a></a></span></div>
-            </div>
-            <div class="poke-skill-box">
-                <div class="skill-box"><span>技能三 : <a></a></span></div>
-                <div class="skill-box"><span>技能四 : <a></a></span></div>
-            </div>
+<!--            <div class="poke-text-box" th:each="skills : ${shopSkills}">-->
+<!--                <div class="text-box"><span>技能 : <a th:text="${shopSkills.get(1).skillName}"></a></span></div>-->
+<!--            </div>-->
             <div class="poke-price-stock-box">
                 <div class="price-stock-box"><span>商品價格 : <a th:text="*{pokemon.price}"></a></span></div>
                 <div class="price-stock-box"><span>庫存數量 : <a th:text="*{pokemon.stock}"></a></span></div>

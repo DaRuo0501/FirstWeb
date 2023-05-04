@@ -211,15 +211,6 @@ public class PageController {
 
             model.addAttribute("pokemons", tempPokemonList);
 
-            for (TempPokemon tempPokemon : tempPokemonList) {
-
-                List<TempSkill> tempSkillList = skillService.getSkillByPokemonId(tempPokemon.getPokemonId());
-
-                model.addAttribute("shopSkills", tempSkillList);
-            }
-
-
-
             // 獲取 屬性
             List<TempPokemon> categorys = pokemonService.getCategory();
 

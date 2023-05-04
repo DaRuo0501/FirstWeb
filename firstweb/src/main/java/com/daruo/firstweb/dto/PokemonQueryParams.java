@@ -12,7 +12,6 @@ public class PokemonQueryParams {
     private Integer offset;
     private Integer priceMin;
     private Integer priceMax;
-    private Integer buyCnt;
 
     public PokemonCategory getPokemonCategory() {
         return pokemonCategory;
