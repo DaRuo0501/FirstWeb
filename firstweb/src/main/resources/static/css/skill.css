@@ -422,6 +422,10 @@ header span {
     height: 50px;
 }
 
+.skill-name-box p {
+    letter-spacing: 5px;
+}
+
 .skill-attack-box {
     display: flex;
     justify-content: center;

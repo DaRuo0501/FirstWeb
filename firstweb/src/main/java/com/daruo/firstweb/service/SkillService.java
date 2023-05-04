@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface SkillService {
 
-    List<TempSkill> getSkillByPokemonId(Integer pokemonId);
+    List<TempSkill> getSkillByPokemonId(Integer userId, Integer pokemonId);
 }

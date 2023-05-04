@@ -141,10 +141,9 @@ public class PageController {
         model.addAttribute("bagPokemon", tempBag);
 
         // 取得 商品的 技能
-//        List<TempSkill> tempSkillList = skillService.getSkillByName(tempUser, tempBag.getPokemonName());
+        List<TempSkill> tempSkillList = skillService.getSkillByPokemonId(tempUser.getUserId(), tempBag.getPokemonId());
 
-//        model.addAttribute("skillList", tempSkillList);
-
+        model.addAttribute("skillList", tempSkillList);
 
         return "skill";
     }
