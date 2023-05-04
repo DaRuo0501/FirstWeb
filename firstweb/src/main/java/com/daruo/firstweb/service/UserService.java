@@ -9,13 +9,13 @@ public interface UserService {
 
     String register(UserRegisterRequest userRegisterRequest);
 
-    User login(UserLoginRequest userLoginRequest);
+    TempUser login(UserLoginRequest userLoginRequest);
 
-    List<User> getAllUsers(UserQueryParams userQueryParams);
+    List<TempUser> getAllUsers(UserQueryParams userQueryParams);
 
     void deleteUserById(Integer userId);
 
     void updateUser(UserUpdateRequest userUpdateRequest);
 
-    User getUserById(Integer userId);
+    TempUser getUserById(Integer userId);
 }

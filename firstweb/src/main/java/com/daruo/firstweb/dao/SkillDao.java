@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface SkillDao {
 
-    void remove(Integer userId, String skillName);
+    List<TempSkill> getSkillByPokemonId(Integer pokemonId);
 }

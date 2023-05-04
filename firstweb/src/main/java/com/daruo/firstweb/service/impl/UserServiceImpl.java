@@ -24,8 +24,8 @@ public class UserServiceImpl implements UserService {
     public String register(UserRegisterRequest userRegisterRequest) {
 
         // 分別使用帳號與信箱取得資料庫內的使用者
-        User userName = userDao.getUserByName(userRegisterRequest.getUserName());
-        User userEmail = userDao.getUserByEmail(userRegisterRequest.getEmail());
+        TempUser userName = userDao.getUserByName(userRegisterRequest.getUserName());
+        TempUser userEmail = userDao.getUserByEmail(userRegisterRequest.getEmail());
 
         // 檢查註冊的 userName
         if (userName != null) {
@@ -52,13 +52,13 @@ public class UserServiceImpl implements UserService {
 
     // 登入
     @Override
-    public User login(UserLoginRequest userLoginRequest) {
+    public TempUser login(UserLoginRequest userLoginRequest) {
 
         // 使用 userName 來取得使用者
-        User user1 = userDao.getUserByName(userLoginRequest.getUserName());
+        TempUser tempUser = userDao.getUserByName(userLoginRequest.getUserName());
 
         // 檢查 user 是否已註冊
-        if (user1 == null) {
+        if (tempUser == null) {
             return null;
         }
 
@@ -66,8 +66,8 @@ public class UserServiceImpl implements UserService {
         String hashedPassword = DigestUtils.md5DigestAsHex(userLoginRequest.getPassword().getBytes());
 
         // 比較 password
-        if (user1.getPassword().equals(hashedPassword)) {
-            return user1;
+        if (tempUser.getPassword().equals(hashedPassword)) {
+            return tempUser;
         } else {
             System.out.println("登入密碼錯誤");
             return null;
@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
 
     // 查詢所有使用者
     @Override
-    public List<User> getAllUsers(UserQueryParams userQueryParams) {
+    public List<TempUser> getAllUsers(UserQueryParams userQueryParams) {
         return userDao.getAllUsers(userQueryParams);
     }
 
@@ -91,10 +91,10 @@ public class UserServiceImpl implements UserService {
     public void updateUser(UserUpdateRequest userUpdateRequest) {
 
         // 使用 ID 從資料庫 取出同一筆 使用者資料
-        User user = getUserById(userUpdateRequest.getUserId());
+        TempUser tempUser = getUserById(userUpdateRequest.getUserId());
 
         // 比較前端與資料庫，同一筆資料的密碼是否相同
-        if (userUpdateRequest.getPassword().equals(user.getPassword())) {
+        if (userUpdateRequest.getPassword().equals(tempUser.getPassword())) {
 
             // 如果密碼相同，代表前端此次未修改密碼
             // 不需產生新的雜湊值，直接更新資料
@@ -111,7 +111,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(Integer userId) {
+    public TempUser getUserById(Integer userId) {
         return userDao.getUserById(userId);
     }
 }

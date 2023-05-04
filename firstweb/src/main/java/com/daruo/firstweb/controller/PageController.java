@@ -68,11 +68,11 @@ public class PageController {
     public String goToUpdateUserPage(@PathVariable(name = "userId") Integer userId,
                                      Model model) {
 
-        User user = userService.getUserById(userId);
+        TempUser tempUser = userService.getUserById(userId);
 
-        model.addAttribute("updateUser", user);
+        model.addAttribute("updateUser", tempUser);
 
-        if (user == null) {
+        if (tempUser == null) {
             throw new RuntimeException();
         } else {
 
@@ -100,13 +100,10 @@ public class PageController {
 
             // 取得 當前使用者
             session = request.getSession();
-            User user = (User) session.getAttribute("showUserName");
-
-            TempUser tempUser = new TempUser();
-            tempUser.setUserId(user.getUserId());
+            TempUser tempUser = (TempUser) session.getAttribute("showUserName");
 
             // 取得 使用者的背包
-            List<TempBag> tempBagList = bagService.getBag(user.getUserId());
+            List<TempBag> tempBagList = bagService.getBag(tempUser.getUserId());
 
             model.addAttribute("bagList", tempBagList);
 
@@ -137,11 +134,7 @@ public class PageController {
 
         // 取得 當前使用者
         session = request.getSession();
-        User user = (User) session.getAttribute("showUserName");
-
-        TempUser tempUser = new TempUser();
-        tempUser.setUserId(user.getUserId());
-        tempUser.setMoney(user.getMoney());
+        TempUser tempUser = (TempUser) session.getAttribute("showUserName");
 
         TempBag tempBag = bagService.goToSkillUpdatePage(tempUser.getUserId(), bagId);
 
@@ -149,7 +142,7 @@ public class PageController {
 
         // 取得 商品的 技能
 //        List<TempSkill> tempSkillList = skillService.getSkillByName(tempUser, tempBag.getPokemonName());
-//
+
 //        model.addAttribute("skillList", tempSkillList);
 
 
@@ -214,12 +207,21 @@ public class PageController {
             pokemonQueryParams.setOffset(offset);
 
             // 獲取 寶可夢
-            List<Pokemon> pokemonList = pokemonService.getPokemons(pokemonQueryParams);
+            List<TempPokemon> tempPokemonList = pokemonService.getPokemons(pokemonQueryParams);
 
-            model.addAttribute("pokemons", pokemonList);
+            model.addAttribute("pokemons", tempPokemonList);
+
+            for (TempPokemon tempPokemon : tempPokemonList) {
+
+                List<TempSkill> tempSkillList = skillService.getSkillByPokemonId(tempPokemon.getPokemonId());
+
+                model.addAttribute("shopSkills", tempSkillList);
+            }
+
+
 
             // 獲取 屬性
-            List<Pokemon> categorys = pokemonService.getCategory();
+            List<TempPokemon> categorys = pokemonService.getCategory();
 
             model.addAttribute("categorys", categorys);
 
@@ -282,10 +284,10 @@ public class PageController {
             // 取得 當前使用者
             session = request.getSession();
 
-            User user = (User) session.getAttribute("showUserName");
+            TempUser tempUser = (TempUser) session.getAttribute("showUserName");
 
             // 取得 使用者的 購物車清單
-            List<TempShopCar> tempShopCarList = shopCarService.getShopCarList(user.getUserId());
+            List<TempShopCar> tempShopCarList = shopCarService.getShopCarList(tempUser.getUserId());
 
             int totalAmount = 0;
 
@@ -299,9 +301,9 @@ public class PageController {
 
             model.addAttribute("shopCars", tempShopCarList);
 
-            User u = userService.getUserById(user.getUserId());
+            TempUser tpUser = userService.getUserById(tempUser.getUserId());
 
-            model.addAttribute("user", u);
+            model.addAttribute("user", tpUser);
 
             // session 不是 null
             if (session.getAttribute("msg") != null) {
@@ -357,9 +359,9 @@ public class PageController {
         // 取得 當前使用者
         session = request.getSession();
 
-        User user = (User) session.getAttribute("showUserName");
+        TempUser tempUser = (TempUser) session.getAttribute("showUserName");
 
-        List<TempOrder> tempOrderList = orderService.getOrderById(user.getUserId());
+        List<TempOrder> tempOrderList = orderService.getOrderById(tempUser.getUserId());
 
         model.addAttribute("orders", tempOrderList);
 
@@ -379,9 +381,9 @@ public class PageController {
         userQueryParams.setLimit(limit);
         userQueryParams.setOffset(offset);
 
-        List<User> userList = userService.getAllUsers(userQueryParams);
+        List<TempUser> tempUserList = userService.getAllUsers(userQueryParams);
 
-        model.addAttribute("users", userList);
+        model.addAttribute("users", tempUserList);
 
         return "userList";
     }

@@ -18,9 +18,10 @@ public class SkillDaoImpl implements SkillDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public void remove(Integer userId, String skillName) {
+    public List<TempSkill> getSkillByPokemonId(Integer pokemonId) {
 
-        String sql = "UPDATE bag SET skill_1 = '' WHERE user_id = 1 AND bag_id = 1;";
 
+
+        return null;
     }
 }

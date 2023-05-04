@@ -56,22 +56,24 @@ public class UserController {
 
     ) {
 
-        User user = userService.login(userLoginRequest);
+        TempUser tempUser = userService.login(userLoginRequest);
 
         // 將登入的用戶存在 session 再傳給 home 頁面
-        session.setAttribute("showUserName", user);
+        session.setAttribute("showUserName", tempUser);
 
         UserQueryParams userQueryParams = new UserQueryParams();
         userQueryParams.setLimit(limit);
         userQueryParams.setOffset(offset);
 
-        if (user == null) {
+        if (tempUser == null) {
             return "redirect:login";
         } else {
-            List<User> userList = userService.getAllUsers(userQueryParams);
-            model.addAttribute("users", userList);
 
-            log.info("登入帳號為:" + user.getUserName());
+            List<TempUser> tempUserList = userService.getAllUsers(userQueryParams);
+
+            model.addAttribute("users", tempUserList);
+
+            log.info("登入帳號為:" + tempUser.getUserName());
 
             return "redirect:/users/home";
         }
@@ -93,9 +95,9 @@ public class UserController {
         userQueryParams.setLimit(limit);
         userQueryParams.setOffset(offset);
 
-        List<User> userList = userService.getAllUsers(userQueryParams);
+        List<TempUser> tempUserList = userService.getAllUsers(userQueryParams);
 
-        model.addAttribute("users", userList);
+        model.addAttribute("users", tempUserList);
 
         return "userList";
     }

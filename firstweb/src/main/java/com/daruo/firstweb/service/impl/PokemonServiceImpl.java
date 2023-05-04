@@ -29,14 +29,15 @@ public class PokemonServiceImpl implements PokemonService {
 
     // 取得 全部商品
     @Override
-    public List<Pokemon> getPokemons(PokemonQueryParams pokemonQueryParams) {
+    public List<TempPokemon> getPokemons(PokemonQueryParams pokemonQueryParams) {
 
         return pokemonDao.getPokemons(pokemonQueryParams);
     }
 
     // 取得 屬性
     @Override
-    public List<Pokemon> getCategory() {
+    public List<TempPokemon> getCategory() {
+
         return pokemonDao.getCategory();
     }
 

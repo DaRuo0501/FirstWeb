@@ -24,13 +24,9 @@ public class SkillController {
 
         // 取得 當前使用者
         session = request.getSession();
-        User user = (User) session.getAttribute("showUserName");
+        TempUser tempUser = (TempUser) session.getAttribute("showUserName");
 
-        TempUser tempUser = new TempUser();
-        tempUser.setUserId(user.getUserId());
-        tempUser.setMoney(user.getMoney());
-
-        skillService.remove(tempUser.getUserId(), skillName);
+//        skillService.remove(tempUser.getUserId(), skillName);
 
     }
 }

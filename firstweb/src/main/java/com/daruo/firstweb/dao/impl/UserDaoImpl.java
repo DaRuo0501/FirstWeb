@@ -54,18 +54,18 @@ public class UserDaoImpl implements UserDao {
 
     // 使用 帳號 查詢 單一個
     @Override
-    public User getUserByName(String userName) {
+    public TempUser getUserByName(String userName) {
 
-        String sql = "SELECT user_id, user_name, password, email, money, created_date, last_modified_date " +
+        String sql = "SELECT user_id, user_name, password, email, user_image_url, money, created_date, last_modified_date " +
                 "FROM user WHERE user_name = :userName;";
 
         Map<String, Object> map = new HashMap<>();
         map.put("userName", userName);
 
-        List<User> userList = namedParameterJdbcTemplate.query(sql, map, new UserRowMapper());
+        List<TempUser> tempUserList = namedParameterJdbcTemplate.query(sql, map, new TempUserRowMapper());
 
-        if (userList.size() > 0) {
-            return userList.get(0);
+        if (tempUserList.size() > 0) {
+            return tempUserList.get(0);
         } else {
             return null;
         }
@@ -73,17 +73,17 @@ public class UserDaoImpl implements UserDao {
 
     // 使用 信箱 查詢
     @Override
-    public User getUserByEmail(String userEmail) {
-        String sql = "SELECT user_id, user_name, password, email, money, created_date, last_modified_date " +
+    public TempUser getUserByEmail(String userEmail) {
+        String sql = "SELECT user_id, user_name, password, email, user_image_url, money, created_date, last_modified_date " +
                 "FROM user WHERE email = :email;";
 
         Map<String, Object> map = new HashMap<>();
         map.put("email", userEmail);
 
-        List<User> userList = namedParameterJdbcTemplate.query(sql, map, new UserRowMapper());
+        List<TempUser> tempUserList = namedParameterJdbcTemplate.query(sql, map, new TempUserRowMapper());
 
-        if (userList.size() > 0) {
-            return userList.get(0);
+        if (tempUserList.size() > 0) {
+            return tempUserList.get(0);
         } else {
             return null;
         }
@@ -91,9 +91,9 @@ public class UserDaoImpl implements UserDao {
 
     // 查詢全部
     @Override
-    public List<User> getAllUsers(UserQueryParams userQueryParams) {
+    public List<TempUser> getAllUsers(UserQueryParams userQueryParams) {
 
-        String sql = "SELECT user_id, user_name, password, email, money, created_date, last_modified_date " +
+        String sql = "SELECT user_id, user_name, password, email, user_image_url, money, created_date, last_modified_date " +
                 "FROM user WHERE 1 = 1";
 
         Map<String, Object> map = new HashMap<>();
@@ -103,9 +103,9 @@ public class UserDaoImpl implements UserDao {
         map.put("limit", userQueryParams.getLimit());
         map.put("offset", userQueryParams.getOffset());
 
-        List<User> userList = namedParameterJdbcTemplate.query(sql, map, new UserRowMapper());
+        List<TempUser> tempUserList = namedParameterJdbcTemplate.query(sql, map, new TempUserRowMapper());
 
-        return userList;
+        return tempUserList;
     }
 
     // 使用 ID 刪除
@@ -141,18 +141,18 @@ public class UserDaoImpl implements UserDao {
 
     // 使用 ID 查詢
     @Override
-    public User getUserById(Integer userId) {
+    public TempUser getUserById(Integer userId) {
 
-        String sql = "SELECT user_id, user_name, password, email, money, created_date, last_modified_date " +
+        String sql = "SELECT user_id, user_name, password, email, user_image_url, money, created_date, last_modified_date " +
                 "FROM user WHERE user_id = :userId;";
 
         Map<String, Object> map = new HashMap<>();
         map.put("userId", userId);
 
-        List<User> userList = namedParameterJdbcTemplate.query(sql, map, new UserRowMapper());
+        List<TempUser> tempUserList = namedParameterJdbcTemplate.query(sql, map, new TempUserRowMapper());
 
-        if (userList.size() > 0) {
-            return userList.get(0);
+        if (tempUserList.size() > 0) {
+            return tempUserList.get(0);
         } else {
             return null;
         }
@@ -162,7 +162,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> getUsersByName(String userName) {
 
-        String sql = "SELECT user_id, user_name, password, email, money, created_date, last_modified_date " +
+        String sql = "SELECT user_id, user_name, password, email, user_image_url, money, created_date, last_modified_date " +
                 "FROM user WHERE user_name like :userName";
 
         Map<String, Object> map = new HashMap<>();

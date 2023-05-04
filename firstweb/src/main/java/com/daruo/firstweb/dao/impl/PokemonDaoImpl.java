@@ -22,10 +22,10 @@ public class PokemonDaoImpl implements PokemonDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public List<Pokemon> getPokemons(PokemonQueryParams pokemonQueryParams) {
+    public List<TempPokemon> getPokemons(PokemonQueryParams pokemonQueryParams) {
 
         String sql = "SELECT pokemon_id, pokemon_name, pokemon_image_url," +
-                " category, hp, lv, exp, attack, price, stock, defense, speed," +
+                " category, hp, lv, exp, attack, price, stock, defense, speed, description," +
                 " created_date, last_modified_date" +
                 " FROM pokemon WHERE 1 = 1";
 
@@ -47,22 +47,22 @@ public class PokemonDaoImpl implements PokemonDao {
         // 分頁
         sql += " LIMIT :limit OFFSET :offset";
 
-        List<Pokemon> pokemonList = namedParameterJdbcTemplate.query(sql, map, new PokemonRowMapper());
+        List<TempPokemon> tempPokemonList = namedParameterJdbcTemplate.query(sql, map, new TempPokemonRowMapper());
 
-        return pokemonList;
+        return tempPokemonList;
     }
 
     // 查詢所有屬性
     @Override
-    public List<Pokemon> getCategory() {
+    public List<TempPokemon> getCategory() {
 
         String sql = "SELECT category_id, category_name from category";
 
         Map<String, Object> map = new HashMap<>();
 
-        List<Pokemon> pokemonList = namedParameterJdbcTemplate.query(sql, map, new PokemonCategoryRowMapper());
+        List<TempPokemon> tempPokemonList = namedParameterJdbcTemplate.query(sql, map, new PokemonCategoryRowMapper());
 
-        return pokemonList;
+        return tempPokemonList;
     }
 
     // 查詢商品的數量

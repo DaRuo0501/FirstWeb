@@ -48,17 +48,13 @@ public class OrderController {
 
             // 取得 當前使用者
             session = request.getSession();
-            User user = (User) session.getAttribute("showUserName");
-
-            TempUser tempUser = new TempUser();
-            tempUser.setUserId(user.getUserId());
-            tempUser.setMoney(user.getMoney());
+            TempUser tempUser = (TempUser) session.getAttribute("showUserName");
 
             // 檢查 使用者的現金是否足夠
             if (tempUser.getMoney() >= totalAmount) {
 
                 TempOrder tempOrder = new TempOrder();
-                tempOrder.setUserId(user.getUserId());  // 購買人
+                tempOrder.setUserId(tempUser.getUserId());  // 購買人
                 tempOrder.setTotalAmount(totalAmount);  // 訂單的 總價格
 
                 // 建立訂單
@@ -67,7 +63,7 @@ public class OrderController {
             } else {
 
                 log.warn("這張訂單的總價格為: {}，購買者: {} 的現金只剩下 {}元，訂單無法成立!",
-                        totalAmount, user.getUserName(), user.getMoney());
+                        totalAmount, tempUser.getUserName(), tempUser.getMoney());
 
                 String errorStr = "您的現金不足! 無法提繳訂單!";
 

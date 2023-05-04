@@ -42,11 +42,7 @@ public class ShopCarController {
 
             // 取得 當前登入的使用者
             session = request.getSession();
-            User user = (User) session.getAttribute("showUserName");
-
-            TempUser tempUser = new TempUser();
-            tempUser.setUserId(user.getUserId());
-            tempUser.setMoney(user.getMoney());
+            TempUser tempUser = (TempUser) session.getAttribute("showUserName");
 
             TempPokemon tempPokemon = pokemonService.getTempPokemonById(pokemonId);
 
@@ -84,10 +80,10 @@ public class ShopCarController {
 
             // 取得 當前使用者
             session = request.getSession();
-            User user = (User) session.getAttribute("showUserName");
+            TempUser tempUser = (TempUser) session.getAttribute("showUserName");
 
             TempShopCar tempShopCar = new TempShopCar();
-            tempShopCar.setUserId(user.getUserId());
+            tempShopCar.setUserId(tempUser.getUserId());
             tempShopCar.setPokemonId(pokemonId);
 
             // 取得 預購買數量
@@ -131,10 +127,10 @@ public class ShopCarController {
 
             // 取得 當前使用者
             session = request.getSession();
-            User user = (User) session.getAttribute("showUserName");
+            TempUser tempUser = (TempUser) session.getAttribute("showUserName");
 
             TempShopCar tempShopCar = new TempShopCar();
-            tempShopCar.setUserId(user.getUserId());
+            tempShopCar.setUserId(tempUser.getUserId());
             tempShopCar.setPokemonId(pokemonId);
 
             // 取得 預購買數量
@@ -179,12 +175,12 @@ public class ShopCarController {
 
             // 取得 當前使用者
             session = request.getSession();
-            User user = (User) session.getAttribute("showUserName");
+            TempUser tempUser = (TempUser) session.getAttribute("showUserName");
 
             TempPokemon tempPokemon = pokemonService.getPokemonById(pokemonId);
 
             TempShopCar tempShopCar = new TempShopCar();
-            tempShopCar.setUserId(user.getUserId());
+            tempShopCar.setUserId(tempUser.getUserId());
             tempPokemon.setPokemonId(pokemonId);
             tempShopCar.setBuyCnt(buyCnt);
 
@@ -213,10 +209,10 @@ public class ShopCarController {
 
             // 取得 當前使用者
             session = request.getSession();
-            User user = (User) session.getAttribute("showUserName");
+            TempUser tempUser = (TempUser) session.getAttribute("showUserName");
 
             TempShopCar tempShopCar = new TempShopCar();
-            tempShopCar.setUserId(user.getUserId());
+            tempShopCar.setUserId(tempUser.getUserId());
             tempShopCar.setPokemonId(pokemonId);
 
             // 刪除

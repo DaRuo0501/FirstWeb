@@ -29,11 +29,7 @@ public class BagController {
 
         // 取得 當前使用者
         session = request.getSession();
-        User user = (User) session.getAttribute("showUserName");
-
-        TempUser tempUser = new TempUser();
-        tempUser.setUserId(user.getUserId());
-        tempUser.setMoney(user.getMoney());
+        TempUser tempUser = (TempUser) session.getAttribute("showUserName");
 
         bagService.deleteById(tempUser.getUserId(), bagId);
 
@@ -49,11 +45,7 @@ public class BagController {
 
         // 取得 當前使用者
         session = request.getSession();
-        User user = (User) session.getAttribute("showUserName");
-
-        TempUser tempUser = new TempUser();
-        tempUser.setUserId(user.getUserId());
-        tempUser.setMoney(user.getMoney());
+        TempUser tempUser = (TempUser) session.getAttribute("showUserName");
 
         bagService.goToBoxById(tempUser.getUserId(), bagId);
 

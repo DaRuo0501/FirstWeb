@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface PokemonDao {
 
-    List<Pokemon> getPokemons(PokemonQueryParams pokemonQueryParams);
+    List<TempPokemon> getPokemons(PokemonQueryParams pokemonQueryParams);
 
-    List<Pokemon> getCategory();
+    List<TempPokemon> getCategory();
 
     Integer getPokemonsCount(PokemonQueryParams pokemonQueryParams);
 

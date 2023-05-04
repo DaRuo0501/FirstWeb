@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface PokemonService {
 
-    List<Pokemon> getPokemons(PokemonQueryParams pokemonQueryParams);
+    List<TempPokemon> getPokemons(PokemonQueryParams pokemonQueryParams);
 
-    List<Pokemon> getCategory();
+    List<TempPokemon> getCategory();
 
     List<Integer> getPokemonsPage(PokemonQueryParams pokemonQueryParams);
 

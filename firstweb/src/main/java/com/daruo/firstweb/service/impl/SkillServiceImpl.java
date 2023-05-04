@@ -26,8 +26,8 @@ public class SkillServiceImpl implements SkillService {
     private BagDao bagDao;
 
     @Override
-    public void remove(Integer userId, String skillName) {
+    public List<TempSkill> getSkillByPokemonId(Integer pokemonId) {
 
-        skillDao.remove(userId, skillName);
+        return skillDao.getSkillByPokemonId(pokemonId);
     }
 }

@@ -12,17 +12,17 @@ public interface UserDao {
 
     Integer createUser(UserRegisterRequest userRegisterRequest);
 
-    User getUserByName(String userName);
+    TempUser getUserByName(String userName);
 
-    User getUserByEmail(String userEmail);
+    TempUser getUserByEmail(String userEmail);
 
-    List<User> getAllUsers(UserQueryParams userQueryParams);
+    List<TempUser> getAllUsers(UserQueryParams userQueryParams);
 
     void deleteUserById(Integer userId);
 
     void updateUser(UserUpdateRequest userUpdateRequest);
 
-    User getUserById(Integer userId);
+    TempUser getUserById(Integer userId);
 
     List<User> getUsersByName(String userName);
 
