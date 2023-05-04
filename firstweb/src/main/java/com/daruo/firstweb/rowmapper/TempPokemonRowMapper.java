@@ -30,10 +30,6 @@ public class TempPokemonRowMapper implements RowMapper {
         tempPokemon.setPrice(resultSet.getInt("price"));
         tempPokemon.setStock(resultSet.getInt("stock"));
         tempPokemon.setDescription(resultSet.getString("description"));
-        tempPokemon.setSkill1(resultSet.getString("skill_1"));
-        tempPokemon.setSkill2(resultSet.getString("skill_2"));
-        tempPokemon.setSkill3(resultSet.getString("skill_3"));
-        tempPokemon.setSkill4(resultSet.getString("skill_4"));
         tempPokemon.setCreatedDate(resultSet.getTimestamp("created_date"));
         tempPokemon.setLastModifiedDate(resultSet.getTimestamp("last_modified_date"));
 

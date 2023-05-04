@@ -13,4 +13,6 @@ public interface BagService {
     void deleteById(Integer userId, Integer bagId);
 
     void goToBoxById(Integer userId, Integer bagId);
+
+    TempBag goToSkillUpdatePage(Integer userId, Integer bagId);
 }

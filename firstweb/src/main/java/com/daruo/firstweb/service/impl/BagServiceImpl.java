@@ -103,4 +103,11 @@ public class BagServiceImpl implements BagService {
         }
 
     }
+
+    @Override
+    public TempBag goToSkillUpdatePage(Integer userId, Integer bagId) {
+
+        return bagDao.getBagById(userId, bagId);
+
+    }
 }

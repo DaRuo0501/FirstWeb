@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface SkillService {
 
-    List<TempSkill> getSkillByName(TempUser tempUser, String pokemonName);
+    void remove(Integer userId, String skillName);
 }

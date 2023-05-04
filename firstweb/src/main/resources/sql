@@ -152,6 +152,15 @@ UPDATE pokemon SET stock = :stock WHERE pokemon_id = :pokemonId;
 
 UPDATE shopping_car SET buy_cnt = shopping_car.buy_cnt+1 WHERE user_id = 1 AND pokemon_id = 4;
 
+DROP TABLE IF EXISTS pokemon_item;
+
+CREATE TABLE IF NOT EXISTS pokemon_item(
+    pokemon_skill_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    pokemon_id INT NOT NULL,
+    skill_id INT NOT NULL
+);
+
 
 # 屬性
 DROP TABLE IF EXISTS category;
@@ -372,3 +381,7 @@ CREATE TABLE IF NOT EXISTS box
     created_date          TIMESTAMP      NOT NULL,
     last_modified_date    TIMESTAMP      NOT NULL
 );
+
+UPDATE bag SET skill_1 = '' WHERE user_id = 1 AND bag_id = 1;
+
+

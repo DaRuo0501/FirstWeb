@@ -31,10 +31,6 @@ public class TempBoxRowMapper implements RowMapper {
         tempBox.setSpeed(rs.getInt("speed"));
         tempBox.setPrice(rs.getInt("price"));
         tempBox.setDescription(rs.getString("description"));
-        tempBox.setSkill1(rs.getString("skill_1"));
-        tempBox.setSkill2(rs.getString("skill_2"));
-        tempBox.setSkill3(rs.getString("skill_3"));
-        tempBox.setSkill4(rs.getString("skill_4"));
         tempBox.setCreatedDate(rs.getTimestamp("created_date"));
         tempBox.setLastModifiedDate(rs.getTimestamp("last_modified_date"));
 

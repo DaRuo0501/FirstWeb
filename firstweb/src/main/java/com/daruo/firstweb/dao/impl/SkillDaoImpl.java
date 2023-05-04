@@ -18,19 +18,9 @@ public class SkillDaoImpl implements SkillDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public List<TempSkill> getSkillByName(String skillName1, String skillName2, String skillName3, String skillName4) {
+    public void remove(Integer userId, String skillName) {
 
-        String sql = "SELECT * FROM skill WHERE skill_name = :skillName1 OR skill_name = :skillName2 " +
-                "OR skill_name = :skillName3 OR skill_name = :skillName4;";
+        String sql = "UPDATE bag SET skill_1 = '' WHERE user_id = 1 AND bag_id = 1;";
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("skillName1", skillName1);
-        map.put("skillName2", skillName2);
-        map.put("skillName3", skillName3);
-        map.put("skillName4", skillName4);
-
-        List<TempSkill> tempSkillList = namedParameterJdbcTemplate.query(sql, map, new TempSkillRowMapper());
-
-        return tempSkillList;
     }
 }

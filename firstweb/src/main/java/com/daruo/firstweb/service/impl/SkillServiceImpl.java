@@ -25,30 +25,9 @@ public class SkillServiceImpl implements SkillService {
     @Autowired
     private BagDao bagDao;
 
-    @Transactional
     @Override
-    public List<TempSkill> getSkillByName(TempUser tempUser, String pokemonName) {
+    public void remove(Integer userId, String skillName) {
 
-        try {
-
-            List<TempBag> tempBagList = bagDao.getBag(tempUser.getUserId());
-
-            TempBag tempBag = tempBagList.get(0);
-
-            String skillName1 = tempBag.getSkill1();
-            String skillName2 = tempBag.getSkill2();
-            String skillName3 = tempBag.getSkill3();
-            String skillName4 = tempBag.getSkill4();
-
-            List<TempSkill> tempSkillList = skillDao.getSkillByName(skillName1, skillName2, skillName3, skillName4);
-
-            return tempSkillList;
-
-        } catch (Exception e) {
-
-            log.warn(e.toString());
-        }
-
-        return null;
+        skillDao.remove(userId, skillName);
     }
 }

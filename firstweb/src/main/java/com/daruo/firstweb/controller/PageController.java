@@ -117,11 +117,6 @@ public class PageController {
 
             model.addAttribute("pokemonName", tempPokemonName);
 
-            // 取得 商品的 技能
-            List<TempSkill> tempSkillList = skillService.getSkillByName(tempUser, tempPokemonName);
-
-            model.addAttribute("skillList", tempSkillList);
-
             return "bag";
 
         } catch (Exception e) {
@@ -132,8 +127,37 @@ public class PageController {
         return "bag";
     }
 
+    // 修改技能頁面
+    @GetMapping("/users/skill/{bagId}")
+    public String skill(@PathVariable Integer bagId,
+                        Model model,
+                        HttpServletRequest request,
+                        HttpSession session
+    ) {
+
+        // 取得 當前使用者
+        session = request.getSession();
+        User user = (User) session.getAttribute("showUserName");
+
+        TempUser tempUser = new TempUser();
+        tempUser.setUserId(user.getUserId());
+        tempUser.setMoney(user.getMoney());
+
+        TempBag tempBag = bagService.goToSkillUpdatePage(tempUser.getUserId(), bagId);
+
+        model.addAttribute("bagPokemon", tempBag);
+
+        // 取得 商品的 技能
+//        List<TempSkill> tempSkillList = skillService.getSkillByName(tempUser, tempBag.getPokemonName());
+//
+//        model.addAttribute("skillList", tempSkillList);
+
+
+        return "skill";
+    }
+
     // 商城頁面
-    @GetMapping("users/shop")
+    @GetMapping("/users/shop")
     public String shop(Model model,
                        Msg msg,
                        HttpSession session,

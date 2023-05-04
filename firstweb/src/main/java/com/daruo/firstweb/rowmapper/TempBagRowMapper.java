@@ -30,10 +30,6 @@ public class TempBagRowMapper implements RowMapper {
         tempBag.setSpeed(rs.getInt("speed"));
         tempBag.setPrice(rs.getInt("price"));
         tempBag.setDescription(rs.getString("description"));
-        tempBag.setSkill1(rs.getString("skill_1"));
-        tempBag.setSkill2(rs.getString("skill_2"));
-        tempBag.setSkill3(rs.getString("skill_3"));
-        tempBag.setSkill4(rs.getString("skill_4"));
         tempBag.setCreatedDate(rs.getTimestamp("created_date"));
         tempBag.setLastModifiedDate(rs.getTimestamp("last_modified_date"));
 

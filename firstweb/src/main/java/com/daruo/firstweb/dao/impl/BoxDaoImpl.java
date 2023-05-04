@@ -30,10 +30,10 @@ public class BoxDaoImpl implements BoxDao {
 
         String sql = "INSERT INTO box (box_id, user_id, pokemon_id, pokemon_name, pokemon_image_url, category, " +
                 "hp, lv, exp, attack, defense, speed, price, description, " +
-                "skill_1, skill_2, skill_3, skill_4, created_date, last_modified_date) " +
+                "created_date, last_modified_date) " +
                 "VALUES (:boxId, :userId, :pokemonId, :pokemonName, :pokemonImageUrl, :category, " +
                 ":hp, :lv, :exp, :attack, :defense, :speed, :price, :description, " +
-                ":skill1, :skill2, :skill3, :skill4, :createdDate, :lastModifiedDate);";
+                ":createdDate, :lastModifiedDate);";
 
         Map<String, Object> map = new HashMap<>();
         map.put("boxId", boxId + 1);
@@ -50,10 +50,6 @@ public class BoxDaoImpl implements BoxDao {
         map.put("speed", tempPokemon.getSpeed());
         map.put("price", tempPokemon.getPrice());
         map.put("description", tempPokemon.getDescription());
-        map.put("skill1", tempPokemon.getSkill1());
-        map.put("skill2", tempPokemon.getSkill2());
-        map.put("skill3", tempPokemon.getSkill3());
-        map.put("skill4", tempPokemon.getSkill4());
 
         Date now = new Date();
         map.put("createdDate", now);
@@ -70,7 +66,7 @@ public class BoxDaoImpl implements BoxDao {
 
         String sql = "SELECT box_id, user_id, pokemon_id, pokemon_name, pokemon_image_url, " +
                 "category, hp, lv, exp, attack, defense, speed, price, description, " +
-                "skill_1, skill_2, skill_3, skill_4, created_date, last_modified_date " +
+                "created_date, last_modified_date " +
                 "FROM box WHERE user_id = :userId ORDER BY box_id DESC;";
 
         Map<String, Object> map = new HashMap<>();
@@ -93,10 +89,10 @@ public class BoxDaoImpl implements BoxDao {
 
         String sql = "INSERT INTO box (box_id, user_id, pokemon_id, pokemon_name, pokemon_image_url, category, " +
                 "hp, lv, exp, attack, defense, speed, price, description, " +
-                "skill_1, skill_2, skill_3, skill_4, created_date, last_modified_date) " +
+                "created_date, last_modified_date) " +
                 "VALUES (:boxId, :userId, :pokemonId, :pokemonName, :pokemonImageUrl, :category, " +
                 ":hp, :lv, :exp, :attack, :defense, :speed, :price, :description, " +
-                ":skill1, :skill2, :skill3, :skill4, :createdDate, :lastModifiedDate);";
+                ":createdDate, :lastModifiedDate);";
 
         Map<String, Object> map = new HashMap<>();
         map.put("boxId", boxId + 1);
@@ -113,10 +109,6 @@ public class BoxDaoImpl implements BoxDao {
         map.put("speed", tempBag.getSpeed());
         map.put("price", tempBag.getPrice());
         map.put("description", tempBag.getDescription());
-        map.put("skill1", tempBag.getSkill1());
-        map.put("skill2", tempBag.getSkill2());
-        map.put("skill3", tempBag.getSkill3());
-        map.put("skill4", tempBag.getSkill4());
 
         Date now = new Date();
         map.put("createdDate", now);

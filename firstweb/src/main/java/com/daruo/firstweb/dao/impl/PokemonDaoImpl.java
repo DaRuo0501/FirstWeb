@@ -26,7 +26,7 @@ public class PokemonDaoImpl implements PokemonDao {
 
         String sql = "SELECT pokemon_id, pokemon_name, pokemon_image_url," +
                 " category, hp, lv, exp, attack, price, stock, defense, speed," +
-                " skill_1, skill_2, skill_3, skill_4, created_date, last_modified_date" +
+                " created_date, last_modified_date" +
                 " FROM pokemon WHERE 1 = 1";
 
         Map<String, Object> map = new HashMap<>();
@@ -87,7 +87,7 @@ public class PokemonDaoImpl implements PokemonDao {
 
         String sql = "SELECT pokemon_id, pokemon_name, pokemon_image_url," +
                 " category, hp, lv, exp, attack, defense, speed, price, stock, description," +
-                " skill_1, skill_2, skill_3, skill_4, created_date, last_modified_date" +
+                " created_date, last_modified_date" +
                 " FROM pokemon WHERE pokemon_id = :pokemonId";
 
         Map<String, Object> map = new HashMap<>();
@@ -107,7 +107,7 @@ public class PokemonDaoImpl implements PokemonDao {
 
         String sql = "SELECT pokemon_id, pokemon_name, pokemon_image_url," +
                 " category, hp, lv, exp, attack, defense, speed, price, stock, description," +
-                " skill_1, skill_2, skill_3, skill_4, created_date, last_modified_date" +
+                " created_date, last_modified_date" +
                 " FROM pokemon WHERE pokemon_id = :pokemonId";
 
         Map<String, Object> map = new HashMap<>();
@@ -155,12 +155,6 @@ public class PokemonDaoImpl implements PokemonDao {
 
             // 查詢 屬性
             sql += " OR category LIKE :search";
-
-            // 查詢 技能
-            sql += " OR skill_1 LIKE :search" +
-                    " OR skill_2 LIKE :search" +
-                    " OR skill_3 LIKE :search" +
-                    " OR skill_4 LIKE :search";
 
             map.put("search", "%" + pokemonQueryParams.getSearch() + "%");
 
