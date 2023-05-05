@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class TempPokemon {
 
+    private Integer myPokemonId;
     private Integer pokemonId;
     private String pokemonName;
     private String pokemonImageUrl;
@@ -21,6 +22,14 @@ public class TempPokemon {
     private String description;
     private Date createdDate;
     private Date lastModifiedDate;
+
+    public Integer getMyPokemonId() {
+        return myPokemonId;
+    }
+
+    public void setMyPokemonId(Integer myPokemonId) {
+        this.myPokemonId = myPokemonId;
+    }
 
     public Integer getPokemonId() {
         return pokemonId;

@@ -16,17 +16,18 @@ public class SkillController {
     @Autowired
     private SkillService skillService;
 
-    @GetMapping("/skill/delete/{skillName}")
-    public void delete(@PathVariable String skillName,
-                         HttpServletRequest request,
-                         HttpSession session
+    @GetMapping("/skill/delete/{bagId}/{skillId}")
+    public void delete(@PathVariable Integer skillId,
+                       @PathVariable Integer bagId,
+                       HttpServletRequest request,
+                       HttpSession session
     ) {
 
         // 取得 當前使用者
         session = request.getSession();
         TempUser tempUser = (TempUser) session.getAttribute("showUserName");
 
-//        skillService.remove(tempUser.getUserId(), skillName);
+        skillService.remove(tempUser.getUserId(), bagId, skillId);
 
     }
 }

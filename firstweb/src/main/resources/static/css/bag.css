@@ -356,15 +356,16 @@ header span {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    height: 60px;
+    align-content: space-around;
+    flex-wrap: wrap;
+    width: 70px;
+    height: 80px;
 }
 
 .pokemon-lv {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 70px;
-    height: 40px;
 }
 
 .pokemon-lv p {

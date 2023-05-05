@@ -8,6 +8,7 @@ public class TempBag {
 
     private Integer bagId;
     private Integer userId;
+    private Integer myPkId;
     private Integer pokemonId;
     private String pokemonName;
     private String pokemonImageUrl;
@@ -37,6 +38,14 @@ public class TempBag {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Integer getMyPkId() {
+        return myPkId;
+    }
+
+    public void setMyPkId(Integer myPkId) {
+        this.myPkId = myPkId;
     }
 
     public Integer getPokemonId() {

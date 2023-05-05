@@ -3,18 +3,24 @@ package com.daruo.firstweb.dao.impl;
 import com.daruo.firstweb.dao.PokemonDao;
 import com.daruo.firstweb.dto.PokemonQueryParams;
 import com.daruo.firstweb.dto.TempPokemon;
+import com.daruo.firstweb.rowmapper.MyPokemonLastIdRowMapper;
 import com.daruo.firstweb.rowmapper.PokemonCategoryRowMapper;
 import com.daruo.firstweb.rowmapper.TempPokemonRowMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Component
 public class PokemonDaoImpl implements PokemonDao {
+
+    private final static Logger log = LoggerFactory.getLogger(PokemonDaoImpl.class);
 
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -131,6 +137,66 @@ public class PokemonDaoImpl implements PokemonDao {
 
         namedParameterJdbcTemplate.update(sql, map);
 
+    }
+
+    @Override
+    public Integer getMyPkLastId(Integer userId) {
+
+        try {
+
+            String sql = "SELECT mp.my_pk_id FROM my_pokemon_value mp WHERE user_id = :userId ORDER BY my_pk_id DESC;";
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("userId", userId);
+
+            List<TempPokemon> tempPokemonList = namedParameterJdbcTemplate.query(sql, map, new MyPokemonLastIdRowMapper());
+
+            if (tempPokemonList.size() > 0) {
+
+                return tempPokemonList.get(0).getMyPokemonId() + 1;
+            }
+
+            return 1;
+
+        } catch (RuntimeException e) {
+
+            log.error(e.toString());
+        }
+
+        return null;
+    }
+
+    @Override
+    public void createUserPokemon(Integer myPkId, Integer userId, TempPokemon tempPokemon) {
+
+        String sql = "INSERT INTO my_pokemon_value (my_pk_id, user_id, pokemon_id, pokemon_name, pokemon_image_url," +
+                " category, hp, lv, exp, attack, defense, speed, price," +
+                " `description`, created_date, last_modified_date)" +
+                " VALUES (:myPkId, :userId, :pokemonId, :pokemonName, :pokemonImageUrl," +
+                " :category, :hp, :lv, :exp, :attack, :defense, :speed, :price," +
+                " :description, :createdDate, :lastModifiedDate);";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("myPkId", myPkId);
+        map.put("userId",userId);
+        map.put("pokemonId", tempPokemon.getPokemonId());
+        map.put("pokemonName", tempPokemon.getPokemonName());
+        map.put("pokemonImageUrl", tempPokemon.getPokemonImageUrl());
+        map.put("category", tempPokemon.getCategory().toString());
+        map.put("hp", tempPokemon.getHp());
+        map.put("lv", tempPokemon.getLv());
+        map.put("exp", tempPokemon.getExp());
+        map.put("attack", tempPokemon.getAttack());
+        map.put("defense", tempPokemon.getDefense());
+        map.put("speed", tempPokemon.getSpeed());
+        map.put("price", tempPokemon.getPrice());
+        map.put("description", tempPokemon.getDescription());
+
+        Date now = new Date();
+        map.put("createdDate", now);
+        map.put("lastModifiedDate", now);
+
+        namedParameterJdbcTemplate.update(sql, map);
     }
 
     // 共用查詢條件

@@ -2,7 +2,6 @@ package com.daruo.firstweb.dao;
 
 import com.daruo.firstweb.dto.PokemonQueryParams;
 import com.daruo.firstweb.dto.TempPokemon;
-import com.daruo.firstweb.model.Pokemon;
 
 import java.util.List;
 
@@ -19,4 +18,8 @@ public interface PokemonDao {
     TempPokemon getTempPokemonById(Integer pokemonId);
 
     void updatePokemonCountById(Integer pokemonId, Integer stock);
+
+    void createUserPokemon(Integer myPkId, Integer userId, TempPokemon tempPokemon);
+
+    Integer getMyPkLastId(Integer userId);
 }

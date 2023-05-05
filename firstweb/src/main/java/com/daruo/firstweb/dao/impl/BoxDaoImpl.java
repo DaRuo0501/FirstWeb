@@ -3,9 +3,9 @@ package com.daruo.firstweb.dao.impl;
 import com.daruo.firstweb.dao.BoxDao;
 import com.daruo.firstweb.dto.TempBag;
 import com.daruo.firstweb.dto.TempBox;
-import com.daruo.firstweb.dto.TempPokemon;
-import com.daruo.firstweb.rowmapper.TempBagRowMapper;
 import com.daruo.firstweb.rowmapper.TempBoxRowMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -21,52 +21,41 @@ import java.util.Map;
 @Component
 public class BoxDaoImpl implements BoxDao {
 
+    private final static Logger log = LoggerFactory.getLogger(BoxDaoImpl.class);
+
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     // 新增 商品 至 背包
     @Override
-    public void createBox(Integer userId, TempPokemon tempPokemon, Integer boxId) {
+    public void createBox(Integer userId, Integer myPkId, Integer boxId) {
 
-        String sql = "INSERT INTO box (box_id, user_id, pokemon_id, pokemon_name, pokemon_image_url, category, " +
-                "hp, lv, exp, attack, defense, speed, price, description, " +
-                "created_date, last_modified_date) " +
-                "VALUES (:boxId, :userId, :pokemonId, :pokemonName, :pokemonImageUrl, :category, " +
-                ":hp, :lv, :exp, :attack, :defense, :speed, :price, :description, " +
-                ":createdDate, :lastModifiedDate);";
+        try {
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("boxId", boxId + 1);
-        map.put("userId", userId);
-        map.put("pokemonId", tempPokemon.getPokemonId());
-        map.put("pokemonName", tempPokemon.getPokemonName());
-        map.put("pokemonImageUrl", tempPokemon.getPokemonImageUrl());
-        map.put("category", tempPokemon.getCategory().toString());
-        map.put("hp", tempPokemon.getHp());
-        map.put("lv", tempPokemon.getLv());
-        map.put("exp", tempPokemon.getExp());
-        map.put("attack", tempPokemon.getAttack());
-        map.put("defense", tempPokemon.getDefense());
-        map.put("speed", tempPokemon.getSpeed());
-        map.put("price", tempPokemon.getPrice());
-        map.put("description", tempPokemon.getDescription());
+            String sql = "INSERT INTO box (box_id, user_id, my_pk_id, created_date, last_modified_date) " +
+                    "VALUES (:boxId, :userId, :myPkId, :createdDate, :lastModifiedDate);";
 
-        Date now = new Date();
-        map.put("createdDate", now);
-        map.put("lastModifiedDate", now);
+            Map<String, Object> map = new HashMap<>();
+            map.put("boxId", boxId + 1);
+            map.put("userId", userId);
+            map.put("myPkId", myPkId);
 
-        KeyHolder keyHolder = new GeneratedKeyHolder();
+            Date now = new Date();
+            map.put("createdDate", now);
+            map.put("lastModifiedDate", now);
 
-        namedParameterJdbcTemplate.update(sql, new MapSqlParameterSource(map), keyHolder);
+            namedParameterJdbcTemplate.update(sql, map);
 
+        } catch (Exception e) {
+
+            log.error(e.toString());
+        }
     }
 
     @Override
     public Integer getLastBoxIdByUserId(Integer userId) {
 
-        String sql = "SELECT box_id, user_id, pokemon_id, pokemon_name, pokemon_image_url, " +
-                "category, hp, lv, exp, attack, defense, speed, price, description, " +
-                "created_date, last_modified_date " +
+        String sql = "SELECT box_id, user_id, my_pk_id, created_date, last_modified_date " +
                 "FROM box WHERE user_id = :userId ORDER BY box_id DESC;";
 
         Map<String, Object> map = new HashMap<>();

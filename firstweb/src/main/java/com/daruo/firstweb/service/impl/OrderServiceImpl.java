@@ -33,7 +33,10 @@ public class OrderServiceImpl implements OrderService {
     private BagDao bagDao;
 
     @Autowired
-    private  BoxDao boxDao;
+    private BoxDao boxDao;
+
+    @Autowired
+    private SkillDao skillDao;
 
     @Transactional
     @Override
@@ -53,6 +56,9 @@ public class OrderServiceImpl implements OrderService {
                     // 查詢 欲購買的商品 架上是否有貨
                     TempPokemon tempPokemon = pokemonDao.getPokemonById(tempShopCar.getPokemonId());
 
+                    // 查詢 商品的 技能
+                    List<TempSkill> tempSkillList = skillDao.getSkillByPokemonId(tempPokemon.getPokemonId());
+
                     // 檢查 商品的 庫存 是否還有貨
                     if (tempPokemon.getStock() > 0) {
 
@@ -61,6 +67,17 @@ public class OrderServiceImpl implements OrderService {
 
                         // 扣除貨架上的商品數量
                         pokemonDao.updatePokemonCountById(tempShopCar.getPokemonId(), tempPokemon.getStock());
+
+                        Integer myPkId = pokemonDao.getMyPkLastId(tempUser.getUserId());
+
+                        // 將商品建立獨立編號
+                        pokemonDao.createUserPokemon(myPkId, tempUser.getUserId(), tempPokemon);
+
+                        for (TempSkill tempSkill : tempSkillList) {
+
+                            // 建立商品的技能
+                            skillDao.createUserPokemonSkill(myPkId, tempUser.getUserId(), tempSkill);
+                        }
 
                         // 取得 使用者的 背包
                         List<TempBag> tempBagList = bagDao.getBag(tempUser.getUserId());
@@ -71,14 +88,14 @@ public class OrderServiceImpl implements OrderService {
                             Integer tempBagLastId = bagDao.getLastBagIdByUserId(tempOrder.getUserId());
 
                             // 將商品 放入使用者的背包
-                            bagDao.createBag(tempOrder.getUserId(), tempPokemon, tempBagLastId);
+                            bagDao.createBag(tempOrder.getUserId(), myPkId, tempBagLastId);
 
                         } else {
 
                             Integer tempBoxLastId = boxDao.getLastBoxIdByUserId(tempOrder.getUserId());
 
                             // 將商品 放入使用者的盒子
-                            boxDao.createBox(tempOrder.getUserId(), tempPokemon, tempBoxLastId);
+                            boxDao.createBox(tempOrder.getUserId(), myPkId, tempBoxLastId);
                         }
 
                     } else {

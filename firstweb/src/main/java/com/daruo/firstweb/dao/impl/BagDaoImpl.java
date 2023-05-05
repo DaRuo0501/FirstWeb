@@ -2,13 +2,11 @@ package com.daruo.firstweb.dao.impl;
 
 import com.daruo.firstweb.dao.BagDao;
 import com.daruo.firstweb.dto.TempBag;
-import com.daruo.firstweb.dto.TempPokemon;
 import com.daruo.firstweb.rowmapper.TempBagRowMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -19,53 +17,42 @@ import java.util.Map;
 @Component
 public class BagDaoImpl implements BagDao {
 
+    private final static Logger log = LoggerFactory.getLogger(BagDaoImpl.class);
+
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     // 新增 商品 至 背包
     @Override
-    public void createBag(Integer userId, TempPokemon tempPokemon, Integer bagId) {
+    public void createBag(Integer userId, Integer myPkId, Integer bagId) {
 
-        String sql = "INSERT INTO bag (bag_id, user_id, pokemon_id, pokemon_name, pokemon_image_url, category, " +
-                "hp, lv, exp, attack, defense, speed, price, description, " +
-                "created_date, last_modified_date) " +
-                "VALUES (:bagId, :userId, :pokemonId, :pokemonName, :pokemonImageUrl, :category, " +
-                ":hp, :lv, :exp, :attack, :defense, :speed, :price, :description, " +
-                ":createdDate, :lastModifiedDate);";
+        try {
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("bagId", bagId + 1);
-        map.put("userId", userId);
-        map.put("pokemonId", tempPokemon.getPokemonId());
-        map.put("pokemonName", tempPokemon.getPokemonName());
-        map.put("pokemonImageUrl", tempPokemon.getPokemonImageUrl());
-        map.put("category", tempPokemon.getCategory().toString());
-        map.put("hp", tempPokemon.getHp());
-        map.put("lv", tempPokemon.getLv());
-        map.put("exp", tempPokemon.getExp());
-        map.put("attack", tempPokemon.getAttack());
-        map.put("defense", tempPokemon.getDefense());
-        map.put("speed", tempPokemon.getSpeed());
-        map.put("price", tempPokemon.getPrice());
-        map.put("description", tempPokemon.getDescription());
+            String sql = "INSERT INTO bag (bag_id, user_id, my_pk_id, created_date, last_modified_date) " +
+                    "VALUES (:bagId, :userId, :myPkId, :createdDate, :lastModifiedDate);";
 
-        Date now = new Date();
-        map.put("createdDate", now);
-        map.put("lastModifiedDate", now);
+            Map<String, Object> map = new HashMap<>();
+            map.put("bagId", bagId + 1);
+            map.put("userId", userId);
+            map.put("myPkId", myPkId);
 
-        KeyHolder keyHolder = new GeneratedKeyHolder();
+            Date now = new Date();
+            map.put("createdDate", now);
+            map.put("lastModifiedDate", now);
 
-        namedParameterJdbcTemplate.update(sql, new MapSqlParameterSource(map), keyHolder);
+            namedParameterJdbcTemplate.update(sql, map);
 
+        } catch (Exception e) {
+
+            log.error(e.toString());
+        }
     }
 
     // 查詢 背包
     @Override
     public List<TempBag> getBag(Integer userId) {
 
-        String sql = "SELECT bag_id, user_id, pokemon_id, pokemon_name, pokemon_image_url, " +
-                "category, hp, lv, exp, attack, defense, speed, price, description, " +
-                "created_date, last_modified_date " +
+        String sql = "SELECT bag_id, user_id, my_pk_id, created_date, last_modified_date " +
                 "FROM bag  WHERE user_id = :userId;";
 
         Map<String, Object> map = new HashMap<>();
@@ -80,9 +67,7 @@ public class BagDaoImpl implements BagDao {
     @Override
     public Integer getLastBagIdByUserId(Integer userId) {
 
-        String sql = "SELECT bag_id, user_id, pokemon_id, pokemon_name, pokemon_image_url, " +
-                "category, hp, lv, exp, attack, defense, speed, price, description, " +
-                "created_date, last_modified_date " +
+        String sql = "SELECT bag_id, user_id, my_pk_id, created_date, last_modified_date " +
                 "FROM bag WHERE user_id = :userId ORDER BY bag_id DESC;";
 
         Map<String, Object> map = new HashMap<>();
@@ -118,9 +103,7 @@ public class BagDaoImpl implements BagDao {
     @Override
     public List<TempBag> getBags(Integer userId, Integer bagId) {
 
-        String sql = "SELECT bag_id, user_id, pokemon_id, pokemon_name, pokemon_image_url, " +
-                "category, hp, lv, exp, attack, defense, speed, price, description, " +
-                "created_date, last_modified_date " +
+        String sql = "SELECT bag_id, user_id, my_pk_id, created_date, last_modified_date " +
                 "FROM bag WHERE user_id = :userId LIMIT 6 OFFSET :OFFSET";
 
         Map<String, Object> map = new HashMap<>();
@@ -149,9 +132,7 @@ public class BagDaoImpl implements BagDao {
     @Override
     public TempBag getBagById(Integer userId, Integer bagId) {
 
-        String sql = "SELECT bag_id, user_id, pokemon_id, pokemon_name, pokemon_image_url, " +
-                "category, hp, lv, exp, attack, defense, speed, price, description, " +
-                "created_date, last_modified_date " +
+        String sql = "SELECT bag_id, user_id, my_pk_id, created_date, last_modified_date " +
                 "FROM bag WHERE user_id = :userId AND bag_id = :bagId";
 
         Map<String, Object> map = new HashMap<>();

@@ -13,6 +13,7 @@ public class TempSkill {
     private String skillDescription;
     private Integer pokemonId;
     private String pokemonName;
+    private Integer bagId;
 
     public Integer getSkillId() {
         return skillId;
@@ -84,5 +85,13 @@ public class TempSkill {
 
     public void setPokemonName(String pokemonName) {
         this.pokemonName = pokemonName;
+    }
+
+    public Integer getBagId() {
+        return bagId;
+    }
+
+    public void setBagId(Integer bagId) {
+        this.bagId = bagId;
     }
 }
