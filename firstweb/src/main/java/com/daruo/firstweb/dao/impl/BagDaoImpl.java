@@ -2,6 +2,7 @@ package com.daruo.firstweb.dao.impl;
 
 import com.daruo.firstweb.dao.BagDao;
 import com.daruo.firstweb.dto.TempBag;
+import com.daruo.firstweb.rowmapper.LastBagRowMapper;
 import com.daruo.firstweb.rowmapper.TempBagRowMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,8 +53,13 @@ public class BagDaoImpl implements BagDao {
     @Override
     public List<TempBag> getBag(Integer userId) {
 
-        String sql = "SELECT bag_id, user_id, my_pk_id, created_date, last_modified_date " +
-                "FROM bag  WHERE user_id = :userId;";
+        String sql = "SELECT bag.bag_id, bag.my_pk_id, mpv.user_id, mpv.pokemon_name, mpv.category," +
+                " mpv.hp, mpv.lv, mpv.pokemon_image_url, mpv.attack, mpv.defense, mpv.speed, mpv.description," +
+                " mpv.created_date, mpv.last_modified_date" +
+                " FROM bag " +
+                " join my_pokemon_value mpv ON bag.my_pk_id = mpv.my_pk_id" +
+                " where mpv.user_id = :userId" +
+                " GROUP BY mpv.my_pk_id;";
 
         Map<String, Object> map = new HashMap<>();
         map.put("userId", userId);
@@ -73,7 +79,7 @@ public class BagDaoImpl implements BagDao {
         Map<String, Object> map = new HashMap<>();
         map.put("userId", userId);
 
-        List<TempBag> tempBagList = namedParameterJdbcTemplate.query(sql, map , new TempBagRowMapper());
+        List<TempBag> tempBagList = namedParameterJdbcTemplate.query(sql, map , new LastBagRowMapper());
 
         if (tempBagList.size() > 0) {
 
@@ -104,13 +110,13 @@ public class BagDaoImpl implements BagDao {
     public List<TempBag> getBags(Integer userId, Integer bagId) {
 
         String sql = "SELECT bag_id, user_id, my_pk_id, created_date, last_modified_date " +
-                "FROM bag WHERE user_id = :userId LIMIT 6 OFFSET :OFFSET";
+                " FROM bag WHERE user_id = :userId LIMIT 6 OFFSET :OFFSET";
 
         Map<String, Object> map = new HashMap<>();
         map.put("userId", userId);
         map.put("OFFSET", bagId - 1);
 
-        List<TempBag> tempBagList = namedParameterJdbcTemplate.query(sql, map , new TempBagRowMapper());
+        List<TempBag> tempBagList = namedParameterJdbcTemplate.query(sql, map , new LastBagRowMapper());
 
         return tempBagList;
     }
@@ -133,13 +139,13 @@ public class BagDaoImpl implements BagDao {
     public TempBag getBagById(Integer userId, Integer bagId) {
 
         String sql = "SELECT bag_id, user_id, my_pk_id, created_date, last_modified_date " +
-                "FROM bag WHERE user_id = :userId AND bag_id = :bagId";
+                " FROM bag WHERE user_id = :userId AND bag_id = :bagId";
 
         Map<String, Object> map = new HashMap<>();
         map.put("userId", userId);
         map.put("bagId", bagId);
 
-        List<TempBag> tempBagList = namedParameterJdbcTemplate.query(sql, map , new TempBagRowMapper());
+        List<TempBag> tempBagList = namedParameterJdbcTemplate.query(sql, map , new LastBagRowMapper());
 
         if (tempBagList.size() > 0) {
 

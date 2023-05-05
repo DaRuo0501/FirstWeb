@@ -308,7 +308,7 @@ header span {
     align-content: center;
     align-items: center;
     flex-wrap: wrap;
-    width: 120px;
+    width: 100px;
     height: 80px;
     margin-right: 5px;
 }
@@ -354,11 +354,11 @@ header span {
 
 .pokemon-lv-box {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
     align-content: space-around;
     flex-wrap: wrap;
-    width: 70px;
+    width: 110px;
     height: 80px;
 }
 
@@ -375,7 +375,7 @@ header span {
 }
 
 .pokemon-lv span {
-    width: 20px;
+    width: 40px;
 }
 
 .skill-text {

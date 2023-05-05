@@ -3,6 +3,7 @@ package com.daruo.firstweb.dao.impl;
 import com.daruo.firstweb.dao.BoxDao;
 import com.daruo.firstweb.dto.TempBag;
 import com.daruo.firstweb.dto.TempBox;
+import com.daruo.firstweb.rowmapper.LastBoxRowMapper;
 import com.daruo.firstweb.rowmapper.TempBoxRowMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,7 +62,7 @@ public class BoxDaoImpl implements BoxDao {
         Map<String, Object> map = new HashMap<>();
         map.put("userId", userId);
 
-        List<TempBox> tempBoxList = namedParameterJdbcTemplate.query(sql, map , new TempBoxRowMapper());
+        List<TempBox> tempBoxList = namedParameterJdbcTemplate.query(sql, map , new LastBoxRowMapper());
 
         if (tempBoxList.size() > 0) {
 
@@ -76,35 +77,25 @@ public class BoxDaoImpl implements BoxDao {
     @Override
     public void createBoxByTempBag(TempBag tempBag, Integer boxId) {
 
-        String sql = "INSERT INTO box (box_id, user_id, pokemon_id, pokemon_name, pokemon_image_url, category, " +
-                "hp, lv, exp, attack, defense, speed, price, description, " +
-                "created_date, last_modified_date) " +
-                "VALUES (:boxId, :userId, :pokemonId, :pokemonName, :pokemonImageUrl, :category, " +
-                ":hp, :lv, :exp, :attack, :defense, :speed, :price, :description, " +
-                ":createdDate, :lastModifiedDate);";
+        try {
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("boxId", boxId + 1);
-        map.put("userId", tempBag.getUserId());
-        map.put("pokemonId", tempBag.getPokemonId());
-        map.put("pokemonName", tempBag.getPokemonName());
-        map.put("pokemonImageUrl", tempBag.getPokemonImageUrl());
-        map.put("category", tempBag.getCategory().toString());
-        map.put("hp", tempBag.getHp());
-        map.put("lv", tempBag.getLv());
-        map.put("exp", tempBag.getExp());
-        map.put("attack", tempBag.getAttack());
-        map.put("defense", tempBag.getDefense());
-        map.put("speed", tempBag.getSpeed());
-        map.put("price", tempBag.getPrice());
-        map.put("description", tempBag.getDescription());
+            String sql = "INSERT INTO box (box_id, user_id, my_pk_id, created_date, last_modified_date) " +
+                    "VALUES (:boxId, :userId, :myPkId, :createdDate, :lastModifiedDate);";
 
-        Date now = new Date();
-        map.put("createdDate", now);
-        map.put("lastModifiedDate", now);
+            Map<String, Object> map = new HashMap<>();
+            map.put("boxId", boxId + 1);
+            map.put("userId", tempBag.getUserId());
+            map.put("myPkId", tempBag.getMyPkId());
 
-        KeyHolder keyHolder = new GeneratedKeyHolder();
+            Date now = new Date();
+            map.put("createdDate", now);
+            map.put("lastModifiedDate", now);
 
-        namedParameterJdbcTemplate.update(sql, new MapSqlParameterSource(map), keyHolder);
+            namedParameterJdbcTemplate.update(sql, map);
+
+        } catch (Exception e) {
+
+            log.error(e.toString());
+        }
     }
 }
