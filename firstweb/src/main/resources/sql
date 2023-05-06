@@ -220,10 +220,7 @@ VALUES (1, 1), (1, 15), (1, 14),
        (501, 1), (501, 8);
 
 
-# 查詢 單一寶可夢的 技能
-SELECT ps.user_id, p.pokemon_id, p.pokemon_name, s.skill_id, s.skill_name, s.skill_attack, s.skill_category, s.skill_category_url, s.skill_description FROM pokemon p join pokemon_skill ps on p.pokemon_id = ps.pokemon_id join skill s on ps.skill_id = s.skill_id join category c on c.category_name = p.category WHERE p.pokemon_id = 1;
 
-SELECT b.bag_id, b.user_id, b.pokemon_id, b.pokemon_name, s.skill_id, s.skill_name, s.skill_category, s.skill_category_url, s.skill_attack, s.skill_description FROM bag b join pokemon_skill ps on b.pokemon_id = ps.pokemon_id join skill s on ps.skill_id = s.skill_id WHERE b.user_id = 1 AND b.pokemon_id = 25;
 
 # 屬性
 DROP TABLE IF EXISTS category;
@@ -410,7 +407,7 @@ DROP TABLE IF EXISTS my_pokemon_value;
 
 CREATE TABLE IF NOT EXISTS my_pokemon_value
 (
-    my_pk_id              INT            NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    my_pk_id              INT            NOT NULL,
     user_id               INT            NOT NULL,
     pokemon_id            INT            NOT NULL,
     pokemon_name          VARCHAR(255)   NOT NULL,
@@ -433,7 +430,7 @@ DROP TABLE IF EXISTS my_pokemon_skill;
 
 CREATE TABLE IF NOT EXISTS my_pokemon_skill
 (
-    my_pk_id              INT            NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    my_pk_id              INT            NOT NULL,
     user_id               INT            NOT NULL,
     pokemon_id            INT            NOT NULL,
     pokemon_name          VARCHAR(255)   NOT NULL,
@@ -446,5 +443,4 @@ CREATE TABLE IF NOT EXISTS my_pokemon_skill
 
 SELECT bag.bag_id, bag.my_pk_id, mpv.user_id, mpv.pokemon_name, mpv.category, mpv.hp, mpv.lv, mpv.pokemon_image_url, mpv.attack, mpv.defense, mpv.speed, mpv.description, mpv.created_date, mpv.last_modified_date FROM bag join my_pokemon_value mpv ON bag.my_pk_id = mpv.my_pk_id where mpv.user_id = 1 GROUP BY mpv.my_pk_id;
 
-SELECT bag.bag_id, bag.my_pk_id, mpv.user_id, mpv.pokemon_name, mpv.category, mpv.hp, mpv.lv, mpv.pokemon_image_url, mpv.attack, mpv.defense, mpv.speed, mpv.description, mpv.created_date, mpv.last_modified_date FROM bag WHERE user_id = :userId ORDER BY bag.bag_id DESC;
 
