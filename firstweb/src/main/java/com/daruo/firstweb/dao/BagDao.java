@@ -12,7 +12,7 @@ public interface BagDao {
 
     Integer getLastBagIdByUserId(Integer userId);
 
-    void deleteBagId(Integer userId, Integer bagId);
+    void deleteBagId(Integer userId, Integer myPkId);
 
     List<TempBag> getBags(Integer userId, Integer bagId);
 

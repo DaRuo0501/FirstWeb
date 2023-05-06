@@ -21,11 +21,9 @@ public class SkillDaoImpl implements SkillDao {
     @Override
     public List<TempSkill> getSkillByPokemonId(Integer pokemonId) {
 
-        String sql = "SELECT p.pokemon_id, p.pokemon_name, s.skill_id, s.skill_name" +
-                " FROM pokemon p" +
-                " join pokemon_skill ps on p.pokemon_id = ps.pokemon_id" +
-                " join skill s on ps.skill_id = s.skill_id" +
-                " where p.pokemon_id = :pokemonId;";
+        String sql = "SELECT * FROM pokemon JOIN pokemon_skill ps on pokemon.pokemon_id = ps.pokemon_id" +
+                " JOIN skill s on ps.skill_id = s.skill_id " +
+                " WHERE ps.pokemon_id = :pokemonId;";
 
         Map<String, Object> map = new HashMap<>();
         map.put("pokemonId", pokemonId);
@@ -59,6 +57,18 @@ public class SkillDaoImpl implements SkillDao {
         Date now = new Date();
         map.put("createdDate", now);
         map.put("lastModifiedDate", now);
+
+        namedParameterJdbcTemplate.update(sql, map);
+    }
+
+    @Override
+    public void deleteById(Integer userId, Integer myPkId) {
+
+        String sql = "DELETE FROM my_pokemon_skill WHERE my_pk_id = :myPkId AND user_id = :userId;";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+        map.put("myPkId", myPkId);
 
         namedParameterJdbcTemplate.update(sql, map);
     }

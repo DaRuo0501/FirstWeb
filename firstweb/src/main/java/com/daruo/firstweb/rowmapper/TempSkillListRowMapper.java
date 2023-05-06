@@ -16,6 +16,8 @@ public class TempSkillListRowMapper implements RowMapper {
         tempSkill.setPokemonName(rs.getString("pokemon_name"));
         tempSkill.setSkillId(rs.getInt("skill_id"));
         tempSkill.setSkillName(rs.getString("skill_name"));
+        tempSkill.setSkillAttack(rs.getInt("skill_attack"));
+        tempSkill.setSkillCategoryUrl(rs.getString("skill_category_url"));
 
         return tempSkill;
     }

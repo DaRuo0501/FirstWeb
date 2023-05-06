@@ -5,8 +5,6 @@ import com.daruo.firstweb.dao.BoxDao;
 import com.daruo.firstweb.dao.PokemonDao;
 import com.daruo.firstweb.dao.SkillDao;
 import com.daruo.firstweb.dto.TempBag;
-import com.daruo.firstweb.dto.TempPokemon;
-import com.daruo.firstweb.dto.TempSkill;
 import com.daruo.firstweb.service.BagService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,19 +44,28 @@ public class BagServiceImpl implements BagService {
 
         try {
 
-            // 刪除 商品
-            bagDao.deleteBagId(userId, bagId);
+            // 取得 購物車內的指定商品
+            TempBag tempBag = bagDao.getBagById(userId, bagId);
+
+            // 刪除 使用者的這項 商品
+            pokemonDao.deleteById(tempBag.getUserId(), tempBag.getMyPkId());
+
+            // 刪除 該項商品的 技能
+            skillDao.deleteById(tempBag.getUserId(), tempBag.getMyPkId());
+
+            // 刪除 購物車內的 商品
+            bagDao.deleteBagId(tempBag.getUserId(), tempBag.getMyPkId());
 
             // 取得購物車內 BagId 排在 刪除商品 後面的所有商品
             List<TempBag> tempBagList = bagDao.getBags(userId, bagId);
 
-            for (TempBag tempBag : tempBagList) {
+            for (TempBag tpBag : tempBagList) {
 
                 // 建立新的變數，用來更新背包的 ID
-                Integer newBagId = tempBag.getBagId();
+                Integer newBagId = tpBag.getBagId();
 
                 // 更新 填補 被刪除的商品所留下來的 BadId 空缺
-                bagDao.updateBagId(userId, tempBag.getBagId(), newBagId);
+                bagDao.updateBagId(userId, tpBag.getBagId(), newBagId);
             }
 
         } catch (Exception e) {
@@ -83,7 +90,7 @@ public class BagServiceImpl implements BagService {
             boxDao.createBoxByTempBag(tempBag, tempBoxLastId);
 
             // 刪除 購物車的該項 商品
-            bagDao.deleteBagId(userId, bagId);
+            bagDao.deleteBagId(tempBag.getUserId(), tempBag.getMyPkId());
 
             // 取得購物車內 BagId 排在 刪除商品 後面的所有商品
             List<TempBag> tempBagList = bagDao.getBags(userId, bagId);

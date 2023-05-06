@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private SkillDao skillDao;
 
-    @Transactional
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public void createOrderById(TempOrder tempOrder, TempUser tempUser, HttpSession session) {
 
@@ -56,9 +57,6 @@ public class OrderServiceImpl implements OrderService {
                     // 查詢 欲購買的商品 架上是否有貨
                     TempPokemon tempPokemon = pokemonDao.getPokemonById(tempShopCar.getPokemonId());
 
-                    // 查詢 商品的 技能
-                    List<TempSkill> tempSkillList = skillDao.getSkillByPokemonId(tempPokemon.getPokemonId());
-
                     // 檢查 商品的 庫存 是否還有貨
                     if (tempPokemon.getStock() > 0) {
 
@@ -72,6 +70,9 @@ public class OrderServiceImpl implements OrderService {
 
                         // 將商品建立獨立編號
                         pokemonDao.createUserPokemon(myPkId, tempUser.getUserId(), tempPokemon);
+
+                        // 查詢 商品的 技能
+                        List<TempSkill> tempSkillList = skillDao.getSkillByPokemonId(tempPokemon.getPokemonId());
 
                         for (TempSkill tempSkill : tempSkillList) {
 
@@ -127,7 +128,10 @@ public class OrderServiceImpl implements OrderService {
             }
 
         } catch (Exception e) {
+
             log.warn(e.toString());
+
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
     }
 

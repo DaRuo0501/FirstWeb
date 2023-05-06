@@ -167,6 +167,19 @@ public class PokemonDaoImpl implements PokemonDao {
     }
 
     @Override
+    public void deleteById(Integer userId, Integer myPkId) {
+
+        String sql = "DELETE FROM my_pokemon_value WHERE my_pk_id = :myPkId AND user_id = :userId;";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+        map.put("myPkId", myPkId);
+
+        namedParameterJdbcTemplate.update(sql, map);
+
+    }
+
+    @Override
     public void createUserPokemon(Integer myPkId, Integer userId, TempPokemon tempPokemon) {
 
         String sql = "INSERT INTO my_pokemon_value (my_pk_id, user_id, pokemon_id, pokemon_name, pokemon_image_url," +

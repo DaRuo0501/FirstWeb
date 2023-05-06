@@ -53,13 +53,13 @@ public class BagDaoImpl implements BagDao {
     @Override
     public List<TempBag> getBag(Integer userId) {
 
-        String sql = "SELECT bag.bag_id, bag.my_pk_id, mpv.user_id, mpv.pokemon_name, mpv.category," +
-                " mpv.hp, mpv.lv, mpv.pokemon_image_url, mpv.attack, mpv.defense, mpv.speed, mpv.description," +
+        String sql = "SELECT bag.bag_id, bag.my_pk_id, mpv.user_id, mpv.pokemon_name," +
+                " mpv.category, mpv.hp, mpv.lv, mpv.pokemon_image_url," +
+                " mpv.attack, mpv.defense, mpv.speed, mpv.description," +
                 " mpv.created_date, mpv.last_modified_date" +
-                " FROM bag " +
+                " FROM bag" +
                 " join my_pokemon_value mpv ON bag.my_pk_id = mpv.my_pk_id" +
-                " where mpv.user_id = :userId" +
-                " GROUP BY mpv.my_pk_id;";
+                " WHERE bag.user_id = :userId";
 
         Map<String, Object> map = new HashMap<>();
         map.put("userId", userId);
@@ -93,13 +93,13 @@ public class BagDaoImpl implements BagDao {
 
     // 刪除 指定的 背包 ID 的 商品
     @Override
-    public void deleteBagId(Integer userId, Integer bagId) {
+    public void deleteBagId(Integer userId, Integer myPkId) {
 
-        String sql = "DELETE FROM bag WHERE user_id = :userId AND bag_id = :bagId;";
+        String sql = "DELETE FROM bag WHERE user_id = :userId AND my_pk_id = :myPkId;";
 
         Map<String, Object> map = new HashMap<>();
         map.put("userId", userId);
-        map.put("bagId", bagId);
+        map.put("myPkId", myPkId);
 
         namedParameterJdbcTemplate.update(sql, map);
 
@@ -138,14 +138,19 @@ public class BagDaoImpl implements BagDao {
     @Override
     public TempBag getBagById(Integer userId, Integer bagId) {
 
-        String sql = "SELECT bag_id, user_id, my_pk_id, created_date, last_modified_date " +
-                " FROM bag WHERE user_id = :userId AND bag_id = :bagId";
+        String sql = "SELECT bag.bag_id, bag.user_id, bag.my_pk_id, mpv.pokemon_name," +
+                " mpv.category, mpv.hp, mpv.lv, mpv.pokemon_image_url," +
+                " mpv.attack, mpv.defense, mpv.speed, mpv.description," +
+                " mpv.created_date, mpv.last_modified_date" +
+                " FROM bag" +
+                " join my_pokemon_value mpv ON bag.my_pk_id = mpv.my_pk_id" +
+                " WHERE bag.user_id = :userId AND bag.bag_id = :bagId";
 
         Map<String, Object> map = new HashMap<>();
         map.put("userId", userId);
         map.put("bagId", bagId);
 
-        List<TempBag> tempBagList = namedParameterJdbcTemplate.query(sql, map , new LastBagRowMapper());
+        List<TempBag> tempBagList = namedParameterJdbcTemplate.query(sql, map , new TempBagRowMapper());
 
         if (tempBagList.size() > 0) {
 
