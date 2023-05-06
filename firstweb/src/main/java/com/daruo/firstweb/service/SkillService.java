@@ -10,4 +10,6 @@ public interface SkillService {
     List<TempSkill> getSkillByPokemonId(Integer bagId);
 
     void remove(Integer userId,Integer bagId, Integer skillId);
+
+    List<TempSkill> getSkillByMyPkId(Integer myPkId);
 }

@@ -7,8 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class SkillController {
@@ -16,11 +15,11 @@ public class SkillController {
     @Autowired
     private SkillService skillService;
 
-    @GetMapping("/skill/delete/{bagId}/{skillId}")
-    public void delete(@PathVariable Integer skillId,
-                       @PathVariable Integer bagId,
-                       HttpServletRequest request,
-                       HttpSession session
+    @RequestMapping("/skill/delete")
+    public String delete(@RequestParam Integer bagId,
+                         @RequestParam Integer skillId,
+                         HttpServletRequest request,
+                         HttpSession session
     ) {
 
         // 取得 當前使用者
@@ -29,5 +28,6 @@ public class SkillController {
 
         skillService.remove(tempUser.getUserId(), bagId, skillId);
 
+        return "redirect:/users/bag";
     }
 }

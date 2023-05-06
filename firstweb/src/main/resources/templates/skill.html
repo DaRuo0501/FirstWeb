@@ -184,7 +184,7 @@
                     </div>
 
                     <div class="skill-edit-box">
-                        <a th:href="@{'/skill/delete/' + *{skill.bagId} + '/' + *{skill.skillId}}">遺忘</a>
+                        <a th:href="@{/skill/delete(bagId=${bagPokemon.bagId},skillId=*{skill.skillId})}">遺忘</a>
                     </div>
 
                 </div>

@@ -8,9 +8,11 @@ public interface SkillDao {
 
     List<TempSkill> getSkillByPokemonId(Integer pokemonId);
 
-    void remove(Integer userId, Integer bagId, Integer skillId);
+    void remove(Integer userId, Integer myPkId, Integer skillId);
 
     void createUserPokemonSkill(Integer myPkId, Integer userId, TempSkill tempSkill);
 
     void deleteById(Integer userId, Integer myPkId);
+
+    List<TempSkill> getSkillByMyPkId(Integer myPkId);
 }

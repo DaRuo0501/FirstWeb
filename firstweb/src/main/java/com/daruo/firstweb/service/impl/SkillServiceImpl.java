@@ -34,6 +34,14 @@ public class SkillServiceImpl implements SkillService {
     @Override
     public void remove(Integer userId,Integer bagId, Integer skillId) {
 
-        skillDao.remove(userId, bagId, skillId);
+        TempBag tempBag = bagDao.getBagById(userId, bagId);
+
+        skillDao.remove(tempBag.getUserId(), tempBag.getMyPkId(), skillId);
+    }
+
+    @Override
+    public List<TempSkill> getSkillByMyPkId(Integer myPkId) {
+
+        return skillDao.getSkillByMyPkId(myPkId);
     }
 }

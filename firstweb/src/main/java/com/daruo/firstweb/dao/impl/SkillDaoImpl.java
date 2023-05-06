@@ -2,6 +2,7 @@ package com.daruo.firstweb.dao.impl;
 
 import com.daruo.firstweb.dao.SkillDao;
 import com.daruo.firstweb.dto.TempSkill;
+import com.daruo.firstweb.rowmapper.TempBagRowMapper;
 import com.daruo.firstweb.rowmapper.TempSkillListRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -34,9 +35,17 @@ public class SkillDaoImpl implements SkillDao {
     }
 
     @Override
-    public void remove(Integer userId, Integer bagId, Integer skillId) {
+    public void remove(Integer userId, Integer myPkId, Integer skillId) {
 
-        String sql = "";
+        String sql = "DELETE FROM my_pokemon_skill mps WHERE mps.user_id = :userId AND mps.my_pk_id = :myPkId AND mps.skill_id = :skillId;";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+        map.put("myPkId", myPkId);
+        map.put("skillId", skillId);
+
+        namedParameterJdbcTemplate.update(sql, map);
+
     }
 
     @Override
@@ -71,5 +80,19 @@ public class SkillDaoImpl implements SkillDao {
         map.put("myPkId", myPkId);
 
         namedParameterJdbcTemplate.update(sql, map);
+    }
+
+    @Override
+    public List<TempSkill> getSkillByMyPkId(Integer myPkId) {
+
+        String sql = "SELECT * FROM bag b JOIN my_pokemon_skill mps on b.my_pk_id = mps.my_pk_id" +
+                " JOIN skill s on mps.skill_id = s.skill_id WHERE b.my_pk_id = 1;";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("myPkId", myPkId);
+
+        List<TempSkill> tempSkillList = namedParameterJdbcTemplate.query(sql, map, new TempSkillListRowMapper());
+
+        return tempSkillList;
     }
 }
