@@ -4,13 +4,11 @@ import com.daruo.firstweb.dao.BagDao;
 import com.daruo.firstweb.dao.SkillDao;
 import com.daruo.firstweb.dto.TempBag;
 import com.daruo.firstweb.dto.TempSkill;
-import com.daruo.firstweb.dto.TempUser;
 import com.daruo.firstweb.service.SkillService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -43,5 +41,11 @@ public class SkillServiceImpl implements SkillService {
     public List<TempSkill> getSkillByMyPkId(Integer myPkId) {
 
         return skillDao.getSkillByMyPkId(myPkId);
+    }
+
+    @Override
+    public List<TempSkill> getPokemonNewSkill(TempBag tempBag) {
+
+        return skillDao.getPokemonNewSkill(tempBag);
     }
 }

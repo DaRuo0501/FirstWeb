@@ -29,4 +29,6 @@ public interface UserDao {
     void updateUserMoney(Integer userId, Integer updateMoney);
 
     TempUser getTempUserById(Integer userId);
+
+    Integer countUser(UserQueryParams userQueryParams);
 }

@@ -282,7 +282,6 @@ header span {
     background: #23242a;
     border: 3px solid #45f3ff;
     border-radius: 16px;
-    margin-top: 20px;
     cursor: default;
 }
 
@@ -467,4 +466,102 @@ header span {
     flex-wrap: wrap;
     width: 400px;
     height: 100%;
+    margin-top: 20px;
 }
+
+.new-skill-box {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    width: 400px;
+    height: 480px;
+    font-size: 22px;
+    background: #363639;
+    border: 3px solid #45f3ff;
+    border-radius: 16px;
+}
+
+.new-skill-title {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 394px;
+    height: 50px;
+    font-size: 30px;
+    font-weight: 600;
+    color: #45f3ff;
+    background: #18181b;
+    border-bottom: 3px solid #45f3ff;
+    border-radius: 15px 15px 0 0;
+}
+
+.new-skill-name-box {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 394px;
+    background: #23242a;
+    border-top: 2px solid #45f3ff;
+    border-bottom: 2px solid #45f3ff;
+    margin-top: 60px;
+}
+
+.new-skill-category {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 50px;
+}
+
+.new-skill-category img {
+    width: 40px;
+    height: 40px;
+}
+
+.new-skill-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 50px;
+}
+
+.new-skill-attack {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 50px;
+}
+
+.new-skill-edit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #8f8f8f;
+    border: 2px solid #8f8f8f;
+    border-radius: 16px;
+    padding: 5px;
+}
+
+.new-skill-edit:hover {
+    color: #45f3ff;
+    border: 2px solid #45f3ff;
+}
+
+.new-skill-edit a {
+    color: #8f8f8f;
+    text-decoration: none;
+}
+
+.new-skill-edit a:hover {
+    color: #45f3ff;
+}
+
+

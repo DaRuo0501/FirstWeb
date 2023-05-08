@@ -180,7 +180,7 @@ public class PokemonDaoImpl implements PokemonDao {
     }
 
     @Override
-    public void createUserPokemon(Integer myPkId, Integer userId, TempPokemon tempPokemon) {
+    public void createUserPokemonValue(Integer myPkId, Integer userId, TempPokemon tempPokemon) {
 
         String sql = "INSERT INTO my_pokemon_value (my_pk_id, user_id, pokemon_id, pokemon_name, pokemon_image_url," +
                 " category, hp, lv, exp, attack, defense, speed, price," +

@@ -1,8 +1,10 @@
 package com.daruo.firstweb.dao.impl;
 
 import com.daruo.firstweb.dao.SkillDao;
+import com.daruo.firstweb.dto.TempBag;
 import com.daruo.firstweb.dto.TempSkill;
 import com.daruo.firstweb.rowmapper.TempBagRowMapper;
+import com.daruo.firstweb.rowmapper.TempSkillListNewRowMapper;
 import com.daruo.firstweb.rowmapper.TempSkillListRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -86,12 +88,27 @@ public class SkillDaoImpl implements SkillDao {
     public List<TempSkill> getSkillByMyPkId(Integer myPkId) {
 
         String sql = "SELECT * FROM bag b JOIN my_pokemon_skill mps on b.my_pk_id = mps.my_pk_id" +
-                " JOIN skill s on mps.skill_id = s.skill_id WHERE b.my_pk_id = 1;";
+                " JOIN skill s on mps.skill_id = s.skill_id WHERE b.my_pk_id = :myPkId;";
 
         Map<String, Object> map = new HashMap<>();
         map.put("myPkId", myPkId);
 
         List<TempSkill> tempSkillList = namedParameterJdbcTemplate.query(sql, map, new TempSkillListRowMapper());
+
+        return tempSkillList;
+    }
+
+    @Override
+    public List<TempSkill> getPokemonNewSkill(TempBag tempBag) {
+
+        String sql = "SELECT * FROM skill_item si join skill s on si.skill_id = s.skill_id" +
+                " WHERE si.category = :category AND si.lv <= :lv;";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("category", tempBag.getCategory().toString());
+        map.put("lv", tempBag.getLv());
+
+        List<TempSkill> tempSkillList = namedParameterJdbcTemplate.query(sql, map, new TempSkillListNewRowMapper());
 
         return tempSkillList;
     }

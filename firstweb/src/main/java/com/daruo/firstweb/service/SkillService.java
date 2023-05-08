@@ -1,5 +1,6 @@
 package com.daruo.firstweb.service;
 
+import com.daruo.firstweb.dto.TempBag;
 import com.daruo.firstweb.dto.TempSkill;
 import com.daruo.firstweb.dto.TempUser;
 
@@ -12,4 +13,6 @@ public interface SkillService {
     void remove(Integer userId,Integer bagId, Integer skillId);
 
     List<TempSkill> getSkillByMyPkId(Integer myPkId);
+
+    List<TempSkill> getPokemonNewSkill(TempBag tempBag);
 }

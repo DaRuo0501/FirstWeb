@@ -6,6 +6,7 @@ import com.daruo.firstweb.dto.*;
 import com.daruo.firstweb.model.Pokemon;
 import com.daruo.firstweb.model.User;
 import com.daruo.firstweb.service.*;
+import com.daruo.firstweb.util.Page;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.constraints.Max;
@@ -13,6 +14,8 @@ import jakarta.validation.constraints.Min;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -144,6 +147,10 @@ public class PageController {
         List<TempSkill> tempSkillList = skillService.getSkillByMyPkId(tempBag.getMyPkId());
 
         model.addAttribute("skillList", tempSkillList);
+
+        List<TempSkill> tempSkillListNew = skillService.getPokemonNewSkill(tempBag);
+
+        model.addAttribute("newSkillList", tempSkillListNew);
 
         return "skill";
     }
@@ -362,14 +369,15 @@ public class PageController {
     @GetMapping("/users/userList")
     public String userList(Model model,
 
-                       // 分頁 Pagination
-                       @RequestParam(defaultValue = "5") @Max(1000) @Min(0) Integer limit,
-                       @RequestParam(defaultValue = "0") @Min(0) Integer offset
+                                         // 分頁 Pagination
+                                         @RequestParam(defaultValue = "5") @Max(1000) @Min(0) Integer limit,
+                                         @RequestParam(defaultValue = "0") @Min(0) Integer offset
     ) {
 
         UserQueryParams userQueryParams = new UserQueryParams();
         userQueryParams.setLimit(limit);
         userQueryParams.setOffset(offset);
+
 
         List<TempUser> tempUserList = userService.getAllUsers(userQueryParams);
 

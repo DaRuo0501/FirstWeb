@@ -18,4 +18,6 @@ public interface UserService {
     void updateUser(UserUpdateRequest userUpdateRequest);
 
     TempUser getUserById(Integer userId);
+
+    Integer countUser(UserQueryParams userQueryParams);
 }

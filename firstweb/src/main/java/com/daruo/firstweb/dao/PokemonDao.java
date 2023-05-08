@@ -19,7 +19,7 @@ public interface PokemonDao {
 
     void updatePokemonCountById(Integer pokemonId, Integer stock);
 
-    void createUserPokemon(Integer myPkId, Integer userId, TempPokemon tempPokemon);
+    void createUserPokemonValue(Integer myPkId, Integer userId, TempPokemon tempPokemon);
 
     Integer getMyPkLastId(Integer userId);
 

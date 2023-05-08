@@ -166,7 +166,7 @@
 
                 <div class="skill-title">
                     <span></span>
-                    <p>可使用的技能</p>
+                    <p>可使用的招式</p>
                 </div>
 
                 <div class="skill-name" th:each="skill : ${skillList}">
@@ -195,7 +195,33 @@
 
         <div class="content-skill-box">
 
+            <div class="new-skill-box">
 
+                <div class="new-skill-title">
+                    <p>可學習的招式</p>
+                </div>
+
+                <div class="new-skill-name-box" th:each="skillNew : ${newSkillList}">
+
+                    <div class="new-skill-category">
+                        <img th:src="*{skillNew.skillCategoryUrl}">
+                    </div>
+
+                    <div class="new-skill-name">
+                        <a th:text="*{skillNew.skillName}">打雷</a>
+                    </div>
+
+                    <div class="new-skill-attack">
+                        <a th:text="*{skillNew.skillAttack}">25</a>
+                    </div>
+
+                    <div class="new-skill-edit">
+                        <a>學習</a>
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 

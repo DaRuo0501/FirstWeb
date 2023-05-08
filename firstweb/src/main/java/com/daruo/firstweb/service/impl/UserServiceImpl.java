@@ -114,4 +114,10 @@ public class UserServiceImpl implements UserService {
     public TempUser getUserById(Integer userId) {
         return userDao.getUserById(userId);
     }
+
+    @Override
+    public Integer countUser(UserQueryParams userQueryParams) {
+
+        return userDao.countUser(userQueryParams);
+    }
 }

@@ -203,4 +203,17 @@ public class UserDaoImpl implements UserDao {
             return null;
         }
     }
+
+    @Override
+    public Integer countUser(UserQueryParams userQueryParams) {
+
+        String sql = "SELECT user_id, user_name, password, email, user_image_url, money, created_date, last_modified_date " +
+                "FROM user";
+
+        Map<String, Object> map = new HashMap<>();
+
+        Integer total = namedParameterJdbcTemplate.queryForObject(sql, map, Integer.class);
+
+        return total;
+    }
 }

@@ -10,6 +10,7 @@ public class TempUser {
     private String email;
     private String userImgUrl;
     private Integer money;
+    private Integer myPkId;
     private Date createdDate;
     private Date lastModifiedDate;
 
@@ -59,6 +60,14 @@ public class TempUser {
 
     public void setMoney(Integer money) {
         this.money = money;
+    }
+
+    public Integer getMyPkId() {
+        return myPkId;
+    }
+
+    public void setMyPkId(Integer myPkId) {
+        this.myPkId = myPkId;
     }
 
     public Date getCreatedDate() {

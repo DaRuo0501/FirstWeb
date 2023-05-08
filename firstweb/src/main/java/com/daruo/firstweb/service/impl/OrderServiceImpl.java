@@ -68,8 +68,8 @@ public class OrderServiceImpl implements OrderService {
 
                         Integer myPkId = pokemonDao.getMyPkLastId(tempUser.getUserId());
 
-                        // 將商品建立獨立編號
-                        pokemonDao.createUserPokemon(myPkId, tempUser.getUserId(), tempPokemon);
+                        // 將商品建立在使用者名下
+                        pokemonDao.createUserPokemonValue(myPkId, tempUser.getUserId(), tempPokemon);
 
                         // 查詢 商品的 技能
                         List<TempSkill> tempSkillList = skillDao.getSkillByPokemonId(tempPokemon.getPokemonId());
