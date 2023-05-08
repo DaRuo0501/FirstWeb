@@ -3,6 +3,7 @@ package com.daruo.firstweb.dao.impl;
 import com.daruo.firstweb.dao.SkillDao;
 import com.daruo.firstweb.dto.TempBag;
 import com.daruo.firstweb.dto.TempSkill;
+import com.daruo.firstweb.rowmapper.TempSkillCountRowMapper;
 import com.daruo.firstweb.rowmapper.TempSkillListNewRowMapper;
 import com.daruo.firstweb.rowmapper.TempSkillListRowMapper;
 import com.daruo.firstweb.rowmapper.TempSkillRowMapper;
@@ -122,6 +123,40 @@ public class SkillDaoImpl implements SkillDao {
         map.put("skillId", skillId);
 
         List<TempSkill> tempSkillList = namedParameterJdbcTemplate.query(sql, map, new TempSkillRowMapper());
+
+        if (tempSkillList.size() > 0) {
+
+            return tempSkillList.get(0);
+        }
+
+        return null;
+    }
+
+    @Override
+    public Integer getCountSkill(Integer myPkId) {
+
+        String sql = "SELECT * FROM my_pokemon_skill WHERE my_pk_id = :myPkId;";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("myPkId", myPkId);
+
+        List<TempSkill> tempSkillList = namedParameterJdbcTemplate.query(sql, map, new TempSkillCountRowMapper());
+
+        Integer total = tempSkillList.size();
+
+        return total;
+    }
+
+    @Override
+    public TempSkill getSkillNameByMyPkId(Integer myPkId, Integer skillId) {
+
+        String sql = "SELECT * FROM my_pokemon_skill WHERE my_pk_id = :myPkId AND skill_id = :skillId;";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("myPkId", myPkId);
+        map.put("skillId", skillId);
+
+        List<TempSkill> tempSkillList = namedParameterJdbcTemplate.query(sql, map, new TempSkillCountRowMapper());
 
         if (tempSkillList.size() > 0) {
 

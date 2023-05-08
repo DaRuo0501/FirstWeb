@@ -22,4 +22,8 @@ public interface SkillDao {
     void add(TempBag tempBag, TempSkill tempSkill);
 
     TempSkill getSkillName(Integer skillId);
+
+    Integer getCountSkill(Integer myPkId);
+
+    TempSkill getSkillNameByMyPkId(Integer myPkId, Integer skillId);
 }

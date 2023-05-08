@@ -110,7 +110,7 @@ public class PageController {
 
             model.addAttribute("bagList", tempBagList);
 
-            model.addAttribute("bagId",bagId);
+            model.addAttribute("bagId", bagId);
 
             // 取得 背包的 第一個商品
             String tempPokemonName = tempBagList.get(bagId).getPokemonName();
@@ -135,22 +135,31 @@ public class PageController {
                         HttpSession session
     ) {
 
-        // 取得 當前使用者
-        session = request.getSession();
-        TempUser tempUser = (TempUser) session.getAttribute("showUserName");
+        try {
 
-        TempBag tempBag = bagService.goToSkillUpdatePage(tempUser.getUserId(), bagId);
+            // 取得 當前使用者
+            session = request.getSession();
+            TempUser tempUser = (TempUser) session.getAttribute("showUserName");
 
-        model.addAttribute("bagPokemon", tempBag);
+            TempBag tempBag = bagService.goToSkillUpdatePage(tempUser.getUserId(), bagId);
 
-        // 取得 商品的 技能
-        List<TempSkill> tempSkillList = skillService.getSkillByMyPkId(tempBag.getMyPkId());
+            model.addAttribute("bagPokemon", tempBag);
 
-        model.addAttribute("skillList", tempSkillList);
+            // 取得 商品的 技能
+            List<TempSkill> tempSkillList = skillService.getSkillByMyPkId(tempBag.getMyPkId());
 
-        List<TempSkill> tempSkillListNew = skillService.getPokemonNewSkill(tempBag);
+            model.addAttribute("skillList", tempSkillList);
 
-        model.addAttribute("newSkillList", tempSkillListNew);
+            List<TempSkill> tempSkillListNew = skillService.getPokemonNewSkill(tempBag);
+
+            model.addAttribute("newSkillList", tempSkillListNew);
+
+            return "skill";
+
+        } catch (Exception e) {
+
+            log.warn(e.getMessage());
+        }
 
         return "skill";
     }
@@ -338,7 +347,7 @@ public class PageController {
 
             return "shopCar";
 
-        } catch (Exception e){
+        } catch (Exception e) {
 
             log.warn(e.getMessage());
         }
@@ -369,9 +378,9 @@ public class PageController {
     @GetMapping("/users/userList")
     public String userList(Model model,
 
-                                         // 分頁 Pagination
-                                         @RequestParam(defaultValue = "5") @Max(1000) @Min(0) Integer limit,
-                                         @RequestParam(defaultValue = "0") @Min(0) Integer offset
+                           // 分頁 Pagination
+                           @RequestParam(defaultValue = "5") @Max(1000) @Min(0) Integer limit,
+                           @RequestParam(defaultValue = "0") @Min(0) Integer offset
     ) {
 
         UserQueryParams userQueryParams = new UserQueryParams();

@@ -42,7 +42,7 @@ public class SkillController {
         session = request.getSession();
         TempUser tempUser = (TempUser) session.getAttribute("showUserName");
 
-        skillService.add(tempUser.getUserId(), bagId, skillId);
+        skillService.add(tempUser.getUserId(), bagId, skillId, session);
 
         return "redirect:/users/bag";
     }

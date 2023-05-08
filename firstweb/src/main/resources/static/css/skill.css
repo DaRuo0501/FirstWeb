@@ -241,6 +241,39 @@ header span {
     letter-spacing: 10px;
 }
 
+.msg-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+}
+
+.msg-box .msg-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 40px;
+    font-size: 26px;
+    font-weight: 600;
+    color: #010101;
+    background: #010101;
+}
+
+.msg-box .show-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 40px;
+    font-size: 30px;
+    font-weight: 600;
+    color: #ff0000;
+}
+
 .right-body {
     display: flex;
     justify-content: space-evenly;
