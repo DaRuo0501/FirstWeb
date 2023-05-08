@@ -15,7 +15,7 @@ public class SkillController {
     @Autowired
     private SkillService skillService;
 
-    @RequestMapping("/skill/delete")
+    @GetMapping("/skill/delete")
     public String delete(@RequestParam Integer bagId,
                          @RequestParam Integer skillId,
                          HttpServletRequest request,
@@ -27,6 +27,22 @@ public class SkillController {
         TempUser tempUser = (TempUser) session.getAttribute("showUserName");
 
         skillService.remove(tempUser.getUserId(), bagId, skillId);
+
+        return "redirect:/users/bag";
+    }
+
+    @GetMapping("/skill/add")
+    public String add(@RequestParam Integer bagId,
+                      @RequestParam Integer skillId,
+                      HttpServletRequest request,
+                      HttpSession session
+    ) {
+
+        // 取得 當前使用者
+        session = request.getSession();
+        TempUser tempUser = (TempUser) session.getAttribute("showUserName");
+
+        skillService.add(tempUser.getUserId(), bagId, skillId);
 
         return "redirect:/users/bag";
     }

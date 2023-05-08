@@ -15,4 +15,6 @@ public interface SkillService {
     List<TempSkill> getSkillByMyPkId(Integer myPkId);
 
     List<TempSkill> getPokemonNewSkill(TempBag tempBag);
+
+    void add(Integer userId, Integer bagId, Integer skillId);
 }

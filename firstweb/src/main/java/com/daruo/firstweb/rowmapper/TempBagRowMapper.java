@@ -15,6 +15,7 @@ public class TempBagRowMapper implements RowMapper {
         tempBag.setBagId(rs.getInt("bag_id"));
         tempBag.setUserId(rs.getInt("user_id"));
         tempBag.setMyPkId(rs.getInt("my_pk_id"));
+        tempBag.setPokemonId(rs.getInt("pokemon_id"));
         tempBag.setPokemonName(rs.getString("pokemon_name"));
         tempBag.setPokemonImageUrl(rs.getString("pokemon_image_url"));
 

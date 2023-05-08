@@ -3,9 +3,9 @@ package com.daruo.firstweb.dao.impl;
 import com.daruo.firstweb.dao.SkillDao;
 import com.daruo.firstweb.dto.TempBag;
 import com.daruo.firstweb.dto.TempSkill;
-import com.daruo.firstweb.rowmapper.TempBagRowMapper;
 import com.daruo.firstweb.rowmapper.TempSkillListNewRowMapper;
 import com.daruo.firstweb.rowmapper.TempSkillListRowMapper;
+import com.daruo.firstweb.rowmapper.TempSkillRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -111,5 +111,46 @@ public class SkillDaoImpl implements SkillDao {
         List<TempSkill> tempSkillList = namedParameterJdbcTemplate.query(sql, map, new TempSkillListNewRowMapper());
 
         return tempSkillList;
+    }
+
+    @Override
+    public TempSkill getSkillName(Integer skillId) {
+
+        String sql = "SELECT * FROM skill WHERE skill_id = :skillId;";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("skillId", skillId);
+
+        List<TempSkill> tempSkillList = namedParameterJdbcTemplate.query(sql, map, new TempSkillRowMapper());
+
+        if (tempSkillList.size() > 0) {
+
+            return tempSkillList.get(0);
+        }
+
+        return null;
+    }
+
+    @Override
+    public void add(TempBag tempBag, TempSkill tempSkill) {
+
+        String sql = "INSERT INTO my_pokemon_skill(my_pk_id, user_id, pokemon_id, pokemon_name, skill_id, skill_name," +
+                " created_date, last_modified_date)" +
+                " VALUES (:myPkId, :userId, :pokemonId, :pokemonName, :skillId, :skillName, :createdDate, :lastModifiedDate);";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("myPkId", tempBag.getMyPkId());
+        map.put("userId", tempBag.getUserId());
+        map.put("pokemonId", tempBag.getPokemonId());
+        map.put("pokemonName", tempBag.getPokemonName());
+        map.put("skillId", tempSkill.getSkillId());
+        map.put("skillName", tempSkill.getSkillName());
+
+        Date now = new Date();
+        map.put("createdDate", now);
+        map.put("lastModifiedDate", now);
+
+        namedParameterJdbcTemplate.update(sql, map);
+
     }
 }

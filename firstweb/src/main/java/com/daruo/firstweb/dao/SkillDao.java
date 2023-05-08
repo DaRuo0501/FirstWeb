@@ -18,4 +18,8 @@ public interface SkillDao {
     List<TempSkill> getSkillByMyPkId(Integer myPkId);
 
     List<TempSkill> getPokemonNewSkill(TempBag tempBag);
+
+    void add(TempBag tempBag, TempSkill tempSkill);
+
+    TempSkill getSkillName(Integer skillId);
 }

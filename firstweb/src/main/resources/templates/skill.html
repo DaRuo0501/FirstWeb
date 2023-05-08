@@ -208,15 +208,15 @@
                     </div>
 
                     <div class="new-skill-name">
-                        <a th:text="*{skillNew.skillName}">打雷</a>
+                        <a th:text="*{skillNew.skillName}"></a>
                     </div>
 
                     <div class="new-skill-attack">
-                        <a th:text="*{skillNew.skillAttack}">25</a>
+                        <a th:text="*{skillNew.skillAttack}"></a>
                     </div>
 
                     <div class="new-skill-edit">
-                        <a>學習</a>
+                        <a th:href="@{/skill/add(bagId=${bagPokemon.bagId},skillId=*{skillNew.skillId})}">學習</a>
                     </div>
 
                 </div>

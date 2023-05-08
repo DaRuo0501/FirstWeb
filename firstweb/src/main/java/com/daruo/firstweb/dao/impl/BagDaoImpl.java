@@ -53,7 +53,7 @@ public class BagDaoImpl implements BagDao {
     @Override
     public List<TempBag> getBag(Integer userId) {
 
-        String sql = "SELECT bag.bag_id, bag.my_pk_id, mpv.user_id, mpv.pokemon_name," +
+        String sql = "SELECT bag.bag_id, bag.my_pk_id, mpv.user_id, mpv.pokemon_id, mpv.pokemon_name," +
                 " mpv.category, mpv.hp, mpv.lv, mpv.pokemon_image_url," +
                 " mpv.attack, mpv.defense, mpv.speed, mpv.description," +
                 " mpv.created_date, mpv.last_modified_date" +
@@ -138,7 +138,7 @@ public class BagDaoImpl implements BagDao {
     @Override
     public TempBag getBagById(Integer userId, Integer bagId) {
 
-        String sql = "SELECT bag.bag_id, bag.user_id, bag.my_pk_id, mpv.pokemon_name," +
+        String sql = "SELECT bag.bag_id, bag.user_id, bag.my_pk_id, mpv.pokemon_id, mpv.pokemon_name," +
                 " mpv.category, mpv.hp, mpv.lv, mpv.pokemon_image_url," +
                 " mpv.attack, mpv.defense, mpv.speed, mpv.description," +
                 " mpv.created_date, mpv.last_modified_date" +

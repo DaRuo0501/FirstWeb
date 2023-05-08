@@ -484,7 +484,6 @@ header span {
 }
 
 .new-skill-title {
-    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -506,7 +505,7 @@ header span {
     background: #23242a;
     border-top: 2px solid #45f3ff;
     border-bottom: 2px solid #45f3ff;
-    margin-top: 60px;
+    margin-top: 10px;
 }
 
 .new-skill-category {
