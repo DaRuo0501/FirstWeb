@@ -2,6 +2,7 @@ package com.daruo.firstweb.dao.impl;
 
 import com.daruo.firstweb.dao.BagDao;
 import com.daruo.firstweb.dto.TempBag;
+import com.daruo.firstweb.dto.TempBox;
 import com.daruo.firstweb.rowmapper.LastBagRowMapper;
 import com.daruo.firstweb.rowmapper.TempBagRowMapper;
 import org.slf4j.Logger;
@@ -54,7 +55,7 @@ public class BagDaoImpl implements BagDao {
     public List<TempBag> getBag(Integer userId) {
 
         String sql = "SELECT bag.bag_id, bag.my_pk_id, mpv.user_id, mpv.pokemon_id, mpv.pokemon_name," +
-                " mpv.category, mpv.hp, mpv.lv, mpv.pokemon_image_url," +
+                " mpv.category, mpv.hp, mpv.lv, mpv.exp, mpv.pokemon_image_url," +
                 " mpv.attack, mpv.defense, mpv.speed, mpv.description," +
                 " mpv.created_date, mpv.last_modified_date" +
                 " FROM bag" +
@@ -139,7 +140,7 @@ public class BagDaoImpl implements BagDao {
     public TempBag getBagById(Integer userId, Integer bagId) {
 
         String sql = "SELECT bag.bag_id, bag.user_id, bag.my_pk_id, mpv.pokemon_id, mpv.pokemon_name," +
-                " mpv.category, mpv.hp, mpv.lv, mpv.pokemon_image_url," +
+                " mpv.category, mpv.hp, mpv.lv, mpv.exp, mpv.pokemon_image_url," +
                 " mpv.attack, mpv.defense, mpv.speed, mpv.description," +
                 " mpv.created_date, mpv.last_modified_date" +
                 " FROM bag" +
@@ -159,5 +160,30 @@ public class BagDaoImpl implements BagDao {
         }
 
         return null;
+    }
+
+    @Override
+    public void createBagByTempBox(TempBox tempBox, Integer tempBagLastId) {
+
+        try {
+
+            String sql = "INSERT INTO bag (bag_id, user_id, my_pk_id, created_date, last_modified_date) " +
+                    "VALUES (:bagId, :userId, :myPkId, :createdDate, :lastModifiedDate);";
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("bagId", tempBagLastId + 1);
+            map.put("userId", tempBox.getUserId());
+            map.put("myPkId", tempBox.getMyPkId());
+
+            Date now = new Date();
+            map.put("createdDate", now);
+            map.put("lastModifiedDate", now);
+
+            namedParameterJdbcTemplate.update(sql, map);
+
+        } catch (Exception e) {
+
+            log.error(e.toString());
+        }
     }
 }

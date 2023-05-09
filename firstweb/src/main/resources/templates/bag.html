@@ -39,7 +39,7 @@
     <!-- 左側欄 標頭 -->
     <div class="logo-details">
         <div class="logo-img">
-            <img src="/images/0025-皮卡丘.png" alt="logo">
+            <img th:src="${session.showUserName.userImgUrl}">
         </div>
         <span class="logo_name" th:text="${session.showUserName.userName}"></span> <i class="fa-solid fa-bars"></i>
     </div>
@@ -79,7 +79,7 @@
                     </li>
 
                     <li class="box-menu">
-                        <a href="#">
+                        <a href="/users/box">
                             <i class="fa-solid fa-box-archive"></i>
                             <span class="link_name">盒子</span>
                         </a>

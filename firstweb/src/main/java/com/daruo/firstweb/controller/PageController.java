@@ -48,6 +48,9 @@ public class PageController {
     @Autowired
     private SkillService skillService;
 
+    @Autowired
+    private BoxService boxService;
+
     // 登入頁面
     @GetMapping(value = {"/users/login", "/"})
     public String login() {
@@ -162,6 +165,31 @@ public class PageController {
         }
 
         return "skill";
+    }
+
+    // 盒子 (倉庫)
+    @GetMapping("/users/box")
+    public String box(Model model,
+                      HttpSession session,
+                      HttpServletRequest request
+    ) {
+
+        try {
+
+            // 取得 當前使用者
+            session = request.getSession();
+            TempUser tempUser = (TempUser) session.getAttribute("showUserName");
+
+            List<TempBox> tempBoxList = boxService.getBox(tempUser.getUserId());
+
+            model.addAttribute("boxList", tempBoxList);
+
+
+        } catch (Exception e) {
+            log.error(e.toString());
+        }
+
+        return "box";
     }
 
     // 商城頁面

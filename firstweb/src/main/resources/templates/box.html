@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- CSS 連結 -->
-  <link rel="stylesheet" href="/css/order.css">
+  <link rel="stylesheet" href="/css/box.css">
 
   <!-- JQuery 連結 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -23,10 +23,11 @@
 
   <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
-  <title>購物車</title>
+
+  <title>背包</title>
 </head>
 
-<body onload="doOnload()">
+<body>
 
 <header>
   <span>夏天的風</span>
@@ -56,45 +57,43 @@
 
     <!-- 個人資料 -->
     <li>
-      <div class="icon-link">
+      <div class="icon-link active open">
         <a href="/users/user"> <i class='bx bx-user'></i> <span class="link_name">個人資料</span>
           <i class="fa-solid fa-caret-down"></i>
         </a>
+      </div> <!-- 子選單 -->
+      <div class="openMenu">
+        <ul class="sub-menu">
+          <li class="box-menu active">
+            <a href="/users/user">
+              <i class='bx bx-user'></i>
+              <span class="link_name">個人資料</span>
+            </a>
+          </li>
+
+          <li class="box-menu active">
+            <a href="/users/bag">
+              <i class="fa-solid fa-bag-shopping"></i>
+              <span class="link_name">背包</span>
+            </a>
+          </li>
+
+          <li class="box-menu">
+            <a href="/users/box">
+              <i class="fa-solid fa-box-archive"></i>
+              <span class="link_name">盒子</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </li>
 
     <!-- 商城 -->
     <li>
-      <div class="icon-link active open">
+      <div class="icon-link">
         <a href="/users/shop"> <i class="fa-solid fa-shop"></i> <span class="link_name">商城</span>
           <i class="fa-solid fa-caret-down"></i>
         </a>
-      </div>
-
-      <!-- 子選單 -->
-      <div class="openMenu">
-        <ul class="sub-menu active">
-          <li class="box-menu active">
-            <a href="/users/shop">
-              <i class="fa-solid fa-shop"></i>
-              <span class="link_name">商城</span>
-            </a>
-          </li>
-
-          <li class="box-menu active">
-            <a href="/users/shopCar">
-              <i class="fa-solid fa-cart-shopping"></i>
-              <span class="link_name">購物車</span>
-            </a>
-          </li>
-
-          <li class="box-menu">
-            <a href="/users/order">
-              <i class="fa-regular fa-rectangle-list"></i>
-              <span class="link_name">訂單</span>
-            </a>
-          </li>
-        </ul>
       </div>
     </li>
 
@@ -116,48 +115,57 @@
   </ul>
 </div>
 
-<!-- 內文 -->
+<!-- 內文的標頭 -->
 <div class="content">
 
   <div class="content-title active">
-
-    <span class="content-text">訂單</span>
-
+    <span class="content-text">背包</span>
   </div>
 
 </div>
 
+<!-- 內文 -->
 <div class="right-body">
 
   <div class="content-body">
 
-    <div class="content-body-title">
-      <span>歷史訂單</span>
+    <div class="content-box" th:each="box : ${boxList}">
+
+      <div class="pokemon-box">
+
+        <div class="pokemon-name-box">
+          <p th:text="*{box.pokemonName}"></p>
+        </div>
+
+        <div class="pokemon-img-box">
+          <img th:src="*{box.pokemonImageUrl}">
+        </div>
+
+      </div>
+
+      <div class="pokemon-edit-box">
+
+        <div class="move-box">
+          <a th:href="@{'/users/box/goToBag/' + ${box.getBoxId()}}">背包</a>
+        </div>
+
+        <div class="delete-box">
+          <a th:href="@{'/users/box/delete/' + ${box.getBoxId()}}">放生</a>
+        </div>
+
+      </div>
+
     </div>
-
-    <table class="content-table">
-      <thead>
-      <tr>
-        <th class="th-id">訂單編號</th>
-        <th class="th-total-amount">金額</th>
-        <th class="th-create-date">訂單成立時間</th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <tr th:each="order,o : ${orders} ">
-        <td class="td-id" th:text="*{order.orderId}"></td>
-        <td class="td-total-amount" th:text="*{order.totalAmount}"></td>
-        <td class="td-create-date" th:text="*{order.createdDate}"></td>
-      </tr>
-      </tbody>
-    </table>
 
   </div>
 
 </div>
 
 <script>
+
+  function clickPage() {
+    document.getElementById("btn-right-box").submit();
+  }
 
   function logout() {
     window.location.href = "/users/login";
@@ -177,52 +185,6 @@
 
   });
 
-  // 下拉式選單 頁數、屬性 選擇後，不要重置為 null 欄位
-  function doOnload() {
-
-    var tempHidPage = document.getElementById("hidPage").textContent;
-    document.getElementById("page").value = tempHidPage;
-
-    var tempHidCategory = document.getElementById("hidCategory").textContent;
-    document.getElementById("category").value = tempHidCategory;
-
-    var tempHidErrorMsg = document.getElementById("hidErrorMsg").textContent;
-    if (tempHidErrorMsg == "Y") {
-
-      document.getElementById("errorMsg").hidden = false;
-      document.getElementById("msg-text").classList.add("show-text");
-
-      // 控制訊息顯示時間，預設5秒後消失
-      timeUp();
-    } else {
-      document.getElementById("errorMsg").hidden = true;
-    }
-  }
-
-  // 下拉選單 選擇後 自動 submit 向後台傳遞參數
-  function reflashPage() {
-    document.getElementById("search-reflash").submit();
-  }
-
-  // 倒計時器
-  var count = 5;
-
-  function timeUp() {
-
-    count -= 1;
-
-    if (count == 0) {
-      document.getElementById("msg-text").classList.remove("show-text");
-    }
-
-    setTimeout("timeUp()", 1000);
-
-    if (count < 0) {
-      count = 0;
-    }
-  }
-
 </script>
-
 </body>
-
+</html>

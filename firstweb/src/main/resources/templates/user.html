@@ -39,7 +39,7 @@
     <!-- 左側欄 標頭 -->
     <div class="logo-details">
         <div class="logo-img">
-            <img src="/images/0025-皮卡丘.png" alt="logo">
+            <img th:src="${session.showUserName.userImgUrl}">
         </div>
         <span class="logo_name" th:text="${session.showUserName.userName}"></span> <i class="fa-solid fa-bars"></i>
     </div>
@@ -81,7 +81,7 @@
                     </li>
 
                     <li class="box-menu">
-                        <a href="#">
+                        <a href="/users/box">
                             <i class="fa-solid fa-box-archive"></i>
                             <span class="link_name">盒子</span>
                         </a>
@@ -129,30 +129,7 @@
 <!-- 內文 -->
 <div class="right-body">
 
-    <div class="right">
 
-    </div>
-</div>
-
-<div class="search-box">
-
-    <div class="search-box1">
-
-        <!--  帳號查詢  -->
-        <form class="search-input" action="/users/select" method="GET">
-            <span>查詢 :</span>
-            <input type="text" name="userName" placeholder="請輸入想查詢的帳號" autocomplete="off" required>
-            <input type="submit" value="確認">
-        </form>
-
-        <!--  頁數查詢  -->
-        <form class="search-input" action="/users/page" method="GET">
-            <span>查詢 :</span>
-            <input type="text" name="page" placeholder="請輸入頁數" autocomplete="off" required>
-            <input type="submit" value="確認">
-        </form>
-
-    </div>
 
 </div>
 

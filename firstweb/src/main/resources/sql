@@ -45,7 +45,6 @@ VALUES  ('John'  , '202cb962ac59075b964b07152d234b70', 'john@gmail.com', '', 100
         ('喬伊'   , '202cb962ac59075b964b07152d234b70', '654@gmail.com', '', 100, '2023-03-09 11:20:00', '2023-03-09 11:20:00'),
         ('君莎'   , '202cb962ac59075b964b07152d234b70', '321@gmail.com', '', 100, '2023-03-09 11:20:00', '2023-03-09 11:20:00');
 
-SELECT user_id, user_name, password, email, created_date, last_modified_date from user LIMIT 5 OFFSET 0;
 
 
 # 新增 Pokemon 表
@@ -252,9 +251,6 @@ VALUES (1, '火', '/images/category-Logo/Pokemon_Type_Icon_Fire.png'),
        (17, '超能力', '/images/category-Logo/Pokemon_Type_Icon_Psychic.png'),
        (18, '龍', '/images/category-Logo/Pokemon_Type_Icon_Dragon.png');
 
-SELECT category_id, category_name from category;
-
-SELECT count(pokemon_id) FROM pokemon WHERE category = '水';
 
 # 技能
 DROP TABLE IF EXISTS skill;
@@ -284,7 +280,7 @@ VALUES ('撞擊', '攻擊', '一般', '/images/category-Logo/Pokemon_Type_Icon_N
        ('噴射火焰', '攻擊', '火', '/images/category-Logo/Pokemon_Type_Icon_Fire.png', 80, ''),
        ('神聖之火', '攻擊', '火', '/images/category-Logo/Pokemon_Type_Icon_Fire.png', 100, ''),
        ('電擊', '攻擊', '電', '/images/category-Logo/Pokemon_Type_Icon_Electric.png', 10, ''),
-       ('飛葉快刀', '攻擊', '草', '/images/category-Logo/Pokemon_Type_Icon_Grass.png', 10, ''),
+       ('飛葉快刀', '攻擊', '草', '/images/category-Logo/Pokemon_Type_Icon_Grass.png', 20, ''),
        ('藤鞭', '攻擊', '草', '/images/category-Logo/Pokemon_Type_Icon_Grass.png', 8, ''),
        ('吸取', '攻擊', '草', '/images/category-Logo/Pokemon_Type_Icon_Grass.png', 5, ''),
        ('奇異光線', '攻擊', '幽靈', '/images/category-Logo/Pokemon_Type_Icon_Ghost.png', 10, ''),
@@ -314,11 +310,18 @@ VALUES ('撞擊', '攻擊', '一般', '/images/category-Logo/Pokemon_Type_Icon_N
        ('碎岩', '攻擊', '岩石', '/images/category-Logo/Pokemon_Type_Icon_Rock.png', 10, ''),
        ('毒牙', '攻擊', '毒', '/images/category-Logo/Pokemon_Type_Icon_Poison.png', 10, ''),
        ('地球上投', '攻擊', '一般', '/images/category-Logo/Pokemon_Type_Icon_Normal.png', 50, ''),
-       ('高速旋轉', '攻擊', '一般', '/images/category-Logo/Pokemon_Type_Icon_Normal.png', 15, '');
+       ('高速旋轉', '攻擊', '一般', '/images/category-Logo/Pokemon_Type_Icon_Normal.png', 15, ''),
+       ('雷電衝', '攻擊', '電', '/images/category-Logo/Pokemon_Type_Icon_Electric.png', 25, ''),
+       ('打雷', '攻擊', '電', '/images/category-Logo/Pokemon_Type_Icon_Electric.png', 35, ''),
+       ('十萬伏特', '攻擊', '電', '/images/category-Logo/Pokemon_Type_Icon_Electric.png', 50, ''),
+       ('火焰衝', '攻擊', '火', '/images/category-Logo/Pokemon_Type_Icon_Fire.png', 25, ''),
+       ('火焰漩渦', '攻擊', '火', '/images/category-Logo/Pokemon_Type_Icon_Fire.png', 35, ''),
+       ('水之波動', '攻擊', '水', '/images/category-Logo/Pokemon_Type_Icon_Water.png', 15, ''),
+       ('水流尾', '攻擊', '水', '/images/category-Logo/Pokemon_Type_Icon_Water.png', 35, ''),
+       ('水炮', '攻擊', '水', '/images/category-Logo/Pokemon_Type_Icon_Water.png', 50, ''),
+       ('種子炸彈', '攻擊', '草', '/images/category-Logo/Pokemon_Type_Icon_Grass.png', 30, ''),
+       ('陽光烈焰', '攻擊', '草', '/images/category-Logo/Pokemon_Type_Icon_Grass.png', 50, '');
 
-SELECT * FROM skill WHERE skill_name = '電擊' OR skill_name = '火焰' OR skill_name = '水槍' OR skill_name = '撞擊';
-
-SELECT * FROM skill WHERE skill_name = :skillName1 OR skill_name = :skillName2 OR skill_name = :skillName3 OR skill_name = :skillName4;
 
 
 # 購物車
@@ -337,25 +340,6 @@ CREATE TABLE IF NOT EXISTS shopping_car(
     amount         INT            NOT NULL
 );
 
-INSERT INTO shopping_car(user_id, seq_no, pokemon_id, pokemon_name, pokemon_image_url, order_id, price, stock, buy_cnt, amount) VALUES (1, 1, 4, '小火龍', '/images/0004-小火龍.png', 1, 150, 3, 1, 100);
-INSERT INTO shopping_car(user_id, seq_no, pokemon_id, pokemon_name, pokemon_image_url, order_id, price, stock, buy_cnt, amount) VALUES (1, 2, 25, '皮卡丘', '/images/0025-皮卡丘.png', 1, 150, 1, 1, 150);
-INSERT INTO shopping_car(user_id, seq_no, pokemon_id, pokemon_name, pokemon_image_url, order_id, price, stock, buy_cnt, amount) VALUES (1, 3, 155, '火球鼠', '/images/0155-火球鼠.png', 1, 150, 3, 1, 100);
-
-SELECT user_id, SUM(amount) FROM shopping_car WHERE user_id = 1;
-
-SELECT seq_no, user_id, pokemon_id, buy_cnt, amount, SUM(amount) FROM shopping_car WHERE user_id = :userId;
-
-UPDATE shopping_car SET buy_cnt = shopping_car.buy_cnt+1 WHERE user_id = 1 AND pokemon_id = 4;
-
-UPDATE shopping_car SET buy_cnt = :buy_cnt+1 WHERE user_id = :userId AND pokemon_id = :pokemonId;
-
-SELECT user_id, seq_no, pokemon_id, buy_cnt, amount FROM shopping_car WHERE user_id = :userId AND pokemon_id = :pokemonId;
-
-DELETE FROM shopping_car WHERE user_id = 1;
-
-UPDATE shopping_car SET amount = :buyCnt * :price WHERE user_id = :userId AND pokemon_id = :pokemonId;
-
-UPDATE shopping_car SET buy_cnt = :buyCnt WHERE user_id = :userId AND pokemon_id = :pokemonId;
 
 
 # 訂單
@@ -370,11 +354,6 @@ CREATE TABLE IF NOT EXISTS `order`
     last_modified_date TIMESTAMP NOT NULL
 );
 
-INSERT INTO `order`(user_id, total_amount, created_date, last_modified_date) VALUES (:userId, :totalAmount, '2022-04-20 17:00:00', '2022-04-25 18:00:00');
-
-INSERT INTO shopping_car(user_id, seq_no, pokemon_id, order_id, buy_cnt, amount) VALUES (1, 1, 4, 1, 1, 100);
-
-SELECT order_id, user_id, total_amount, created_date, last_modified_date FROM `order` WHERE user_id = :userId;
 
 
 # 背包
@@ -395,14 +374,15 @@ DROP TABLE IF EXISTS box;
 
 CREATE TABLE IF NOT EXISTS box
 (
-    box_id                INT            NOT NULL   PRIMARY KEY,
+    box_id                INT            NOT NULL,
     user_id               INT            NOT NULL,
     my_pk_id              INT            NOT NULL,
     created_date          TIMESTAMP      NOT NULL,
     last_modified_date    TIMESTAMP      NOT NULL
 );
 
-# 我的寶可夢
+
+# 我的寶可夢的能力值
 DROP TABLE IF EXISTS my_pokemon_value;
 
 CREATE TABLE IF NOT EXISTS my_pokemon_value
@@ -425,6 +405,7 @@ CREATE TABLE IF NOT EXISTS my_pokemon_value
     last_modified_date    TIMESTAMP      NOT NULL
 );
 
+
 # 我的寶可夢 擁有的 技能
 DROP TABLE IF EXISTS my_pokemon_skill;
 
@@ -441,6 +422,51 @@ CREATE TABLE IF NOT EXISTS my_pokemon_skill
     last_modified_date    TIMESTAMP      NOT NULL
 );
 
-SELECT bag.bag_id, bag.my_pk_id, mpv.user_id, mpv.pokemon_name, mpv.category, mpv.hp, mpv.lv, mpv.pokemon_image_url, mpv.attack, mpv.defense, mpv.speed, mpv.description, mpv.created_date, mpv.last_modified_date FROM bag join my_pokemon_value mpv ON bag.my_pk_id = mpv.my_pk_id where mpv.user_id = 1 GROUP BY mpv.my_pk_id;
+
+
+# 寶可夢學習過的舊招式
+DROP TABLE IF EXISTS my_pokemon_skill_old;
+
+CREATE TABLE IF NOT EXISTS my_pokemon_skill_old
+(
+    my_pk_sk_old_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    my_pk_id INT NOT NULL,
+    skill_id INT NOT NULL
+);
+
+
+# 寶可夢可學會的招式
+DROP TABLE IF EXISTS skill_item;
+
+CREATE TABLE IF NOT EXISTS skill_item
+(
+    skill_item_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    category VARCHAR(32) NOT NULL,
+    pokemon_id INT,
+    lv INT,
+    skill_id INT NOT NULL
+);
+
+INSERT INTO skill_item (category, lv, skill_id)
+VALUES ('電', 1, 13),
+       ('電', 5, 45),
+       ('電', 8, 46),
+       ('電', 10, 47),
+       ('火', 1, 10),
+       ('火', 5, 48),
+       ('火', 8, 49),
+       ('火', 10, 11),
+       ('水', 1, 8),
+       ('水', 1, 9),
+       ('水', 5, 50),
+       ('水', 8, 51),
+       ('水', 10, 52),
+       ('草', 1, 15),
+       ('草', 3, 16),
+       ('草', 5, 14),
+       ('草', 8, 53),
+       ('草', 10, 54);
+
 
 

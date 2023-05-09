@@ -15,6 +15,7 @@ public class TempBoxRowMapper implements RowMapper {
         TempBox tempBox = new TempBox();
         tempBox.setBoxId(rs.getInt("box_id"));
         tempBox.setUserId(rs.getInt("user_id"));
+        tempBox.setMyPkId(rs.getInt("my_pk_id"));
         tempBox.setPokemonId(rs.getInt("pokemon_id"));
         tempBox.setPokemonName(rs.getString("pokemon_name"));
         tempBox.setPokemonImageUrl(rs.getString("pokemon_image_url"));
@@ -29,7 +30,6 @@ public class TempBoxRowMapper implements RowMapper {
         tempBox.setAttack(rs.getInt("attack"));
         tempBox.setDefense(rs.getInt("defense"));
         tempBox.setSpeed(rs.getInt("speed"));
-        tempBox.setPrice(rs.getInt("price"));
         tempBox.setDescription(rs.getString("description"));
         tempBox.setCreatedDate(rs.getTimestamp("created_date"));
         tempBox.setLastModifiedDate(rs.getTimestamp("last_modified_date"));

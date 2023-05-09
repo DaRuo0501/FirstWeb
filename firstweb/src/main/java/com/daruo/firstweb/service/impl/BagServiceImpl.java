@@ -64,7 +64,7 @@ public class BagServiceImpl implements BagService {
                 // 建立新的變數，用來更新背包的 ID
                 Integer newBagId = tpBag.getBagId();
 
-                // 更新 填補 被刪除的商品所留下來的 BadId 空缺
+                // 更新 填補 被刪除的商品所留下來的 BagId 空缺
                 bagDao.updateBagId(userId, tpBag.getBagId(), newBagId);
             }
 
@@ -80,19 +80,19 @@ public class BagServiceImpl implements BagService {
 
         try {
 
-            // 取得 購物車內 指定 背包 ID 的 商品資訊
+            // 取得 背包內 指定 背包 ID 的 商品資訊
             TempBag tempBag = bagDao.getBagById(userId, bagId);
 
             // 取得 盒子內 最後一個 盒子 ID
             Integer tempBoxLastId = boxDao.getLastBoxIdByUserId(userId);
 
-            // 將購物車的商品 轉交給 盒子
+            // 將背包的商品 轉交給 盒子
             boxDao.createBoxByTempBag(tempBag, tempBoxLastId);
 
-            // 刪除 購物車的該項 商品
+            // 刪除 背包的該項 商品
             bagDao.deleteBagId(tempBag.getUserId(), tempBag.getMyPkId());
 
-            // 取得購物車內 BagId 排在 刪除商品 後面的所有商品
+            // 取得背包內 BagId 排在 刪除商品 後面的所有商品
             List<TempBag> tempBagList = bagDao.getBags(userId, bagId);
 
             for (TempBag tpBag : tempBagList) {

@@ -25,6 +25,7 @@ public class TempBagRowMapper implements RowMapper {
 
         tempBag.setHp(rs.getInt("hp"));
         tempBag.setLv(rs.getInt("lv"));
+        tempBag.setExp(rs.getInt("exp"));
         tempBag.setAttack(rs.getInt("attack"));
         tempBag.setDefense(rs.getInt("defense"));
         tempBag.setSpeed(rs.getInt("speed"));
