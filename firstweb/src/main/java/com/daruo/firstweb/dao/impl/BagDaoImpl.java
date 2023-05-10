@@ -60,7 +60,7 @@ public class BagDaoImpl implements BagDao {
                 " mpv.created_date, mpv.last_modified_date" +
                 " FROM bag" +
                 " join my_pokemon_value mpv ON bag.my_pk_id = mpv.my_pk_id" +
-                " WHERE bag.user_id = :userId";
+                " WHERE mpv.user_id = :userId AND bag.user_id = :userId";
 
         Map<String, Object> map = new HashMap<>();
         map.put("userId", userId);

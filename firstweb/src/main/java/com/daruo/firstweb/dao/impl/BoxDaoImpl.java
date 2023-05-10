@@ -105,7 +105,7 @@ public class BoxDaoImpl implements BoxDao {
     public List<TempBox> getBox(Integer userId) {
 
         String sql = "SELECT * FROM box join my_pokemon_value mpv on box.my_pk_id = mpv.my_pk_id" +
-                " WHERE box.user_id = :userId ORDER BY box_id ASC;";
+                " WHERE box.user_id = :userId AND mpv.user_id = :userId;";
 
         Map<String, Object> map = new HashMap<>();
         map.put("userId", userId);
