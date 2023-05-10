@@ -86,21 +86,12 @@ public class SkillServiceImpl implements SkillService {
                 } else {
 
                     log.warn("此商品: {} ，已學過了 {} 這個招式!", tempBag.getPokemonName(), tempSkill.getSkillName());
-
-                    String errorStr = "此商品: " + tempBag.getPokemonName() + " ，已學過了 " + tempSkill.getSkillName() + " 這個招式!";
-
-                    ErrorMsg(errorStr, session);
-
                 }
 
 
             } else {
 
                 log.warn("此商品: {} ，已學滿了 4 種招式!", tempBag.getPokemonName());
-
-                String errorStr = "此商品: " + tempBag.getPokemonName() + " ，已學滿了 4 種招式!";
-
-                ErrorMsg(errorStr, session);
             }
 
         } catch (Exception e) {
