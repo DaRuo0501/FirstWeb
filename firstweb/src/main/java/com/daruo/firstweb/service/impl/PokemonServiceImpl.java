@@ -83,6 +83,12 @@ public class PokemonServiceImpl implements PokemonService {
         return page;
     }
 
+    @Override
+    public List<TempPokemon> getPokemonByUserId(Integer userId) {
+
+        return pokemonDao.getPokemonByUserId(userId);
+    }
+
     // 共用的 頁數 計算方法
     private Integer pageCount(PokemonQueryParams pokemonQueryParams, Integer total) {
 

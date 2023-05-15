@@ -21,4 +21,6 @@ public interface PokemonService {
     TempPokemon getTempPokemonById(Integer pokemonId);
 
     Integer getPokemonCategoryPage(PokemonQueryParams pokemonQueryParams);
+
+    List<TempPokemon> getPokemonByUserId(Integer userId);
 }

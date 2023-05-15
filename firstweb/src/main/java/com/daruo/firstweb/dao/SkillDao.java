@@ -15,7 +15,7 @@ public interface SkillDao {
 
     void deleteById(Integer userId, Integer myPkId);
 
-    List<TempSkill> getSkillByMyPkId(Integer myPkId);
+    List<TempSkill> getSkillByMyPkId(Integer myPkId, Integer userId);
 
     List<TempSkill> getPokemonNewSkill(TempBag tempBag);
 
@@ -23,7 +23,7 @@ public interface SkillDao {
 
     TempSkill getSkillName(Integer skillId);
 
-    Integer getCountSkill(Integer myPkId);
+    Integer getCountSkill(Integer myPkId, Integer userId);
 
     TempSkill getSkillNameByMyPkId(Integer myPkId, Integer skillId);
 }

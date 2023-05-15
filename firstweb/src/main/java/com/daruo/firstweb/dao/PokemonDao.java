@@ -24,4 +24,6 @@ public interface PokemonDao {
     Integer getMyPkLastId(Integer userId);
 
     void deleteById(Integer userId, Integer myPkId);
+
+    List<TempPokemon> getPokemonByUserId(Integer userId);
 }

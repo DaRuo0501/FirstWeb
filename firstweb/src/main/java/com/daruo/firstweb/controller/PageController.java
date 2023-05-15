@@ -69,26 +69,31 @@ public class PageController {
         return "home";
     }
 
-    // 修改使用者頁面
-    @GetMapping("/users/goToUpdatePage/{userId}")
-    public String goToUpdateUserPage(@PathVariable(name = "userId") Integer userId,
-                                     Model model) {
-
-        TempUser tempUser = userService.getUserById(userId);
-
-        model.addAttribute("updateUser", tempUser);
-
-        if (tempUser == null) {
-            throw new RuntimeException();
-        } else {
-
-            return "userUpdate";
-        }
-    }
-
     // 個人資料頁面
     @GetMapping("/users/user")
-    public String userPage() {
+    public String userPage(Model model,
+                           HttpSession session,
+                           HttpServletRequest request
+    ) {
+
+        try {
+
+            // 取得 當前使用者
+            session = request.getSession();
+            TempUser tempUser = (TempUser) session.getAttribute("showUserName");
+
+            TempUser tpUser = userService.getUserById(tempUser.getUserId());
+
+            model.addAttribute("user", tpUser);
+
+            List<TempPokemon> tempPokemonList = pokemonService.getPokemonByUserId(tempUser.getUserId());
+
+            model.addAttribute("pokemons", tempPokemonList);
+
+        } catch (Exception e) {
+            log.error(e.toString());
+        }
+
         return "user";
     }
 
@@ -149,7 +154,7 @@ public class PageController {
             model.addAttribute("bagPokemon", tempBag);
 
             // 取得 商品的 技能
-            List<TempSkill> tempSkillList = skillService.getSkillByMyPkId(tempBag.getMyPkId());
+            List<TempSkill> tempSkillList = skillService.getSkillByMyPkId(tempBag.getMyPkId(), tempUser.getUserId());
 
             model.addAttribute("skillList", tempSkillList);
 
@@ -421,6 +426,23 @@ public class PageController {
         model.addAttribute("users", tempUserList);
 
         return "userList";
+    }
+
+    // 修改使用者頁面
+    @GetMapping("/users/goToUpdatePage/{userId}")
+    public String goToUpdateUserPage(@PathVariable(name = "userId") Integer userId,
+                                     Model model) {
+
+        TempUser tempUser = userService.getUserById(userId);
+
+        model.addAttribute("updateUser", tempUser);
+
+        if (tempUser == null) {
+            throw new RuntimeException();
+        } else {
+
+            return "userUpdate";
+        }
     }
 
     // 登出(返回登入頁面)

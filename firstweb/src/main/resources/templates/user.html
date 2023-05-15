@@ -129,7 +129,20 @@
 <!-- 內文 -->
 <div class="right-body">
 
+    <div class="content-body" th:object="${user}">
 
+        <div class="user-image-box">
+            <img th:src="*{userImgUrl}">
+        </div>
+
+        <div class="user-text-box">
+            <p th:text="*{userName}"></p>
+            <p th:text="*{email}"></p>
+            <p th:text="*{money}"></p>
+            <p th:text="${pokemons.size()}"></p>
+        </div>
+
+    </div>
 
 </div>
 

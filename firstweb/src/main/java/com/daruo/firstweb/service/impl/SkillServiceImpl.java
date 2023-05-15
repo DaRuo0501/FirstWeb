@@ -45,9 +45,9 @@ public class SkillServiceImpl implements SkillService {
     }
 
     @Override
-    public List<TempSkill> getSkillByMyPkId(Integer myPkId) {
+    public List<TempSkill> getSkillByMyPkId(Integer myPkId, Integer userId) {
 
-        return skillDao.getSkillByMyPkId(myPkId);
+        return skillDao.getSkillByMyPkId(myPkId, userId);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class SkillServiceImpl implements SkillService {
             TempBag tempBag = bagDao.getBagById(userId, bagId);
 
             // 取得商品 學會的招式數量
-            Integer myPkSkillCount = skillDao.getCountSkill(tempBag.getMyPkId());
+            Integer myPkSkillCount = skillDao.getCountSkill(tempBag.getMyPkId(), userId);
 
             // 取得 想學習的 招式名稱
             TempSkill tempSkill = skillDao.getSkillName(skillId);

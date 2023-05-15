@@ -86,13 +86,15 @@ public class SkillDaoImpl implements SkillDao {
     }
 
     @Override
-    public List<TempSkill> getSkillByMyPkId(Integer myPkId) {
+    public List<TempSkill> getSkillByMyPkId(Integer myPkId, Integer userId) {
 
         String sql = "SELECT * FROM bag b JOIN my_pokemon_skill mps on b.my_pk_id = mps.my_pk_id" +
-                " JOIN skill s on mps.skill_id = s.skill_id WHERE b.my_pk_id = :myPkId;";
+                " JOIN skill s on mps.skill_id = s.skill_id" +
+                " WHERE mps.my_pk_id = :myPkId AND mps.user_id = :userId AND b.user_id = :userId;";
 
         Map<String, Object> map = new HashMap<>();
         map.put("myPkId", myPkId);
+        map.put("userId", userId);
 
         List<TempSkill> tempSkillList = namedParameterJdbcTemplate.query(sql, map, new TempSkillListRowMapper());
 
@@ -133,12 +135,13 @@ public class SkillDaoImpl implements SkillDao {
     }
 
     @Override
-    public Integer getCountSkill(Integer myPkId) {
+    public Integer getCountSkill(Integer myPkId, Integer userId) {
 
-        String sql = "SELECT * FROM my_pokemon_skill WHERE my_pk_id = :myPkId;";
+        String sql = "SELECT * FROM my_pokemon_skill WHERE my_pk_id = :myPkId AND user_id = :userId;";
 
         Map<String, Object> map = new HashMap<>();
         map.put("myPkId", myPkId);
+        map.put("userId", userId);
 
         List<TempSkill> tempSkillList = namedParameterJdbcTemplate.query(sql, map, new TempSkillCountRowMapper());
 

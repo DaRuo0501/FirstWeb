@@ -5,6 +5,7 @@ import com.daruo.firstweb.dto.PokemonQueryParams;
 import com.daruo.firstweb.dto.TempPokemon;
 import com.daruo.firstweb.rowmapper.MyPokemonLastIdRowMapper;
 import com.daruo.firstweb.rowmapper.PokemonCategoryRowMapper;
+import com.daruo.firstweb.rowmapper.TempPokemonListRowMapper;
 import com.daruo.firstweb.rowmapper.TempPokemonRowMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -177,6 +178,19 @@ public class PokemonDaoImpl implements PokemonDao {
 
         namedParameterJdbcTemplate.update(sql, map);
 
+    }
+
+    @Override
+    public List<TempPokemon> getPokemonByUserId(Integer userId) {
+
+        String sql = "SELECT * FROM my_pokemon_value WHERE user_id = :userId;";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+
+        List<TempPokemon> tempPokemonList = namedParameterJdbcTemplate.query(sql, map, new TempPokemonListRowMapper());
+
+        return tempPokemonList;
     }
 
     @Override
