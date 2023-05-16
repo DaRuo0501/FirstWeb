@@ -136,10 +136,24 @@
         </div>
 
         <div class="user-text-box">
-            <p th:text="*{userName}"></p>
-            <p th:text="*{email}"></p>
-            <p th:text="*{money}"></p>
-            <p th:text="${pokemons.size()}"></p>
+            <div class="user-text">
+                <span>姓名:</span>
+                <p th:text="*{userName}"></p>
+            </div>
+            <div class="user-text">
+                <span>電子信箱:</span>
+                <p th:text="*{email}"></p>
+            </div>
+            <div class="user-text">
+                <span>目前擁有的現金:</span>
+                <p th:text="*{money}"></p>
+                <span>元</span>
+            </div>
+            <div class="user-text">
+                <span>持有的商品數量: </span>
+                <p th:text="${pokemons.size()}"></p>
+                <span>隻</span>
+            </div>
         </div>
 
     </div>
